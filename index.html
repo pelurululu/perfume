@@ -16,19 +16,19 @@
 <style>
 :root {
   /* Light/Off-white theme from admin panel */
-  --bg:    #F7F4EF;
-  --bg2:   #EDE9E1;
-  --bg3:   #E4DFD5;
+  --bg:    #F8F5F0;
+  --bg2:   #F0EBE2;
+  --bg3:   #E6E0D5;
   --bg4:   #D9D2C5;
   --ink:   #1C1A16;
   --ink2:  #2E2B24;
   --ink3:  #4A4640;
   --muted: #7A756C;
   --muted2:#A09890;
-  --g:     #8A6A3A;
-  --g2:    #A07F4A;
-  --g3:    #C4A06A;
-  --border: rgba(138,106,58,.14);
+  --g:     #9A7240;
+  --g2:    #B08850;
+  --g3:    #CBA870;
+  --border: rgba(138,106,58,.12);
   --shadow: 0 1px 3px rgba(28,26,22,.08), 0 4px 16px rgba(28,26,22,.06);
   --red:   #B04040;
   --grn:   #3A7A52;
@@ -349,6 +349,43 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
 @media(max-width:1020px){.product-grid{grid-template-columns:repeat(3,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:24px}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}}
 @media(max-width:880px){nav{padding:13px 22px}nav.scrolled{padding:11px 22px}.nav-links{display:none}.hamburger{display:flex}.hero-inner{padding:0 22px}.section-wrap{padding:0 22px}.bundle-bar{padding:11px 22px}.bundle-section{padding:64px 22px}.bundle-inner{grid-template-columns:1fr;gap:36px}.why-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.shipping-grid{grid-template-columns:1fr 1fr}footer{padding:40px 22px 18px}.product-grid{grid-template-columns:repeat(2,1fr)}.cart-panel{width:100%;max-width:100vw}}
 @media(max-width:520px){.product-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.price-strip-inner{flex-direction:column;align-items:center;gap:12px}.price-item{border:none;padding:0}.gender-tabs{flex-direction:column;width:100%}.gender-tab{justify-content:center}.float-wa-text{display:none}.float-wa{padding:12px}.shipping-grid{grid-template-columns:1fr}}
+  /* === SIGNATURE SECTION === */
+.signature-section{padding:80px 0;background:var(--bg2);position:relative;overflow:hidden}
+.signature-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 60% at 50% 0%,rgba(138,106,58,.07) 0%,transparent 65%);pointer-events:none}
+.sig-grid{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:1px;background:var(--border);margin-top:44px;position:relative;z-index:1}
+.sig-card{background:#fff;padding:36px 28px 32px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;transition:transform .38s cubic-bezier(.23,.92,.52,1);box-shadow:var(--shadow)}
+.sig-card:hover{transform:translateY(-6px);z-index:2;box-shadow:0 24px 64px rgba(28,26,22,.1)}
+.sig-card--center{background:var(--bg);border:1px solid rgba(138,106,58,.18)}
+.sig-crown{display:inline-flex;align-items:center;gap:6px;font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:var(--g);background:rgba(138,106,58,.08);border:1px solid rgba(138,106,58,.18);padding:4px 12px;margin-bottom:10px}
+.sig-card-num{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.35em;color:rgba(138,106,58,.3);margin-bottom:18px}
+.sig-visual{margin-bottom:20px;display:flex;align-items:flex-end;justify-content:center;height:164px}
+.sig-inspired{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.sig-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.sig-desc{font-size:10.5px;color:var(--muted);line-height:2;margin-bottom:14px;max-width:200px}
+.sig-tags{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.sig-tags span{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--g);background:rgba(138,106,58,.08);padding:3px 9px;border:1px solid rgba(138,106,58,.14)}
+.sig-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--g);font-weight:300}
+.sig-price small{font-size:11px;color:var(--muted);font-family:'DM Sans',sans-serif}
+@media(max-width:880px){.sig-grid{grid-template-columns:1fr}}
+  /* === CAROUSEL === */
+.carousel-controls-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:0 2px}
+.carousel-page-label{font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.carousel-arrows{display:flex;gap:6px}
+.carousel-arrow{width:36px;height:36px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:var(--t);box-shadow:var(--shadow)}
+.carousel-arrow:hover{border-color:var(--g);color:var(--g)}
+.carousel-arrow:disabled{opacity:.28;cursor:not-allowed;pointer-events:none}
+.carousel-viewport{overflow:hidden;position:relative}
+.product-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);transition:opacity .32s ease}
+.product-grid.page-transition{opacity:0}
+.carousel-footer{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding:0 2px}
+.carousel-dots{display:flex;gap:7px;align-items:center}
+.carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--border);border:1px solid var(--muted2);cursor:pointer;transition:var(--t)}
+.carousel-dot.active{background:var(--g);border-color:var(--g);width:20px;border-radius:3px}
+.carousel-see-more{display:inline-flex;align-items:center;gap:5px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);transition:opacity .2s}
+.carousel-see-more:hover{opacity:.65}
+.no-results{display:none;grid-column:1/-1;text-align:center;padding:60px 0;background:var(--bg)}
+.no-results p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--muted)}
+.no-results span{font-size:10px;color:var(--muted2);letter-spacing:.08em;display:block;margin-top:4px}
 </style>
 </head>
 <body>
@@ -437,6 +474,63 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
   <button class="bundle-bar-btn" onclick="scrollToSection('bundle')">Tahu Lebih Lanjut</button>
 </div>
 
+  <section class="signature-section" id="signature">
+  <div class="section-wrap">
+    <div class="section-label">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+      Koleksi Tandatangan
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
+    </div>
+    <h2 class="section-title">Wangian <em>Pilihan Utama</em></h2>
+    <p class="section-subtitle">Wangian yang paling diminati — formulasi terbaik, ketahanan luar biasa, dan profil yang tidak dilupakan.</p>
+    <div class="sig-grid">
+      <div class="sig-card">
+        <div class="sig-card-num">01</div>
+        <div class="sig-visual">
+          <svg width="48" height="140" viewBox="0 0 48 140" fill="none"><defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".2"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".2"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#5A3A10"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#5A3A10" opacity=".6"/><rect x="7" y="16" width="34" height="118" rx="2.5" fill="url(#sg1)"/><rect x="9" y="18" width="5" height="114" rx="1" fill="rgba(255,255,255,.06)"/></svg>
+        </div>
+        <div class="sig-info">
+          <p class="sig-inspired">Terinspirasi Creed Aventus</p>
+          <h3 class="sig-name">Aventus Noir</h3>
+          <p class="sig-desc">Birch smoky, nanas segar, kasturi hangat. Untuk lelaki yang meninggalkan kesan.</p>
+          <div class="sig-tags"><span>Woody</span><span>Smoky</span><span>Fruity</span></div>
+          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
+        </div>
+      </div>
+      <div class="sig-card sig-card--center">
+        <div class="sig-crown">
+          <svg width="18" height="14" viewBox="0 0 24 18" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M2 16h20M2 16L5 4l7 6 5-9 5 9 3-6v12"/></svg>
+          Terlaris
+        </div>
+        <div class="sig-card-num">02</div>
+        <div class="sig-visual">
+          <svg width="56" height="160" viewBox="0 0 56 160" fill="none"><defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".92"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="19" y="0" width="18" height="12" rx="4" fill="#3A1828"/><rect x="18" y="12" width="20" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="19" width="40" height="134" rx="3" fill="url(#sg2)"/><rect x="10" y="21" width="6" height="130" rx="1.5" fill="rgba(255,255,255,.07)"/></svg>
+        </div>
+        <div class="sig-info">
+          <p class="sig-inspired">Terinspirasi Good Girl</p>
+          <h3 class="sig-name">Belle Noir</h3>
+          <p class="sig-desc">Jasmin berlapis, vanilla intim, sedikit rempah. Feminin penuh karakter.</p>
+          <div class="sig-tags"><span>Floral</span><span>Oriental</span><span>Warm</span></div>
+          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
+        </div>
+      </div>
+      <div class="sig-card">
+        <div class="sig-card-num">03</div>
+        <div class="sig-visual">
+          <svg width="48" height="140" viewBox="0 0 48 140" fill="none"><defs><linearGradient id="sg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".9"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#0E2E42"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#0E2E42" opacity=".6"/><rect x="7" y="16" width="34" height="118" rx="2.5" fill="url(#sg3)"/><rect x="9" y="18" width="5" height="114" rx="1" fill="rgba(255,255,255,.06)"/></svg>
+        </div>
+        <div class="sig-info">
+          <p class="sig-inspired">Terinspirasi Bleu de Chanel</p>
+          <h3 class="sig-name">Ciel Bleu</h3>
+          <p class="sig-desc">Citrus bersih, cedar segar, putih kasturi. Klasik moden untuk setiap hari.</p>
+          <div class="sig-tags"><span>Fresh</span><span>Woody</span><span>Citrus</span></div>
+          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track">
     <span class="ticker-item">Pati Diimport</span><span class="ticker-item">55 Wangian Lelaki</span><span class="ticker-item">98 Wangian Wanita</span><span class="ticker-item">10ml · 30ml · 60ml</span><span class="ticker-item">Terinspirasi Jenama Dunia</span><span class="ticker-item">Ketahanan Sehingga 12 Jam</span><span class="ticker-item">Penghantaran Seluruh Malaysia</span><span class="ticker-item">Bayar FPX · eWallet · Kad</span>
@@ -452,16 +546,52 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
     <div class="search-wrap">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="search-input" placeholder="Cari wangian, jenama, jenis..." aria-label="Cari wangian">
-      <button id="search-clear" aria-label="Padam carian">✕</button>
+      <button id="search-clear" onclick="clearSearch()" aria-label="Padam carian">✕</button>
     </div>
     <div class="gender-tabs" role="tablist" aria-label="Pilih jantina">
-      <button class="gender-tab active-men" id="tab-men" onclick="switchGender('m')" role="tab" aria-selected="true">♂ Lelaki (<span id="count-m">55</span>)</button>
-      <button class="gender-tab" id="tab-women" onclick="switchGender('w')" role="tab" aria-selected="false">♀ Wanita (<span id="count-w">98</span>)</button>
-      <button class="gender-tab" id="tab-unisex" onclick="switchGender('u')" role="tab" aria-selected="false">✦ Unisex (<span id="count-u">12</span>)</button>
+      <button class="gender-tab active-men" id="tab-men" onclick="switchGender('m')" role="tab" aria-selected="true">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="6"/><path d="M20 4l-6 6M20 4h-5M20 4v5"/></svg>
+        Lelaki (<span id="count-m">55</span>)
+      </button>
+      <button class="gender-tab" id="tab-women" onclick="switchGender('w')" role="tab" aria-selected="false">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg>
+        Wanita (<span id="count-w">98</span>)
+      </button>
+      <button class="gender-tab" id="tab-unisex" onclick="switchGender('u')" role="tab" aria-selected="false">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+        Unisex (<span id="count-u">12</span>)
+      </button>
     </div>
-    <div class="product-grid" id="product-grid">
-      <div class="grid-loading"><div class="spinner"></div><p>Memuatkan koleksi...</p></div>
+
+    <!-- Carousel controls row -->
+    <div class="carousel-controls-row">
+      <span class="carousel-page-label" id="carousel-page-label">Halaman 1</span>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" id="carousel-prev" onclick="carouselPrev()" aria-label="Sebelumnya">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-arrow" id="carousel-next" onclick="carouselNext()" aria-label="Seterusnya">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
     </div>
+
+    <!-- Carousel viewport -->
+    <div class="carousel-viewport" id="carousel-viewport">
+      <div class="product-grid" id="product-grid">
+        <div class="grid-loading"><div class="spinner"></div><p>Memuatkan koleksi...</p></div>
+      </div>
+    </div>
+
+    <!-- Pagination dots + see more -->
+    <div class="carousel-footer">
+      <div class="carousel-dots" id="carousel-dots"></div>
+      <a href="#collection" class="carousel-see-more" id="carousel-see-more" onclick="carouselSeeMore(event)">
+        Lihat Semua
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -496,9 +626,9 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
     <div class="section-label">Kenapa The Artisan</div>
     <h2 class="section-title">Kualiti yang <em>Tidak Berkompromi</em></h2>
     <div class="why-grid">
-      <div class="why-card reveal"><div class="why-icon">🌿</div><div class="why-title">Pati Premium Diimport</div><p class="why-body">Setiap formula menggunakan pati wangian berkualiti tinggi yang diimport — profil wangian setara dengan inspirasi jenama asal dunia.</p></div>
-      <div class="why-card reveal delay-1"><div class="why-icon">⏱</div><div class="why-title">Ketahanan Sehingga 12 Jam</div><p class="why-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam. Tidak perlu semprot berulang kali sepanjang hari.</p></div>
-      <div class="why-card reveal delay-2"><div class="why-icon">✦</div><div class="why-title">Tiga Saiz Untuk Semua</div><p class="why-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Setiap saiz menawarkan nilai terbaik untuk harganya.</p></div>
+      <div class="why-card reveal"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3 9 10 7M12 12c0-5 5-8 10-7-1 5-4 9-10 7"/></svg></div><div class="why-title">Pati Premium Diimport</div><p class="why-body">Setiap formula menggunakan pati wangian berkualiti tinggi yang diimport — profil wangian setara dengan inspirasi jenama asal dunia.</p></div>
+      <div class="why-card reveal delay-1"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 3h6M12 3v2"/></svg></div><div class="why-title">Ketahanan Sehingga 12 Jam</div><p class="why-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam. Tidak perlu semprot berulang kali sepanjang hari.</p></div>
+      <div class="why-card reveal delay-2"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div class="why-title">Tiga Saiz Untuk Semua</div><p class="why-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Setiap saiz menawarkan nilai terbaik untuk harganya.</p></div>
     </div>
   </div>
 </section>
@@ -532,10 +662,10 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
     <div class="section-label">Penghantaran</div>
     <h2 class="section-title">Cepat & <em>Selamat</em></h2>
     <div class="shipping-grid">
-      <div class="shipping-card reveal"><div class="shipping-icon">📦</div><div class="shipping-title">Penghantaran Pantas</div><p class="shipping-body">Semenanjung 2–4 hari bekerja. Sabah & Sarawak 4–7 hari bekerja.</p></div>
-      <div class="shipping-card reveal delay-1"><div class="shipping-icon">🔒</div><div class="shipping-title">Pembungkusan Selamat</div><p class="shipping-body">Setiap botol dibungkus bubble wrap dan kotak khas — tiba dalam keadaan sempurna.</p></div>
-      <div class="shipping-card reveal delay-2"><div class="shipping-icon">🚚</div><div class="shipping-title">Percuma RM150+</div><p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj penghantaran RM8 sahaja.</p></div>
-      <div class="shipping-card reveal delay-3"><div class="shipping-icon">↩</div><div class="shipping-title">Polisi Pemulangan</div><p class="shipping-body">Produk rosak atau salah hantar akan diganti dalam masa 7 hari bekerja. Hubungi kami via WhatsApp.</p></div>
+      <div class="shipping-card reveal"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="shipping-title">Penghantaran Pantas</div><p class="shipping-body">Semenanjung 2–4 hari bekerja. Sabah & Sarawak 4–7 hari bekerja.</p></div>
+      <div class="shipping-card reveal delay-1"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="shipping-title">Pembungkusan Selamat</div><p class="shipping-body">Setiap botol dibungkus bubble wrap dan kotak khas — tiba dalam keadaan sempurna.</p></div>
+      <div class="shipping-card reveal delay-2"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8zM5.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg></div><div class="shipping-title">Percuma RM150+</div><p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj penghantaran RM8 sahaja.</p></div>
+      <div class="shipping-card reveal delay-3"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div><div class="shipping-title">Polisi Pemulangan</div><p class="shipping-body">Produk rosak atau salah hantar akan diganti dalam masa 7 hari bekerja. Hubungi kami via WhatsApp.</p></div>
     </div>
   </div>
 </section>
@@ -616,7 +746,7 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
     </div>
     <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--m2);letter-spacing:.06em">Memproses pesanan anda...</p></div>
     <div class="modal-success" id="modal-success">
-      <div class="success-icon">✓</div>
+      <div class="success-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg></div>
       <h3>Pesanan Dihantar!</h3>
       <p>Pasukan kami akan menghubungi anda melalui <strong style="color:var(--g)">WhatsApp</strong> dalam masa 1–2 jam untuk pengesahan bayaran dan penghantaran.<br><br>Sila semak mesej WhatsApp anda.</p>
       <div class="success-tag">selamat datang ke the artisan parfum.</div>
@@ -625,7 +755,7 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
 </div>
 
 <a href="https://wa.me/601159003985?text=Salam%2C+saya+ingin+bertanya+tentang+The+Artisan+Parfum." class="float-wa" target="_blank" rel="noopener" aria-label="Hubungi kami via WhatsApp">
-  <span class="float-wa-icon">💬</span><span class="float-wa-text">Tanya Kami</span>
+  <span class="float-wa-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span class="float-wa-text">Tanya Kami</span>
 </a>
 <div class="float-cart" id="float-cart" onclick="openCart(event)" role="button" tabindex="0" aria-label="Buka troli" onkeypress="if(event.key==='Enter')openCart(event)">
   <div class="float-cart-badge" id="float-cart-badge">0</div>
@@ -1082,40 +1212,108 @@ function handleOrderSubmit() {
 }
 
 /* =====================================================
-   GENDER FILTER + SEARCH
+   GENDER FILTER + SEARCH + CAROUSEL
 ===================================================== */
 let currentGender = 'm';
-let searchQuery = '';
+let searchQuery   = '';
 let searchDebounce;
+let carouselPage  = 0;
+const CARDS_PER_PAGE = 10; // 2 rows of 5
 
 function switchGender(gender) {
   currentGender = gender;
+  carouselPage  = 0;
   document.getElementById('tab-men').className    = 'gender-tab' + (gender === 'm' ? ' active-men' : '');
   document.getElementById('tab-women').className  = 'gender-tab' + (gender === 'w' ? ' active-women' : '');
   document.getElementById('tab-unisex').className = 'gender-tab' + (gender === 'u' ? ' active-unisex' : '');
-  ['m','w','u'].forEach(g => document.getElementById('tab-' + (g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex')).setAttribute('aria-selected', gender === g));
+  ['m','w','u'].forEach(g => {
+    const key = g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex';
+    document.getElementById('tab-' + key).setAttribute('aria-selected', gender === g);
+  });
   applyFilters();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('search-input').addEventListener('input', function () {
-    searchQuery = this.value.toLowerCase().trim();
+    searchQuery  = this.value.toLowerCase().trim();
+    carouselPage = 0;
     document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(applyFilters, 240);
   });
 });
 
-function clearSearch() { document.getElementById('search-input').value = ''; searchQuery = ''; document.getElementById('search-clear').style.display = 'none'; applyFilters(); }
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  searchQuery  = '';
+  carouselPage = 0;
+  document.getElementById('search-clear').style.display = 'none';
+  applyFilters();
+}
 
 function applyFilters() {
-  let visible = 0;
-  document.querySelectorAll('.product-card').forEach(card => {
-    const show = card.dataset.gender === currentGender && (!searchQuery || card.dataset.searchIndex.includes(searchQuery));
-    card.classList.toggle('hidden', !show);
-    if (show) visible++;
-  });
-  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  const allCards = Array.from(document.querySelectorAll('.product-card'));
+  const matching = allCards.filter(card =>
+    card.dataset.gender === currentGender &&
+    (!searchQuery || card.dataset.searchIndex.includes(searchQuery))
+  );
+  const totalPages = Math.max(1, Math.ceil(matching.length / CARDS_PER_PAGE));
+  carouselPage = Math.min(carouselPage, totalPages - 1);
+  const start = carouselPage * CARDS_PER_PAGE;
+  const pageCards = matching.slice(start, start + CARDS_PER_PAGE);
+  // Show/hide
+  allCards.forEach(c => c.classList.add('hidden'));
+  pageCards.forEach(c => c.classList.remove('hidden'));
+  // No results
+  document.getElementById('no-results').style.display = matching.length === 0 ? 'block' : 'none';
+  updateCarouselUI(matching.length, totalPages);
+}
+
+function updateCarouselUI(total, totalPages) {
+  // Page label
+  document.getElementById('carousel-page-label').textContent =
+    `Halaman ${carouselPage + 1} / ${totalPages}`;
+  // Arrows
+  document.getElementById('carousel-prev').disabled = carouselPage === 0;
+  document.getElementById('carousel-next').disabled = carouselPage >= totalPages - 1;
+  // Dots
+  const dotsEl = document.getElementById('carousel-dots');
+  dotsEl.innerHTML = '';
+  for (let i = 0; i < totalPages; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === carouselPage ? ' active' : '');
+    dot.setAttribute('aria-label', `Halaman ${i + 1}`);
+    dot.onclick = () => { carouselPage = i; applyFilters(); };
+    dotsEl.appendChild(dot);
+  }
+  // See more — only show if more than 1 page
+  const seeMore = document.getElementById('carousel-see-more');
+  seeMore.style.display = totalPages > 1 ? 'inline-flex' : 'none';
+  seeMore.textContent = '';
+  seeMore.innerHTML = carouselPage >= totalPages - 1
+    ? `Lihat Kurang <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>`
+    : `Lihat Semua (${total}) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>`;
+}
+
+function carouselPrev() {
+  if (carouselPage > 0) { carouselPage--; pageTransition(); }
+}
+function carouselNext() {
+  carouselPage++; pageTransition();
+}
+function carouselSeeMore(e) {
+  e.preventDefault();
+  const allCards = Array.from(document.querySelectorAll('.product-card'));
+  const matching = allCards.filter(c => c.dataset.gender === currentGender && (!searchQuery || c.dataset.searchIndex.includes(searchQuery)));
+  const totalPages = Math.ceil(matching.length / CARDS_PER_PAGE);
+  carouselPage = carouselPage >= totalPages - 1 ? 0 : totalPages - 1;
+  pageTransition();
+}
+function pageTransition() {
+  const grid = document.getElementById('product-grid');
+  grid.classList.add('page-transition');
+  setTimeout(() => { applyFilters(); grid.classList.remove('page-transition'); }, 220);
+  document.getElementById('collection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 /* =====================================================
