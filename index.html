@@ -1,660 +1,1215 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Artisan Parfum — Wangian Premium Malaysia</title>
-  <meta name="description" content="165 wangian premium terinspirasi jenama dunia. Pati diimport, ketahanan sehingga 12 jam. Tiga saiz untuk setiap gaya hidup.">
-  
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%23A67C52'/><text x='32' y='46' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23FAF7F0'>a</text></svg>">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="The Artisan Parfum — Wangian Premium Malaysia">
-  <meta property="og:description" content="165 wangian premium. 10ml RM25 · 30ml RM49 · 60ml RM79.">
-  <meta property="og:url" content="https://theartisanparfum.my">
-  <meta property="og:type" content="website">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-  
-  <!-- Styles -->
-  <link rel="stylesheet" href="./assets/css/variables.css">
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/components.css">
-  
-  <style>
-    /* Page-specific styles */
-    
-    /* Header & Navigation */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: var(--z-sticky);
-      background-color: rgba(250, 247, 240, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: all var(--transition-base);
-    }
-    
-    .header.scrolled {
-      box-shadow: var(--shadow-sm);
-    }
-    
-    .header-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-5) 0;
-    }
-    
-    .logo {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      font-style: italic;
-      font-weight: var(--weight-regular);
-      color: var(--text-primary);
-      letter-spacing: var(--tracking-wide);
-    }
-    
-    .logo-accent {
-      color: var(--gold);
-    }
-    
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: var(--space-8);
-    }
-    
-    .nav-link {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--tracking-super);
-      text-transform: uppercase;
-      color: var(--text-secondary);
-      transition: color var(--transition-base);
-    }
-    
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-    
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-    }
-    
-    .nav-icon {
-      position: relative;
-      padding: var(--space-2);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: color var(--transition-fast);
-    }
-    
-    .nav-icon:hover {
-      color: var(--text-primary);
-    }
-    
-    .nav-badge {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 16px;
-      height: 16px;
-      background-color: var(--gold);
-      color: white;
-      font-size: 9px;
-      font-weight: var(--weight-semibold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      padding: var(--space-2);
-      cursor: pointer;
-    }
-    
-    .hamburger span {
-      width: 24px;
-      height: 2px;
-      background-color: var(--text-primary);
-      transition: transform var(--transition-base), opacity var(--transition-base);
-    }
-    
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: calc(var(--header-height) + var(--space-12));
-      padding-bottom: var(--space-20);
-      background: 
-        radial-gradient(ellipse 50% 60% at 70% 40%, rgba(166, 124, 82, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 30% 40% at 10% 80%, rgba(166, 124, 82, 0.05) 0%, transparent 55%),
-        var(--bg-primary);
-    }
-    
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: center;
-    }
-    
-    .hero-eyebrow {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--tracking-super);
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: var(--space-4);
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-    
-    .hero-eyebrow::before {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background-color: var(--gold);
-    }
-    
-    .hero-title {
-      margin-bottom: var(--space-5);
-    }
-    
-    .hero-title-accent {
-      color: var(--gold);
-      font-style: italic;
-    }
-    
-    .hero-description {
-      font-size: var(--text-lg);
-      color: var(--text-secondary);
-      line-height: var(--leading-loose);
-      max-width: 540px;
-      margin-bottom: var(--space-8);
-    }
-    
-    .hero-cta {
-      display: flex;
-      gap: var(--space-4);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-12);
-    }
-    
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-8);
-      padding-top: var(--space-8);
-      border-top: 1px solid var(--border-subtle);
-    }
-    
-    .stat-number {
-      font-family: var(--font-display);
-      font-size: var(--text-5xl);
-      font-weight: var(--weight-light);
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: var(--space-2);
-    }
-    
-    .stat-label {
-      font-size: var(--text-xs);
-      letter-spacing: var(--tracking-wider);
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-    
-    .hero-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .hero-bottles {
-      position: relative;
-      z-index: 2;
-      animation: float 8s ease-in-out infinite;
-    }
-    
-    /* Features Grid */
-    .features {
-      padding: var(--space-24) 0;
-      background-color: var(--bg-secondary);
-    }
-    
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background-color: var(--border-subtle);
-      margin-top: var(--space-12);
-    }
-    
-    .feature-card {
-      background-color: var(--bg-elevated);
-      padding: var(--space-10);
-      text-align: center;
-    }
-    
-    .feature-icon {
-      font-size: 48px;
-      margin-bottom: var(--space-5);
-    }
-    
-    .feature-title {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      font-weight: var(--weight-regular);
-      margin-bottom: var(--space-3);
-    }
-    
-    .feature-text {
-      color: var(--text-secondary);
-      line-height: var(--leading-relaxed);
-    }
-    
-    /* Section Headers */
-    .section-header {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto var(--space-12);
-    }
-    
-    .section-eyebrow {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      letter-spacing: var(--tracking-super);
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: var(--space-3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-3);
-    }
-    
-    .section-eyebrow::before,
-    .section-eyebrow::after {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background-color: var(--gold);
-    }
-    
-    .section-subtitle {
-      color: var(--text-secondary);
-      line-height: var(--leading-loose);
-      margin-top: var(--space-4);
-    }
-    
-    /* Categories Preview */
-    .categories {
-      padding: var(--space-24) 0;
-    }
-    
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-6);
-      margin-top: var(--space-12);
-    }
-    
-    .category-card {
-      position: relative;
-      aspect-ratio: 3/4;
-      background-color: var(--bg-tertiary);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform var(--transition-base);
-    }
-    
-    .category-card:hover {
-      transform: translateY(-4px);
-    }
-    
-    .category-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(43, 40, 34, 0.7) 0%, transparent 60%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: var(--space-6);
-    }
-    
-    .category-name {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      color: white;
-      margin-bottom: var(--space-1);
-    }
-    
-    .category-count {
-      font-size: var(--text-sm);
-      color: rgba(255, 255, 255, 0.8);
-      letter-spacing: var(--tracking-wide);
-    }
-    
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .nav-menu {
-        display: none;
-      }
-      
-      .hamburger {
-        display: flex;
-      }
-      
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .hero-visual {
-        order: -1;
-      }
-      
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (max-width: 640px) {
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-      
-      .categories-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Artisan Parfum — Wangian Premium Malaysia</title>
+<meta name="description" content="165 wangian premium terinspirasi jenama dunia. 10ml RM25 · 30ml RM49 · 60ml RM79. Beli 3×60ml PERCUMA 1×30ml. Penghantaran seluruh Malaysia.">
+<meta property="og:title" content="The Artisan Parfum — Wangian Premium Malaysia">
+<meta property="og:description" content="165 wangian premium. 10ml RM25 · 30ml RM49 · 60ml RM79.">
+<meta property="og:url" content="https://theartisanparfum.my">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230A0908'/><text x='32' y='46' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23BF9B5F'>a</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Light/Off-white theme from admin panel */
+  --bg:    #F7F4EF;
+  --bg2:   #EDE9E1;
+  --bg3:   #E4DFD5;
+  --bg4:   #D9D2C5;
+  --ink:   #1C1A16;
+  --ink2:  #2E2B24;
+  --ink3:  #4A4640;
+  --muted: #7A756C;
+  --muted2:#A09890;
+  --g:     #8A6A3A;
+  --g2:    #A07F4A;
+  --g3:    #C4A06A;
+  --border: rgba(138,106,58,.14);
+  --shadow: 0 1px 3px rgba(28,26,22,.08), 0 4px 16px rgba(28,26,22,.06);
+  --red:   #B04040;
+  --grn:   #3A7A52;
+  --amb:   #B07030;
+  --t: .3s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.lock{overflow:hidden}
+img,svg{display:block}
+button,input,select,textarea{font-family:inherit}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{line-height:1.1}
+body::before{content:'';position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='1'/%3E%3C/svg%3E")}
+@media(pointer:coarse){.cur,.cur2{display:none!important}body{cursor:auto!important}}
+@media(pointer:fine){body{cursor:none}}
+.cur{width:5px;height:5px;background:var(--g);border-radius:50%;position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .2s}
+.cur2{width:28px;height:28px;border:1px solid rgba(138,106,58,.28);border-radius:50%;position:fixed;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .18s,height .18s,border-color .18s}
+.cur2.h{width:44px;height:44px;border-color:var(--g)}
+#ann{background:var(--g);padding:8px 18px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;position:relative;z-index:810}
+.ann-txt{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:400}
+.ann-cd{display:flex;align-items:center;gap:3px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#fff}
+.ann-cd b{min-width:20px;text-align:center;display:inline-block}
+.ann-sep{opacity:.5;margin:0 1px}
+#ann-close{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;cursor:pointer;color:rgba(255,255,255,.6);line-height:1;padding:4px}
+nav{position:fixed;top:36px;left:0;right:0;z-index:800;padding:20px 52px;display:flex;justify-content:space-between;align-items:center;transition:padding var(--t),background var(--t),top var(--t)}
+nav.scrolled{background:rgba(247,244,239,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:13px 52px;border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+nav.no-ann{top:0}
+.logo{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;font-weight:400;letter-spacing:.04em;color:var(--ink);transition:opacity .25s}
+.logo span{color:var(--g)}
+.logo:hover{opacity:.7}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.nav-links a{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);transition:color .22s;font-weight:400}
+.nav-links a:hover{color:var(--ink)}
+.nav-links .btn-cta{background:var(--g)!important;color:#fff!important;padding:8px 20px;transition:background .22s!important;letter-spacing:.18em!important}
+.nav-links .btn-cta:hover{background:var(--g2)!important}
+.nav-cart{position:relative;display:flex!important;align-items:center;gap:5px}
+.nav-cart-badge{background:var(--g);color:#fff;border-radius:50%;width:15px;height:15px;font-size:8px;font-weight:500;display:none;align-items:center;justify-content:center;position:absolute;top:-7px;right:-8px}
+.nav-cart-badge.visible{display:flex}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:1px;background:var(--ink);display:block;transition:transform .28s,opacity .28s}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mobile-nav{position:fixed;inset:0;background:rgba(247,244,239,.98);z-index:790;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .28s}
+.mobile-nav.open{opacity:1;pointer-events:all}
+.mobile-nav a{font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic;font-weight:300;color:var(--ink);transition:color .2s}
+.mobile-nav a:hover{color:var(--g)}
+.hero{min-height:100vh;background:var(--bg);display:flex;align-items:center;position:relative;overflow:hidden;padding-top:100px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 72% 38%,rgba(138,106,58,.09) 0%,transparent 60%),radial-gradient(ellipse 28% 44% at 8% 82%,rgba(138,106,58,.05) 0%,transparent 55%)}
+.hero-inner{max-width:1420px;margin:0 auto;padding:0 52px;width:100%;display:grid;grid-template-columns:1fr 42%;align-items:center;gap:40px;position:relative;z-index:2}
+.hero-eyebrow{font-size:7.5px;letter-spacing:.55em;text-transform:uppercase;color:var(--g);display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.hero-eyebrow::before{content:'';width:26px;height:1px;background:var(--g);flex-shrink:0}
+h1.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,5.5vw,86px);font-weight:300;line-height:1.05;letter-spacing:-.01em;color:var(--ink);margin-bottom:20px}
+h1.hero-title em{font-style:italic;color:var(--g)}
+.hero-desc{font-size:12.5px;line-height:2.05;color:rgba(28,26,22,.44);max-width:400px;margin-bottom:40px;letter-spacing:.025em}
+.hero-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:48px}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#fff;font-family:'DM Sans',sans-serif;font-size:9.5px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;padding:13px 30px;transition:background .24s}
+.btn-gold:hover{background:var(--g2)}
+.btn-text{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(28,26,22,.38);cursor:pointer;padding:0;transition:color .24s}
+.btn-text:hover{color:var(--ink)}
+.hero-stats{display:flex;gap:0;border-top:1px solid var(--border);padding-top:28px}
+.hero-stat{padding:0 28px 0 0;margin:0 28px 0 0;border-right:1px solid var(--border)}
+.hero-stat:last-child{border:none;padding:0;margin:0}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--g);line-height:1}
+.hero-stat-num em{font-style:italic}
+.hero-stat-lbl{font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(28,26,22,.28);margin-top:4px}
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative}
+.hero-glow{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(138,106,58,.09) 0%,transparent 65%);animation:glow-pulse 7s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.4}}
+.hero-bottles{display:flex;align-items:flex-end;gap:14px;position:relative;z-index:1;animation:float 9s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.price-strip{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0}
+.price-strip-inner{display:flex;justify-content:center;flex-wrap:wrap}
+.price-item{padding:0 40px;text-align:center;border-right:1px solid var(--border)}
+.price-item:last-child{border:none}
+.price-size{font-size:7.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.price-row{display:flex;align-items:baseline;gap:9px;justify-content:center}
+.price-promo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--g)}
+.price-normal{font-size:11px;color:rgba(122,117,108,.42);text-decoration:line-through}
+.price-save{font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:var(--grn);margin-top:2px}
+.bundle-bar{background:var(--bg3);border-bottom:1px solid var(--border);padding:13px 52px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.bundle-bar-text{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--g2)}
+.bundle-bar-divider{width:1px;height:16px;background:var(--border)}
+.bundle-bar-btn{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;background:transparent;border:1px solid rgba(138,106,58,.28);color:var(--g);padding:6px 16px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:400;transition:var(--t)}
+.bundle-bar-btn:hover{background:rgba(138,106,58,.1)}
+.ticker-wrap{background:var(--bg2);border-bottom:1px solid var(--border);overflow:hidden;padding:9px 0}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 40s linear infinite}
+.ticker-item{display:inline-flex;align-items:center;gap:20px;padding:0 20px;font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.ticker-item::after{content:'·';color:var(--g);opacity:.5;font-size:12px}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.section-wrap{max-width:1420px;margin:0 auto;padding:0 52px}
+.section-label{display:flex;align-items:center;justify-content:center;gap:12px;font-size:7.5px;letter-spacing:.5em;text-transform:uppercase;color:var(--g);margin-bottom:12px}
+.section-label::before,.section-label::after{content:'';flex:1;max-width:26px;height:1px;background:var(--g)}
+h2.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.2vw,50px);font-weight:300;text-align:center;color:var(--ink);margin-bottom:9px}
+h2.section-title em{font-style:italic;color:var(--g)}
+.section-subtitle{font-size:11.5px;color:var(--muted);text-align:center;line-height:2.1;max-width:460px;margin:0 auto 40px;letter-spacing:.025em}
+.collection{padding:84px 0;background:var(--bg)}
+.search-wrap{position:relative;max-width:380px;margin:0 auto 28px}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:14px;height:14px;opacity:.38;pointer-events:none;stroke:var(--muted)}
+#search-input{width:100%;padding:10px 38px 10px 40px;background:#fff;border:1px solid var(--border);color:var(--ink);font-size:12px;font-weight:300;outline:none;transition:border-color .24s;box-shadow:var(--shadow)}
+#search-input::placeholder{color:var(--muted)}
+#search-input:focus{border-color:var(--g)}
+#search-clear{position:absolute;right:11px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:15px;display:none;line-height:1;padding:2px}
+.gender-tabs{display:flex;justify-content:center;gap:0;margin-bottom:24px;border:1px solid var(--border);width:fit-content;margin-left:auto;margin-right:auto;background:#fff;box-shadow:var(--shadow)}
+.gender-tab{padding:10px 46px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;background:transparent;border:none;cursor:pointer;color:var(--muted);transition:var(--t);font-family:'DM Sans',sans-serif;font-weight:400;display:flex;align-items:center;gap:7px}
+.gender-tab.active-men{background:rgba(58,106,88,.1);color:#3A6A58}
+.gender-tab.active-women{background:rgba(138,90,120,.1);color:#8A5A78}
+.gender-tab.active-unisex{background:rgba(138,106,58,.1);color:var(--g)}
+.gender-tab:not(.active-men):not(.active-women):not(.active-unisex):hover{background:rgba(138,106,58,.07);color:var(--g)}
+.product-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border)}
+.no-results{display:none;grid-column:1/-1;text-align:center;padding:60px 0;background:var(--bg)}
+.no-results p{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--muted)}
+.no-results span{font-size:10px;color:var(--muted2);letter-spacing:.08em;display:block;margin-top:4px}
+.grid-loading{grid-column:1/-1;background:var(--bg);padding:80px 20px;text-align:center}
+.grid-loading .spinner{width:32px;height:32px;border:1.5px solid var(--border);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.grid-loading p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--muted)}
+.product-card{background:#fff;position:relative;transition:transform .38s cubic-bezier(.23,.92,.52,1);box-shadow:var(--shadow)}
+.product-card.hidden{display:none!important}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(28,26,22,.12);z-index:2}
+.card-visual{height:240px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.card-mood-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(247,244,239,.93) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px;opacity:0;transition:opacity .38s;z-index:3}
+.product-card:hover .card-mood-overlay{opacity:1}
+.mood-description{font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:3px}
+.mood-vibe{font-size:6.5px;letter-spacing:.25em;text-transform:uppercase;color:var(--g)}
+.card-bottle{position:relative;z-index:2;transition:transform .42s cubic-bezier(.23,.92,.52,1)}
+.product-card:hover .card-bottle{transform:scale(1.06) translateY(-8px)}
+.card-badge{position:absolute;top:11px;right:11px;z-index:4;font-size:6.5px;letter-spacing:.18em;text-transform:uppercase;padding:3.5px 8px;font-family:'DM Sans',sans-serif;font-weight:400}
+.badge-hot{background:var(--g);color:#fff}
+.badge-new{background:var(--bg3);color:var(--ink);border:1px solid var(--border)}
+.badge-exclusive{background:var(--ink);color:#fff}
+.card-info{padding:14px 14px 18px;border-top:1px solid var(--border)}
+.card-inspired{font-size:6.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;display:flex;align-items:center;gap:4px}
+.card-inspired::before{content:'◆';font-size:4.5px;color:var(--g);opacity:.7}
+.card-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--ink);line-height:1.15;margin-bottom:2px}
+.card-family{font-size:9px;color:var(--muted);margin-bottom:10px;letter-spacing:.02em}
+.stock-wrap{margin-bottom:12px}
+.stock-bar{height:1.5px;background:rgba(138,106,58,.12);position:relative;overflow:hidden;margin-bottom:3px}
+.stock-fill{height:100%;transition:width .35s}
+.stock-fill.ok{background:var(--grn)}
+.stock-fill.low{background:var(--amb)}
+.stock-fill.crit{background:var(--red)}
+.stock-text{font-size:7px;letter-spacing:.1em;color:var(--muted)}
+.stock-text.urgent{color:var(--red)}
+.size-selector{display:flex;gap:4px;margin-bottom:10px}
+.size-btn{flex:1;padding:7px 3px 8px;background:#fff;border:1px solid var(--border);cursor:pointer;transition:var(--t);text-align:center;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:1px}
+.size-btn:hover:not(:disabled){border-color:var(--g);background:rgba(138,106,58,.04)}
+.size-btn.selected{background:var(--g);border-color:var(--g)}
+.size-btn.selected .size-ml{color:rgba(255,255,255,.7)}
+.size-btn.selected .size-price{color:#fff}
+.size-btn.selected .size-normal{color:rgba(255,255,255,.45);text-decoration:line-through}
+.size-btn:disabled{opacity:.3;cursor:not-allowed}
+.size-ml{font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.size-price{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:400;color:var(--g);line-height:1.1}
+.size-normal{font-size:7px;color:rgba(122,117,108,.4);text-decoration:line-through}
+.btn-add-to-cart{width:100%;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-weight:400;transition:var(--t);display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-add-to-cart:hover:not(:disabled){background:var(--g);color:#fff;border-color:var(--g)}
+.btn-add-to-cart:disabled{opacity:.38;cursor:not-allowed}
+.btn-add-to-cart.added{background:var(--grn);border-color:var(--grn);color:#fff;pointer-events:none}
+.btn-add-to-cart.sold-out{background:transparent;border-color:rgba(176,64,64,.3);color:var(--red);cursor:not-allowed;pointer-events:none}
+.bundle-section{padding:84px 52px;background:var(--bg2);position:relative;overflow:hidden}
+.bundle-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 45% 65% at 12% 50%,rgba(138,106,58,.06) 0%,transparent 65%);pointer-events:none}
+.bundle-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.bundle-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(138,106,58,.09);border:1px solid rgba(138,106,58,.22);color:var(--g2);font-size:7px;letter-spacing:.3em;text-transform:uppercase;padding:4px 13px;margin-bottom:18px;font-family:'DM Sans',sans-serif}
+.bundle-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,46px);font-weight:300;line-height:1.12;color:var(--ink);margin-bottom:12px}
+.bundle-section h2 em{font-style:italic;color:var(--g2)}
+.bundle-body{font-size:10.5px;color:rgba(74,70,64,.55);line-height:2.15;margin-bottom:18px}
+.bundle-perks{list-style:none;margin-bottom:24px}
+.bundle-perks li{font-size:10px;color:rgba(74,70,64,.55);padding:6px 0;border-bottom:1px solid rgba(138,106,58,.05);display:flex;align-items:center;gap:9px}
+.bundle-perks li::before{content:'—';color:var(--g);flex-shrink:0}
+.bundle-visual{display:flex;align-items:center;justify-content:center;position:relative}
+.bundle-visual-bg{position:absolute;font-family:'Cormorant Garamond',serif;font-size:100px;font-weight:300;font-style:italic;color:rgba(138,106,58,.04);user-select:none;white-space:nowrap}
+.bundle-bottles{display:flex;align-items:flex-end;gap:12px;position:relative;z-index:1;animation:float 8s ease-in-out infinite}
+.why-section{padding:84px 0;background:var(--bg)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:44px}
+.why-card{background:#fff;padding:32px 26px;box-shadow:var(--shadow)}
+.why-icon{font-size:22px;margin-bottom:13px}
+.why-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.why-body{font-size:10.5px;color:var(--muted);line-height:2.1;letter-spacing:.025em}
+.how-section{padding:84px 0;background:var(--bg2)}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:44px}
+.how-card{background:var(--bg2);padding:32px 26px;box-shadow:var(--shadow)}
+.how-num{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;font-style:italic;color:rgba(138,106,58,.1);line-height:1;margin-bottom:12px}
+.how-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--ink);margin-bottom:8px}
+.how-body{font-size:10.5px;color:var(--muted);line-height:2.1;letter-spacing:.025em}
+.testi-section{padding:84px 0;background:var(--bg)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:44px}
+.testi-card{padding:30px 24px;background:#fff;box-shadow:var(--shadow)}
+.testi-stars{color:var(--g);font-size:8px;letter-spacing:4px;margin-bottom:11px}
+.testi-body{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:300;line-height:1.9;color:rgba(28,26,22,.78);margin-bottom:13px}
+.testi-name{font-size:7.5px;letter-spacing:.25em;color:var(--g);text-transform:uppercase}
+.testi-location{font-size:7.5px;color:var(--muted);letter-spacing:.1em;margin-top:2px}
+.shipping-section{padding:68px 0;background:var(--bg2)}
+.shipping-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:40px}
+.shipping-card{padding:24px 20px;background:var(--bg2);box-shadow:var(--shadow)}
+.shipping-icon{font-size:20px;margin-bottom:10px}
+.shipping-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;color:var(--ink);margin-bottom:6px}
+.shipping-body{font-size:10px;color:var(--muted);line-height:2;letter-spacing:.025em}
+footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--ink);display:block;margin-bottom:11px;letter-spacing:.04em}
+.footer-logo span{color:var(--g)}
+.footer-about{font-size:10px;color:var(--muted);line-height:2;max-width:220px}
+.footer-socials{display:flex;gap:6px;margin-top:13px}
+.social-link{width:29px;height:29px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;transition:var(--t)}
+.social-link:hover{border-color:var(--g);color:var(--g)}
+.footer-col h5{font-size:7.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--g);margin-bottom:13px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:7px}
+.footer-col a{font-size:10px;color:var(--muted);letter-spacing:.02em;transition:color .2s}
+.footer-col a:hover{color:var(--ink)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:16px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px}
+.footer-copy{font-size:8px;color:rgba(122,117,108,.4);letter-spacing:.07em}
+.footer-legal{display:flex;gap:14px}
+.footer-legal a{font-size:8px;color:rgba(122,117,108,.4);transition:color .2s}
+.footer-legal a:hover{color:var(--g)}
+.footer-disclaimer{font-size:7.5px;color:rgba(122,117,108,.28);line-height:1.85;margin-top:11px;padding-top:11px;border-top:1px solid rgba(138,106,58,.04)}
+.cart-overlay{position:fixed;inset:0;background:rgba(28,26,22,.55);z-index:890;opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.cart-overlay.visible{opacity:1;pointer-events:all}
+.cart-panel{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#fff;z-index:895;transform:translateX(100%);transition:transform .36s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;border-left:1px solid var(--border);box-shadow:-4px 0 24px rgba(28,26,22,.08)}
+.cart-panel.visible{transform:translateX(0)}
+.cart-header{padding:20px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-header-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;font-style:italic;color:var(--ink)}
+.cart-header-count{font-size:9px;letter-spacing:.15em;color:var(--muted)}
+.cart-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:20px;padding:4px;line-height:1;transition:color .2s}
+.cart-close:hover{color:var(--ink)}
+.cart-body{flex:1;overflow-y:auto;padding:14px 22px;scrollbar-width:thin}
+.cart-empty{text-align:center;padding:48px 0}
+.cart-empty p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--muted)}
+.cart-empty span{font-size:9.5px;color:var(--muted2);letter-spacing:.07em;display:block;margin-top:4px}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.cart-item:last-child{border:none}
+.cart-item-visual{width:40px;height:58px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-item-info{flex:1}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:400;color:var(--ink);margin-bottom:1px}
+.cart-item-insp{font-size:7.5px;color:var(--muted);letter-spacing:.07em;margin-bottom:5px}
+.cart-item-size{display:inline-flex;align-items:center;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g);background:rgba(138,106,58,.09);padding:2.5px 7px}
+.cart-item-controls{display:flex;align-items:center;gap:7px;margin-top:7px}
+.qty-control{display:flex;align-items:center;border:1px solid var(--border);background:#fff}
+.qty-btn{width:26px;height:26px;background:transparent;border:none;cursor:pointer;color:var(--muted);font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.qty-btn:hover{background:var(--bg);color:var(--ink)}
+.qty-num{min-width:28px;text-align:center;font-size:12px;color:var(--ink)}
+.cart-item-remove{background:none;border:none;cursor:pointer;color:rgba(122,117,108,.38);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:0;transition:color .2s;margin-left:auto}
+.cart-item-remove:hover{color:var(--red)}
+.cart-item-price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--g);white-space:nowrap}
+.cart-bundle-hint{background:rgba(138,106,58,.07);border:1px solid rgba(138,106,58,.17);padding:11px 13px;margin:10px 0;font-size:9px;color:var(--g2);line-height:1.7}
+.cart-bundle-hint b{color:var(--g);font-weight:500}
+.cart-countdown{background:rgba(138,106,58,.05);border:1px solid var(--border);padding:9px 13px;margin:8px 0;display:flex;align-items:center;gap:10px}
+.cart-cd-icon{font-size:13px}
+.cart-cd-label{font-size:8px;letter-spacing:.07em;color:var(--muted)}
+.cart-cd-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--g);letter-spacing:.04em;display:inline-block;min-width:50px}
+.cart-footer{padding:14px 22px;border-top:1px solid var(--border)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.cart-total-label{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cart-total-value{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:300;color:var(--g)}
+.cart-savings{font-size:9px;color:var(--grn);letter-spacing:.06em;margin-bottom:14px}
+.btn-proceed-checkout{width:100%;padding:13px;background:var(--g);color:#fff;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;transition:background .24s;font-weight:400;margin-bottom:7px}
+.btn-proceed-checkout:hover{background:var(--g2)}
+.btn-whatsapp-order{width:100%;padding:11px;background:transparent;border:1px solid rgba(58,122,82,.28);color:var(--grn);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-weight:400;display:flex;align-items:center;justify-content:center;gap:7px;transition:var(--t)}
+.btn-whatsapp-order:hover{background:rgba(58,122,82,.07);border-color:rgba(58,122,82,.55)}
+.cart-item-remove-btn{width:100%;padding:6px 10px;background:rgba(176,64,64,.07);border:1px solid rgba(176,64,64,.18);color:var(--red);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:400;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:8px;transition:var(--t)}
+.cart-item-remove-btn:hover{background:rgba(176,64,64,.2);border-color:var(--red)}
+.modal-overlay{position:fixed;inset:0;background:rgba(28,26,22,.85);z-index:900;display:flex;align-items:flex-start;justify-content:center;padding:54px 20px 20px;opacity:0;pointer-events:none;transition:opacity .28s;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow-y:auto}
+.modal-overlay.visible{opacity:1;pointer-events:all}
+.modal-box{background:#fff;width:100%;max-width:510px;padding:38px;position:relative;border:1px solid var(--border);transform:translateY(18px);transition:transform .32s;box-shadow:0 20px 60px rgba(28,26,22,.18)}
+.modal-overlay.visible .modal-box{transform:translateY(0)}
+.modal-close{position:absolute;top:12px;right:12px;background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);padding:5px;line-height:1;transition:color .2s}
+.modal-close:hover{color:var(--ink)}
+.modal-eyebrow{font-size:7px;letter-spacing:.4em;text-transform:uppercase;color:var(--g);margin-bottom:4px}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--ink);margin-bottom:4px}
+.modal-subtitle{font-size:10px;color:var(--muted);margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);line-height:1.8}
+.order-summary{background:rgba(247,244,239,.5);padding:10px 13px;margin-bottom:16px;max-height:150px;overflow-y:auto;scrollbar-width:thin}
+.order-summary-item{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);padding:2.5px 0}
+.order-summary-item span:last-child{color:var(--g);font-family:'Cormorant Garamond',serif;font-size:12px}
+.order-summary-total{border-top:1px solid var(--border);margin-top:5px;padding-top:5px;display:flex;justify-content:space-between}
+.order-summary-total span:last-child{color:var(--g2);font-family:'Cormorant Garamond',serif;font-size:15px}
+.form-group{margin-bottom:13px}
+.form-group label{display:block;font-size:7.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);color:var(--ink);font-size:12px;font-weight:300;outline:none;transition:border-color .22s;-webkit-appearance:none;appearance:none;border-radius:0}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--g)}
+.form-group input.invalid,.form-group select.invalid,.form-group textarea.invalid{border-color:var(--red)}
+.form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237A756C'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center}
+.form-error{font-size:8px;color:#C87070;margin-top:3px;display:none;letter-spacing:.04em}
+.form-error.visible{display:block}
+.form-group textarea{resize:vertical;min-height:58px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.form-total-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--border);margin-top:2px}
+.form-total-label{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.form-total-value{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:300;color:var(--g)}
+.btn-submit{width:100%;padding:13px;background:var(--g);color:#fff;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;transition:background .24s;font-weight:400;margin-top:12px}
+.btn-submit:hover:not(:disabled){background:var(--g2)}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed}
+.form-security-note{text-align:center;font-size:8.5px;color:var(--muted);margin-top:7px;letter-spacing:.06em}
+.modal-loading{display:none;text-align:center;padding:26px 0}
+.spinner{width:28px;height:28px;border:1.5px solid var(--border);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 13px}
+.modal-success{display:none;text-align:center;padding:12px 0}
+.success-icon{font-size:42px;margin-bottom:13px}
+.modal-success h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;font-style:italic;color:var(--g);margin-bottom:9px}
+.modal-success p{font-size:11px;color:var(--muted);line-height:2;letter-spacing:.03em}
+.success-tag{margin-top:16px;font-size:9px;font-style:italic;color:var(--g);letter-spacing:.1em;font-family:'Cormorant Garamond',serif}
+.float-wa{position:fixed;bottom:24px;right:24px;z-index:880;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 16px 10px 12px;font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:.04em;box-shadow:0 5px 24px rgba(37,211,102,.28);transition:var(--t);text-decoration:none}
+.float-wa:hover{background:#1db956;transform:translateY(-2px)}
+.float-wa-icon{font-size:16px;line-height:1}
+.float-wa-text{white-space:nowrap}
+.float-cart{position:fixed;bottom:24px;left:24px;z-index:880;background:#fff;border:1px solid var(--border);padding:10px 16px;display:none;align-items:center;gap:8px;cursor:pointer;transition:var(--t);box-shadow:var(--shadow)}
+.float-cart:hover{border-color:var(--g)}
+.float-cart-badge{background:var(--g);color:#fff;border-radius:50%;width:17px;height:17px;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:500}
+.float-cart-label{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .58s ease,transform .58s ease}
+.reveal.visible{opacity:1;transform:none}
+.delay-1{transition-delay:.07s}
+.delay-2{transition-delay:.14s}
+.delay-3{transition-delay:.21s}
+.delay-4{transition-delay:.28s}
+@media(max-width:1280px){.product-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:1020px){.product-grid{grid-template-columns:repeat(3,1fr)}.footer-grid{grid-template-columns:1fr 1fr;gap:24px}.hero-inner{grid-template-columns:1fr}.hero-visual{display:none}}
+@media(max-width:880px){nav{padding:13px 22px}nav.scrolled{padding:11px 22px}.nav-links{display:none}.hamburger{display:flex}.hero-inner{padding:0 22px}.section-wrap{padding:0 22px}.bundle-bar{padding:11px 22px}.bundle-section{padding:64px 22px}.bundle-inner{grid-template-columns:1fr;gap:36px}.why-grid{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr}.shipping-grid{grid-template-columns:1fr 1fr}footer{padding:40px 22px 18px}.product-grid{grid-template-columns:repeat(2,1fr)}.cart-panel{width:100%;max-width:100vw}}
+@media(max-width:520px){.product-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.price-strip-inner{flex-direction:column;align-items:center;gap:12px}.price-item{border:none;padding:0}.gender-tabs{flex-direction:column;width:100%}.gender-tab{justify-content:center}.float-wa-text{display:none}.float-wa{padding:12px}.shipping-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <!-- Grain Texture Overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
-  
-  <!-- Header -->
-  <header class="header" id="header">
-    <div class="container">
-      <div class="header-content">
-        <!-- Logo -->
-        <a href="/" class="logo">
-          the artisan<span class="logo-accent">.</span>
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <nav class="nav-menu" aria-label="Main Navigation">
-          <a href="/shop/collection.html" class="nav-link">Koleksi</a>
-          <a href="/shop/collection.html?category=hot" class="nav-link">Hot Sellers</a>
-          <a href="/shop/collection.html?category=new" class="nav-link">Terbaru</a>
-          <a href="#about" class="nav-link">Tentang Kami</a>
-        </nav>
-        
-        <!-- Actions -->
-        <div class="nav-actions">
-          <!-- Search Icon -->
-          <button class="nav-icon" aria-label="Search" id="searchBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            </svg>
-          </button>
-          
-          <!-- User Icon -->
-          <a href="/auth/login.html" class="nav-icon" aria-label="Account" id="accountBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </a>
-          
-          <!-- Cart Icon -->
-          <button class="nav-icon" aria-label="Cart" id="cartBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="9" cy="21" r="1"/>
-              <circle cx="20" cy="21" r="1"/>
-              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-            </svg>
-            <span class="nav-badge" id="cartBadge" style="display: none;">0</span>
-          </button>
-          
-          <!-- CTA Button (Desktop Only) -->
-          <a href="/shop/collection.html" class="btn btn-primary" style="display: none;">
-            Beli Sekarang
-          </a>
+
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
+
+<div id="ann">
+  <span class="ann-txt">⚡ Promosi Terhad — Berakhir Dalam</span>
+  <div class="ann-cd">
+    <b id="cdH">23</b><span class="ann-sep">:</span><b id="cdM">59</b><span class="ann-sep">:</span><b id="cdS">47</b>
+  </div>
+  <span class="ann-txt">· Harga Promo Aktif Sekarang</span>
+  <button id="ann-close" aria-label="Tutup">✕</button>
+</div>
+
+<nav id="main-nav">
+  <a href="#top" class="logo">the artisan<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#collection">Koleksi</a></li>
+    <li><a href="#bundle">Bundle</a></li>
+    <li><a href="#shipping">Penghantaran</a></li>
+    <li><a href="https://wa.me/601159003985" target="_blank" rel="noopener">WhatsApp</a></li>
+    <li>
+      <a href="#" id="nav-cart-btn" class="nav-cart">
+        🛒 Troli
+        <i class="nav-cart-badge" id="nav-badge">0</i>
+      </a>
+    </li>
+    <li><a href="#collection" class="btn-cta">Beli Sekarang</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Buka Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<nav class="mobile-nav" id="mobile-nav" aria-label="Menu Mudah Alih">
+  <a href="#collection" onclick="closeMobileNav()">Koleksi</a>
+  <a href="#bundle"     onclick="closeMobileNav()">Bundle</a>
+  <a href="#shipping"   onclick="closeMobileNav()">Penghantaran</a>
+  <a href="#"           onclick="closeMobileNav(); openCart(event);" style="color:var(--g)">🛒 Troli</a>
+  <a href="https://wa.me/601159003985" target="_blank" onclick="closeMobileNav()">WhatsApp</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Wangian Premium Malaysia</div>
+      <h1 class="hero-title">Wangian<br>yang <em>Bercerita</em></h1>
+      <p class="hero-desc">165 wangian premium terinspirasi jenama dunia. Formulasi pati diimport. Tiga saiz — dari RM25 untuk setiap gaya hidup dan momen anda.</p>
+      <div class="hero-actions">
+        <a href="#collection" class="btn-gold">Terokai Koleksi</a>
+        <button class="btn-text" onclick="openCart(event)">Lihat Troli →</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">165</div><div class="hero-stat-lbl">Pilihan Wangian</div></div>
+        <div class="hero-stat"><div class="hero-stat-num"><em>3</em></div><div class="hero-stat-lbl">Saiz Tersedia</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">12<em>j</em></div><div class="hero-stat-lbl">Ketahanan Wangian</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-glow"></div>
+      <div class="hero-bottles">
+        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="hb1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".3"/><stop offset="48%" stop-color="#3A6A88" stop-opacity=".88"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#0E2E42"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#0E2E42" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#hb1)" stroke="rgba(0,0,0,.1)" stroke-width=".5"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
+        <svg width="64" height="178" viewBox="0 0 64 178" fill="none" aria-hidden="true"><defs><linearGradient id="hb2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".28"/><stop offset="48%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".28"/></linearGradient></defs><rect x="22" y="0" width="20" height="12" rx="5" fill="#5A3A10"/><rect x="24" y="1.5" width="5" height="8" rx="1" fill="rgba(255,255,255,.16)"/><rect x="21" y="12" width="22" height="8" rx="1" fill="#5A3A10" opacity=".6"/><rect x="11" y="20" width="42" height="150" rx="3" fill="url(#hb2)" stroke="rgba(0,0,0,.08)" stroke-width=".5"/><rect x="13" y="22" width="7" height="146" rx="1.5" fill="rgba(255,255,255,.06)"/><rect x="13" y="64" width="38" height="54" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.09)" stroke-width=".4"/><text x="32" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">THE ARTISAN</text><text x="32" y="91" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">PARFUM</text><ellipse cx="32" cy="172" rx="14.5" ry="2" fill="rgba(0,0,0,.07)"/></svg>
+        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="hb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".3"/><stop offset="48%" stop-color="#8A5A78" stop-opacity=".88"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#3A1828"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#hb3)" stroke="rgba(0,0,0,.1)" stroke-width=".5"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE STRIP — populated dynamically from Supabase pricing table -->
+<div class="price-strip" id="price-strip">
+  <div class="price-strip-inner" id="price-strip-inner">
+    <!-- Rendered by JS after fetching pricing -->
+    <div class="price-item"><div class="price-size">10 ml</div><div class="price-row"><span class="price-promo" id="p10-promo">RM 25</span><span class="price-normal" id="p10-normal">RM 35</span></div><div class="price-save" id="p10-save">Jimat RM 10</div></div>
+    <div class="price-item"><div class="price-size">30 ml</div><div class="price-row"><span class="price-promo" id="p30-promo">RM 49</span><span class="price-normal" id="p30-normal">RM 69</span></div><div class="price-save" id="p30-save">Jimat RM 20</div></div>
+    <div class="price-item"><div class="price-size">60 ml</div><div class="price-row"><span class="price-promo" id="p60-promo">RM 79</span><span class="price-normal" id="p60-normal">RM 99</span></div><div class="price-save" id="p60-save">Jimat RM 20</div></div>
+  </div>
+</div>
+
+<div class="bundle-bar">
+  <span style="font-size:14px">🎁</span>
+  <span class="bundle-bar-text">Beli 3 botol 60ml — Percuma 1 botol 30ml pilihan anda</span>
+  <div class="bundle-bar-divider"></div>
+  <button class="bundle-bar-btn" onclick="scrollToSection('bundle')">Tahu Lebih Lanjut</button>
+</div>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item">Pati Diimport</span><span class="ticker-item">55 Wangian Lelaki</span><span class="ticker-item">98 Wangian Wanita</span><span class="ticker-item">10ml · 30ml · 60ml</span><span class="ticker-item">Terinspirasi Jenama Dunia</span><span class="ticker-item">Ketahanan Sehingga 12 Jam</span><span class="ticker-item">Penghantaran Seluruh Malaysia</span><span class="ticker-item">Bayar FPX · eWallet · Kad</span>
+    <span class="ticker-item">Pati Diimport</span><span class="ticker-item">55 Wangian Lelaki</span><span class="ticker-item">98 Wangian Wanita</span><span class="ticker-item">10ml · 30ml · 60ml</span><span class="ticker-item">Terinspirasi Jenama Dunia</span><span class="ticker-item">Ketahanan Sehingga 12 Jam</span><span class="ticker-item">Penghantaran Seluruh Malaysia</span><span class="ticker-item">Bayar FPX · eWallet · Kad</span>
+  </div>
+</div>
+
+<section class="collection" id="collection">
+  <div class="section-wrap">
+    <div class="section-label">Koleksi Eksklusif</div>
+    <h2 class="section-title">Pilih <em>Wangian</em> Anda</h2>
+    <p class="section-subtitle">Terinspirasi profil jenama premium dunia — diformulasikan semula dengan pati premium diimport untuk ketahanan dan kekuatan optimal.</p>
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Cari wangian, jenama, jenis..." aria-label="Cari wangian">
+      <button id="search-clear" aria-label="Padam carian">✕</button>
+    </div>
+    <div class="gender-tabs" role="tablist" aria-label="Pilih jantina">
+      <button class="gender-tab active-men" id="tab-men" onclick="switchGender('m')" role="tab" aria-selected="true">♂ Lelaki (<span id="count-m">55</span>)</button>
+      <button class="gender-tab" id="tab-women" onclick="switchGender('w')" role="tab" aria-selected="false">♀ Wanita (<span id="count-w">98</span>)</button>
+      <button class="gender-tab" id="tab-unisex" onclick="switchGender('u')" role="tab" aria-selected="false">✦ Unisex (<span id="count-u">12</span>)</button>
+    </div>
+    <div class="product-grid" id="product-grid">
+      <div class="grid-loading"><div class="spinner"></div><p>Memuatkan koleksi...</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bundle-section reveal" id="bundle">
+  <div class="bundle-inner">
+    <div>
+      <div class="bundle-tag">🎁 Tawaran Eksklusif</div>
+      <h2>Beli 3×60ml<br><em>Percuma 1×30ml</em></h2>
+      <p class="bundle-body">Gabungkan tiga wangian kegemaran anda dalam satu pesanan dan kami hadirkan satu botol 30ml percuma pilihan anda. Simpan untuk diri atau jadikan hadiah istimewa.</p>
+      <ul class="bundle-perks">
+        <li>Pilih mana-mana 3 wangian 60ml dari koleksi</li>
+        <li>Dapat 1 botol 30ml percuma — pilihan anda</li>
+        <li>Jimat sehingga RM 49 berbanding harga biasa</li>
+        <li>Sesuai untuk lelaki, wanita, atau campuran</li>
+        <li>Pembungkusan premium — sempurna untuk hadiah</li>
+      </ul>
+      <button class="btn-gold" onclick="scrollToSection('collection')">Terokai Koleksi 60ml →</button>
+    </div>
+    <div class="bundle-visual">
+      <div class="bundle-visual-bg">trio</div>
+      <div class="bundle-bottles">
+        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="bv1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A7858" stop-opacity=".3"/><stop offset="48%" stop-color="#4A7858" stop-opacity=".9"/><stop offset="100%" stop-color="#4A7858" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#1A3820"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#1A3820" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#bv1)"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
+        <svg width="62" height="172" viewBox="0 0 62 172" fill="none" aria-hidden="true"><defs><linearGradient id="bv2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".28"/><stop offset="48%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".28"/></linearGradient></defs><rect x="21" y="0" width="20" height="11" rx="5" fill="#5A3A10"/><rect x="23" y="1.5" width="5" height="7.5" rx="1" fill="rgba(255,255,255,.16)"/><rect x="20" y="11" width="22" height="7" rx="1" fill="#5A3A10" opacity=".6"/><rect x="10" y="18" width="42" height="146" rx="3" fill="url(#bv2)"/><rect x="12" y="20" width="7" height="142" rx="1.5" fill="rgba(255,255,255,.06)"/><ellipse cx="31" cy="166" rx="14" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
+        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="bv3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".3"/><stop offset="48%" stop-color="#8A5A78" stop-opacity=".9"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#3A1828"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#bv3)"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="section-wrap">
+    <div class="section-label">Kenapa The Artisan</div>
+    <h2 class="section-title">Kualiti yang <em>Tidak Berkompromi</em></h2>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon">🌿</div><div class="why-title">Pati Premium Diimport</div><p class="why-body">Setiap formula menggunakan pati wangian berkualiti tinggi yang diimport — profil wangian setara dengan inspirasi jenama asal dunia.</p></div>
+      <div class="why-card reveal delay-1"><div class="why-icon">⏱</div><div class="why-title">Ketahanan Sehingga 12 Jam</div><p class="why-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam. Tidak perlu semprot berulang kali sepanjang hari.</p></div>
+      <div class="why-card reveal delay-2"><div class="why-icon">✦</div><div class="why-title">Tiga Saiz Untuk Semua</div><p class="why-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Setiap saiz menawarkan nilai terbaik untuk harganya.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="section-wrap">
+    <div class="section-label">Proses Mudah</div>
+    <h2 class="section-title">Cara <em>Membuat Pesanan</em></h2>
+    <div class="how-grid">
+      <div class="how-card reveal"><div class="how-num">01</div><div class="how-title">Pilih Saiz</div><p class="how-body">Klik butang saiz yang anda mahu pada kad produk — 10ml, 30ml, atau 60ml. Saiz yang dipilih akan disorot.</p></div>
+      <div class="how-card reveal delay-1"><div class="how-num">02</div><div class="how-title">Tambah ke Troli</div><p class="how-body">Klik butang "Tambah ke Troli" pada kad produk. Wangian anda akan masuk ke dalam troli beli-belah.</p></div>
+      <div class="how-card reveal delay-2"><div class="how-num">03</div><div class="how-title">Sahkan & Bayar</div><p class="how-body">Buka troli, isi maklumat penghantaran, dan bayar melalui ToyyibPay (FPX · Kad · eWallet) atau WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section">
+  <div class="section-wrap">
+    <div class="section-label">Pelanggan Setia</div>
+    <h2 class="section-title">Apa Kata <em>Mereka</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-body">"Dah cuba banyak inspired perfume, tapi The Artisan memang lain. Aventus tahan dari pagi sampai malam — husband pun puji!"</p><div class="testi-name">Nur Aisyah R.</div><div class="testi-location">Kuala Lumpur</div></div>
+      <div class="testi-card reveal delay-1"><div class="testi-stars">★★★★★</div><p class="testi-body">"Harga berpatutan tapi kualiti tak main-main. Dah order 3 kali. Good Girl jadi signature scent saya sekarang."</p><div class="testi-name">Farah D.</div><div class="testi-location">Shah Alam</div></div>
+      <div class="testi-card reveal delay-2"><div class="testi-stars">★★★★★</div><p class="testi-body">"Hadiah untuk isteri — dia tanya beli kat mana. Pembungkusan kemas, wangian tahan lama. Memang recommend kepada semua!"</p><div class="testi-name">Ahmad Zaki B.</div><div class="testi-location">Johor Bahru</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="shipping-section" id="shipping">
+  <div class="section-wrap">
+    <div class="section-label">Penghantaran</div>
+    <h2 class="section-title">Cepat & <em>Selamat</em></h2>
+    <div class="shipping-grid">
+      <div class="shipping-card reveal"><div class="shipping-icon">📦</div><div class="shipping-title">Penghantaran Pantas</div><p class="shipping-body">Semenanjung 2–4 hari bekerja. Sabah & Sarawak 4–7 hari bekerja.</p></div>
+      <div class="shipping-card reveal delay-1"><div class="shipping-icon">🔒</div><div class="shipping-title">Pembungkusan Selamat</div><p class="shipping-body">Setiap botol dibungkus bubble wrap dan kotak khas — tiba dalam keadaan sempurna.</p></div>
+      <div class="shipping-card reveal delay-2"><div class="shipping-icon">🚚</div><div class="shipping-title">Percuma RM150+</div><p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj penghantaran RM8 sahaja.</p></div>
+      <div class="shipping-card reveal delay-3"><div class="shipping-icon">↩</div><div class="shipping-title">Polisi Pemulangan</div><p class="shipping-body">Produk rosak atau salah hantar akan diganti dalam masa 7 hari bekerja. Hubungi kami via WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#top" class="footer-logo">the artisan<span>.</span></a>
+      <p class="footer-about">165 wangian premium untuk mereka yang menghargai kualiti. Pati diimport. Formula terinspirasi jenama mewah dunia.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link" aria-label="Instagram">📷</a>
+        <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+        <a href="#" class="social-link" aria-label="Facebook">📘</a>
+        <a href="https://wa.me/601159003985" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col"><h5>Koleksi</h5><ul><li><a href="#collection">Untuk Lelaki</a></li><li><a href="#collection">Untuk Wanita</a></li><li><a href="#bundle">Bundle 3+1</a></li></ul></div>
+    <div class="footer-col"><h5>Maklumat</h5><ul><li><a href="#shipping">Penghantaran</a></li><li><a href="#">FAQ</a></li><li><a href="#">Tentang Kami</a></li></ul></div>
+    <div class="footer-col"><h5>Hubungi Kami</h5><ul><li><a href="https://wa.me/601159003985" target="_blank">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 The Artisan Parfum. Semua hak terpelihara.</p>
+    <div class="footer-legal"><a href="#">Privasi</a><a href="#">Terma & Syarat</a><a href="#">Polisi Pemulangan</a></div>
+  </div>
+  <p class="footer-disclaimer">Nota: Semua wangian The Artisan Parfum adalah produk asal yang terinspirasi oleh profil wangian jenama premium dunia. The Artisan Parfum tidak berafiliasi, disahkan, atau berkaitan dengan mana-mana jenama yang disebutkan. Nama jenama digunakan semata-mata untuk tujuan perbandingan profil wangian sahaja.</p>
+</footer>
+
+<!-- CART SIDE PANEL -->
+<div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
+<aside class="cart-panel" id="cart-panel" aria-label="Troli Beli-belah" aria-modal="true">
+  <div class="cart-header">
+    <div><div class="cart-header-title">Troli Anda</div><span class="cart-header-count" id="cart-count-label"></span></div>
+    <button class="cart-close" onclick="closeCart()" aria-label="Tutup troli">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty"><p>Troli kosong</p><span>Tambah wangian untuk mula membeli</span></div>
+    <div id="cart-items-list"></div>
+    <div class="cart-bundle-hint" id="bundle-hint" style="display:none"></div>
+    <div class="cart-countdown" id="cart-countdown" style="display:none">
+      <span class="cart-cd-icon">⏳</span>
+      <div><div class="cart-cd-label">Troli anda disimpan selama</div><span class="cart-cd-time" id="cart-cd-display">15:00</span></div>
+    </div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-total-row"><span class="cart-total-label">Jumlah</span><span class="cart-total-value" id="cart-total-display">RM 0</span></div>
+    <div class="cart-savings" id="cart-savings-display"></div>
+    <button class="btn-proceed-checkout" onclick="openOrderModal()">Teruskan ke Bayaran →</button>
+    <button class="btn-whatsapp-order" onclick="sendCartViaWhatsApp()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Pesan via WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeOrderModal()" aria-label="Tutup">✕</button>
+    <div id="modal-form">
+      <div class="modal-eyebrow">Maklumat Penghantaran</div>
+      <h2 class="modal-title" id="modal-title">Sahkan Pesanan</h2>
+      <p class="modal-subtitle">Isi maklumat di bawah. Anda akan diarahkan ke halaman pembayaran selamat.</p>
+      <div class="order-summary" id="modal-order-summary" aria-label="Ringkasan pesanan"></div>
+      <div class="form-group"><label for="field-name">Nama Penuh *</label><input type="text" id="field-name" placeholder="Nama anda" autocomplete="name"><div class="form-error" id="err-name">Nama tidak sah (minimum 3 huruf)</div></div>
+      <div class="form-group"><label for="field-phone">No. Telefon *</label><input type="tel" id="field-phone" placeholder="01X-XXXXXXX" autocomplete="tel"><div class="form-error" id="err-phone">No. telefon tidak sah (format: 01X-XXXXXXX)</div></div>
+      <div class="form-group"><label for="field-email">Emel <span style="color:var(--m)">(Opsyen)</span></label><input type="email" id="field-email" placeholder="email@contoh.com" autocomplete="email"><div class="form-error" id="err-email">Emel tidak sah</div></div>
+      <div class="form-group"><label for="field-address">Alamat Penghantaran *</label><textarea id="field-address" placeholder="No. rumah, jalan, taman..." autocomplete="street-address"></textarea><div class="form-error" id="err-address">Sila masukkan alamat lengkap (minimum 10 huruf)</div></div>
+      <div class="form-row">
+        <div class="form-group"><label for="field-state">Negeri *</label>
+          <select id="field-state" autocomplete="address-level1"><option value="">Pilih Negeri</option><option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option><option>Perlis</option><option>Pulau Pinang</option><option>Sabah</option><option>Sarawak</option><option>Selangor</option><option>Terengganu</option><option>W.P. Kuala Lumpur</option><option>W.P. Labuan</option><option>W.P. Putrajaya</option></select>
+          <div class="form-error" id="err-state">Sila pilih negeri</div></div>
+        <div class="form-group"><label for="field-postcode">Poskod *</label><input type="text" id="field-postcode" placeholder="XXXXX" maxlength="5" autocomplete="postal-code"><div class="form-error" id="err-postcode">Poskod tidak sah (5 digit)</div></div>
+      </div>
+      <div class="form-group"><label for="field-note">Nota <span style="color:var(--m)">(Opsyen)</span></label><input type="text" id="field-note" placeholder="Pilihan 30ml percuma untuk bundle, arahan khas..."></div>
+      <div class="form-total-row"><span class="form-total-label">Jumlah Bayaran</span><span class="form-total-value" id="modal-total-display">RM 0</span></div>
+      <button class="btn-submit" id="submit-btn" onclick="handleOrderSubmit()">Sahkan &amp; Bayar via ToyyibPay →</button>
+      <p class="form-security-note">🔒 Pembayaran selamat · FPX · Kad Kredit · eWallet</p>
+    </div>
+    <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--m2);letter-spacing:.06em">Memproses pesanan anda...</p></div>
+    <div class="modal-success" id="modal-success">
+      <div class="success-icon">✓</div>
+      <h3>Pesanan Dihantar!</h3>
+      <p>Pasukan kami akan menghubungi anda melalui <strong style="color:var(--g)">WhatsApp</strong> dalam masa 1–2 jam untuk pengesahan bayaran dan penghantaran.<br><br>Sila semak mesej WhatsApp anda.</p>
+      <div class="success-tag">selamat datang ke the artisan parfum.</div>
+    </div>
+  </div>
+</div>
+
+<a href="https://wa.me/601159003985?text=Salam%2C+saya+ingin+bertanya+tentang+The+Artisan+Parfum." class="float-wa" target="_blank" rel="noopener" aria-label="Hubungi kami via WhatsApp">
+  <span class="float-wa-icon">💬</span><span class="float-wa-text">Tanya Kami</span>
+</a>
+<div class="float-cart" id="float-cart" onclick="openCart(event)" role="button" tabindex="0" aria-label="Buka troli" onkeypress="if(event.key==='Enter')openCart(event)">
+  <div class="float-cart-badge" id="float-cart-badge">0</div>
+  <span class="float-cart-label">Troli</span>
+</div>
+
+<script>
+'use strict';
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
+const SB_URL = 'https://oyhtkqfmlwbkjbcfgqxm.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95aHRrcWZtbHdia2piY2ZncXhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5MzM0NzcsImV4cCI6MjA5MDUwOTQ3N30.ZtWi9M7biYA47TcELySXXT-8KdhEne5Iag6uSA7bhrQ';
+
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(SB_URL + '/rest/v1/' + path, {
+    ...opts,
+    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', ...(opts.headers || {}) }
+  });
+  if (!res.ok) throw new Error('Supabase error: ' + res.status);
+  return res.status === 204 ? null : res.json();
+}
+
+/* =====================================================
+   APP CONFIG — prices loaded from Supabase
+===================================================== */
+const CONFIG = {
+  WA_NUMBER:     '601159003985',
+  TOYYIBPAY_URL: 'https://perfume-backend-9653.onrender.com/checkout.php',
+  USE_TOYYIBPAY: true,
+  PRICES: { '10ml': { normal: 35, promo: 25 }, '30ml': { normal: 69, promo: 49 }, '60ml': { normal: 99, promo: 79 } },
+  INITIAL_STOCK: 50,
+  KEYS: { STOCK: 'artisan_stock_v2', CART: 'artisan_cart_v2', TIMER: 'artisan_ann_end_v1' }
+};
+
+/* =====================================================
+   LOAD PRICING FROM SUPABASE
+===================================================== */
+async function loadPricing() {
+  try {
+    const rows = await sbFetch('pricing?select=size,normal_price,promo_price');
+    if (rows && rows.length) {
+      rows.forEach(r => {
+        CONFIG.PRICES[r.size] = { normal: r.normal_price, promo: r.promo_price };
+      });
+      updatePriceStrip();
+    }
+  } catch (e) { /* Keep defaults */ }
+}
+
+function updatePriceStrip() {
+  ['10ml','30ml','60ml'].forEach(size => {
+    const key = size.replace('ml','');
+    const p = CONFIG.PRICES[size];
+    const promoEl  = document.getElementById('p' + key + '-promo');
+    const normalEl = document.getElementById('p' + key + '-normal');
+    const saveEl   = document.getElementById('p' + key + '-save');
+    if (promoEl)  promoEl.textContent  = 'RM ' + p.promo;
+    if (normalEl) normalEl.textContent = 'RM ' + p.normal;
+    if (saveEl)   saveEl.textContent   = 'Jimat RM ' + (p.normal - p.promo);
+  });
+}
+
+/* =====================================================
+   LOAD PRODUCTS FROM SUPABASE
+===================================================== */
+let PRODUCTS = [];
+
+async function loadProducts() {
+  const grid = document.getElementById('product-grid');
+  try {
+    const rows = await sbFetch('products?active=eq.true&order=id.asc&select=*');
+    PRODUCTS = rows || [];
+    // Update gender counts
+    ['m','w','u'].forEach(g => {
+      const el = document.getElementById('count-' + g);
+      if (el) el.textContent = PRODUCTS.filter(p => p.gender === g).length;
+    });
+    renderProducts();
+  } catch (e) {
+    grid.innerHTML = `<div class="no-results" style="display:block;background:var(--k)"><p>Gagal memuatkan produk</p><span>Cuba muat semula halaman ini</span></div>`;
+    console.error('Failed to load products:', e);
+  }
+}
+
+/* =====================================================
+   STOCK MANAGEMENT — localStorage cache + Supabase sync
+===================================================== */
+function initStock() {
+  const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
+  let updated = false;
+  PRODUCTS.forEach(p => {
+    if (stored[p.id] === undefined) { stored[p.id] = p.stock ?? CONFIG.INITIAL_STOCK; updated = true; }
+  });
+  if (updated) localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(stored));
+}
+
+function getStock(id) {
+  const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
+  const product = PRODUCTS.find(p => p.id === id);
+  return s[id] !== undefined ? s[id] : (product?.stock ?? CONFIG.INITIAL_STOCK);
+}
+
+function decrementStock(id, qty = 1) {
+  const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
+  s[id] = Math.max(0, (s[id] ?? CONFIG.INITIAL_STOCK) - qty);
+  localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(s));
+  // Async sync to Supabase
+  sbFetch('products?id=eq.' + id, {
+    method: 'PATCH',
+    headers: { 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ stock: s[id] })
+  }).catch(() => {});
+  refreshCardStock(id);
+}
+
+function refreshCardStock(id) {
+  const card = document.querySelector(`[data-product-id="${id}"]`);
+  if (!card) return;
+  const stk = getStock(id);
+  const pct = stk / CONFIG.INITIAL_STOCK;
+  const fill   = card.querySelector('.stock-fill');
+  const text   = card.querySelector('.stock-text');
+  const addBtn = card.querySelector('.btn-add-to-cart');
+  const sizeBtns = card.querySelectorAll('.size-btn');
+  if (fill) { fill.style.width = (pct * 100) + '%'; fill.className = 'stock-fill ' + (stk === 0 ? 'crit' : stk <= 8 ? 'crit' : stk <= 18 ? 'low' : 'ok'); }
+  if (text) { text.textContent = stk === 0 ? 'STOK HABIS' : stk + ' unit berbaki'; text.className = 'stock-text' + (stk <= 8 ? ' urgent' : ''); }
+  if (addBtn && stk === 0) { addBtn.textContent = 'Stok Habis'; addBtn.className = 'btn-add-to-cart sold-out'; }
+  sizeBtns.forEach(b => { b.disabled = stk === 0; });
+}
+
+/* =====================================================
+   SVG BOTTLE GENERATOR
+===================================================== */
+function createBottleSVG(productId, cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const gradId = 'grad_' + productId.replace(/[^a-zA-Z0-9]/g, '_');
+  return `<svg width="58" height="166" viewBox="0 0 58 166" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".26"/>
+      <stop offset="46%" stop-color="rgb(${r},${g},${b})" stop-opacity=".88"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".26"/>
+    </linearGradient></defs>
+    <rect x="21" y="0" width="16" height="12" rx="3.5" fill="${cap || '#3A1828'}"/>
+    <rect x="23" y="1.5" width="4" height="8.5" rx="1" fill="rgba(255,255,255,.16)"/>
+    <rect x="20" y="12" width="18" height="8" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
+    <rect x="11" y="20" width="36" height="138" rx="3" fill="url(#${gradId})" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
+    <rect x="13" y="22" width="5.5" height="134" rx="1.5" fill="rgba(255,255,255,.055)"/>
+    <rect x="13" y="62" width="32" height="54" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)" stroke-width=".4"/>
+    <text x="29" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="3.2" fill="rgba(255,255,255,.48)" letter-spacing=".9">THE ARTISAN</text>
+    <text x="29" y="89" text-anchor="middle" font-family="Georgia,serif" font-size="3.2" fill="rgba(255,255,255,.48)" letter-spacing=".9">PARFUM</text>
+    <ellipse cx="29" cy="160" rx="12.5" ry="1.8" fill="rgba(0,0,0,.07)"/>
+  </svg>`;
+}
+
+function createMiniBottleSVG(cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const uid = `${r}_${g}_${b}_${Date.now()}`;
+  return `<svg width="32" height="62" viewBox="0 0 32 62" fill="none" aria-hidden="true">
+    <defs><linearGradient id="mini_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+    </linearGradient></defs>
+    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
+    <rect x="10" y="7" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
+    <rect x="4" y="11" width="24" height="46" rx="2.5" fill="url(#mini_${uid})" stroke="rgba(0,0,0,.1)" stroke-width=".4"/>
+  </svg>`;
+}
+
+/* =====================================================
+   RENDER PRODUCT CARDS
+===================================================== */
+function renderProducts() {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = '<div class="no-results" id="no-results"><p>Tiada wangian dijumpai</p><span>Cuba carian berbeza</span></div>';
+
+  PRODUCTS.forEach((product, index) => {
+    const stk = getStock(product.id);
+    const pct = stk / CONFIG.INITIAL_STOCK;
+    const isOut = stk === 0;
+    const fillClass = stk === 0 ? 'crit' : stk <= 8 ? 'crit' : stk <= 18 ? 'low' : 'ok';
+
+    let badgeHTML = '';
+    if (product.badge) {
+      const bc = ['Exclusive'].includes(product.badge) ? 'badge-exclusive' : ['Hot','Bestseller','Trending'].includes(product.badge) ? 'badge-hot' : 'badge-new';
+      badgeHTML = `<span class="card-badge ${bc}">${product.badge}</span>`;
+    }
+
+    // Image OR SVG bottle
+    const bottleVisual = product.image_url
+      ? `<img src="${product.image_url}" alt="${product.name}" style="max-height:200px;max-width:90%;object-fit:contain">`
+      : createBottleSVG(product.id, product.cap_color, product.rgb);
+
+    const p = CONFIG.PRICES;
+    const card = document.createElement('article');
+    card.className = 'product-card reveal' + (product.gender !== 'm' ? ' hidden' : '');
+    card.dataset.gender = product.gender;
+    card.dataset.productId = product.id;
+    card.dataset.searchIndex = [product.name, product.inspired_by, product.family, product.notes].join(' ').toLowerCase();
+    card.style.transitionDelay = ((index % 5) * 0.06) + 's';
+
+    card.innerHTML = `
+      <div class="card-visual" style="background:radial-gradient(ellipse 80% 70% at 50% 35%,rgba(${product.rgb || '155,85,110'},0.16) 0%,rgba(${product.rgb || '155,85,110'},0.04) 100%)">
+        <div class="card-mood-overlay">
+          <p class="mood-description">${product.mood || ''}</p>
+          <p class="mood-vibe">${product.vibe || ''}</p>
         </div>
-        
-        <!-- Mobile Hamburger -->
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
+        <div class="card-bottle">${bottleVisual}</div>
+        ${badgeHTML}
+      </div>
+      <div class="card-info">
+        <p class="card-inspired">Terinspirasi oleh ${product.inspired_by}</p>
+        <h3 class="card-name">${product.name}</h3>
+        <p class="card-family">${product.family} · ${product.notes}</p>
+        <div class="stock-wrap">
+          <div class="stock-bar"><div class="stock-fill ${fillClass}" style="width:${pct * 100}%"></div></div>
+          <span class="stock-text ${stk <= 8 ? 'urgent' : ''}">${isOut ? 'STOK HABIS' : stk + ' unit berbaki'}</span>
+        </div>
+        <div class="size-selector">
+          <button class="size-btn" data-size="10ml" ${isOut ? 'disabled' : ''} title="10ml — RM ${p['10ml'].promo}">
+            <span class="size-ml">10ml</span>
+            <span class="size-price">RM ${p['10ml'].promo}</span>
+            <small class="size-normal">RM ${p['10ml'].normal}</small>
+          </button>
+          <button class="size-btn" data-size="30ml" ${isOut ? 'disabled' : ''} title="30ml — RM ${p['30ml'].promo}">
+            <span class="size-ml">30ml</span>
+            <span class="size-price">RM ${p['30ml'].promo}</span>
+            <small class="size-normal">RM ${p['30ml'].normal}</small>
+          </button>
+          <button class="size-btn" data-size="60ml" ${isOut ? 'disabled' : ''} title="60ml — RM ${p['60ml'].promo}">
+            <span class="size-ml">60ml</span>
+            <span class="size-price">RM ${p['60ml'].promo}</span>
+            <small class="size-normal">RM ${p['60ml'].normal}</small>
+          </button>
+        </div>
+        <button class="btn-add-to-cart ${isOut ? 'sold-out' : ''}" data-product-id="${product.id}" ${isOut ? 'disabled' : ''}>
+          ${isOut ? 'Stok Habis' : '+ Tambah ke Troli'}
+        </button>
+      </div>`;
+
+    const sizeBtns = card.querySelectorAll('.size-btn');
+    const addBtn   = card.querySelector('.btn-add-to-cart');
+
+    sizeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sizeBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        addBtn.dataset.selectedSize = btn.dataset.size;
+        addBtn.textContent = `+ Tambah ${btn.dataset.size} ke Troli`;
+      });
+    });
+
+    addBtn.addEventListener('click', () => {
+      const selectedSize = addBtn.dataset.selectedSize;
+      if (!selectedSize) {
+        sizeBtns.forEach(b => { b.style.borderColor = 'var(--g)'; });
+        setTimeout(() => sizeBtns.forEach(b => { b.style.borderColor = ''; }), 1200);
+        addBtn.textContent = '← Pilih saiz dahulu';
+        setTimeout(() => { addBtn.textContent = '+ Tambah ke Troli'; }, 1500);
+        return;
+      }
+      addToCart(product.id, selectedSize, card);
+    });
+
+    grid.appendChild(card);
+  });
+
+  initScrollReveal();
+  applyFilters();
+}
+
+/* =====================================================
+   CART
+===================================================== */
+let cart = JSON.parse(localStorage.getItem(CONFIG.KEYS.CART) || '[]');
+let cartCountdownEnd = 0;
+let cartCountdownTimer = null;
+
+const saveCart      = () => localStorage.setItem(CONFIG.KEYS.CART, JSON.stringify(cart));
+const getCartTotal  = () => cart.reduce((s, i) => s + i.pricePerUnit * i.qty, 0);
+const getCartCount  = () => cart.reduce((s, i) => s + i.qty, 0);
+const getCartSaving = () => cart.reduce((s, i) => s + (CONFIG.PRICES[i.size].normal - i.pricePerUnit) * i.qty, 0);
+const count60ml     = () => cart.filter(i => i.size === '60ml').reduce((s, i) => s + i.qty, 0);
+
+function addToCart(productId, size, cardEl) {
+  if (getStock(productId) === 0) return;
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+  const pricePerUnit = CONFIG.PRICES[size].promo;
+  const existing = cart.find(i => i.productId === productId && i.size === size);
+  if (existing) { existing.qty += 1; } else {
+    cart.push({ productId, size, pricePerUnit, qty: 1, name: product.name, inspiredBy: product.inspired_by, cap: product.cap_color, rgb: product.rgb });
+  }
+  saveCart();
+  decrementStock(productId, 1);
+  refreshCartUI();
+  openCart();
+  const addBtn = cardEl.querySelector('.btn-add-to-cart');
+  if (addBtn) {
+    const prev = addBtn.textContent;
+    addBtn.textContent = '✓ Ditambah!';
+    addBtn.className = 'btn-add-to-cart added';
+    setTimeout(() => { addBtn.textContent = prev; addBtn.className = 'btn-add-to-cart'; }, 1400);
+  }
+}
+
+function removeFromCart(productId, size) {
+  cart = cart.filter(i => !(i.productId === productId && i.size === size));
+  saveCart(); refreshCartUI();
+}
+
+function changeCartQty(productId, size, delta) {
+  const item = cart.find(i => i.productId === productId && i.size === size);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart(); refreshCartUI();
+}
+
+function refreshCartUI() {
+  const count = getCartCount(), total = getCartTotal(), saving = getCartSaving(), qty60 = count60ml();
+  document.getElementById('nav-badge').textContent        = count;
+  document.getElementById('float-cart-badge').textContent = count;
+  document.getElementById('nav-badge').classList.toggle('visible', count > 0);
+  document.getElementById('float-cart').style.display     = count > 0 ? 'flex' : 'none';
+  document.getElementById('cart-count-label').textContent = count > 0 ? `${count} item` : '';
+  const emptyEl = document.getElementById('cart-empty'), itemsEl = document.getElementById('cart-items-list'), footerEl = document.getElementById('cart-footer');
+  if (count === 0) { emptyEl.style.display = 'block'; footerEl.style.display = 'none'; itemsEl.innerHTML = ''; document.getElementById('bundle-hint').style.display = 'none'; document.getElementById('cart-countdown').style.display = 'none'; clearInterval(cartCountdownTimer); return; }
+  emptyEl.style.display = 'none'; footerEl.style.display = 'block';
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-visual">${createMiniBottleSVG(item.cap, item.rgb)}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-insp">Terinspirasi: ${item.inspiredBy}</div>
+        <div class="cart-item-size">${item.size} · RM ${item.pricePerUnit}</div>
+        <div class="cart-item-controls">
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeCartQty('${item.productId}','${item.size}',-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeCartQty('${item.productId}','${item.size}',1)">+</button>
+          </div>
+          <span class="cart-item-price">RM ${item.pricePerUnit * item.qty}</span>
+        </div>
+        <button class="cart-item-remove-btn" onclick="removeFromCart('${item.productId}','${item.size}')">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          Buang dari Troli
         </button>
       </div>
-    </div>
-  </header>
-  
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <!-- Content -->
-        <div class="hero-content reveal">
-          <div class="hero-eyebrow">Wangian Premium Malaysia</div>
-          
-          <h1 class="hero-title">
-            Wangian yang<br>
-            <span class="hero-title-accent">Bercerita</span>
-          </h1>
-          
-          <p class="hero-description">
-            165 wangian premium terinspirasi jenama dunia. Formulasi pati diimport berkualiti tinggi. 
-            Tiga saiz untuk setiap gaya hidup dan momen anda — dari RM25.
-          </p>
-          
-          <div class="hero-cta">
-            <a href="/shop/collection.html" class="btn btn-primary btn-lg">
-              Terokai Koleksi →
-            </a>
-            <a href="#features" class="btn btn-ghost btn-lg">
-              Ketahui Lebih
-            </a>
-          </div>
-          
-          <div class="hero-stats">
-            <div class="reveal-delay-1">
-              <div class="stat-number">165</div>
-              <div class="stat-label">Pilihan Wangian</div>
-            </div>
-            <div class="reveal-delay-2">
-              <div class="stat-number">12j</div>
-              <div class="stat-label">Ketahanan</div>
-            </div>
-            <div class="reveal-delay-3">
-              <div class="stat-number">3</div>
-              <div class="stat-label">Saiz Tersedia</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Visual -->
-        <div class="hero-visual reveal-delay-2">
-          <div class="hero-bottles">
-            <!-- SVG Bottles illustration will go here -->
-            <svg width="400" height="400" viewBox="0 0 400 400" fill="none" aria-hidden="true">
-              <!-- Simplified bottle illustration -->
-              <circle cx="200" cy="200" r="150" fill="url(#heroGrad)" opacity="0.1"/>
-              <defs>
-                <radialGradient id="heroGrad">
-                  <stop offset="0%" stop-color="#A67C52"/>
-                  <stop offset="100%" stop-color="#A67C52" stop-opacity="0"/>
-                </radialGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">Kenapa The Artisan</div>
-        <h2>Kualiti yang Tidak Berkompromi</h2>
-        <p class="section-subtitle">
-          Setiap botol direka dengan teliti menggunakan pati premium dan formulasi yang terbukti untuk memberikan pengalaman wangian yang istimewa.
-        </p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card reveal">
-          <div class="feature-icon">🌿</div>
-          <h3 class="feature-title">Pati Premium Diimport</h3>
-          <p class="feature-text">
-            Setiap formula menggunakan pati wangian berkualiti tinggi yang diimport — profil setara dengan inspirasi jenama dunia.
-          </p>
-        </div>
-        
-        <div class="feature-card reveal reveal-delay-1">
-          <div class="feature-icon">⏱</div>
-          <h3 class="feature-title">Ketahanan Sehingga 12 Jam</h3>
-          <p class="feature-text">
-            Formulasi kami memastikan wangian bertahan dari pagi ke malam. Tidak perlu semprot berulang kali.
-          </p>
-        </div>
-        
-        <div class="feature-card reveal reveal-delay-2">
-          <div class="feature-icon">✦</div>
-          <h3 class="feature-title">Tiga Saiz Untuk Semua</h3>
-          <p class="feature-text">
-            10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Setiap saiz menawarkan nilai terbaik.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Categories Preview -->
-  <section class="categories">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">Terokai Koleksi</div>
-        <h2>Cari Wangian Sempurna Anda</h2>
-        <p class="section-subtitle">
-          Daripada klasik abadi hingga eksklusif terhad, kami menawarkan koleksi wangian untuk setiap personaliti dan momen.
-        </p>
-      </div>
-      
-      <div class="categories-grid">
-        <a href="/shop/collection.html?gender=m" class="category-card reveal">
-          <div class="category-overlay">
-            <h3 class="category-name">Lelaki</h3>
-            <p class="category-count">55 Wangian</p>
-          </div>
-        </a>
-        
-        <a href="/shop/collection.html?gender=w" class="category-card reveal reveal-delay-1">
-          <div class="category-overlay">
-            <h3 class="category-name">Wanita</h3>
-            <p class="category-count">98 Wangian</p>
-          </div>
-        </a>
-        
-        <a href="/shop/collection.html?category=hot" class="category-card reveal reveal-delay-2">
-          <div class="category-overlay">
-            <h3 class="category-name">Hot Sellers</h3>
-            <p class="category-count">Pilihan Popular</p>
-          </div>
-        </a>
-        
-        <a href="/shop/collection.html?category=new" class="category-card reveal reveal-delay-3">
-          <div class="category-overlay">
-            <h3 class="category-name">Terbaru</h3>
-            <p class="category-count">Koleksi Baharu</p>
-          </div>
-        </a>
-      </div>
-      
-      <div style="text-align: center; margin-top: var(--space-12);">
-        <a href="/shop/collection.html" class="btn btn-primary btn-lg">
-          Lihat Semua Koleksi →
-        </a>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Scripts -->
-  <script src="./assets/js/config.js"></script>
-  <script>
-    // Header scroll effect
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-    
-    // Reveal animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      // Mobile menu implementation would go here
-    });
-  </script>
+    </div>`).join('');
+  const hintEl = document.getElementById('bundle-hint'), need = 3 - qty60;
+  if (qty60 >= 3) { hintEl.innerHTML = '<b>🎁 Bundle aktif!</b> Anda layak mendapat <b>1 botol 30ml PERCUMA</b>. Nyatakan pilihan dalam nota.'; hintEl.style.display = 'block'; }
+  else if (qty60 > 0) { hintEl.innerHTML = `<b>🎁 Hampir dapat hadiah!</b> Tambah <b>${need}</b> lagi 60ml untuk 1×30ml <b>PERCUMA</b>.`; hintEl.style.display = 'block'; }
+  else { hintEl.style.display = 'none'; }
+  document.getElementById('cart-total-display').textContent = 'RM ' + total;
+  const savEl = document.getElementById('cart-savings-display');
+  savEl.textContent = saving > 0 ? `Jimat RM ${saving} daripada harga asal` : '';
+  document.getElementById('cart-countdown').style.display = 'flex';
+  if (!cartCountdownEnd || cartCountdownEnd <= Date.now()) cartCountdownEnd = Date.now() + 15 * 60 * 1000;
+  startCartCountdown();
+}
+
+function startCartCountdown() {
+  clearInterval(cartCountdownTimer);
+  const display = document.getElementById('cart-cd-display');
+  cartCountdownTimer = setInterval(() => {
+    const rem = Math.max(0, cartCountdownEnd - Date.now());
+    const m = Math.floor(rem / 60000), s = Math.floor((rem % 60000) / 1000);
+    if (display) display.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (rem === 0) { cartCountdownEnd = Date.now() + 15 * 60 * 1000; startCartCountdown(); }
+  }, 1000);
+}
+
+function openCart(event) { if (event) event.preventDefault(); document.getElementById('cart-overlay').classList.add('visible'); document.getElementById('cart-panel').classList.add('visible'); document.body.classList.add('lock'); }
+function closeCart()     { document.getElementById('cart-overlay').classList.remove('visible'); document.getElementById('cart-panel').classList.remove('visible'); document.body.classList.remove('lock'); }
+
+function sendCartViaWhatsApp() {
+  if (!cart.length) return;
+  const items = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} — RM ${i.pricePerUnit * i.qty}`).join('\n');
+  const msg = `Salam, saya ingin pesan The Artisan Parfum:\n\n${items}\n\n*Jumlah: RM ${getCartTotal()}*\n\nSila bantu sahkan stok dan bayaran. Terima kasih!`;
+  window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+/* =====================================================
+   ORDER MODAL
+===================================================== */
+function openOrderModal() {
+  if (!cart.length) return;
+  closeCart();
+  const sumEl = document.getElementById('modal-order-summary');
+  sumEl.innerHTML = cart.map(i => `<div class="order-summary-item"><span>${i.name} ${i.size} ×${i.qty}</span><span>RM ${i.pricePerUnit * i.qty}</span></div>`).join('') + `<div class="order-summary-total"><span>Jumlah</span><span>RM ${getCartTotal()}</span></div>`;
+  document.getElementById('modal-total-display').textContent = 'RM ' + getCartTotal();
+  ['field-name','field-phone','field-email','field-address','field-state','field-postcode','field-note'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('invalid'); } });
+  document.querySelectorAll('.form-error').forEach(e => e.classList.remove('visible'));
+  document.getElementById('modal-form').style.display    = 'block';
+  document.getElementById('modal-loading').style.display = 'none';
+  document.getElementById('modal-success').style.display = 'none';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('modal-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+  setTimeout(() => document.getElementById('field-name')?.focus(), 150);
+}
+
+function closeOrderModal() { document.getElementById('modal-overlay').classList.remove('visible'); document.body.classList.remove('lock'); }
+
+const isValidEmail    = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const isValidPhone    = v => /^(\+?60|0)[0-9]{8,10}$/.test(v.replace(/[\s\-]/g, ''));
+const isValidPostcode = v => /^\d{5}$/.test(v.trim());
+
+function setInvalid(fId, eId) { document.getElementById(fId)?.classList.add('invalid'); document.getElementById(eId)?.classList.add('visible'); }
+function clearInvalid(fId, eId) { document.getElementById(fId)?.classList.remove('invalid'); document.getElementById(eId)?.classList.remove('visible'); }
+
+function handleOrderSubmit() {
+  const name = document.getElementById('field-name').value.trim();
+  const phone = document.getElementById('field-phone').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+  const address = document.getElementById('field-address').value.trim();
+  const state = document.getElementById('field-state').value;
+  const postcode = document.getElementById('field-postcode').value.trim();
+  const note = document.getElementById('field-note').value.trim();
+  let ok = true;
+  if (name.length < 3) { setInvalid('field-name','err-name'); ok = false; } else clearInvalid('field-name','err-name');
+  if (!isValidPhone(phone)) { setInvalid('field-phone','err-phone'); ok = false; } else clearInvalid('field-phone','err-phone');
+  if (email && !isValidEmail(email)) { setInvalid('field-email','err-email'); ok = false; } else clearInvalid('field-email','err-email');
+  if (address.length < 10) { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
+  if (!state) { setInvalid('field-state','err-state'); ok = false; } else clearInvalid('field-state','err-state');
+  if (!isValidPostcode(postcode)) { setInvalid('field-postcode','err-postcode'); ok = false; } else clearInvalid('field-postcode','err-postcode');
+  if (!ok) return;
+
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('modal-form').style.display    = 'none';
+  document.getElementById('modal-loading').style.display = 'block';
+
+  const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
+  const itemsStr = cart.map(i => `${i.name} (${i.size}) x${i.qty}`).join(' | ');
+
+  if (CONFIG.USE_TOYYIBPAY && CONFIG.TOYYIBPAY_URL) {
+    const form = document.createElement('form');
+    form.method = 'POST'; form.action = CONFIG.TOYYIBPAY_URL;
+    const fields = { name, phone, email, address: `${address}, ${state} ${postcode}`, note, total: getCartTotal(), items: itemsStr, itemsFormatted: itemsFmt };
+    Object.entries(fields).forEach(([k, v]) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; form.appendChild(i); });
+    document.body.appendChild(form); form.submit();
+  } else {
+    setTimeout(() => {
+      const waMsg = `*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email ? '\n📧 *Emel:* ' + email : ''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${getCartTotal()}*\n\n📝 *Nota:* ${note || '-'}`;
+      window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+      document.getElementById('modal-loading').style.display = 'none';
+      document.getElementById('modal-success').style.display = 'block';
+      document.getElementById('submit-btn').disabled = false;
+      cart = []; saveCart(); refreshCartUI();
+    }, 1800);
+  }
+}
+
+/* =====================================================
+   GENDER FILTER + SEARCH
+===================================================== */
+let currentGender = 'm';
+let searchQuery = '';
+let searchDebounce;
+
+function switchGender(gender) {
+  currentGender = gender;
+  document.getElementById('tab-men').className    = 'gender-tab' + (gender === 'm' ? ' active-men' : '');
+  document.getElementById('tab-women').className  = 'gender-tab' + (gender === 'w' ? ' active-women' : '');
+  document.getElementById('tab-unisex').className = 'gender-tab' + (gender === 'u' ? ' active-unisex' : '');
+  ['m','w','u'].forEach(g => document.getElementById('tab-' + (g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex')).setAttribute('aria-selected', gender === g));
+  applyFilters();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('search-input').addEventListener('input', function () {
+    searchQuery = this.value.toLowerCase().trim();
+    document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(applyFilters, 240);
+  });
+});
+
+function clearSearch() { document.getElementById('search-input').value = ''; searchQuery = ''; document.getElementById('search-clear').style.display = 'none'; applyFilters(); }
+
+function applyFilters() {
+  let visible = 0;
+  document.querySelectorAll('.product-card').forEach(card => {
+    const show = card.dataset.gender === currentGender && (!searchQuery || card.dataset.searchIndex.includes(searchQuery));
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+/* =====================================================
+   ANNOUNCEMENT COUNTDOWN
+===================================================== */
+function initAnnouncementCountdown() {
+  let end = parseInt(localStorage.getItem(CONFIG.KEYS.TIMER) || '0');
+  if (!end || end <= Date.now()) { end = Date.now() + 24 * 60 * 60 * 1000; localStorage.setItem(CONFIG.KEYS.TIMER, end); }
+  (function tick() {
+    const rem = Math.max(0, end - Date.now());
+    const pad = n => String(n).padStart(2,'0');
+    const hEl = document.getElementById('cdH'), mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
+    if (hEl) hEl.textContent = pad(Math.floor(rem / 3600000));
+    if (mEl) mEl.textContent = pad(Math.floor((rem % 3600000) / 60000));
+    if (sEl) sEl.textContent = pad(Math.floor((rem % 60000) / 1000));
+    if (rem > 0) { setTimeout(tick, 1000); } else { end = Date.now() + 24 * 60 * 60 * 1000; localStorage.setItem(CONFIG.KEYS.TIMER, end); tick(); }
+  })();
+}
+
+document.getElementById('ann-close').addEventListener('click', () => {
+  const bar = document.getElementById('ann'); if (bar) bar.style.display = 'none';
+  document.getElementById('main-nav').classList.add('no-ann');
+});
+
+/* =====================================================
+   NAV SCROLL / HAMBURGER / MISC
+===================================================== */
+const mainNav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+const hamburgerBtn = document.getElementById('hamburger'), mobileNavEl = document.getElementById('mobile-nav');
+hamburgerBtn.addEventListener('click', () => {
+  const isOpen = mobileNavEl.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open', isOpen);
+  hamburgerBtn.setAttribute('aria-expanded', isOpen);
+  document.body.classList.toggle('lock', isOpen);
+});
+function closeMobileNav() { mobileNavEl.classList.remove('open'); hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded','false'); document.body.classList.remove('lock'); }
+document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - mainNav.offsetHeight - 10, behavior: 'smooth' }); }
+  });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCart(); closeOrderModal(); closeMobileNav(); } });
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - mainNav.offsetHeight - 10, behavior: 'smooth' });
+}
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+function initScrollReveal() {
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+/* =====================================================
+   CUSTOM CURSOR
+===================================================== */
+(function initCursor() {
+  const dot = document.getElementById('cur'), ring = document.getElementById('cur2');
+  if (!dot || !ring || window.matchMedia('(pointer:coarse)').matches) return;
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+  document.addEventListener('mouseleave', () => { dot.style.opacity='0'; ring.style.opacity='0'; });
+  document.addEventListener('mouseenter', () => { dot.style.opacity='1'; ring.style.opacity='1'; });
+  (function ar() { rx += (mx-rx)*.11; ry += (my-ry)*.11; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(ar); })();
+  document.querySelectorAll('a,button,[role="button"],.product-card,.size-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('h'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('h'));
+  });
+})();
+
+/* =====================================================
+   APP INIT — async: load pricing + products from Supabase
+===================================================== */
+async function init() {
+  initAnnouncementCountdown();
+  initScrollReveal();
+  // Load pricing first (affects price display in cards)
+  await loadPricing();
+  // Load + render products
+  await loadProducts();
+  // Init stock from loaded products
+  initStock();
+  // Restore cart
+  refreshCartUI();
+}
+
+init();
+</script>
 </body>
 </html>
