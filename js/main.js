@@ -8,4 +8,45 @@ async function init() {
   openPromoPopup();
 }
 
+async function loadCarouselFromDB() {
+  try {
+    const slides = await sbFetch('carousel_slides?active=eq.true&order=slide_order.asc');
+    if (!slides || !slides.length) return;
+    slides.forEach((slide, i) => {
+      const s = document.querySelector(`.hc-slide:nth-child(${i + 1})`);
+      if (!s) return;
+      s.querySelector('.hc-eyebrow').textContent   = slide.eyebrow || '';
+      const titleEl = s.querySelector('.hc-title');
+      titleEl.innerHTML = `${slide.title || ''}<br><em>${slide.title_em || ''}</em>`;
+      s.querySelector('.hc-desc').textContent = slide.description || '';
+      const btn = s.querySelector('.hc-btn');
+      if (btn) {
+        btn.textContent = slide.btn_text || '';
+        if (slide.btn_onclick) btn.setAttribute('onclick', slide.btn_onclick);
+      }
+      s.querySelector('.hc-bg').style.background = slide.bg_gradient || '';
+    });
+  } catch(e) { /* keep hardcoded fallback */ }
+}
+
+async function loadPopupFromDB() {
+  try {
+    const rows = await sbFetch('promo_popup?id=eq.1');
+    const p = rows?.[0];
+    if (!p) return;
+    if (!p.active) {
+      localStorage.setItem('artisan_promo_hide', '1');
+      return;
+    }
+    document.querySelector('.promo-popup-eyebrow').textContent = p.eyebrow || '';
+    document.querySelector('.promo-popup-title').innerHTML =
+      `${p.title || ''} <br><em>${p.title_em || ''}</em>`;
+    document.querySelector('.promo-popup-desc').textContent = p.description || '';
+    document.querySelector('.promo-popup-saving strong').textContent = p.saving_text || '';
+    const cta = document.querySelector('.promo-popup-cta');
+    cta.textContent = p.cta_text || '';
+    cta.href = p.cta_href || '#';
+  } catch(e) { /* keep hardcoded fallback */ }
+}
+
 init();
