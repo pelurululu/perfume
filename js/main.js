@@ -55,6 +55,18 @@ async function loadPopupFromDB() {
     document.querySelector('.promo-popup-desc').textContent = p.description || '';
     document.querySelector('.promo-popup-saving strong').textContent = p.saving_text || '';
     const cta = document.querySelector('.promo-popup-cta');
+    const imgWrap = document.getElementById('promo-popup-img-wrap');
+if (imgWrap && p.image_url) {
+  let img = imgWrap.querySelector('img.popup-bg-img');
+  if (!img) {
+    img = document.createElement('img');
+    img.className = 'popup-bg-img';
+    imgWrap.insertBefore(img, imgWrap.firstChild);
+  }
+  img.src = p.image_url;
+  img.classList.add('visible');
+  imgWrap.querySelector('svg').style.display = 'none';
+}
     cta.textContent = p.cta_text || '';
     cta.href = p.cta_href || '#';
   } catch(e) { /* keep hardcoded fallback */ }
