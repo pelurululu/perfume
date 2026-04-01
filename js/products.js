@@ -171,42 +171,37 @@ function renderProducts() {
     card.dataset.searchIndex = [product.name, product.inspired_by, product.family, product.notes].join(' ').toLowerCase();
     
 
-    card.innerHTML = `
-      <div class="card-visual" style="background:radial-gradient(ellipse 80% 70% at 50% 35%,rgba(${product.rgb || '155,85,110'},0.16) 0%,rgba(${product.rgb || '155,85,110'},0.04) 100%)">
-        <div class="card-mood-overlay">
-          <p class="mood-description">${product.mood || ''}</p>
-          <p class="mood-vibe">${product.vibe || ''}</p>
-        </div>
-        <div class="card-bottle">${bottleVisual}</div>
+   card.innerHTML = `
+      <div class="card-visual">
         ${badgeHTML}
+        ${product.image_url 
+          ? `<img src="${product.image_url}" alt="${product.name}" loading="lazy">` 
+          : bottleVisual
+        }
       </div>
       <div class="card-info">
-        <p class="card-inspired">Terinspirasi oleh ${product.inspired_by}</p>
         <h3 class="card-name">${product.name}</h3>
-        <p class="card-family">${product.family} · ${product.notes}</p>
+        <div class="card-price-row">
+          <span class="card-price-current">RM ${p['30ml'].promo}</span>
+          <span class="card-price-original">RM ${p['30ml'].normal}</span>
+        </div>
         <div class="stock-wrap">
           <div class="stock-bar"><div class="stock-fill ${fillClass}" style="width:${pct * 100}%"></div></div>
           <span class="stock-text ${stk <= 8 ? 'urgent' : ''}">${isOut ? 'STOK HABIS' : stk + ' unit berbaki'}</span>
         </div>
         <div class="size-selector">
-          <button class="size-btn" data-size="10ml" ${isOut ? 'disabled' : ''} title="10ml — RM ${p['10ml'].promo}">
+          <button class="size-btn" data-size="10ml" ${isOut ? 'disabled' : ''}>
             <span class="size-ml">10ml</span>
-            <span class="size-price">RM ${p['10ml'].promo}</span>
-            <small class="size-normal">RM ${p['10ml'].normal}</small>
           </button>
-          <button class="size-btn" data-size="30ml" ${isOut ? 'disabled' : ''} title="30ml — RM ${p['30ml'].promo}">
+          <button class="size-btn" data-size="30ml" ${isOut ? 'disabled' : ''}>
             <span class="size-ml">30ml</span>
-            <span class="size-price">RM ${p['30ml'].promo}</span>
-            <small class="size-normal">RM ${p['30ml'].normal}</small>
           </button>
-          <button class="size-btn" data-size="60ml" ${isOut ? 'disabled' : ''} title="60ml — RM ${p['60ml'].promo}">
+          <button class="size-btn" data-size="60ml" ${isOut ? 'disabled' : ''}>
             <span class="size-ml">60ml</span>
-            <span class="size-price">RM ${p['60ml'].promo}</span>
-            <small class="size-normal">RM ${p['60ml'].normal}</small>
           </button>
         </div>
         <button class="btn-add-to-cart ${isOut ? 'sold-out' : ''}" data-product-id="${product.id}" ${isOut ? 'disabled' : ''}>
-          ${isOut ? 'Stok Habis' : '+ Tambah ke Troli'}
+          ${isOut ? 'Stok Habis' : 'Add To Cart'}
         </button>
       </div>`;
 
