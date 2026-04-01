@@ -35,7 +35,9 @@ function clearSearch() {
 }
 
 function applyFilters() {
-  const allCards = Array.from(document.querySelectorAll('.product-card'));
+  const grid = document.getElementById('product-grid');
+  if (!grid) return;
+  const allCards = Array.from(grid.querySelectorAll('.product-card'));
   const matching = allCards.filter(c =>
     c.dataset.gender === currentGender &&
     (!searchQuery || c.dataset.searchIndex.includes(searchQuery))
