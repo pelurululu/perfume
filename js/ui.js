@@ -1,105 +1,113 @@
+/* =====================================================
+   COLLECTION SLIDER
+===================================================== */
 let currentGender = 'm';
 let searchQuery   = '';
 let searchDebounce;
-let carouselPage  = 0;
-const CARDS_PER_PAGE = 10; // 2 rows of 5
+let pSliderIndex  = 0;
+let pSliderPages  = 0;
+const CARDS_PER_SLIDE = 3;
 
 function switchGender(gender) {
   currentGender = gender;
-  carouselPage  = 0;
-  document.getElementById('tab-men').className    = 'gender-tab' + (gender === 'm' ? ' active-men' : '');
-  document.getElementById('tab-women').className  = 'gender-tab' + (gender === 'w' ? ' active-women' : '');
-  document.getElementById('tab-unisex').className = 'gender-tab' + (gender === 'u' ? ' active-unisex' : '');
-  ['m','w','u'].forEach(g => {
-    const key = g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex';
-    document.getElementById('tab-' + key).setAttribute('aria-selected', gender === g);
-  });
+  pSliderIndex  = 0;
+  document.querySelectorAll('.coll-gender-btn').forEach(b => b.classList.remove('active'));
+  const map = { m: 'gbtn-m', w: 'gbtn-w', u: 'gbtn-u' };
+  document.getElementById(map[gender])?.classList.add('active');
   applyFilters();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('search-input').addEventListener('input', function () {
-    searchQuery  = this.value.toLowerCase().trim();
-    carouselPage = 0;
-    document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
-    clearTimeout(searchDebounce);
-    searchDebounce = setTimeout(applyFilters, 240);
-  });
+  const inp = document.getElementById('search-input');
+  if (inp) {
+    inp.addEventListener('input', function () {
+      searchQuery  = this.value.toLowerCase().trim();
+      pSliderIndex = 0;
+      document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
+      clearTimeout(searchDebounce);
+      searchDebounce = setTimeout(applyFilters, 240);
+    });
+  }
 });
 
 function clearSearch() {
-  document.getElementById('search-input').value = '';
+  const inp = document.getElementById('search-input');
+  if (inp) inp.value = '';
   searchQuery  = '';
-  carouselPage = 0;
+  pSliderIndex = 0;
   document.getElementById('search-clear').style.display = 'none';
   applyFilters();
 }
 
 function applyFilters() {
   const allCards = Array.from(document.querySelectorAll('.product-card'));
-  const matching = allCards.filter(card =>
-    card.dataset.gender === currentGender &&
-    (!searchQuery || card.dataset.searchIndex.includes(searchQuery))
+  const matching = allCards.filter(c =>
+    c.dataset.gender === currentGender &&
+    (!searchQuery || c.dataset.searchIndex.includes(searchQuery))
   );
-  const totalPages = Math.max(1, Math.ceil(matching.length / CARDS_PER_PAGE));
-  carouselPage = Math.min(carouselPage, totalPages - 1);
-  const start = carouselPage * CARDS_PER_PAGE;
-  const pageCards = matching.slice(start, start + CARDS_PER_PAGE);
-  // Show/hide
-  allCards.forEach(c => c.classList.add('hidden'));
-  pageCards.forEach(c => c.classList.remove('hidden'));
-  // No results
+
+  // Hide all, then reorder track so matching cards come first
+  allCards.forEach(c => {
+    c.style.display = 'none';
+    c.classList.add('hidden');
+  });
+
+  matching.forEach(c => {
+    c.style.display = '';
+    c.classList.remove('hidden');
+  });
+
   document.getElementById('no-results').style.display = matching.length === 0 ? 'block' : 'none';
-  updateCarouselUI(matching.length, totalPages);
+
+  pSliderPages = Math.max(1, Math.ceil(matching.length / CARDS_PER_SLIDE));
+  pSliderIndex = Math.min(pSliderIndex, pSliderPages - 1);
+  pSliderRender(matching);
 }
 
-function updateCarouselUI(total, totalPages) {
-  // Page label
-  document.getElementById('carousel-page-label').textContent =
-    `Halaman ${carouselPage + 1} / ${totalPages}`;
+function pSliderRender(matching) {
+  // Move track to current page
+  const cardW = 100 / CARDS_PER_SLIDE;
+  const offset = pSliderIndex * CARDS_PER_SLIDE * cardW;
+  const track = document.getElementById('pslider-track');
+  track.style.transform = `translateX(-${offset}%)`;
+
   // Arrows
-  document.getElementById('carousel-prev').disabled = carouselPage === 0;
-  document.getElementById('carousel-next').disabled = carouselPage >= totalPages - 1;
+  document.getElementById('pslider-prev').disabled = pSliderIndex === 0;
+  document.getElementById('pslider-next').disabled = pSliderIndex >= pSliderPages - 1;
+
   // Dots
-  const dotsEl = document.getElementById('carousel-dots');
+  const dotsEl = document.getElementById('pslider-dots');
   dotsEl.innerHTML = '';
-  for (let i = 0; i < totalPages; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot' + (i === carouselPage ? ' active' : '');
-    dot.setAttribute('aria-label', `Halaman ${i + 1}`);
-    dot.onclick = () => { carouselPage = i; applyFilters(); };
-    dotsEl.appendChild(dot);
+  for (let i = 0; i < pSliderPages; i++) {
+    const d = document.createElement('button');
+    d.className = 'pslider-dot' + (i === pSliderIndex ? ' active' : '');
+    d.setAttribute('aria-label', `Halaman ${i + 1}`);
+    d.onclick = () => { pSliderIndex = i; pSliderRender(matching); };
+    dotsEl.appendChild(d);
   }
-  // See more — only show if more than 1 page
-  const seeMore = document.getElementById('carousel-see-more');
-  seeMore.style.display = totalPages > 1 ? 'inline-flex' : 'none';
-  seeMore.textContent = '';
-  seeMore.innerHTML = carouselPage >= totalPages - 1
-    ? `Lihat Kurang <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>`
-    : `Lihat Semua (${total}) <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>`;
+
+  // Counter
+  const start = pSliderIndex * CARDS_PER_SLIDE + 1;
+  const end   = Math.min(start + CARDS_PER_SLIDE - 1, matching.length);
+  document.getElementById('pslider-counter').textContent =
+    matching.length > 0 ? `${start}–${end} / ${matching.length}` : '';
 }
 
-function carouselPrev() {
-  if (carouselPage > 0) { carouselPage--; pageTransition(); }
-}
-function carouselNext() {
-  carouselPage++; pageTransition();
-}
-function carouselSeeMore(e) {
-  e.preventDefault();
-  const allCards = Array.from(document.querySelectorAll('.product-card'));
-  const matching = allCards.filter(c => c.dataset.gender === currentGender && (!searchQuery || c.dataset.searchIndex.includes(searchQuery)));
-  const totalPages = Math.ceil(matching.length / CARDS_PER_PAGE);
-  carouselPage = carouselPage >= totalPages - 1 ? 0 : totalPages - 1;
-  pageTransition();
-}
-function pageTransition() {
-  const grid = document.getElementById('product-grid');
-  grid.classList.add('page-transition');
-  setTimeout(() => { applyFilters(); grid.classList.remove('page-transition'); }, 220);
-  document.getElementById('collection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+function pSliderNext() {
+  if (pSliderIndex < pSliderPages - 1) {
+    pSliderIndex++;
+    const matching = Array.from(document.querySelectorAll('.product-card:not(.hidden)'));
+    pSliderRender(matching);
+  }
 }
 
+function pSliderPrev() {
+  if (pSliderIndex > 0) {
+    pSliderIndex--;
+    const matching = Array.from(document.querySelectorAll('.product-card:not(.hidden)'));
+    pSliderRender(matching);
+  }
+}
 /* =====================================================
    PROMO POPUP
 ===================================================== */
