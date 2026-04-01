@@ -62,105 +62,96 @@
   <a href="https://wa.me/601159003985" target="_blank" onclick="closeMobileNav()">WhatsApp</a>
 </nav>
 
-<section class="hero" id="top">
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-eyebrow">Wangian Premium Malaysia</div>
-      <h1 class="hero-title">Wangian<br>yang <em>Bercerita</em></h1>
-      <p class="hero-desc">165 wangian premium terinspirasi jenama dunia. Formulasi pati diimport. Tiga saiz — dari RM25 untuk setiap gaya hidup dan momen anda.</p>
-      <div class="hero-actions">
-        <a href="#collection" class="btn-gold">Terokai Koleksi</a>
-        <button class="btn-text" onclick="openCart(event)">Lihat Troli →</button>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-num">165</div><div class="hero-stat-lbl">Pilihan Wangian</div></div>
-        <div class="hero-stat"><div class="hero-stat-num"><em>3</em></div><div class="hero-stat-lbl">Saiz Tersedia</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">12<em>j</em></div><div class="hero-stat-lbl">Ketahanan Wangian</div></div>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-glow"></div>
-      <div class="hero-bottles">
-        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="hb1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".3"/><stop offset="48%" stop-color="#3A6A88" stop-opacity=".88"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#0E2E42"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#0E2E42" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#hb1)" stroke="rgba(0,0,0,.1)" stroke-width=".5"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
-        <svg width="64" height="178" viewBox="0 0 64 178" fill="none" aria-hidden="true"><defs><linearGradient id="hb2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".28"/><stop offset="48%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".28"/></linearGradient></defs><rect x="22" y="0" width="20" height="12" rx="5" fill="#5A3A10"/><rect x="24" y="1.5" width="5" height="8" rx="1" fill="rgba(255,255,255,.16)"/><rect x="21" y="12" width="22" height="8" rx="1" fill="#5A3A10" opacity=".6"/><rect x="11" y="20" width="42" height="150" rx="3" fill="url(#hb2)" stroke="rgba(0,0,0,.08)" stroke-width=".5"/><rect x="13" y="22" width="7" height="146" rx="1.5" fill="rgba(255,255,255,.06)"/><rect x="13" y="64" width="38" height="54" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.09)" stroke-width=".4"/><text x="32" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">THE ARTISAN</text><text x="32" y="91" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">PARFUM</text><ellipse cx="32" cy="172" rx="14.5" ry="2" fill="rgba(0,0,0,.07)"/></svg>
-        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="hb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".3"/><stop offset="48%" stop-color="#8A5A78" stop-opacity=".88"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#3A1828"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#hb3)" stroke="rgba(0,0,0,.1)" stroke-width=".5"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="hero-carousel" id="top">
+  <div class="hc-track" id="hc-track">
 
-<!-- PRICE STRIP — populated dynamically from Supabase pricing table -->
-<div class="price-strip" id="price-strip">
-  <div class="price-strip-inner" id="price-strip-inner">
-    <!-- Rendered by JS after fetching pricing -->
-    <div class="price-item"><div class="price-size">10 ml</div><div class="price-row"><span class="price-promo" id="p10-promo">RM 25</span><span class="price-normal" id="p10-normal">RM 35</span></div><div class="price-save" id="p10-save">Jimat RM 10</div></div>
-    <div class="price-item"><div class="price-size">30 ml</div><div class="price-row"><span class="price-promo" id="p30-promo">RM 49</span><span class="price-normal" id="p30-normal">RM 69</span></div><div class="price-save" id="p30-save">Jimat RM 20</div></div>
-    <div class="price-item"><div class="price-size">60 ml</div><div class="price-row"><span class="price-promo" id="p60-promo">RM 79</span><span class="price-normal" id="p60-normal">RM 99</span></div><div class="price-save" id="p60-save">Jimat RM 20</div></div>
-  </div>
-</div>
-
-<div class="bundle-bar">
-  <span style="font-size:14px">🎁</span>
-  <span class="bundle-bar-text">Beli 3 botol 60ml — Percuma 1 botol 30ml pilihan anda</span>
-  <div class="bundle-bar-divider"></div>
-  <button class="bundle-bar-btn" onclick="scrollToSection('bundle')">Tahu Lebih Lanjut</button>
-</div>
-
-  <section class="signature-section" id="signature">
-  <div class="section-wrap">
-    <div class="section-label">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-      Koleksi Tandatangan
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
-    </div>
-    <h2 class="section-title">Wangian <em>Pilihan Utama</em></h2>
-    <p class="section-subtitle">Wangian yang paling diminati — formulasi terbaik, ketahanan luar biasa, dan profil yang tidak dilupakan.</p>
-    <div class="sig-grid">
-      <div class="sig-card">
-        <div class="sig-card-num">01</div>
-        <div class="sig-visual">
-          <svg width="48" height="140" viewBox="0 0 48 140" fill="none"><defs><linearGradient id="sg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".2"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".2"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#5A3A10"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#5A3A10" opacity=".6"/><rect x="7" y="16" width="34" height="118" rx="2.5" fill="url(#sg1)"/><rect x="9" y="18" width="5" height="114" rx="1" fill="rgba(255,255,255,.06)"/></svg>
-        </div>
-        <div class="sig-info">
-          <p class="sig-inspired">Terinspirasi Creed Aventus</p>
-          <h3 class="sig-name">Aventus Noir</h3>
-          <p class="sig-desc">Birch smoky, nanas segar, kasturi hangat. Untuk lelaki yang meninggalkan kesan.</p>
-          <div class="sig-tags"><span>Woody</span><span>Smoky</span><span>Fruity</span></div>
-          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
-        </div>
+    <!-- SLIDE 1 -->
+    <div class="hc-slide">
+      <div class="hc-bg" style="background:linear-gradient(135deg,#1a0f0a 0%,#2d1f14 40%,#1a0f0a 100%)">
+        <!-- decorative blurred circles to mimic soft studio lighting -->
+        <div class="hc-light" style="top:-10%;left:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(196,152,80,.18) 0%,transparent 65%)"></div>
+        <div class="hc-light" style="top:20%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(138,90,120,.12) 0%,transparent 65%)"></div>
       </div>
-      <div class="sig-card sig-card--center">
-        <div class="sig-crown">
-          <svg width="18" height="14" viewBox="0 0 24 18" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M2 16h20M2 16L5 4l7 6 5-9 5 9 3-6v12"/></svg>
-          Terlaris
-        </div>
-        <div class="sig-card-num">02</div>
-        <div class="sig-visual">
-          <svg width="56" height="160" viewBox="0 0 56 160" fill="none"><defs><linearGradient id="sg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".92"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="19" y="0" width="18" height="12" rx="4" fill="#3A1828"/><rect x="18" y="12" width="20" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="19" width="40" height="134" rx="3" fill="url(#sg2)"/><rect x="10" y="21" width="6" height="130" rx="1.5" fill="rgba(255,255,255,.07)"/></svg>
-        </div>
-        <div class="sig-info">
-          <p class="sig-inspired">Terinspirasi Good Girl</p>
-          <h3 class="sig-name">Belle Noir</h3>
-          <p class="sig-desc">Jasmin berlapis, vanilla intim, sedikit rempah. Feminin penuh karakter.</p>
-          <div class="sig-tags"><span>Floral</span><span>Oriental</span><span>Warm</span></div>
-          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
-        </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">Koleksi Tandatangan</div>
+        <h1 class="hc-title">Wangian yang<br><em>Bercerita</em></h1>
+        <p class="hc-desc">165 wangian premium terinspirasi jenama dunia. Formulasi pati diimport untuk setiap momen.</p>
+        <a href="#collection" class="hc-btn">Terokai Koleksi</a>
       </div>
-      <div class="sig-card">
-        <div class="sig-card-num">03</div>
-        <div class="sig-visual">
-          <svg width="48" height="140" viewBox="0 0 48 140" fill="none"><defs><linearGradient id="sg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".9"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#0E2E42"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#0E2E42" opacity=".6"/><rect x="7" y="16" width="34" height="118" rx="2.5" fill="url(#sg3)"/><rect x="9" y="18" width="5" height="114" rx="1" fill="rgba(255,255,255,.06)"/></svg>
-        </div>
-        <div class="sig-info">
-          <p class="sig-inspired">Terinspirasi Bleu de Chanel</p>
-          <h3 class="sig-name">Ciel Bleu</h3>
-          <p class="sig-desc">Citrus bersih, cedar segar, putih kasturi. Klasik moden untuk setiap hari.</p>
-          <div class="sig-tags"><span>Fresh</span><span>Woody</span><span>Citrus</span></div>
-          <div class="sig-price">RM 79 <small>/ 60ml</small></div>
+      <div class="hc-visual">
+        <div class="hc-bottles-wrap">
+          <svg width="70" height="196" viewBox="0 0 70 196" fill="none" aria-hidden="true"><defs><linearGradient id="cs1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".95"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient></defs><rect x="25" y="0" width="20" height="14" rx="4" fill="#0E2E42"/><rect x="27" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="24" y="14" width="22" height="9" rx="1.5" fill="#0E2E42" opacity=".6"/><rect x="12" y="23" width="46" height="164" rx="3.5" fill="url(#cs1)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="14" y="25" width="8" height="160" rx="2" fill="rgba(255,255,255,.06)"/><rect x="14" y="72" width="42" height="62" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.07)" stroke-width=".4"/><text x="35" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="3.8" fill="rgba(255,255,255,.5)" letter-spacing="1">THE ARTISAN</text><text x="35" y="107" text-anchor="middle" font-family="Georgia,serif" font-size="3.8" fill="rgba(255,255,255,.5)" letter-spacing="1">PARFUM</text><ellipse cx="35" cy="190" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
+          <svg width="88" height="230" viewBox="0 0 88 230" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".18"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".96"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".18"/></linearGradient></defs><rect x="30" y="0" width="28" height="17" rx="6" fill="#5A3A10"/><rect x="33" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.18)"/><rect x="29" y="17" width="30" height="10" rx="1.5" fill="#5A3A10" opacity=".6"/><rect x="14" y="27" width="60" height="192" rx="4" fill="url(#cs2)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="16" y="29" width="10" height="188" rx="2" fill="rgba(255,255,255,.07)"/><rect x="16" y="84" width="56" height="72" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)" stroke-width=".5"/><text x="44" y="112" text-anchor="middle" font-family="Georgia,serif" font-size="4.4" fill="rgba(255,255,255,.55)" letter-spacing="1.1">THE ARTISAN</text><text x="44" y="125" text-anchor="middle" font-family="Georgia,serif" font-size="4.4" fill="rgba(255,255,255,.55)" letter-spacing="1.1">PARFUM</text><ellipse cx="44" cy="222" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
+          <svg width="70" height="196" viewBox="0 0 70 196" fill="none" aria-hidden="true"><defs><linearGradient id="cs3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".95"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="25" y="0" width="20" height="14" rx="4" fill="#3A1828"/><rect x="27" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="24" y="14" width="22" height="9" rx="1.5" fill="#3A1828" opacity=".6"/><rect x="12" y="23" width="46" height="164" rx="3.5" fill="url(#cs3)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="14" y="25" width="8" height="160" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="35" cy="190" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
         </div>
       </div>
     </div>
+
+    <!-- SLIDE 2 -->
+    <div class="hc-slide">
+      <div class="hc-bg" style="background:linear-gradient(135deg,#0d1a12 0%,#142a1c 40%,#0d1a12 100%)">
+        <div class="hc-light" style="top:0%;left:20%;width:700px;height:500px;background:radial-gradient(circle,rgba(74,120,88,.2) 0%,transparent 65%)"></div>
+        <div class="hc-light" style="bottom:-10%;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(196,160,80,.1) 0%,transparent 65%)"></div>
+      </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">Untuk Lelaki</div>
+        <h1 class="hc-title">55 Wangian<br><em>Maskulin</em></h1>
+        <p class="hc-desc">Dari woody smoky hingga fresh aquatic — pilihan lengkap untuk setiap gaya hidup lelaki moden.</p>
+        <a href="#collection" class="hc-btn" onclick="switchGender('m')">Lihat Koleksi Lelaki</a>
+      </div>
+      <div class="hc-visual">
+        <div class="hc-bottles-wrap">
+          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2A5A3A" stop-opacity=".2"/><stop offset="50%" stop-color="#2A5A3A" stop-opacity=".95"/><stop offset="100%" stop-color="#2A5A3A" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#0A2410"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.16)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#0A2410" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs4)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
+          <svg width="90" height="234" viewBox="0 0 90 234" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".18"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".96"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".18"/></linearGradient></defs><rect x="31" y="0" width="28" height="17" rx="6" fill="#0E2E42"/><rect x="34" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.16)"/><rect x="30" y="17" width="30" height="10" rx="1.5" fill="#0E2E42" opacity=".6"/><rect x="15" y="27" width="60" height="196" rx="4" fill="url(#cs5)"/><rect x="17" y="29" width="10" height="192" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="45" cy="226" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
+          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A3A2A" stop-opacity=".2"/><stop offset="50%" stop-color="#4A3A2A" stop-opacity=".95"/><stop offset="100%" stop-color="#4A3A2A" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#2A1A0A"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.14)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#2A1A0A" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs6)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.05)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="hc-slide">
+      <div class="hc-bg" style="background:linear-gradient(135deg,#1a0d18 0%,#2d1428 40%,#1a0d18 100%)">
+        <div class="hc-light" style="top:-5%;right:25%;width:650px;height:550px;background:radial-gradient(circle,rgba(138,90,120,.22) 0%,transparent 65%)"></div>
+        <div class="hc-light" style="bottom:0%;left:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(196,152,80,.1) 0%,transparent 65%)"></div>
+      </div>
+      <div class="hc-content">
+        <div class="hc-eyebrow">Untuk Wanita</div>
+        <h1 class="hc-title">98 Wangian<br><em>Feminin</em></h1>
+        <p class="hc-desc">Floral intim, oriental hangat, fresh ringan — koleksi terlengkap untuk wanita yang tahu apa yang dia mahu.</p>
+        <a href="#collection" class="hc-btn hc-btn--light" onclick="switchGender('w')">Lihat Koleksi Wanita</a>
+      </div>
+      <div class="hc-visual">
+        <div class="hc-bottles-wrap">
+          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".95"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#3A1828"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#3A1828" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs7)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
+          <svg width="90" height="234" viewBox="0 0 90 234" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs8" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".18"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".96"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".18"/></linearGradient></defs><rect x="31" y="0" width="28" height="17" rx="6" fill="#5A3A10"/><rect x="34" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.18)"/><rect x="30" y="17" width="30" height="10" rx="1.5" fill="#5A3A10" opacity=".6"/><rect x="15" y="27" width="60" height="196" rx="4" fill="url(#cs8)"/><rect x="17" y="29" width="10" height="192" rx="2" fill="rgba(255,255,255,.07)"/><ellipse cx="45" cy="226" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
+          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs9" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C47890" stop-opacity=".2"/><stop offset="50%" stop-color="#C47890" stop-opacity=".95"/><stop offset="100%" stop-color="#C47890" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#5A1828"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.16)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#5A1828" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs9)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!-- DOTS -->
+  <div class="hc-dots" id="hc-dots">
+    <button class="hc-dot active" onclick="hcGoTo(0)"></button>
+    <button class="hc-dot" onclick="hcGoTo(1)"></button>
+    <button class="hc-dot" onclick="hcGoTo(2)"></button>
+  </div>
+
+  <!-- ARROWS -->
+  <button class="hc-arrow hc-arrow--prev" onclick="hcPrev()" aria-label="Sebelumnya">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="hc-arrow hc-arrow--next" onclick="hcNext()" aria-label="Seterusnya">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <!-- SCROLL HINT -->
+  <div class="hc-scroll-hint">
+    <div class="hc-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+
 </section>
 
 <div class="ticker-wrap" aria-hidden="true">
