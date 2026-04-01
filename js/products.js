@@ -1,3 +1,28 @@
+async function loadPricing() {
+  try {
+    const rows = await sbFetch('pricing?select=size,normal_price,promo_price');
+    if (rows && rows.length) {
+      rows.forEach(r => {
+        CONFIG.PRICES[r.size] = { normal: r.normal_price, promo: r.promo_price };
+      });
+      updatePriceStrip();
+    }
+  } catch (e) { /* Keep defaults */ }
+}
+
+function updatePriceStrip() {
+  ['10ml','30ml','60ml'].forEach(size => {
+    const key = size.replace('ml','');
+    const p = CONFIG.PRICES[size];
+    const promoEl  = document.getElementById('p' + key + '-promo');
+    const normalEl = document.getElementById('p' + key + '-normal');
+    const saveEl   = document.getElementById('p' + key + '-save');
+    if (promoEl)  promoEl.textContent  = 'RM ' + p.promo;
+    if (normalEl) normalEl.textContent = 'RM ' + p.normal;
+    if (saveEl)   saveEl.textContent   = 'Jimat RM ' + (p.normal - p.promo);
+  });
+}
+
 let PRODUCTS = [];
 
 async function loadProducts() {
