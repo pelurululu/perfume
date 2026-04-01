@@ -26,7 +26,16 @@ async function loadCarouselFromDB() {
         btn.textContent = slide.btn_text || '';
         if (slide.btn_onclick) btn.setAttribute('onclick', slide.btn_onclick);
       }
-      s.querySelector('.hc-bg').style.background = slide.bg_gradient || '';
+      const bgEl = s.querySelector('.hc-bg');
+if (slide.bg_image_url) {
+  bgEl.style.backgroundImage = `url('${slide.bg_image_url}')`;
+  bgEl.style.background = slide.bg_gradient || '';
+  bgEl.style.backgroundImage = `linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${slide.bg_image_url}')`;
+  bgEl.style.backgroundSize = 'cover';
+  bgEl.style.backgroundPosition = 'center';
+} else {
+  bgEl.style.background = slide.bg_gradient || '';
+}
     });
   } catch(e) { /* keep hardcoded fallback */ }
 }
