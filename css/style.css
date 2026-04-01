@@ -149,6 +149,123 @@ h2.section-title em{font-style:italic;color:var(--g)}
 .grid-loading .spinner{width:32px;height:32px;border:1.5px solid var(--border);border-top-color:var(--g);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 16px}
 .grid-loading p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--muted)}
 
+/* === PRODUCT CARD === */
+.product-card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--t), transform var(--t);
+  position: relative;
+  overflow: hidden;
+}
+.product-card:hover {
+  box-shadow: 0 30px 80px rgba(28,22,15,.1);
+  transform: translateY(-4px);
+}
+.card-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px 24px;
+  min-height: 220px;
+  overflow: hidden;
+  background: var(--bg2);
+}
+.card-bottle { position: relative; z-index: 1; }
+.card-mood-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity var(--t);
+  background: linear-gradient(to top, rgba(24,22,15,.55) 0%, transparent 60%);
+  z-index: 2;
+}
+.product-card:hover .card-mood-overlay { opacity: 1; }
+.mood-description, .mood-vibe {
+  font-size: 9px;
+  color: rgba(255,255,255,.8);
+  letter-spacing: .08em;
+  text-align: center;
+  line-height: 1.6;
+}
+.card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 7px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  z-index: 3;
+}
+.badge-hot    { background: var(--red);  color: #fff; }
+.badge-new    { background: var(--g);    color: #fff; }
+.badge-exclusive { background: var(--ink); color: #fff; }
+
+.card-info { padding: 18px 16px 20px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.card-inspired { font-size: 7.5px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted2); }
+.card-name { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; color: var(--ink); line-height: 1.2; }
+.card-family { font-size: 9.5px; color: var(--muted); letter-spacing: .04em; margin-bottom: 4px; }
+
+/* Stock bar */
+.stock-wrap { margin: 4px 0 8px; }
+.stock-bar { height: 2px; background: var(--bg3); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+.stock-fill { height: 100%; border-radius: 2px; transition: width .4s; }
+.stock-fill.ok   { background: var(--grn); }
+.stock-fill.low  { background: var(--amb); }
+.stock-fill.crit { background: var(--red); }
+.stock-text { font-size: 7.5px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.stock-text.urgent { color: var(--red); }
+
+/* Size selector */
+.size-selector { display: flex; gap: 6px; margin-bottom: 10px; }
+.size-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7px 4px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: var(--t);
+  gap: 1px;
+}
+.size-btn:hover { border-color: var(--g); }
+.size-btn.selected { border-color: var(--g); background: rgba(138,106,58,.07); }
+.size-btn:disabled { opacity: .4; cursor: not-allowed; }
+.size-ml    { font-size: 10px; font-weight: 500; color: var(--ink); letter-spacing: .04em; }
+.size-price { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--g); }
+.size-normal { font-size: 8px; color: var(--muted2); text-decoration: line-through; }
+
+/* Add to cart button */
+.btn-add-to-cart {
+  width: 100%;
+  padding: 10px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  transition: background var(--t);
+  margin-top: auto;
+}
+.btn-add-to-cart:hover:not(:disabled) { background: var(--g); }
+.btn-add-to-cart.added   { background: var(--grn); }
+.btn-add-to-cart.sold-out { background: var(--muted2); cursor: not-allowed; }
+.btn-add-to-cart:disabled { opacity: .5; cursor: not-allowed; }
+
 /* dark mode patches */
 [data-theme="dark"] .product-card{background:#1A1712}
 [data-theme="dark"] .card-visual{background:#1A1712}
