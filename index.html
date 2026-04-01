@@ -1471,7 +1471,7 @@ async function init() {
 (function initTheme() {
   const saved = localStorage.getItem('artisan_theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (saved === 'dark' || (!saved && prefersDark)) {
+  if (saved === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
   document.getElementById('theme-toggle').addEventListener('click', () => {
