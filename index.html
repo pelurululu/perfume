@@ -404,69 +404,84 @@
 <div class="promo-popup-overlay" id="promo-overlay" onclick="if(event.target===this)closePromoPopup()">
   <div class="promo-popup">
     <button class="promo-close" onclick="closePromoPopup()" aria-label="Tutup">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 
-    <!-- IMAGE -->
+    <!-- LEFT: IMAGE -->
     <div class="promo-popup-img">
-      <svg width="100%" height="100%" viewBox="0 0 480 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="480" height="220" fill="#F0EBE2"/>
+      <svg viewBox="0 0 420 480" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <rect width="420" height="480" fill="#EDE8DF"/>
+        <!-- ambient glow -->
+        <radialGradient id="ambglow" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="rgba(196,160,96,.18)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+        <rect width="420" height="480" fill="url(#ambglow)"/>
+        <!-- surface -->
+        <rect x="40" y="300" width="340" height="14" rx="4" fill="rgba(154,114,64,.12)"/>
+        <rect x="60" y="310" width="300" height="6" rx="3" fill="rgba(154,114,64,.07)"/>
         <defs>
-          <linearGradient id="pp1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A7858" stop-opacity=".25"/><stop offset="50%" stop-color="#4A7858" stop-opacity=".88"/><stop offset="100%" stop-color="#4A7858" stop-opacity=".25"/></linearGradient>
-          <linearGradient id="pp2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".25"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".92"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".25"/></linearGradient>
-          <linearGradient id="pp3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".25"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".88"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".25"/></linearGradient>
-          <linearGradient id="pp4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".25"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".88"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".25"/></linearGradient>
+          <linearGradient id="pb1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A7858" stop-opacity=".2"/><stop offset="50%" stop-color="#4A7858" stop-opacity=".9"/><stop offset="100%" stop-color="#4A7858" stop-opacity=".2"/></linearGradient>
+          <linearGradient id="pb2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".2"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".94"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".2"/></linearGradient>
+          <linearGradient id="pb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".9"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient>
+          <linearGradient id="pb4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".9"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient>
+          <!-- box patterns -->
+          <pattern id="pat1" patternUnits="userSpaceOnUse" width="8" height="8"><rect width="8" height="8" fill="#C49A62" opacity=".08"/><path d="M0 0l8 8M8 0l-8 8" stroke="#C49A62" stroke-width=".5" opacity=".15"/></pattern>
+          <pattern id="pat2" patternUnits="userSpaceOnUse" width="10" height="10"><circle cx="5" cy="5" r="2" fill="#8A5A78" opacity=".12"/></pattern>
+          <pattern id="pat3" patternUnits="userSpaceOnUse" width="8" height="8"><rect width="8" height="8" fill="#4A7858" opacity=".07"/><rect x="1" y="1" width="6" height="6" fill="none" stroke="#4A7858" stroke-width=".4" opacity=".2"/></pattern>
         </defs>
-        <!-- decorative bg circles -->
-        <circle cx="240" cy="110" r="90" fill="rgba(196,160,96,.06)"/>
-        <circle cx="240" cy="110" r="60" fill="rgba(196,160,96,.05)"/>
-        <!-- bottle 1 -->
-        <rect x="130" y="30" width="14" height="9" rx="2.5" fill="#1A3820"/>
-        <rect x="129" y="39" width="16" height="5" rx="1" fill="#1A3820" opacity=".6"/>
-        <rect x="122" y="44" width="30" height="110" rx="2.5" fill="url(#pp1)"/>
-        <rect x="124" y="46" width="4" height="106" rx="1" fill="rgba(255,255,255,.06)"/>
-        <!-- bottle 2 (tallest, center) -->
-        <rect x="221" y="18" width="18" height="11" rx="4" fill="#5A3A10"/>
-        <rect x="220" y="29" width="20" height="6" rx="1" fill="#5A3A10" opacity=".6"/>
-        <rect x="212" y="35" width="36" height="130" rx="3" fill="url(#pp2)"/>
-        <rect x="214" y="37" width="6" height="126" rx="1.5" fill="rgba(255,255,255,.07)"/>
-        <rect x="214" y="75" width="28" height="46" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)" stroke-width=".4"/>
-        <text x="230" y="93" text-anchor="middle" font-family="Georgia,serif" font-size="3" fill="rgba(255,255,255,.45)" letter-spacing=".8">THE ARTISAN</text>
-        <text x="230" y="101" text-anchor="middle" font-family="Georgia,serif" font-size="3" fill="rgba(255,255,255,.45)" letter-spacing=".8">PARFUM</text>
-        <!-- bottle 3 -->
-        <rect x="286" y="30" width="14" height="9" rx="2.5" fill="#3A1828"/>
-        <rect x="285" y="39" width="16" height="5" rx="1" fill="#3A1828" opacity=".6"/>
-        <rect x="278" y="44" width="30" height="110" rx="2.5" fill="url(#pp3)"/>
-        <rect x="280" y="46" width="4" height="106" rx="1" fill="rgba(255,255,255,.06)"/>
-        <!-- bottle 4 (free badge) -->
-        <rect x="348" y="50" width="12" height="8" rx="2" fill="#0E2E42"/>
-        <rect x="347" y="58" width="14" height="4" rx="1" fill="#0E2E42" opacity=".6"/>
-        <rect x="341" y="62" width="26" height="90" rx="2" fill="url(#pp4)"/>
-        <rect x="343" y="64" width="3.5" height="86" rx="1" fill="rgba(255,255,255,.06)"/>
-        <!-- FREE tag on bottle 4 -->
-        <rect x="332" y="42" width="44" height="16" rx="2" fill="#9A7240"/>
-        <text x="354" y="53" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#fff" letter-spacing="1">PERCUMA</text>
-        <!-- plus sign -->
-        <text x="320" y="118" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="rgba(154,114,64,.18)">+</text>
-        <!-- shadow ellipses -->
-        <ellipse cx="137" cy="156" rx="17" ry="2.2" fill="rgba(0,0,0,.06)"/>
-        <ellipse cx="230" cy="167" rx="20" ry="2.5" fill="rgba(0,0,0,.06)"/>
-        <ellipse cx="293" cy="156" rx="17" ry="2.2" fill="rgba(0,0,0,.06)"/>
-        <ellipse cx="354" cy="154" rx="15" ry="2" fill="rgba(0,0,0,.06)"/>
+        <!-- BOX 1 — left back -->
+        <rect x="54" y="148" width="72" height="152" rx="3" fill="url(#pat1)" stroke="rgba(196,154,98,.3)" stroke-width="1"/>
+        <rect x="56" y="150" width="68" height="148" rx="2" fill="rgba(196,154,98,.06)"/>
+        <text x="90" y="228" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(154,114,64,.6)" letter-spacing="1.2">THE ARTISAN</text>
+        <text x="90" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="rgba(154,114,64,.45)" letter-spacing=".8">PARFUM</text>
+        <!-- BOX 2 — right back -->
+        <rect x="294" y="158" width="68" height="142" rx="3" fill="url(#pat2)" stroke="rgba(138,90,120,.28)" stroke-width="1"/>
+        <rect x="296" y="160" width="64" height="138" rx="2" fill="rgba(138,90,120,.05)"/>
+        <text x="328" y="232" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(138,90,120,.55)" letter-spacing="1">THE ARTISAN</text>
+        <!-- BOX 3 — center back -->
+        <rect x="172" y="128" width="76" height="172" rx="3" fill="url(#pat3)" stroke="rgba(74,120,88,.28)" stroke-width="1"/>
+        <rect x="174" y="130" width="72" height="168" rx="2" fill="rgba(74,120,88,.05)"/>
+        <text x="210" y="216" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(74,120,88,.55)" letter-spacing="1">THE ARTISAN</text>
+        <!-- BOTTLE 1 — left -->
+        <rect x="78" y="174" width="13" height="10" rx="2.5" fill="#1A3820"/>
+        <rect x="77" y="184" width="15" height="5" rx="1" fill="#1A3820" opacity=".55"/>
+        <rect x="69" y="189" width="30" height="112" rx="2.5" fill="url(#pb1)"/>
+        <rect x="71" y="191" width="4.5" height="108" rx="1" fill="rgba(255,255,255,.07)"/>
+        <ellipse cx="84" cy="303" rx="16" ry="2.2" fill="rgba(0,0,0,.09)"/>
+        <!-- BOTTLE 2 — center (tallest) -->
+        <rect x="200" y="148" width="20" height="13" rx="4" fill="#5A3A10"/>
+        <rect x="199" y="161" width="22" height="7" rx="1" fill="#5A3A10" opacity=".55"/>
+        <rect x="190" y="168" width="40" height="136" rx="3" fill="url(#pb2)"/>
+        <rect x="192" y="170" width="6" height="132" rx="1.5" fill="rgba(255,255,255,.07)"/>
+        <rect x="192" y="210" width="32" height="50" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width=".5"/>
+        <text x="210" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">THE ARTISAN</text>
+        <text x="210" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">PARFUM</text>
+        <ellipse cx="210" cy="306" rx="22" ry="2.8" fill="rgba(0,0,0,.09)"/>
+        <!-- BOTTLE 3 — right -->
+        <rect x="314" y="182" width="13" height="10" rx="2.5" fill="#3A1828"/>
+        <rect x="313" y="192" width="15" height="5" rx="1" fill="#3A1828" opacity=".55"/>
+        <rect x="305" y="197" width="30" height="106" rx="2.5" fill="url(#pb3)"/>
+        <rect x="307" y="199" width="4.5" height="102" rx="1" fill="rgba(255,255,255,.07)"/>
+        <ellipse cx="320" cy="305" rx="16" ry="2.2" fill="rgba(0,0,0,.09)"/>
+        <!-- FREE bottle — small, right foreground -->
+        <rect x="348" y="222" width="11" height="8" rx="2" fill="#0E2E42"/>
+        <rect x="347" y="230" width="13" height="4" rx="1" fill="#0E2E42" opacity=".55"/>
+        <rect x="341" y="234" width="26" height="68" rx="2" fill="url(#pb4)"/>
+        <rect x="343" y="236" width="3.5" height="64" rx="1" fill="rgba(255,255,255,.07)"/>
+        <ellipse cx="354" cy="304" rx="14" ry="1.8" fill="rgba(0,0,0,.08)"/>
+        <!-- FREE badge -->
+        <rect x="336" y="206" width="50" height="18" rx="2" fill="#9A7240"/>
+        <text x="361" y="218" text-anchor="middle" font-family="Georgia,serif" font-size="8.5" fill="#fff" letter-spacing="1.5">PERCUMA</text>
+        <!-- decorative label on surface -->
+        <text x="210" y="338" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-style="italic" fill="rgba(154,114,64,.28)" letter-spacing="2">the artisan parfum</text>
       </svg>
     </div>
 
-    <!-- CONTENT -->
+    <!-- RIGHT: CONTENT -->
     <div class="promo-popup-body">
-      <div class="promo-popup-eyebrow">Tawaran Terhad</div>
+      <div class="promo-popup-eyebrow">Tawaran Eksklusif</div>
       <h2 class="promo-popup-title">Beli <em>3×60ml</em><br>Percuma <em>1×30ml</em></h2>
-      <p class="promo-popup-desc">Pilih mana-mana 3 wangian 60ml dan dapatkan 1 botol 30ml percuma pilihan anda. Jimat sehingga <strong>RM 49</strong>.</p>
-      <div class="promo-popup-perks">
-        <span>✦ Mana-mana 3 wangian 60ml</span>
-        <span>✦ 1 botol 30ml percuma</span>
-        <span>✦ Jimat RM 49</span>
-      </div>
-      <a href="#collection" class="promo-popup-cta" onclick="closePromoPopup()">
+      <p class="promo-popup-desc">Pilih mana-mana 3 wangian 60ml dari koleksi kami dan dapatkan 1 botol 30ml percuma pilihan anda sendiri.</p>
+      <p class="promo-popup-saving">Jimat sehingga <strong>RM 49</strong></p>
+      <a href="#bundle" class="promo-popup-cta" onclick="closePromoPopup()">
         Beli Sekarang
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
       </a>
