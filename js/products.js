@@ -132,9 +132,13 @@ function createMiniBottleSVG(cap, rgbStr) {
    RENDER PRODUCT CARDS
 ===================================================== */
 function renderProducts() {
-  const grid = document.getElementById('pslider-track');
-const loading = document.getElementById('grid-loading');
-if (loading) loading.remove();
+  const grid = document.getElementById('product-grid');
+  const loading = document.getElementById('grid-loading');
+  if (loading) loading.remove();
+  
+  // Clear existing products
+  const existingCards = grid.querySelectorAll('.product-card');
+  existingCards.forEach(card => card.remove());;
 
   PRODUCTS.forEach((product, index) => {
     const stk = getStock(product.id);
@@ -225,10 +229,11 @@ if (loading) loading.remove();
       addToCart(product.id, selectedSize, card);
     });
 
-    grid.appendChild(card);
+  grid.appendChild(card);
   });
 
   initScrollReveal();
+  // Initial render - build rows for default gender
   applyFilters();
 }
 
