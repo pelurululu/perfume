@@ -36,8 +36,9 @@ async function loadProducts() {
       if (el) el.textContent = PRODUCTS.filter(p => p.gender === g).length;
     });
     renderProducts();
-  } catch (e) {
-    grid.innerHTML = `<div class="no-results" style="display:block;background:var(--k)"><p>Gagal memuatkan produk</p><span>Cuba muat semula halaman ini</span></div>`;
+ } catch (e) {
+    const loading = document.getElementById('grid-loading');
+    if (loading) loading.innerHTML = '<p style="color:var(--red);font-size:12px">Gagal memuatkan produk. Cuba muat semula.</p>';
     console.error('Failed to load products:', e);
   }
 }
@@ -131,8 +132,9 @@ function createMiniBottleSVG(cap, rgbStr) {
    RENDER PRODUCT CARDS
 ===================================================== */
 function renderProducts() {
-  const grid = document.getElementById('product-grid');
-  grid.innerHTML = '<div class="no-results" id="no-results"><p>Tiada wangian dijumpai</p><span>Cuba carian berbeza</span></div>';
+  const grid = document.getElementById('pslider-track');
+const loading = document.getElementById('grid-loading');
+if (loading) loading.remove();
 
   PRODUCTS.forEach((product, index) => {
     const stk = getStock(product.id);
