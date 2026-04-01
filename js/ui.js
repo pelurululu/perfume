@@ -101,6 +101,26 @@ function pageTransition() {
 }
 
 /* =====================================================
+   PROMO POPUP
+===================================================== */
+function openPromoPopup() {
+  if (localStorage.getItem('artisan_promo_hide') === '1') return;
+  setTimeout(() => {
+    document.getElementById('promo-overlay').classList.add('visible');
+    document.body.classList.add('lock');
+  }, 1800); // delay so page loads first
+}
+
+function closePromoPopup() {
+  document.getElementById('promo-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+}
+
+function handleDontShow(checkbox) {
+  localStorage.setItem('artisan_promo_hide', checkbox.checked ? '1' : '0');
+}
+
+/* =====================================================
    ANNOUNCEMENT COUNTDOWN
 ===================================================== */
 function initAnnouncementCountdown() {
