@@ -153,7 +153,8 @@ function renderProducts() {
 
     const p = CONFIG.PRICES;
     const card = document.createElement('article');
-    card.className = 'product-card reveal' + (product.gender !== 'm' ? ' hidden' : '');
+    card.className = 'product-card' + (product.gender !== 'm' ? ' hidden' : '');
+card.style.display = product.gender !== 'm' ? 'none' : '';
     card.dataset.gender = product.gender;
     card.dataset.productId = product.id;
     card.dataset.searchIndex = [product.name, product.inspired_by, product.family, product.notes].join(' ').toLowerCase();
