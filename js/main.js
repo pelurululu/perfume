@@ -9,5 +9,6 @@ async function init() {
   initStock();
   // Restore cart
   refreshCartUI();
+  openPromoPopup();
 }
 init();
