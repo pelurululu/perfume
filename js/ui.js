@@ -58,6 +58,14 @@ function buildRows(matching) {
 
   if (matching.length === 0) return;
 
+  // Clone the cards so we can move them
+  const clonedCards = matching.map(c => {
+    const clone = c.cloneNode(true);
+    clone._productId = c._productId;
+    return clone;
+  });
+
+
   // Split into chunks of CARDS_PER_ROW
   const chunks = [];
   for (let i = 0; i < matching.length; i += CARDS_PER_ROW) {
@@ -96,8 +104,9 @@ function buildRows(matching) {
     track.id = `prow-track-${rowIndex}`;
     track.dataset.offset = '0';
 
-    chunk.forEach(card => {
+  clonedCards.slice(rowIndex * CARDS_PER_ROW, rowIndex * CARDS_PER_ROW + chunk.length).forEach(card => {
       card.style.display = '';
+      attachCardListeners(card);
       track.appendChild(card);
     });
 
