@@ -330,3 +330,38 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('mouseleave', () => { hcTimer = setInterval(hcNext, 5000); });
   }
 });
+
+// Touch swipe support for mobile
+document.addEventListener('DOMContentLoaded', () => {
+  const rows = document.querySelectorAll('.prow-viewport');
+  
+  rows.forEach((viewport, rowIndex) => {
+    let startX = 0;
+    let isDragging = false;
+    
+    viewport.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    });
+    
+    viewport.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+    }, { passive: false });
+    
+    viewport.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+          rowScroll(rowIndex, 1); // Swipe left = next
+        } else {
+          rowScroll(rowIndex, -1); // Swipe right = prev
+        }
+      }
+      isDragging = false;
+    });
+  });
+});
