@@ -425,3 +425,28 @@ footer{background:var(--bg2);padding:52px 52px 22px;border-top:1px solid var(--b
 .theme-toggle .icon-moon{display:none}
 [data-theme="dark"] .theme-toggle .icon-sun{display:none}
 [data-theme="dark"] .theme-toggle .icon-moon{display:block}
+/* === PROMO POPUP === */
+.promo-popup-overlay{position:fixed;inset:0;background:rgba(28,26,22,.7);z-index:950;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .32s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.promo-popup-overlay.visible{opacity:1;pointer-events:all}
+.promo-popup{background:#fff;max-width:520px;width:100%;position:relative;overflow:hidden;transform:translateY(20px) scale(.97);transition:transform .36s cubic-bezier(.23,.92,.52,1);box-shadow:0 32px 80px rgba(28,26,22,.22)}
+.promo-popup-overlay.visible .promo-popup{transform:translateY(0) scale(1)}
+.promo-close{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,255,255,.85);border:1px solid var(--border);width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:var(--t);border-radius:0}
+.promo-close:hover{background:#fff;color:var(--ink);border-color:var(--g)}
+.promo-popup-img{width:100%;height:200px;overflow:hidden;border-bottom:1px solid var(--border)}
+.promo-popup-img svg{width:100%;height:100%}
+.promo-popup-body{padding:28px 32px 26px}
+.promo-popup-eyebrow{font-size:7px;letter-spacing:.42em;text-transform:uppercase;color:var(--g);margin-bottom:8px}
+.promo-popup-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,34px);font-weight:300;line-height:1.1;color:var(--ink);margin-bottom:12px}
+.promo-popup-title em{font-style:italic;color:var(--g)}
+.promo-popup-desc{font-size:11px;color:var(--muted);line-height:1.9;margin-bottom:14px}
+.promo-popup-desc strong{color:var(--g2)}
+.promo-popup-perks{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:20px}
+.promo-popup-perks span{font-size:8.5px;letter-spacing:.06em;color:var(--ink3)}
+.promo-popup-cta{display:inline-flex;align-items:center;gap:7px;background:var(--g);color:#fff;padding:11px 26px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-family:'DM Sans',sans-serif;transition:background .22s;margin-bottom:16px}
+.promo-popup-cta:hover{background:var(--g2)}
+.promo-popup-check{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:9px;color:var(--muted);letter-spacing:.04em;user-select:none}
+.promo-popup-check input{width:13px;height:13px;accent-color:var(--g);cursor:pointer;flex-shrink:0}
+[data-theme="dark"] .promo-popup{background:#161410}
+[data-theme="dark"] .promo-popup-img{border-color:rgba(196,160,96,.1)}
+[data-theme="dark"] .promo-close{background:rgba(22,20,16,.85);border-color:rgba(196,160,96,.15)}
+@media(max-width:520px){.promo-popup-body{padding:20px 20px 18px}.promo-popup-img{height:160px}}
