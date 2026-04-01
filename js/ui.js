@@ -215,3 +215,39 @@ function initScrollReveal() {
   });
 })();
 
+/* =====================================================
+   HERO CAROUSEL
+===================================================== */
+let hcCurrent = 0;
+const hcTotal = 3;
+let hcTimer;
+
+function hcGoTo(index) {
+  hcCurrent = index;
+  document.getElementById('hc-track').style.transform = `translateX(-${index * 100}%)`;
+  document.querySelectorAll('.hc-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+  clearInterval(hcTimer);
+  hcTimer = setInterval(hcNext, 5000);
+}
+
+function hcNext() {
+  hcGoTo((hcCurrent + 1) % hcTotal);
+}
+
+function hcPrev() {
+  hcGoTo((hcCurrent - 1 + hcTotal) % hcTotal);
+}
+
+// Auto-play
+hcTimer = setInterval(hcNext, 5000);
+
+// Pause on hover
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.querySelector('.hero-carousel');
+  if (carousel) {
+    carousel.addEventListener('mouseenter', () => clearInterval(hcTimer));
+    carousel.addEventListener('mouseleave', () => { hcTimer = setInterval(hcNext, 5000); });
+  }
+});
