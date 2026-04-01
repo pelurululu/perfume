@@ -165,54 +165,62 @@
   <div class="section-wrap">
     <div class="section-label">Koleksi Eksklusif</div>
     <h2 class="section-title">Pilih <em>Wangian</em> Anda</h2>
-    <p class="section-subtitle">Terinspirasi profil jenama premium dunia — diformulasikan semula dengan pati premium diimport untuk ketahanan dan kekuatan optimal.</p>
-    <div class="search-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search-input" placeholder="Cari wangian, jenama, jenis..." aria-label="Cari wangian">
-      <button id="search-clear" onclick="clearSearch()" aria-label="Padam carian">✕</button>
-    </div>
-    <div class="gender-tabs" role="tablist" aria-label="Pilih jantina">
-      <button class="gender-tab active-men" id="tab-men" onclick="switchGender('m')" role="tab" aria-selected="true">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="6"/><path d="M20 4l-6 6M20 4h-5M20 4v5"/></svg>
-        Lelaki (<span id="count-m">55</span>)
-      </button>
-      <button class="gender-tab" id="tab-women" onclick="switchGender('w')" role="tab" aria-selected="false">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg>
-        Wanita (<span id="count-w">98</span>)
-      </button>
-      <button class="gender-tab" id="tab-unisex" onclick="switchGender('u')" role="tab" aria-selected="false">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-        Unisex (<span id="count-u">12</span>)
-      </button>
-    </div>
+    <p class="section-subtitle">Terinspirasi profil jenama premium dunia — diformulasikan semula dengan pati premium diimport.</p>
 
-    <!-- Carousel controls row -->
-    <div class="carousel-controls-row">
-      <span class="carousel-page-label" id="carousel-page-label">Halaman 1</span>
-      <div class="carousel-arrows">
-        <button class="carousel-arrow" id="carousel-prev" onclick="carouselPrev()" aria-label="Sebelumnya">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 18 9 12 15 6"/></svg>
+    <!-- Gender + Search row -->
+    <div class="coll-toolbar">
+      <div class="coll-gender-btns">
+        <button class="coll-gender-btn active" id="gbtn-m" onclick="switchGender('m')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="6"/><path d="M20 4l-6 6M20 4h-5M20 4v5"/></svg>
+          Lelaki <span id="count-m">—</span>
         </button>
-        <button class="carousel-arrow" id="carousel-next" onclick="carouselNext()" aria-label="Seterusnya">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 18 15 12 9 6"/></svg>
+        <button class="coll-gender-btn" id="gbtn-w" onclick="switchGender('w')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg>
+          Wanita <span id="count-w">—</span>
         </button>
+        <button class="coll-gender-btn" id="gbtn-u" onclick="switchGender('u')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+          Unisex <span id="count-u">—</span>
+        </button>
+      </div>
+      <div class="search-wrap" style="margin:0;max-width:260px">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Cari wangian..." aria-label="Cari wangian">
+        <button id="search-clear" onclick="clearSearch()" aria-label="Padam">✕</button>
       </div>
     </div>
 
-    <!-- Carousel viewport -->
-    <div class="carousel-viewport" id="carousel-viewport">
-      <div class="product-grid" id="product-grid">
-        <div class="grid-loading"><div class="spinner"></div><p>Memuatkan koleksi...</p></div>
+    <!-- Slider -->
+    <div class="pslider-wrap">
+      <button class="pslider-arrow pslider-arrow--prev" id="pslider-prev" onclick="pSliderPrev()" aria-label="Sebelumnya">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="pslider-viewport" id="pslider-viewport">
+        <div class="pslider-track" id="pslider-track">
+          <!-- cards injected by JS -->
+          <div class="grid-loading" id="grid-loading">
+            <div class="spinner"></div>
+            <p>Memuatkan koleksi...</p>
+          </div>
+        </div>
       </div>
+
+      <button class="pslider-arrow pslider-arrow--next" id="pslider-next" onclick="pSliderNext()" aria-label="Seterusnya">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
 
-    <!-- Pagination dots + see more -->
-    <div class="carousel-footer">
-      <div class="carousel-dots" id="carousel-dots"></div>
-      <a href="#collection" class="carousel-see-more" id="carousel-see-more" onclick="carouselSeeMore(event)">
-        Lihat Semua
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </a>
+    <!-- Dots + counter -->
+    <div class="pslider-footer">
+      <div class="pslider-dots" id="pslider-dots"></div>
+      <span class="pslider-counter" id="pslider-counter"></span>
+    </div>
+
+    <!-- No results -->
+    <div class="no-results" id="no-results" style="display:none">
+      <p>Tiada wangian dijumpai</p>
+      <span>Cuba carian berbeza</span>
     </div>
 
   </div>
