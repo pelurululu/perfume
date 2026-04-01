@@ -6,6 +6,8 @@ async function init() {
   initStock();
   refreshCartUI();
   openPromoPopup();
+  await loadCarouselFromDB();
+await loadPopupFromDB();
 }
 
 async function loadCarouselFromDB() {
