@@ -1,23 +1,22 @@
 :root {
-  /* Light/Off-white theme from admin panel */
-  --bg:    #F8F5F0;
-  --bg2:   #F0EBE2;
-  --bg3:   #E6E0D5;
-  --bg4:   #D9D2C5;
-  --ink:   #1C1A16;
-  --ink2:  #2E2B24;
-  --ink3:  #4A4640;
-  --muted: #7A756C;
-  --muted2:#A09890;
-  --g:     #9A7240;
-  --g2:    #B08850;
-  --g3:    #CBA870;
-  --border: rgba(138,106,58,.12);
-  --shadow: 0 1px 3px rgba(28,26,22,.08), 0 4px 16px rgba(28,26,22,.06);
-  --red:   #B04040;
-  --grn:   #3A7A52;
-  --amb:   #B07030;
-  --t: .3s cubic-bezier(.4,0,.2,1);
+  --bg:     #FAFAF8;
+  --bg2:    #F2EEE8;
+  --bg3:    #E8E2D9;
+  --bg4:    #DDD6CA;
+  --ink:    #18160F;
+  --ink2:   #2C291E;
+  --ink3:   #46432E;
+  --muted:  #78746A;
+  --muted2: #A8A298;
+  --g:      #8C6A2F;
+  --g2:     #A87D38;
+  --g3:     #C49848;
+  --border: rgba(120,90,40,.1);
+  --shadow: 0 1px 2px rgba(24,22,15,.06), 0 4px 20px rgba(24,22,15,.05);
+  --red:    #A83030;
+  --grn:    #2E6E44;
+  --amb:    #A06420;
+  --t: .25s cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
