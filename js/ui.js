@@ -110,7 +110,14 @@ function buildRows(matching) {
       track.appendChild(card);
     });
 
-    viewport.appendChild(track);
+    let pRowTouchStartX = 0;
+viewport.addEventListener('touchstart', e => { pRowTouchStartX = e.touches[0].clientX; }, { passive: true });
+viewport.addEventListener('touchend', e => {
+  const diff = pRowTouchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) rowScroll(rowIndex, diff > 0 ? 1 : -1);
+}, { passive: true });
+
+viewport.appendChild(track);
     rowWrap.appendChild(rowHeader);
     rowWrap.appendChild(viewport);
 
@@ -328,5 +335,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (carousel) {
     carousel.addEventListener('mouseenter', () => clearInterval(hcTimer));
     carousel.addEventListener('mouseleave', () => { hcTimer = setInterval(hcNext, 5000); });
+
+    let hcTouchStartX = 0;
+    carousel.addEventListener('touchstart', e => { hcTouchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const diff = hcTouchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) diff > 0 ? hcNext() : hcPrev();
+    }, { passive: true });
   }
 });
