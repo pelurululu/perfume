@@ -154,11 +154,11 @@ function renderProducts() {
     const p = CONFIG.PRICES;
     const card = document.createElement('article');
     card.className = 'product-card' + (product.gender !== 'm' ? ' hidden' : '');
-card.style.display = product.gender !== 'm' ? 'none' : '';
+    card.style.display = product.gender !== 'm' ? 'none' : '';
     card.dataset.gender = product.gender;
     card.dataset.productId = product.id;
     card.dataset.searchIndex = [product.name, product.inspired_by, product.family, product.notes].join(' ').toLowerCase();
-    card.style.transitionDelay = ((index % 5) * 0.06) + 's';
+    
 
     card.innerHTML = `
       <div class="card-visual" style="background:radial-gradient(ellipse 80% 70% at 50% 35%,rgba(${product.rgb || '155,85,110'},0.16) 0%,rgba(${product.rgb || '155,85,110'},0.04) 100%)">
