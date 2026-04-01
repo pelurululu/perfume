@@ -1,16 +1,13 @@
 /* =====================================================
-   COLLECTION SLIDER
+   COLLECTION SLIDER — multi-row, 10 per row
 ===================================================== */
 let currentGender = 'm';
 let searchQuery   = '';
 let searchDebounce;
-let pSliderIndex  = 0;
-let pSliderPages  = 0;
-const CARDS_PER_SLIDE = 3;
+const CARDS_PER_ROW = 10;
 
 function switchGender(gender) {
   currentGender = gender;
-  pSliderIndex  = 0;
   document.querySelectorAll('.coll-gender-btn').forEach(b => b.classList.remove('active'));
   const map = { m: 'gbtn-m', w: 'gbtn-w', u: 'gbtn-u' };
   document.getElementById(map[gender])?.classList.add('active');
@@ -21,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const inp = document.getElementById('search-input');
   if (inp) {
     inp.addEventListener('input', function () {
-      searchQuery  = this.value.toLowerCase().trim();
-      pSliderIndex = 0;
+      searchQuery = this.value.toLowerCase().trim();
       document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
       clearTimeout(searchDebounce);
       searchDebounce = setTimeout(applyFilters, 240);
@@ -33,8 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function clearSearch() {
   const inp = document.getElementById('search-input');
   if (inp) inp.value = '';
-  searchQuery  = '';
-  pSliderIndex = 0;
+  searchQuery = '';
   document.getElementById('search-clear').style.display = 'none';
   applyFilters();
 }
@@ -46,68 +41,133 @@ function applyFilters() {
     (!searchQuery || c.dataset.searchIndex.includes(searchQuery))
   );
 
-  // Hide all, then reorder track so matching cards come first
-  allCards.forEach(c => {
-    c.style.display = 'none';
-    c.classList.add('hidden');
-  });
-
-  matching.forEach(c => {
-    c.style.display = '';
-    c.classList.remove('hidden');
-  });
+  // Hide all cards first
+  allCards.forEach(c => { c.style.display = 'none'; c.classList.add('hidden'); });
+  matching.forEach(c => { c.classList.remove('hidden'); });
 
   document.getElementById('no-results').style.display = matching.length === 0 ? 'block' : 'none';
 
-  pSliderPages = Math.max(1, Math.ceil(matching.length / CARDS_PER_SLIDE));
-  pSliderIndex = Math.min(pSliderIndex, pSliderPages - 1);
-  pSliderRender(matching);
+  buildRows(matching);
 }
 
-function pSliderRender(matching) {
-  // Move track to current page
-  const cardW = 100 / CARDS_PER_SLIDE;
-  const offset = pSliderIndex * CARDS_PER_SLIDE * cardW;
-  const track = document.getElementById('pslider-track');
-  track.style.transform = `translateX(-${offset}%)`;
+function buildRows(matching) {
+  const container = document.getElementById('pslider-rows');
+  container.innerHTML = '';
 
-  // Arrows
-  document.getElementById('pslider-prev').disabled = pSliderIndex === 0;
-  document.getElementById('pslider-next').disabled = pSliderIndex >= pSliderPages - 1;
+  if (matching.length === 0) return;
 
-  // Dots
-  const dotsEl = document.getElementById('pslider-dots');
-  dotsEl.innerHTML = '';
-  for (let i = 0; i < pSliderPages; i++) {
-    const d = document.createElement('button');
-    d.className = 'pslider-dot' + (i === pSliderIndex ? ' active' : '');
-    d.setAttribute('aria-label', `Halaman ${i + 1}`);
-    d.onclick = () => { pSliderIndex = i; pSliderRender(matching); };
-    dotsEl.appendChild(d);
+  // Split into chunks of CARDS_PER_ROW
+  const chunks = [];
+  for (let i = 0; i < matching.length; i += CARDS_PER_ROW) {
+    chunks.push(matching.slice(i, i + CARDS_PER_ROW));
   }
 
-  // Counter
-  const start = pSliderIndex * CARDS_PER_SLIDE + 1;
-  const end   = Math.min(start + CARDS_PER_SLIDE - 1, matching.length);
-  document.getElementById('pslider-counter').textContent =
-    matching.length > 0 ? `${start}–${end} / ${matching.length}` : '';
+  chunks.forEach((chunk, rowIndex) => {
+    const rowWrap = document.createElement('div');
+    rowWrap.className = 'prow-wrap';
+    rowWrap.dataset.row = rowIndex;
+
+    // Row header
+    const rowHeader = document.createElement('div');
+    rowHeader.className = 'prow-header';
+    const start = rowIndex * CARDS_PER_ROW + 1;
+    const end   = Math.min(start + chunk.length - 1, matching.length);
+    rowHeader.innerHTML = `
+      <span class="prow-label">${start}–${end} daripada ${matching.length}</span>
+      <div class="prow-arrows">
+        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},-1)" aria-label="Kiri">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},1)" aria-label="Kanan">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    `;
+
+    // Viewport + track
+    const viewport = document.createElement('div');
+    viewport.className = 'prow-viewport';
+    viewport.dataset.rowIndex = rowIndex;
+
+    const track = document.createElement('div');
+    track.className = 'prow-track';
+    track.id = `prow-track-${rowIndex}`;
+    track.dataset.offset = '0';
+
+    chunk.forEach(card => {
+      card.style.display = '';
+      track.appendChild(card);
+    });
+
+    viewport.appendChild(track);
+    rowWrap.appendChild(rowHeader);
+    rowWrap.appendChild(viewport);
+
+    // Dots
+    const cardCount = chunk.length;
+    const visibleCards = getVisibleCardCount();
+    const maxOffset = Math.max(0, cardCount - visibleCards);
+    if (maxOffset > 0) {
+      const dots = document.createElement('div');
+      dots.className = 'prow-dots';
+      dots.id = `prow-dots-${rowIndex}`;
+      for (let d = 0; d <= maxOffset; d++) {
+        const dot = document.createElement('button');
+        dot.className = 'pslider-dot' + (d === 0 ? ' active' : '');
+        dot.onclick = ((ri, di) => () => rowScrollTo(ri, di))(rowIndex, d);
+        dots.appendChild(dot);
+      }
+      rowWrap.appendChild(dots);
+    }
+
+    container.appendChild(rowWrap);
+  });
 }
 
-function pSliderNext() {
-  if (pSliderIndex < pSliderPages - 1) {
-    pSliderIndex++;
-    const matching = Array.from(document.querySelectorAll('.product-card:not(.hidden)'));
-    pSliderRender(matching);
+function getVisibleCardCount() {
+  const w = window.innerWidth;
+  if (w <= 600) return 1;
+  if (w <= 1024) return 2;
+  return 3;
+}
+
+function rowScroll(rowIndex, dir) {
+  const track = document.getElementById(`prow-track-${rowIndex}`);
+  if (!track) return;
+  const current = parseInt(track.dataset.offset) || 0;
+  const cardCount = track.children.length;
+  const visible = getVisibleCardCount();
+  const max = Math.max(0, cardCount - visible);
+  const next = Math.min(max, Math.max(0, current + dir));
+  rowScrollTo(rowIndex, next);
+}
+
+function rowScrollTo(rowIndex, offset) {
+  const track = document.getElementById(`prow-track-${rowIndex}`);
+  if (!track) return;
+  const cardCount = track.children.length;
+  const visible = getVisibleCardCount();
+  const max = Math.max(0, cardCount - visible);
+  offset = Math.min(max, Math.max(0, offset));
+
+  const pct = (100 / visible) * offset;
+  track.style.transform = `translateX(-${pct}%)`;
+  track.dataset.offset = offset;
+
+  // Update dots
+  const dotsEl = document.getElementById(`prow-dots-${rowIndex}`);
+  if (dotsEl) {
+    dotsEl.querySelectorAll('.pslider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === offset);
+    });
   }
 }
 
-function pSliderPrev() {
-  if (pSliderIndex > 0) {
-    pSliderIndex--;
-    const matching = Array.from(document.querySelectorAll('.product-card:not(.hidden)'));
-    pSliderRender(matching);
-  }
-}
+// Re-render rows on resize
+window.addEventListener('resize', () => {
+  const allCards = Array.from(document.querySelectorAll('.product-card:not(.hidden)'));
+  if (allCards.length > 0) buildRows(allCards);
+}, { passive: true });
 /* =====================================================
    PROMO POPUP
 ===================================================== */
