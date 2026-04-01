@@ -394,42 +394,11 @@
   <span class="float-cart-label">Troli</span>
 </div>
 
-<script>
-
-  <script src="js/config.js"></script>
+<script src="js/config.js"></script>
 <script src="js/products.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/main.js"></script>
 
-/* =====================================================
-   LOAD PRICING FROM SUPABASE
-===================================================== */
-async function loadPricing() {
-  try {
-    const rows = await sbFetch('pricing?select=size,normal_price,promo_price');
-    if (rows && rows.length) {
-      rows.forEach(r => {
-        CONFIG.PRICES[r.size] = { normal: r.normal_price, promo: r.promo_price };
-      });
-      updatePriceStrip();
-    }
-  } catch (e) { /* Keep defaults */ }
-}
-
-function updatePriceStrip() {
-  ['10ml','30ml','60ml'].forEach(size => {
-    const key = size.replace('ml','');
-    const p = CONFIG.PRICES[size];
-    const promoEl  = document.getElementById('p' + key + '-promo');
-    const normalEl = document.getElementById('p' + key + '-normal');
-    const saveEl   = document.getElementById('p' + key + '-save');
-    if (promoEl)  promoEl.textContent  = 'RM ' + p.promo;
-    if (normalEl) normalEl.textContent = 'RM ' + p.normal;
-    if (saveEl)   saveEl.textContent   = 'Jimat RM ' + (p.normal - p.promo);
-  });
-}
-
-</script>
 </body>
 </html>
