@@ -194,4 +194,4 @@ function initScrollReveal() {
     localStorage.setItem('artisan_theme', isDark ? 'light' : 'dark');
   });
 })();
-init();
+
