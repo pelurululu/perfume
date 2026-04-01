@@ -132,13 +132,18 @@ function createMiniBottleSVG(cap, rgbStr) {
    RENDER PRODUCT CARDS
 ===================================================== */
 function renderProducts() {
-  const grid = document.getElementById('product-grid');
   const loading = document.getElementById('grid-loading');
   if (loading) loading.remove();
-  
-  // Clear existing products
-  const existingCards = grid.querySelectorAll('.product-card');
-  existingCards.forEach(card => card.remove());;
+
+  // Get or create hidden storage container
+  let grid = document.getElementById('product-grid');
+  if (!grid) {
+    grid = document.createElement('div');
+    grid.id = 'product-grid';
+    grid.style.display = 'none';
+    document.querySelector('.collection .section-wrap').appendChild(grid);
+  }
+  grid.innerHTML = '';
 
   PRODUCTS.forEach((product, index) => {
     const stk = getStock(product.id);
@@ -208,32 +213,41 @@ function renderProducts() {
     const sizeBtns = card.querySelectorAll('.size-btn');
     const addBtn   = card.querySelector('.btn-add-to-cart');
 
-    sizeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        sizeBtns.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        addBtn.dataset.selectedSize = btn.dataset.size;
-        addBtn.textContent = `+ Tambah ${btn.dataset.size} ke Troli`;
-      });
-    });
+    // Store product ID on card for later
+    card._productId = product.id;
 
-    addBtn.addEventListener('click', () => {
-      const selectedSize = addBtn.dataset.selectedSize;
-      if (!selectedSize) {
-        sizeBtns.forEach(b => { b.style.borderColor = 'var(--g)'; });
-        setTimeout(() => sizeBtns.forEach(b => { b.style.borderColor = ''; }), 1200);
-        addBtn.textContent = '← Pilih saiz dahulu';
-        setTimeout(() => { addBtn.textContent = '+ Tambah ke Troli'; }, 1500);
-        return;
-      }
-      addToCart(product.id, selectedSize, card);
-    });
-
-  grid.appendChild(card);
+grid.appendChild(card);
   });
 
   initScrollReveal();
-  // Initial render - build rows for default gender
   applyFilters();
+}
+
+// NEW FUNCTION - Add this right after renderProducts()
+function attachCardListeners(card) {
+  const sizeBtns = card.querySelectorAll('.size-btn');
+  const addBtn = card.querySelector('.btn-add-to-cart');
+  const productId = card._productId;
+
+  sizeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      addBtn.dataset.selectedSize = btn.dataset.size;
+      addBtn.textContent = `+ Tambah ${btn.dataset.size} ke Troli`;
+    });
+  });
+
+  addBtn.addEventListener('click', () => {
+    const selectedSize = addBtn.dataset.selectedSize;
+    if (!selectedSize) {
+      sizeBtns.forEach(b => { b.style.borderColor = 'var(--g)'; });
+      setTimeout(() => sizeBtns.forEach(b => { b.style.borderColor = ''; }), 1200);
+      addBtn.textContent = '← Pilih saiz dahulu';
+      setTimeout(() => { addBtn.textContent = '+ Tambah ke Troli'; }, 1500);
+      return;
+    }
+    addToCart(productId, selectedSize, card);
+  });
 }
 
