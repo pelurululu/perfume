@@ -10,3 +10,4 @@ async function init() {
   // Restore cart
   refreshCartUI();
 }
+init();
