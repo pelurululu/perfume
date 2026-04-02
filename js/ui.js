@@ -14,6 +14,11 @@ function switchGender(gender) {
   applyFilters();
 }
 
+function closeNavSearch() {
+  document.getElementById('nav-search-bar').classList.remove('open');
+  document.getElementById('nav-search-input').value = '';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const inp = document.getElementById('search-input');
   if (inp) {
