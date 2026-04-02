@@ -57,52 +57,61 @@ function applyFilters() {
   buildRows(matching);
 }
 
-function buildRows(matching) {
-  const container = document.getElementById('pslider-rows');
-  container.innerHTML = '';
-
-  if (matching.length === 0) return;
-
-  // Clone the cards so we can move them
-  const clonedCards = matching.map(c => {
-    const clone = c.cloneNode(true);
-    clone._productId = c._productId;
-    return clone;
-  });
-
-
-  // Split into chunks of CARDS_PER_ROW
-  const chunks = [];
-  for (let i = 0; i < matching.length; i += CARDS_PER_ROW) {
-    chunks.push(matching.slice(i, i + CARDS_PER_ROW));
+// ── TOUCH swipe ──
+let rowTouchStartX = 0;
+viewport.addEventListener('touchstart', e => {
+  rowTouchStartX = e.touches[0].clientX;
+}, { passive: true });
+viewport.addEventListener('touchmove', e => {
+  const delta   = rowTouchStartX - e.touches[0].clientX;
+  const current = parseInt(track.dataset.offset) || 0;
+  const visible = getVisibleCardCount();
+  const pct     = (100 / visible) * current;
+  track.style.transition = 'none';
+  track.style.transform  = `translateX(calc(-${pct}% - ${delta}px))`;
+}, { passive: true });
+viewport.addEventListener('touchend', e => {
+  track.style.transition = '';
+  const diff = rowTouchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) {
+    rowScroll(rowIndex, diff > 0 ? 1 : -1);
+  } else {
+    rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
   }
+}, { passive: true });
 
-  chunks.forEach((chunk, rowIndex) => {
-    const rowWrap = document.createElement('div');
-    rowWrap.className = 'prow-wrap';
-    rowWrap.dataset.row = rowIndex;
+// ── MOUSE DRAG (laptop) ──
+let rowDragStartX = 0, rowDragging = false, rowDragDelta = 0;
+viewport.addEventListener('mousedown', e => {
+  if (e.button !== 0) return;
+  rowDragging   = true;
+  rowDragStartX = e.clientX;
+  rowDragDelta  = 0;
+  track.style.transition = 'none';
+  viewport.style.cursor  = 'grabbing';
+});
+window.addEventListener('mousemove', e => {
+  if (!rowDragging) return;
+  rowDragDelta  = rowDragStartX - e.clientX;
+  const current = parseInt(track.dataset.offset) || 0;
+  const visible = getVisibleCardCount();
+  const pct     = (100 / visible) * current;
+  track.style.transform = `translateX(calc(-${pct}% - ${rowDragDelta}px))`;
+});
+window.addEventListener('mouseup', () => {
+  if (!rowDragging) return;
+  rowDragging           = false;
+  track.style.transition = '';
+  viewport.style.cursor  = 'grab';
+  if (Math.abs(rowDragDelta) > 40) {
+    rowScroll(rowIndex, rowDragDelta > 0 ? 1 : -1);
+  } else {
+    rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
+  }
+});
+viewport.addEventListener('dragstart', e => e.preventDefault());
 
-    // Row header
-    const rowHeader = document.createElement('div');
-    rowHeader.className = 'prow-header';
-    const start = rowIndex * CARDS_PER_ROW + 1;
-    const end   = Math.min(start + chunk.length - 1, matching.length);
-    rowHeader.innerHTML = `
-      <span class="prow-label">${start}–${end} daripada ${matching.length}</span>
-      <div class="prow-arrows">
-        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},-1)" aria-label="Kiri">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},1)" aria-label="Kanan">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    `;
-
-    // Viewport + track
-    const viewport = document.createElement('div');
-    viewport.className = 'prow-viewport';
-    viewport.dataset.rowIndex = rowIndex;
+viewport.appendChild(track);
 
     const track = document.createElement('div');
     track.className = 'prow-track';
@@ -326,45 +335,92 @@ function initScrollReveal() {
 })();
 
 /* =====================================================
-   HERO CAROUSEL
+   HERO CAROUSEL — auto, swipe, mouse drag
 ===================================================== */
 let hcCurrent = 0;
-const hcTotal = 3;
+const hcTotal  = document.querySelectorAll('.hc-slide').length;
 let hcTimer;
+let hcDragging = false, hcDragStartX = 0, hcDragDelta = 0;
 
 function hcGoTo(index) {
-  hcCurrent = index;
-  document.getElementById('hc-track').style.transform = `translateX(-${index * 100}%)`;
-  document.querySelectorAll('.hc-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === index);
-  });
+  hcCurrent = (index + hcTotal) % hcTotal;
+  const track = document.getElementById('hc-track');
+  if (track) track.style.transform = `translateX(-${hcCurrent * 100}%)`;
+  document.querySelectorAll('.hc-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === hcCurrent)
+  );
+  resetHcTimer();
+}
+
+function hcNext() { hcGoTo(hcCurrent + 1); }
+function hcPrev() { hcGoTo(hcCurrent - 1); }
+
+function resetHcTimer() {
   clearInterval(hcTimer);
   hcTimer = setInterval(hcNext, 5000);
 }
 
-function hcNext() {
-  hcGoTo((hcCurrent + 1) % hcTotal);
-}
-
-function hcPrev() {
-  hcGoTo((hcCurrent - 1 + hcTotal) % hcTotal);
-}
-
-// Auto-play
-hcTimer = setInterval(hcNext, 5000);
-
-// Pause on hover
 document.addEventListener('DOMContentLoaded', () => {
   const carousel = document.querySelector('.hero-carousel');
-  if (carousel) {
-    carousel.addEventListener('mouseenter', () => clearInterval(hcTimer));
-    carousel.addEventListener('mouseleave', () => { hcTimer = setInterval(hcNext, 5000); });
+  const track    = document.getElementById('hc-track');
+  if (!carousel || !track) return;
 
-    let hcTouchStartX = 0;
-    carousel.addEventListener('touchstart', e => { hcTouchStartX = e.touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', e => {
-      const diff = hcTouchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) diff > 0 ? hcNext() : hcPrev();
-    }, { passive: true });
-  }
+  // Start auto-play
+  hcTimer = setInterval(hcNext, 5000);
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', () => clearInterval(hcTimer));
+  carousel.addEventListener('mouseleave', () => { resetHcTimer(); });
+
+  // ── TOUCH SWIPE ──
+  let touchStartX = 0;
+  carousel.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+    clearInterval(hcTimer);
+  }, { passive: true });
+  carousel.addEventListener('touchmove', e => {
+    const delta = touchStartX - e.touches[0].clientX;
+    track.style.transform = `translateX(calc(-${hcCurrent * 100}% - ${delta}px))`;
+  }, { passive: true });
+  carousel.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    track.style.transition = '';
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? hcNext() : hcPrev();
+    } else {
+      hcGoTo(hcCurrent); // snap back
+    }
+    resetHcTimer();
+  }, { passive: true });
+
+  // ── MOUSE DRAG (laptop) ──
+  carousel.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    hcDragging   = true;
+    hcDragStartX = e.clientX;
+    hcDragDelta  = 0;
+    track.style.transition = 'none';
+    carousel.style.cursor  = 'grabbing';
+    clearInterval(hcTimer);
+  });
+  window.addEventListener('mousemove', e => {
+    if (!hcDragging) return;
+    hcDragDelta = hcDragStartX - e.clientX;
+    track.style.transform = `translateX(calc(-${hcCurrent * 100}% - ${hcDragDelta}px))`;
+  });
+  window.addEventListener('mouseup', () => {
+    if (!hcDragging) return;
+    hcDragging = false;
+    track.style.transition = '';
+    carousel.style.cursor  = 'grab';
+    if (Math.abs(hcDragDelta) > 60) {
+      hcDragDelta > 0 ? hcNext() : hcPrev();
+    } else {
+      hcGoTo(hcCurrent);
+    }
+    resetHcTimer();
+  });
+
+  // Prevent drag from triggering link clicks
+  carousel.addEventListener('dragstart', e => e.preventDefault());
 });
