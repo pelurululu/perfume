@@ -826,6 +826,16 @@ async function apInit() {
     document.getElementById('ap-loading').style.display = 'none';
     document.getElementById('ap-grid').style.display = 'grid';
 
+    // Read URL params for gender and search
+const params = new URLSearchParams(window.location.search);
+if (params.get('gender')) apSwitchGender(params.get('gender'));
+if (params.get('q')) {
+  const q = params.get('q');
+  document.getElementById('ap-search').value = q;
+  apQuery = q.toLowerCase();
+  document.getElementById('ap-search-clear').style.display = 'block';
+}
+
     refreshCartUI();
     apRender();
   } catch(e) {
