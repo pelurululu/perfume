@@ -1564,3 +1564,6 @@ footer {
   .hc-scroll-hint { display: none }
 }
 
+#theme-toggle {
+  display: none;
+}
