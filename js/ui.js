@@ -47,98 +47,116 @@ function applyFilters() {
     c.dataset.gender === currentGender &&
     (!searchQuery || c.dataset.searchIndex.includes(searchQuery))
   );
-
-  // Hide all cards first
   allCards.forEach(c => { c.style.display = 'none'; c.classList.add('hidden'); });
   matching.forEach(c => { c.classList.remove('hidden'); });
-
   document.getElementById('no-results').style.display = matching.length === 0 ? 'block' : 'none';
-
   buildRows(matching);
 }
 
-// ── TOUCH swipe ──
-let rowTouchStartX = 0;
-viewport.addEventListener('touchstart', e => {
-  rowTouchStartX = e.touches[0].clientX;
-}, { passive: true });
-viewport.addEventListener('touchmove', e => {
-  const delta   = rowTouchStartX - e.touches[0].clientX;
-  const current = parseInt(track.dataset.offset) || 0;
-  const visible = getVisibleCardCount();
-  const pct     = (100 / visible) * current;
-  track.style.transition = 'none';
-  track.style.transform  = `translateX(calc(-${pct}% - ${delta}px))`;
-}, { passive: true });
-viewport.addEventListener('touchend', e => {
-  track.style.transition = '';
-  const diff = rowTouchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) {
-    rowScroll(rowIndex, diff > 0 ? 1 : -1);
-  } else {
-    rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
-  }
-}, { passive: true });
+function buildRows(matching) {
+  const container = document.getElementById('pslider-rows');
+  container.innerHTML = '';
+  if (matching.length === 0) return;
 
-// ── MOUSE DRAG (laptop) ──
-let rowDragStartX = 0, rowDragging = false, rowDragDelta = 0;
-viewport.addEventListener('mousedown', e => {
-  if (e.button !== 0) return;
-  rowDragging   = true;
-  rowDragStartX = e.clientX;
-  rowDragDelta  = 0;
-  track.style.transition = 'none';
-  viewport.style.cursor  = 'grabbing';
-});
-window.addEventListener('mousemove', e => {
-  if (!rowDragging) return;
-  rowDragDelta  = rowDragStartX - e.clientX;
-  const current = parseInt(track.dataset.offset) || 0;
-  const visible = getVisibleCardCount();
-  const pct     = (100 / visible) * current;
-  track.style.transform = `translateX(calc(-${pct}% - ${rowDragDelta}px))`;
-});
-window.addEventListener('mouseup', () => {
-  if (!rowDragging) return;
-  rowDragging           = false;
-  track.style.transition = '';
-  viewport.style.cursor  = 'grab';
-  if (Math.abs(rowDragDelta) > 40) {
-    rowScroll(rowIndex, rowDragDelta > 0 ? 1 : -1);
-  } else {
-    rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
-  }
-});
-viewport.addEventListener('dragstart', e => e.preventDefault());
+  const clonedCards = matching.map(c => {
+    const clone = c.cloneNode(true);
+    clone._productId = c._productId;
+    return clone;
+  });
 
-viewport.appendChild(track);
+  const chunks = [];
+  for (let i = 0; i < matching.length; i += CARDS_PER_ROW) {
+    chunks.push(matching.slice(i, i + CARDS_PER_ROW));
+  }
+
+  chunks.forEach((chunk, rowIndex) => {
+    const rowWrap = document.createElement('div');
+    rowWrap.className = 'prow-wrap';
+    rowWrap.dataset.row = rowIndex;
+
+    const rowHeader = document.createElement('div');
+    rowHeader.className = 'prow-header';
+    const start = rowIndex * CARDS_PER_ROW + 1;
+    const end   = Math.min(start + chunk.length - 1, matching.length);
+    rowHeader.innerHTML = `
+      <span class="prow-label">${start}–${end} daripada ${matching.length}</span>
+      <div class="prow-arrows">
+        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},-1)" aria-label="Kiri">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pslider-arrow" onclick="rowScroll(${rowIndex},1)" aria-label="Kanan">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>`;
+
+    const viewport = document.createElement('div');
+    viewport.className = 'prow-viewport';
+    viewport.dataset.rowIndex = rowIndex;
 
     const track = document.createElement('div');
     track.className = 'prow-track';
     track.id = `prow-track-${rowIndex}`;
     track.dataset.offset = '0';
 
-  clonedCards.slice(rowIndex * CARDS_PER_ROW, rowIndex * CARDS_PER_ROW + chunk.length).forEach(card => {
+    clonedCards.slice(rowIndex * CARDS_PER_ROW, rowIndex * CARDS_PER_ROW + chunk.length).forEach(card => {
       card.style.display = '';
       attachCardListeners(card);
       track.appendChild(card);
     });
 
-    let pRowTouchStartX = 0;
-viewport.addEventListener('touchstart', e => { pRowTouchStartX = e.touches[0].clientX; }, { passive: true });
-viewport.addEventListener('touchend', e => {
-  const diff = pRowTouchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) rowScroll(rowIndex, diff > 0 ? 1 : -1);
-}, { passive: true });
+    // ── TOUCH swipe ──
+    let touchStartX = 0;
+    viewport.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    viewport.addEventListener('touchmove', e => {
+      const delta   = touchStartX - e.touches[0].clientX;
+      const current = parseInt(track.dataset.offset) || 0;
+      const pct     = (100 / getVisibleCardCount()) * current;
+      track.style.transition = 'none';
+      track.style.transform  = `translateX(calc(-${pct}% - ${delta}px))`;
+    }, { passive: true });
+    viewport.addEventListener('touchend', e => {
+      track.style.transition = '';
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) rowScroll(rowIndex, diff > 0 ? 1 : -1);
+      else rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
+    }, { passive: true });
 
-viewport.appendChild(track);
+    // ── MOUSE DRAG ──
+    let dragStartX = 0, dragging = false, dragDelta = 0;
+    viewport.addEventListener('mousedown', e => {
+      if (e.button !== 0) return;
+      dragging   = true;
+      dragStartX = e.clientX;
+      dragDelta  = 0;
+      track.style.transition = 'none';
+      viewport.style.cursor  = 'grabbing';
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      dragDelta = dragStartX - e.clientX;
+      const current = parseInt(track.dataset.offset) || 0;
+      const pct     = (100 / getVisibleCardCount()) * current;
+      track.style.transform = `translateX(calc(-${pct}% - ${dragDelta}px))`;
+    });
+    window.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      track.style.transition = '';
+      viewport.style.cursor  = 'grab';
+      if (Math.abs(dragDelta) > 40) rowScroll(rowIndex, dragDelta > 0 ? 1 : -1);
+      else rowScrollTo(rowIndex, parseInt(track.dataset.offset) || 0);
+    });
+    viewport.addEventListener('dragstart', e => e.preventDefault());
+
+    viewport.appendChild(track);
     rowWrap.appendChild(rowHeader);
     rowWrap.appendChild(viewport);
 
     // Dots
-    const cardCount = chunk.length;
-    const visibleCards = getVisibleCardCount();
-    const maxOffset = Math.max(0, cardCount - visibleCards);
+    const cardCount  = chunk.length;
+    const maxOffset  = Math.max(0, cardCount - getVisibleCardCount());
     if (maxOffset > 0) {
       const dots = document.createElement('div');
       dots.className = 'prow-dots';
