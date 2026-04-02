@@ -626,7 +626,7 @@ h2.section-title em { font-style: italic; color: var(--g) }
 }
 .prow-label { font-size: 11px; color: var(--muted); font-family: 'DM Sans', sans-serif }
 .prow-arrows { display: flex; gap: 6px }
-.prow-viewport { overflow: hidden; width: 100% }
+.prow-viewport { overflow: hidden; width: 100%; cursor: grab;}
 .prow-track { display: flex; gap: 0; transition: transform .5s cubic-bezier(.77,0,.18,1) }
 .prow-dots { display: flex; gap: 8px; justify-content: center; margin-top: 18px }
 .pslider-arrow {
@@ -1451,6 +1451,7 @@ footer {
 
 /* === HERO CAROUSEL === */
 .hero-carousel {
+  cursor: grab;
   position: relative;
   width: 100%;
   height: 100vh;
@@ -1461,7 +1462,8 @@ footer {
   display: flex;
   width: 100%;
   height: 100%;
-  transition: transform .75s cubic-bezier(.77,0,.18,1);
+  transition: transform .7s cubic-bezier(.77,0,.18,1);
+  will-change: transform;
 }
 .hc-slide {
   flex: 0 0 100%;
