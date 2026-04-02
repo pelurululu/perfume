@@ -247,6 +247,21 @@ hamburgerBtn.addEventListener('click', () => {
 });
 function closeMobileNav() { mobileNavEl.classList.remove('open'); hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded','false'); document.body.classList.remove('lock'); }
 document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+document.getElementById('nav-search-btn').addEventListener('click', () => {
+  const bar = document.getElementById('nav-search-bar');
+  bar.classList.toggle('open');
+  if (bar.classList.contains('open')) {
+    setTimeout(() => document.getElementById('nav-search-input').focus(), 150);
+  }
+});
+
+document.getElementById('nav-search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const q = e.target.value.trim();
+    if (q) window.location.href = `koleksi.html?q=${encodeURIComponent(q)}`;
+  }
+  if (e.key === 'Escape') closeNavSearch();
+});
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
