@@ -249,14 +249,23 @@ nav.no-ann { top: 0 }
 /* Search bar slide-down */
 .nav-search-bar {
   position: fixed;
-  top: 100px;
+  top: 64px;
   left: 0; right: 0;
   z-index: 799;
   background: #fff;
   border-bottom: 1px solid var(--border);
   box-shadow: 0 4px 20px rgba(0,0,0,.06);
-  transform: translateY(-110%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity .22s, transform .22s;
+  visibility: hidden;
+}
+.nav-search-bar.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  visibility: visible;
 }
 .nav-search-bar.open { transform: translateY(0) }
 .nav-search-inner {
