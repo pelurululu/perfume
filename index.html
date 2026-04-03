@@ -539,6 +539,65 @@ async function loadGenderCategories() {
   }
 }
 
+  /* ── Load Carousel Slides from Supabase ── */
+async function loadCarouselSlides() {
+  try {
+    const rows = await sbFetch('carousel_slides?active=eq.true&order=slide_order.asc');
+    if (!rows || !rows.length) return;
+    
+    const track = document.getElementById('hc-track');
+    const dotsContainer = document.getElementById('hc-dots');
+    const slides = [];
+    
+    // Clear existing content
+    track.innerHTML = '';
+    dotsContainer.innerHTML = '';
+    
+    rows.forEach((slide, index) => {
+      // Create slide
+      const slideDiv = document.createElement('div');
+      slideDiv.className = 'hc-slide';
+      
+      // Background - use image if available, otherwise gradient
+      const bgDiv = document.createElement('div');
+      bgDiv.className = 'hc-bg';
+      if (slide.bg_image_url) {
+        bgDiv.style.backgroundImage = `url('${slide.bg_image_url}')`;
+        bgDiv.style.backgroundSize = 'cover';
+        bgDiv.style.backgroundPosition = 'center';
+      } else if (slide.bg_gradient) {
+        bgDiv.style.background = slide.bg_gradient;
+      }
+      
+      // Content
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'hc-content';
+      contentDiv.innerHTML = `
+        <div class="hc-eyebrow">${slide.eyebrow || ''}</div>
+        <h1 class="hc-title">${slide.title || ''}<br><em>${slide.title_em || ''}</em></h1>
+        <p class="hc-desc">${slide.description || ''}</p>
+        <a href="${slide.btn_onclick || 'koleksi.html'}" class="hc-btn ${slide.btn_onclick?.includes('gender=w') ? 'hc-btn--ghost' : ''}">${slide.btn_text || 'Terokai Koleksi'}</a>
+      `;
+      
+      slideDiv.appendChild(bgDiv);
+      slideDiv.appendChild(contentDiv);
+      track.appendChild(slideDiv);
+      
+      // Create dot
+      const dot = document.createElement('button');
+      dot.className = 'hc-dot' + (index === 0 ? ' active' : '');
+      dot.setAttribute('onclick', `hcGoTo(${index})`);
+      dotsContainer.appendChild(dot);
+    });
+    
+    // Update total counter
+    document.getElementById('hc-total').textContent = rows.length;
+    
+  } catch(e) {
+    console.error('Error loading carousel slides:', e);
+  }
+}
+
 // Open product modal for a specific product by ID (function to be used from koleksi.html modal code)
 let PRODUCTS_GLOBAL = [];
 
@@ -589,6 +648,7 @@ document.getElementById('entry-u').addEventListener('click', () => handleEntryCa
   loadScentFamilies();
   loadGenderCategories();
   loadProductsForModal();  // ← this preloads products so modal is ready
+    loadCarouselSlides();  // ← ADD THIS LINE
 });
   
 </script>
