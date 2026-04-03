@@ -269,12 +269,39 @@ window.addEventListener('scroll', () => {
   mainNav.classList.toggle('scrolled', scrolled);
   
 }, { passive: true });
-const hamburgerBtn = document.getElementById('hamburger');
-hamburgerBtn.addEventListener('click', () => {
-  
-  hamburgerBtn.classList.toggle('open', isOpen);
-  hamburgerBtn.setAttribute('aria-expanded', isOpen);
-  document.body.classList.toggle('lock', isOpen);
+// HAMBURGER / MEGA MENU
+let megaOpen = false;
+
+function openMegaMenu() {
+  megaOpen = true;
+  document.getElementById('mega-overlay').classList.add('visible');
+  document.getElementById('hamburger').classList.add('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+  document.body.classList.add('lock');
+}
+
+function closeMegaMenu() {
+  megaOpen = false;
+  document.getElementById('mega-overlay').classList.remove('visible');
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('lock');
+}
+
+function switchMegaTab(gender) {
+  document.querySelectorAll('.mega-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('mtab-' + gender).classList.add('active');
+  document.querySelectorAll('.mega-grid').forEach(g => g.classList.add('hidden'));
+  document.getElementById('mgrid-' + gender).classList.remove('hidden');
+}
+
+document.getElementById('hamburger').addEventListener('click', () => {
+  megaOpen ? closeMegaMenu() : openMegaMenu();
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeMegaMenu(); closeCart(); closeOrderModal(); }
 });
 
 document.getElementById('nav-cart-btn').addEventListener('click', openCart);
