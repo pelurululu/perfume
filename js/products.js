@@ -358,3 +358,66 @@ function attachCardListeners(card) {
     addToCart(productId, selectedSize, card);
   });
 }
+
+let currentScentId = null;
+let currentScentSize = null;
+
+function openScentModal(productId) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p) return;
+  currentScentId = productId;
+  currentScentSize = null;
+
+  document.getElementById('sm-bottle').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
+  document.getElementById('sm-insp').textContent = 'Terinspirasi oleh ' + p.inspired_by;
+  document.getElementById('sm-name').textContent = p.name;
+  document.getElementById('sm-family').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
+
+  const pr = CONFIG.PRICES;
+  document.getElementById('sm-p10').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('sm-n10').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sm-p30').textContent = 'RM ' + pr['30ml'].promo;
+  document.getElementById('sm-n30').textContent = 'RM ' + pr['30ml'].normal;
+  document.getElementById('sm-p60').textContent = 'RM ' + pr['60ml'].promo;
+  document.getElementById('sm-n60').textContent = 'RM ' + pr['60ml'].normal;
+
+  const stk = getStock(productId);
+  document.getElementById('sm-stock').textContent = stk === 0 ? '⚠️ Stok habis' : stk + ' unit berbaki';
+
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  const addBtn = document.getElementById('sm-add-btn');
+  addBtn.textContent = '+ Tambah ke Troli';
+  addBtn.disabled = stk === 0;
+
+  document.getElementById('scent-modal-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+}
+
+function closeScentModal() {
+  document.getElementById('scent-modal-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+  currentScentId = null;
+  currentScentSize = null;
+}
+
+function selectScentSize(btn) {
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentScentSize = btn.dataset.size;
+  document.getElementById('sm-add-btn').textContent = `+ Tambah ${currentScentSize} ke Troli`;
+}
+
+function scentModalAddToCart() {
+  if (!currentScentSize) {
+    document.querySelectorAll('.scent-size-btn').forEach(b => {
+      b.style.borderColor = 'var(--red)';
+      setTimeout(() => b.style.borderColor = '', 1200);
+    });
+    document.getElementById('sm-add-btn').textContent = '← Pilih saiz dahulu';
+    setTimeout(() => document.getElementById('sm-add-btn').textContent = '+ Tambah ke Troli', 1500);
+    return;
+  }
+  const fakeCard = document.querySelector(`[data-product-id="${currentScentId}"]`) || document.createElement('div');
+  addToCart(currentScentId, currentScentSize, fakeCard);
+  closeScentModal();
+}
