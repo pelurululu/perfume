@@ -558,25 +558,21 @@ async function loadProductsForModal() {
   }
 }
 
-// Add click handlers to entry cards
-document.getElementById('entry-m').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('m');
-});
-document.getElementById('entry-w').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('w');
-});
-document.getElementById('entry-u').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('u');
-});
+async function handleEntryCardClick(gender) {
+  if (!window.PRODUCTS_FOR_MODAL || window.PRODUCTS_FOR_MODAL.length === 0) {
+    await loadProductsForModal();
+  }
+  const product = window.PRODUCTS_FOR_MODAL.find(p => p.gender === gender);
+  if (product) {
+    window.openProductModalFromIndex(product.id);
+  } else {
+    window.location.href = 'koleksi.html?gender=' + gender;
+  }
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadScentFamilies();
-  loadGenderCategories();
-  loadProductsForModal();
-});
+document.getElementById('entry-m').addEventListener('click', () => handleEntryCardClick('m'));
+document.getElementById('entry-w').addEventListener('click', () => handleEntryCardClick('w'));
+document.getElementById('entry-u').addEventListener('click', () => handleEntryCardClick('u'));
 </script>
 
 <!-- Include the modal functions from koleksi.html (reused) -->
