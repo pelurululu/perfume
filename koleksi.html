@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 <style>
 /* =============================================
    TOKENS
@@ -45,7 +46,7 @@ button, input, select, textarea { font-family: inherit; }
 a { text-decoration: none; color: inherit; }
 
 /* =============================================
-   NAV
+   HEADER / NAV (SAME AS INDEX)
 ============================================= */
 #main-nav {
   position: fixed;
@@ -134,6 +135,168 @@ a { text-decoration: none; color: inherit; }
   .hamburger { display: flex; }
 }
 
+/* SEARCH BAR (hidden in koleksi) */
+.nav-search-bar {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .25s, opacity .2s;
+  z-index: 795;
+}
+.nav-search-bar.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.nav-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.nav-search-inner input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 10px 0;
+  background: transparent;
+  color: var(--ink);
+}
+.nav-search-inner button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* MEGA MENU */
+.mega-overlay {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 790;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .3s, opacity .2s;
+  border-bottom: 1px solid var(--line);
+}
+.mega-overlay.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.mega-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+.mega-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.mega-tab {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.mega-tab.active {
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: -1px;
+}
+.mega-search-wrap {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  background: #fff;
+}
+.mega-search-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 13px;
+  background: transparent;
+}
+.mega-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: #e0e0e0;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 32px;
+}
+.mega-grid.hidden { display: none; }
+.mega-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: opacity .15s;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.mega-item:hover { opacity: .85; background: #111; }
+.mega-item-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; background-color: #222;
+  transition: transform .35s ease;
+}
+.mega-item:hover .mega-item-bg { transform: scale(1.04); }
+.mega-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.18) 60%, transparent 100%);
+}
+.mega-item-label {
+  position: absolute; bottom: 14px; left: 16px; right: 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
+  color: #fff; letter-spacing: .02em; line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+.mega-footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.mega-footer-links a {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+@media (max-width: 880px) { .mega-grid { grid-template-columns: repeat(2, 1fr); } }
+
 /* =============================================
    PAGE LAYOUT
 ============================================= */
@@ -143,23 +306,25 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* =============================================
-   GENDER TABS (sticky)
+   GENDER TABS + FAMILY FILTER
 ============================================= */
-.gender-tabs-bar {
+.filter-bar {
   position: sticky;
   top: 64px;
   z-index: 100;
   background: #fff;
   border-bottom: 1px solid var(--line);
+  padding: 12px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  gap: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 .gender-tabs {
   display: flex;
-  height: 52px;
+  height: 44px;
+  gap: 4px;
 }
 .gender-tab {
   background: none;
@@ -179,36 +344,36 @@ a { text-decoration: none; color: inherit; }
   font-family: 'DM Sans', sans-serif;
 }
 .gender-tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
-.gender-tab:hover { color: var(--ink); }
 .gender-tab-count {
   font-size: 10px;
   color: var(--muted2);
   font-weight: 400;
 }
-.search-bar {
+.family-filter {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  padding: 8px 14px;
-  min-width: 200px;
-  color: var(--muted);
-  background: #fff;
+  gap: 12px;
 }
-.search-bar input {
-  border: none;
-  outline: none;
-  background: none;
+.family-filter label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.family-select {
+  padding: 8px 32px 8px 12px;
+  border: 1px solid var(--line);
+  background: #fff;
   font-size: 13px;
   color: var(--ink);
-  width: 100%;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23777' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  appearance: none;
 }
-.search-bar input::placeholder { color: var(--muted2); }
-.search-bar button {
-  background: none; border: none;
-  cursor: pointer; color: var(--muted);
-  display: flex; align-items: center;
-}
+.family-select:focus { outline: none; border-color: var(--ink); }
 
 /* =============================================
    PRODUCT GRID
@@ -383,453 +548,39 @@ a { text-decoration: none; color: inherit; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* =============================================
-   PRODUCT MODAL (bottom sheet)
-============================================= */
-.pm-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.45);
-  z-index: 900;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .28s;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-.pm-overlay.visible { opacity: 1; pointer-events: all; }
-
-.pm-sheet {
-  background: #fff;
-  width: 100%;
-  max-width: 640px;
-  max-height: 92vh;
-  overflow-y: auto;
-  border-radius: 0;
-  border-top: 1px solid var(--line);
-  position: relative;
-  transform: translateY(100%);
-  transition: transform .35s cubic-bezier(.23,.92,.52,1);
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-}
-.pm-overlay.visible .pm-sheet { transform: translateY(0); }
-
-.pm-close {
-  position: absolute;
-  top: 14px; right: 16px;
-  z-index: 10;
-  background: var(--off);
-  border: none;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 14px;
-  transition: background .2s, color .2s;
-}
-.pm-close:hover { background: var(--line); color: var(--ink); }
-
-/* Sheet header */
-.pm-header {
-  display: flex;
-  gap: 20px;
-  padding: 28px 24px 20px;
-  border-bottom: 1px solid var(--line);
-}
-.pm-header-bottle {
-  flex-shrink: 0;
-  width: 72px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-.pm-header-info { flex: 1; }
-.pm-insp {
-  font-size: 10px;
-  color: var(--muted2);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.pm-name {
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 3px;
-  line-height: 1.2;
-}
-.pm-family {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-.pm-prices {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.pm-price-from {
-  font-size: 9px;
-  color: var(--muted2);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.pm-price-main {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--ink);
-}
-.pm-price-old {
-  font-size: 12px;
-  color: var(--muted2);
-  text-decoration: line-through;
-}
-.pm-stock-info {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.pm-stock-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--grn);
-  flex-shrink: 0;
-}
-.pm-stock-dot.low { background: #e67e22; }
-.pm-stock-dot.out { background: var(--red); }
-
-/* Sheet body sections */
-.pm-section {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--line);
-}
-.pm-section:last-child { border-bottom: none; }
-.pm-section-label {
-  font-size: 9px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 14px;
-  font-weight: 500;
-}
-
-/* Scent / variation chips */
-.scent-variations {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.scent-chip-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--line);
-  padding: 8px 14px;
-  font-size: 12px;
-  color: var(--ink2);
-  cursor: pointer;
-  background: #fff;
-  transition: border-color .15s, background .15s;
-  font-family: 'DM Sans', sans-serif;
-  white-space: nowrap;
-}
-.scent-chip-btn:hover { border-color: var(--ink); background: var(--off); }
-.scent-chip-btn.selected { border-color: var(--ink); background: var(--ink); color: #fff; }
-.scent-chip-btn.out-chip { opacity: .38; pointer-events: none; }
-.scent-chip-num { font-size: 9px; opacity: .6; }
-.scent-chip-hot { font-size: 8px; letter-spacing: .06em; text-transform: uppercase; padding: 1px 5px; border-radius: 2px; flex-shrink: 0; }
-.chip-badge-hot { background: rgba(192,57,43,.15); color: var(--red); }
-.chip-badge-new { background: rgba(39,174,96,.15); color: var(--grn); }
-
-/* Size selector */
-.size-options {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-.size-btn {
-  border: 1px solid var(--line);
-  background: #fff;
-  padding: 14px 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  transition: border-color .15s, background .15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.size-btn:hover,
-.size-btn.selected { border-color: var(--ink); background: var(--off); }
-.size-btn.selected { background: var(--ink); color: #fff; }
-.size-btn .ml { font-size: 14px; font-weight: 500; }
-.size-btn .price-now { font-size: 16px; font-family: 'Cormorant Garamond', serif; font-weight: 300; }
-.size-btn .price-was { font-size: 10px; color: var(--muted2); text-decoration: line-through; }
-.size-btn.selected .price-was { color: rgba(255,255,255,.5); }
-.size-btn.selected .ml,
-.size-btn.selected .price-now { color: #fff; }
-
-/* Quantity */
-.qty-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.qty-stepper {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--line);
-}
-.qty-step-btn {
-  width: 36px; height: 36px;
-  background: none; border: none;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 18px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s, color .15s;
-}
-.qty-step-btn:hover { background: var(--off); color: var(--ink); }
-.qty-step-btn:active { background: var(--line); }
-.qty-display {
-  min-width: 40px;
-  text-align: center;
-  font-size: 15px;
-  color: var(--ink);
-  font-weight: 400;
-  border-left: 1px solid var(--line);
-  border-right: 1px solid var(--line);
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.qty-hint {
-  font-size: 11px;
-  color: var(--muted);
-}
-
-/* Sheet footer CTA */
-.pm-footer {
-  padding: 16px 24px;
-  background: #fff;
-  border-top: 1px solid var(--line);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  position: sticky;
-  bottom: 0;
-}
-.pm-total-display {
-  flex: 1;
-}
-.pm-total-label {
-  font-size: 9px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 1px;
-}
-.pm-total-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 300;
-  color: var(--ink);
-}
-.btn-add-to-cart-main {
-  flex: 2;
-  padding: 14px;
-  background: var(--ink);
-  color: #fff;
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: background .2s;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
-}
-.btn-add-to-cart-main:hover:not(:disabled) { background: #333; }
-.btn-add-to-cart-main:disabled { opacity: .35; cursor: not-allowed; }
-.btn-add-to-cart-main.added { background: var(--grn); }
-
-/* validation shake */
-@keyframes shake {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
-}
-.shake { animation: shake .3s ease; }
-
-/* =============================================
-   CART PANEL (same as original)
-============================================= */
-.cart-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.35);
-  z-index: 890;
-  opacity: 0; pointer-events: none;
-  transition: opacity .25s;
-}
-.cart-overlay.visible { opacity: 1; pointer-events: all; }
-.cart-panel {
-  position: fixed; top: 0; right: 0; bottom: 0;
-  width: 380px; max-width: 100vw;
-  background: #fff; z-index: 895;
-  transform: translateX(100%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
-  display: flex; flex-direction: column;
-  border-left: 1px solid var(--line);
-}
-.cart-panel.visible { transform: translateX(0); }
-.cart-header {
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--line);
-  display: flex; justify-content: space-between; align-items: center;
-  height: 56px;
-}
-.cart-header-title { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
-.cart-header-count { font-size: 11px; color: var(--muted); }
-.cart-close {
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); font-size: 18px; padding: 4px; line-height: 1;
-  transition: color .2s;
-}
-.cart-close:hover { color: var(--ink); }
-.cart-body { flex: 1; overflow-y: auto; padding: 14px 22px; scrollbar-width: thin; }
-.cart-empty { text-align: center; padding: 48px 0; }
-.cart-empty p { font-size: 14px; color: var(--muted); margin-bottom: 5px; }
-.cart-empty span { font-size: 12px; color: var(--muted2); }
-.cart-item { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
-.cart-item:last-child { border: none; }
-.cart-item-visual { width: 40px; height: 58px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.cart-item-info { flex: 1; }
-.cart-item-name { font-size: 13px; color: var(--ink); margin-bottom: 2px; }
-.cart-item-insp { font-size: 10px; color: var(--muted); margin-bottom: 5px; }
-.cart-item-size { display: inline-flex; font-size: 9px; text-transform: uppercase; color: var(--ink); background: var(--off); padding: 2px 7px; letter-spacing: .06em; }
-.cart-item-controls { display: flex; align-items: center; gap: 7px; margin-top: 7px; }
-.qty-control { display: flex; align-items: center; border: 1px solid var(--line); }
-.qty-btn { width: 26px; height: 26px; background: transparent; border: none; cursor: pointer; color: var(--muted); font-size: 15px; display: flex; align-items: center; justify-content: center; transition: background .15s; }
-.qty-btn:hover { background: var(--off); color: var(--ink); }
-.qty-num { min-width: 28px; text-align: center; font-size: 13px; color: var(--ink); }
-.cart-item-remove-btn { background: none; border: none; cursor: pointer; color: var(--muted2); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; padding: 0; transition: color .2s; margin-left: auto; display: flex; align-items: center; gap: 4px; }
-.cart-item-remove-btn:hover { color: var(--red); }
-.cart-item-price { font-size: 14px; color: var(--ink); white-space: nowrap; }
-.cart-bundle-hint { background: var(--off); border-left: 2px solid var(--ink); padding: 10px 12px; margin: 8px 0; font-size: 12px; color: var(--muted); line-height: 1.7; }
-.cart-bundle-hint b { color: var(--ink); }
-.cart-countdown { background: var(--off); border: 1px solid var(--line); padding: 9px 12px; margin: 7px 0; display: flex; align-items: center; gap: 10px; }
-.cart-cd-label { font-size: 10px; color: var(--muted); }
-.cart-cd-time { font-size: 16px; color: var(--ink); display: inline-block; min-width: 48px; font-weight: 500; }
-.cart-footer { padding: 14px 22px; border-top: 1px solid var(--line); }
-.cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-.cart-total-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.cart-total-value { font-size: 22px; font-weight: 300; color: var(--ink); font-family: 'Cormorant Garamond', serif; }
-.cart-savings { font-size: 11px; color: var(--grn); margin-bottom: 14px; }
-.btn-proceed-checkout { width: 100%; padding: 13px; background: var(--ink); color: #fff; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s; margin-bottom: 7px; }
-.btn-proceed-checkout:hover { background: #333; }
-.btn-whatsapp-order { width: 100%; padding: 11px; background: transparent; border: 1px solid rgba(37,211,102,.3); color: var(--grn); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; transition: var(--t); }
-.btn-whatsapp-order:hover { background: rgba(37,211,102,.05); border-color: var(--grn); }
-
-/* =============================================
-   ORDER MODAL
-============================================= */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 910;
-  display: flex; align-items: flex-start; justify-content: center;
-  padding: 52px 20px 20px; opacity: 0; pointer-events: none;
-  transition: opacity .25s; backdrop-filter: blur(4px); overflow-y: auto;
-}
-.modal-overlay.visible { opacity: 1; pointer-events: all; }
-.modal-box { background: #fff; width: 100%; max-width: 500px; padding: 36px; position: relative; border: 1px solid var(--line); transform: translateY(12px); transition: transform .28s; }
-.modal-overlay.visible .modal-box { transform: translateY(0); }
-.modal-close { position: absolute; top: 13px; right: 13px; background: none; border: none; font-size: 17px; cursor: pointer; color: var(--muted); padding: 5px; line-height: 1; transition: color .2s; }
-.modal-close:hover { color: var(--ink); }
-.modal-eyebrow { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.modal-title { font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 4px; }
-.modal-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line); line-height: 1.7; }
-.order-summary { background: var(--off); padding: 10px 12px; margin-bottom: 14px; max-height: 130px; overflow-y: auto; scrollbar-width: thin; }
-.order-summary-item { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 3px 0; }
-.order-summary-item span:last-child { color: var(--ink); font-size: 13px; }
-.order-summary-total { border-top: 1px solid var(--line); margin-top: 5px; padding-top: 5px; display: flex; justify-content: space-between; }
-.order-summary-total span:last-child { color: var(--ink); font-size: 15px; font-weight: 500; }
-.form-group { margin-bottom: 12px; }
-.form-group label { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; font-weight: 500; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; background: #fff; border: 1px solid var(--line); color: var(--ink); font-size: 13px; outline: none; transition: border-color .2s; -webkit-appearance: none; appearance: none; border-radius: 0; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--ink); }
-.form-group input.invalid, .form-group select.invalid, .form-group textarea.invalid { border-color: var(--red); }
-.form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23777'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-.form-error { font-size: 10px; color: var(--red); margin-top: 3px; display: none; }
-.form-error.visible { display: block; }
-.form-group textarea { resize: vertical; min-height: 56px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.form-total-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); margin-top: 2px; }
-.form-total-label { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.form-total-value { font-size: 22px; font-weight: 300; color: var(--ink); font-family: 'Cormorant Garamond', serif; }
-.btn-submit { width: 100%; padding: 13px; background: var(--ink); color: #fff; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s; margin-top: 12px; }
-.btn-submit:hover:not(:disabled) { background: #333; }
-.btn-submit:disabled { opacity: .35; cursor: not-allowed; }
-.form-security-note { text-align: center; font-size: 11px; color: var(--muted); margin-top: 7px; }
-.modal-loading { display: none; text-align: center; padding: 24px 0; }
-.modal-success { display: none; text-align: center; padding: 12px 0; }
-.success-icon { margin-bottom: 12px; }
-.modal-success h3 { font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
-.modal-success p { font-size: 13px; color: var(--muted); line-height: 1.9; }
-.success-tag { margin-top: 14px; font-size: 11px; font-style: italic; color: var(--muted); font-family: 'Cormorant Garamond', serif; }
-
-/* =============================================
-   FLOAT BUTTONS
-============================================= */
-.float-wa {
-  position: fixed; bottom: 22px; right: 22px; z-index: 880;
-  display: flex; align-items: center; gap: 7px;
-  background: #25D366; color: #fff; padding: 10px 16px 10px 12px;
-  font-size: 12px; box-shadow: 0 4px 14px rgba(37,211,102,.2);
-  transition: var(--t);
-}
-.float-wa:hover { background: #1db956; transform: translateY(-1px); }
-.float-cart {
-  position: fixed; bottom: 22px; left: 22px; z-index: 880;
-  background: #fff; border: 1px solid var(--line);
-  padding: 9px 16px; display: none; align-items: center; gap: 7px;
-  cursor: pointer; transition: var(--t);
-}
-.float-cart:hover { border-color: var(--ink); }
-.float-cart-badge { background: var(--ink); color: #fff; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 500; }
-.float-cart-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-
-/* =============================================
    RESPONSIVE
 ============================================= */
 @media (max-width: 1100px) {
   .products-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 760px) {
-  .gender-tabs-bar { padding: 0 16px; }
-  .gender-tab { padding: 0 14px; font-size: 12px; }
+  .filter-bar { padding: 12px 16px; flex-direction: column; align-items: stretch; }
+  .gender-tabs { justify-content: center; }
+  .gender-tab { padding: 0 16px; font-size: 12px; }
   .products-section { padding: 20px 16px 64px; }
   .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .search-bar { min-width: 120px; }
-  .pm-sheet { max-height: 88vh; }
-  .size-options { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 480px) {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .pm-header { gap: 14px; }
-  .pm-header-bottle { width: 52px; }
-  .pm-name { font-size: 18px; }
-  .scent-chip-btn { font-size: 11px; padding: 7px 11px; }
 }
 </style>
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div id="ann">
+  <span class="ann-txt">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Promosi Terhad — Berakhir Dalam
+  </span>
+  <div class="ann-cd">
+    <b id="cdH">23</b><span class="ann-sep">:</span><b id="cdM">59</b><span class="ann-sep">:</span><b id="cdS">47</b>
+  </div>
+  <span class="ann-txt">· Harga Promo Aktif</span>
+  <button id="ann-close" aria-label="Tutup">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+</div>
 
 <!-- NAV -->
 <nav id="main-nav">
@@ -849,18 +600,54 @@ a { text-decoration: none; color: inherit; }
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <i class="nav-cart-badge" id="nav-badge">0</i>
     </button>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
+<!-- SEARCH BAR (hidden but kept for consistency) -->
+<div class="nav-search-bar" id="nav-search-bar">
+  <div class="nav-search-inner">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="nav-search-input" placeholder="Cari wangian..." autocomplete="off">
+    <button onclick="closeNavSearch()" aria-label="Tutup">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- MEGA MENU -->
+<div class="mega-overlay" id="mega-overlay">
+  <div class="mega-inner">
+    <div class="mega-tabs">
+      <button class="mega-tab active" id="mtab-m" onclick="switchMegaTab('m')">Men</button>
+      <button class="mega-tab" id="mtab-w" onclick="switchMegaTab('w')">Women</button>
+      <button class="mega-tab" id="mtab-u" onclick="switchMegaTab('u')">Unisex</button>
+    </div>
+    <div class="mega-search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="mega-search-input" placeholder="Cari wangian..." id="mega-search-input"
+        onkeydown="if(event.key==='Enter'){ const q=this.value.trim(); if(q) window.location.href='koleksi.html?q='+encodeURIComponent(q); }">
+    </div>
+    <div class="mega-grid" id="mgrid-m"></div>
+    <div class="mega-grid hidden" id="mgrid-w"></div>
+    <div class="mega-grid hidden" id="mgrid-u"></div>
+    <div class="mega-footer-links">
+      <a href="tentang.html" onclick="closeMegaMenu()">Tentang Kami</a>
+      <a href="faq.html" onclick="closeMegaMenu()">FAQ</a>
+      <a href="#shipping" onclick="closeMegaMenu()">Penghantaran</a>
+      <a href="https://wa.me/601159003985" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</div>
+
 <div class="page-wrap">
 
-  <!-- GENDER TABS -->
-  <div class="gender-tabs-bar">
+  <!-- FILTER BAR: Gender Tabs + Family Dropdown (NO SEARCH) -->
+  <div class="filter-bar">
     <div class="gender-tabs">
-      <button class="gender-tab active" id="gtab-all" onclick="switchGender('all')">
+      <button class="gender-tab" id="gtab-all" onclick="switchGender('all')">
         Semua <span class="gender-tab-count" id="cnt-all">—</span>
       </button>
       <button class="gender-tab" id="gtab-m" onclick="switchGender('m')">
@@ -873,12 +660,11 @@ a { text-decoration: none; color: inherit; }
         Unisex <span class="gender-tab-count" id="cnt-u">—</span>
       </button>
     </div>
-    <div class="search-bar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search-input" placeholder="Cari wangian..." autocomplete="off">
-      <button id="search-clear" style="display:none" onclick="clearSearch()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+    <div class="family-filter">
+      <label>🏷️ FILTER KELUARGA</label>
+      <select class="family-select" id="family-select" onchange="filterByFamily()">
+        <option value="all">Semua Keluarga</option>
+      </select>
     </div>
   </div>
 
@@ -901,11 +687,8 @@ a { text-decoration: none; color: inherit; }
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 
-    <!-- HEADER -->
     <div class="pm-header">
-      <div class="pm-header-bottle" id="pm-bottle-wrap">
-        <!-- SVG bottle injected here -->
-      </div>
+      <div class="pm-header-bottle" id="pm-bottle-wrap"></div>
       <div class="pm-header-info">
         <p class="pm-insp" id="pm-insp-text"></p>
         <h2 class="pm-name" id="pm-name-text"></h2>
@@ -922,15 +705,11 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
 
-    <!-- SCENT VARIATIONS -->
     <div class="pm-section" id="pm-scents-section">
       <div class="pm-section-label">Pilih Wangian</div>
-      <div class="scent-variations" id="pm-scents-wrap">
-        <!-- chips injected -->
-      </div>
+      <div class="scent-variations" id="pm-scents-wrap"></div>
     </div>
 
-    <!-- SIZE -->
     <div class="pm-section">
       <div class="pm-section-label">Saiz & Harga</div>
       <div class="size-options">
@@ -952,7 +731,6 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
 
-    <!-- QUANTITY -->
     <div class="pm-section">
       <div class="pm-section-label">Kuantiti</div>
       <div class="qty-row">
@@ -967,7 +745,6 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
-<!-- STICKY FOOTER (outside sheet, stuck to viewport bottom) -->
 <div class="pm-footer" id="pm-footer" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:905;">
   <div class="pm-total-display">
     <div class="pm-total-label">Jumlah</div>
@@ -1062,9 +839,6 @@ a { text-decoration: none; color: inherit; }
   <span class="float-cart-label">Troli</span>
 </div>
 
-<!-- =============================================
-   SCRIPTS
-============================================= -->
 <script src="js/config.js"></script>
 <script>
 'use strict';
@@ -1072,14 +846,12 @@ a { text-decoration: none; color: inherit; }
 /* ─── STATE ─── */
 let PRODUCTS      = [];
 let currentGender = 'all';
-let searchQuery   = '';
-let searchDebounce;
-let searchClear;
+let currentFamily = 'all';
 
 /* ─── MODAL STATE ─── */
-let modalProductId  = null;  // selected product (from PRODUCTS)
-let modalScent      = null;  // selected scent variation id
-let modalSize       = null;  // '10ml' | '30ml' | '60ml'
+let modalProductId  = null;
+let modalScent      = null;
+let modalSize       = null;
 let modalQty        = 1;
 
 /* ─── CART STATE ─── */
@@ -1088,7 +860,7 @@ let cartCountdownEnd   = 0;
 let cartCountdownTimer = null;
 
 /* =============================================
-   SVG BOTTLE
+   SVG BOTTLE HELPERS
 ============================================= */
 function createMiniBottleSVG(cap, rgbStr) {
   const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
@@ -1130,6 +902,21 @@ function createCardBottleSVG(productId, cap, rgbStr) {
   </svg>`;
 }
 
+function miniSVG(cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const uid = Math.random().toString(36).slice(2);
+  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
+    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+    </linearGradient></defs>
+    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
+    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
+    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
+  </svg>`;
+}
+
 /* =============================================
    STOCK HELPERS
 ============================================= */
@@ -1138,12 +925,14 @@ function getStock(id) {
   const p = PRODUCTS.find(x => x.id === id);
   return s[id] !== undefined ? s[id] : (p?.stock ?? CONFIG.INITIAL_STOCK);
 }
+
 function decrementStock(id, qty = 1) {
   const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   s[id] = Math.max(0, (s[id] ?? CONFIG.INITIAL_STOCK) - qty);
   localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(s));
   sbFetch('products?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ stock: s[id] }) }).catch(() => {});
 }
+
 function initStock() {
   const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   let updated = false;
@@ -1169,6 +958,7 @@ async function loadProducts() {
     PRODUCTS = rows || [];
     initStock();
     updateCounts();
+    loadFamilyOptions();
     renderGrid();
   } catch(e) {
     document.getElementById('products-grid').innerHTML =
@@ -1176,20 +966,13 @@ async function loadProducts() {
   }
 }
 
-async function init() {
-  // URL params
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('gender')) currentGender = params.get('gender');
-  if (params.get('q')) { searchQuery = params.get('q').toLowerCase(); document.getElementById('search-input').value = params.get('q'); document.getElementById('search-clear').style.display = 'block'; }
-  setActiveTab(currentGender);
-  await loadPricing();
-  await loadProducts();
-  refreshCartUI();
+function loadFamilyOptions() {
+  const families = [...new Set(PRODUCTS.map(p => p.family).filter(f => f))];
+  const select = document.getElementById('family-select');
+  select.innerHTML = '<option value="all">Semua Keluarga</option>' +
+    families.sort().map(f => `<option value="${f.replace(/"/g, '&quot;')}">${f}</option>`).join('');
 }
 
-/* =============================================
-   GRID RENDER
-============================================= */
 function updateCounts() {
   document.getElementById('cnt-all').textContent = PRODUCTS.length;
   document.getElementById('cnt-m').textContent   = PRODUCTS.filter(p => p.gender === 'm').length;
@@ -1200,8 +983,8 @@ function updateCounts() {
 function getFiltered() {
   return PRODUCTS.filter(p => {
     const gOk = currentGender === 'all' || p.gender === currentGender;
-    const qOk = !searchQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(searchQuery);
-    return gOk && qOk;
+    const fOk = currentFamily === 'all' || p.family === currentFamily;
+    return gOk && fOk;
   });
 }
 
@@ -1215,7 +998,7 @@ function renderGrid() {
       : '';
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<div class="no-results">Tiada wangian dijumpai untuk carian ini.</div>';
+    grid.innerHTML = '<div class="no-results">Tiada wangian dijumpai untuk filter ini.</div>';
     return;
   }
 
@@ -1261,7 +1044,7 @@ function renderGrid() {
 }
 
 /* =============================================
-   TAB SWITCHING
+   FILTER FUNCTIONS
 ============================================= */
 function switchGender(g) {
   currentGender = g;
@@ -1269,35 +1052,20 @@ function switchGender(g) {
   renderGrid();
 }
 
+function filterByFamily() {
+  currentFamily = document.getElementById('family-select').value;
+  renderGrid();
+}
+
 function setActiveTab(g) {
   document.querySelectorAll('.gender-tab').forEach(b => b.classList.remove('active'));
   const el = document.getElementById('gtab-' + g);
   if (el) el.classList.add('active');
-  // Also highlight nav link
   document.querySelectorAll('.nav-center-links a').forEach(a => a.classList.remove('active'));
   if (g !== 'all') {
     const navEl = document.getElementById('nav-' + (g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex'));
     if (navEl) navEl.classList.add('active');
   }
-}
-
-/* =============================================
-   SEARCH
-============================================= */
-document.getElementById('search-input').addEventListener('input', function() {
-  searchQuery = this.value.toLowerCase().trim();
-  document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
-  clearTimeout(searchDebounce);
-  searchDebounce = setTimeout(renderGrid, 240);
-});
-document.getElementById('search-input').addEventListener('keydown', e => {
-  if (e.key === 'Escape') clearSearch();
-});
-function clearSearch() {
-  document.getElementById('search-input').value = '';
-  searchQuery = '';
-  document.getElementById('search-clear').style.display = 'none';
-  renderGrid();
 }
 
 /* =============================================
@@ -1312,13 +1080,11 @@ function openProductModal(productId) {
   modalSize      = null;
   modalQty       = 1;
 
-  // Header
   document.getElementById('pm-bottle-wrap').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
   document.getElementById('pm-insp-text').textContent   = 'Terinspirasi oleh ' + (p.inspired_by || '');
   document.getElementById('pm-name-text').textContent   = p.name;
   document.getElementById('pm-family-text').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
 
-  // Prices
   const pr = CONFIG.PRICES;
   document.getElementById('pm-price-main').textContent = 'RM ' + pr['10ml'].promo;
   document.getElementById('pm-price-old').textContent  = 'RM ' + pr['10ml'].normal;
@@ -1329,48 +1095,36 @@ function openProductModal(productId) {
   document.getElementById('sz-price-60').textContent   = 'RM ' + pr['60ml'].promo;
   document.getElementById('sz-was-60').textContent     = 'RM ' + pr['60ml'].normal;
 
-  // Stock
   const stk = getStock(productId);
   const dot  = document.getElementById('pm-stock-dot');
   dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
   document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
   document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
 
-  // Scent variations — build from product data
-  // Each product represents one "scent name". We'll show a list of similar
-  // scents (same gender) as the "variation" selector — typical for these sites
-  // where you pick the specific scent then size. We also show the product itself.
+  // Build scent variations (products in same gender)
   buildScentVariations(p);
 
-  // Size buttons reset
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
 
-  // Qty
   document.getElementById('qty-display').textContent = '1';
   updateModalTotal();
 
-  // Footer
   const footer = document.getElementById('pm-footer');
   footer.style.display = 'flex';
   document.getElementById('pm-add-btn').textContent = '+ Tambah ke Troli';
   document.getElementById('pm-add-btn').classList.remove('added');
   document.getElementById('pm-add-btn').disabled = stk === 0;
 
-  // Open
   document.getElementById('pm-overlay').classList.add('visible');
   document.body.classList.add('lock');
-
-  // Scroll sheet to top
   document.getElementById('pm-sheet').scrollTop = 0;
 }
 
 function buildScentVariations(currentProduct) {
-  // Show all products of same gender as scent chips
   const sameGender = PRODUCTS.filter(p => p.gender === currentProduct.gender);
   const wrap = document.getElementById('pm-scents-wrap');
 
   if (sameGender.length <= 1) {
-    // Just this product — no variation section needed
     document.getElementById('pm-scents-section').style.display = 'none';
     modalScent = currentProduct.id;
     return;
@@ -1396,7 +1150,6 @@ function buildScentVariations(currentProduct) {
     </button>`;
   }).join('');
 
-  // Pre-select current product
   modalScent = currentProduct.id;
 }
 
@@ -1406,7 +1159,6 @@ function selectScent(scentId) {
     b.classList.toggle('selected', b.dataset.scentId === scentId);
   });
 
-  // Update stock display for selected scent
   const stk = getStock(scentId);
   const dot  = document.getElementById('pm-stock-dot');
   dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
@@ -1414,7 +1166,6 @@ function selectScent(scentId) {
   document.getElementById('pm-add-btn').disabled = stk === 0;
   document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
 
-  // Reset qty
   modalQty = 1;
   document.getElementById('qty-display').textContent = '1';
   updateModalTotal();
@@ -1425,7 +1176,6 @@ function selectSize(size) {
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('size-' + size.replace('ml', '')).classList.add('selected');
 
-  // Update header price
   const pr = CONFIG.PRICES[size];
   document.getElementById('pm-price-main').textContent = 'RM ' + pr.promo;
   document.getElementById('pm-price-old').textContent  = 'RM ' + pr.normal;
@@ -1462,11 +1212,9 @@ function closeProductModal() {
 }
 
 function modalAddToCart() {
-  // Validate scent
   const targetId = modalScent || modalProductId;
   if (!targetId) return;
 
-  // Validate size
   if (!modalSize) {
     document.querySelectorAll('.size-btn').forEach(b => {
       b.style.outline = '2px solid var(--red)';
@@ -1505,7 +1253,6 @@ function modalAddToCart() {
   decrementStock(targetId, modalQty);
   refreshCartUI();
 
-  // Feedback
   const btn = document.getElementById('pm-add-btn');
   btn.textContent = '✓ Ditambah!';
   btn.classList.add('added');
@@ -1516,7 +1263,7 @@ function modalAddToCart() {
 }
 
 /* =============================================
-   CART
+   CART FUNCTIONS
 ============================================= */
 const saveCart      = () => localStorage.setItem(CONFIG.KEYS.CART, JSON.stringify(cart));
 const getCartTotal  = () => cart.reduce((s, i) => s + i.pricePerUnit * i.qty, 0);
@@ -1528,6 +1275,7 @@ function removeFromCart(productId, size) {
   cart = cart.filter(i => !(i.productId === productId && i.size === size));
   saveCart(); refreshCartUI();
 }
+
 function changeCartQty(productId, size, delta) {
   const item = cart.find(i => i.productId === productId && i.size === size);
   if (!item) return;
@@ -1613,27 +1361,13 @@ function startCartCountdown() {
   }, 1000);
 }
 
-function miniSVG(cap, rgbStr) {
-  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
-  const uid = Math.random().toString(36).slice(2);
-  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
-    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
-      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-    </linearGradient></defs>
-    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
-    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
-    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
-  </svg>`;
-}
-
 function openCart(e) {
   if (e) e.preventDefault();
   document.getElementById('cart-overlay').classList.add('visible');
   document.getElementById('cart-panel').classList.add('visible');
   document.body.classList.add('lock');
 }
+
 function closeCart() {
   document.getElementById('cart-overlay').classList.remove('visible');
   document.getElementById('cart-panel').classList.remove('visible');
@@ -1668,6 +1402,7 @@ function openOrderModal() {
   document.getElementById('modal-overlay').classList.add('visible');
   document.body.classList.add('lock');
 }
+
 function closeOrderModal() {
   document.getElementById('modal-overlay').classList.remove('visible');
   document.body.classList.remove('lock');
@@ -1676,6 +1411,7 @@ function closeOrderModal() {
 const isValidEmail    = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const isValidPhone    = v => /^(\+?60|0)[0-9]{8,10}$/.test(v.replace(/[\s\-]/g, ''));
 const isValidPostcode = v => /^\d{5}$/.test(v.trim());
+
 function setInvalid(fId, eId) { document.getElementById(fId)?.classList.add('invalid'); document.getElementById(eId)?.classList.add('visible'); }
 function clearInvalid(fId, eId) { document.getElementById(fId)?.classList.remove('invalid'); document.getElementById(eId)?.classList.remove('visible'); }
 
@@ -1722,26 +1458,119 @@ function handleOrderSubmit() {
 }
 
 /* =============================================
-   NAV & MISC
+   MEGA MENU & HEADER FUNCTIONS (same as index)
 ============================================= */
-document.getElementById('nav-cart-btn').addEventListener('click', openCart);
-document.getElementById('hamburger').addEventListener('click', () => {
-  // Mobile: link to index for now
-  window.location.href = 'index.html';
-});
-document.getElementById('nav-search-btn').addEventListener('click', () => {
-  document.getElementById('search-input').focus();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); }
-});
+function closeNavSearch() {
+  document.getElementById('nav-search-bar').classList.remove('visible');
+}
 
-// Scroll — nav stays fixed, no announcement bar on this page
-window.addEventListener('scroll', () => {}, { passive: true });
+function closeMegaMenu() {
+  document.getElementById('mega-overlay').classList.remove('visible');
+}
+
+function switchMegaTab(gender) {
+  document.querySelectorAll('.mega-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`mtab-${gender}`).classList.add('active');
+  document.querySelectorAll('.mega-grid').forEach(g => g.classList.add('hidden'));
+  document.getElementById(`mgrid-${gender}`).classList.remove('hidden');
+}
+
+async function loadScentFamilies() {
+  try {
+    const rows = await sbFetch('scent_families?active=eq.true&order=sort_order.asc');
+    if (!rows || !rows.length) return renderFallbackFamilies();
+    const grids = { m: document.getElementById('mgrid-m'), w: document.getElementById('mgrid-w'), u: document.getElementById('mgrid-u') };
+    Object.values(grids).forEach(g => { if(g) g.innerHTML = ''; });
+    rows.forEach(fam => {
+      const genders = (fam.genders || 'mwu').split('');
+      genders.forEach(g => {
+        if (!grids[g]) return;
+        const href = fam.href || ('koleksi.html?gender=' + g + (fam.slug ? '&family=' + encodeURIComponent(fam.slug) : ''));
+        const a = document.createElement('a');
+        a.href = href;
+        a.className = 'mega-item';
+        a.innerHTML = '<div class="mega-item-bg" style="background-color:#1a1a2a;' +
+          (fam.image_url ? 'background-image:url(\'' + fam.image_url + '\');background-size:cover;background-position:center;' : '') +
+          '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + fam.name + '</div>';
+        grids[g].appendChild(a);
+      });
+    });
+  } catch(e) { renderFallbackFamilies(); }
+}
+
+function renderFallbackFamilies() {
+  const fallback = {
+    m: [['Woody & Smoky','#1a1a2e'],['Fresh & Aquatic','#0d1a2e'],['Citrus & Aromatic','#1a1400'],['Oriental & Spicy','#2e0d0d'],['Fougere','#0d2e0d'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
+    w: [['Floral','#2e0d1a'],['Rose & Oud','#1a0a0a'],['Sweet & Gourmand','#1a0d00'],['Oriental & Warm','#1a1000'],['Fresh & Light','#0d1a1a'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
+    u: [['Woody','#1a1a0d'],['Green & Earthy','#0d1a0d'],['Aquatic','#0d1a2e'],['Clean & Musky','#1a1a2e'],['Bestsellers','#1a1a1a'],['Bundle 3+1','#0a0a0a']]
+  };
+  const hrefs = { m:'koleksi.html?gender=m', w:'koleksi.html?gender=w', u:'koleksi.html?gender=u' };
+  Object.entries(fallback).forEach(([g, items]) => {
+    const grid = document.getElementById('mgrid-' + g);
+    if (!grid) return;
+    items.forEach(([name, bg]) => {
+      const a = document.createElement('a');
+      a.href = hrefs[g];
+      a.className = 'mega-item';
+      a.innerHTML = '<div class="mega-item-bg" style="background:' + bg + '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + name + '</div>';
+      grid.appendChild(a);
+    });
+  });
+}
+
+/* =============================================
+   ANNOUNCEMENT BAR
+============================================= */
+function startAnnouncementTimer() {
+  let end = Date.now() + 23 * 3600000 + 59 * 60000 + 47 * 1000;
+  const hEl = document.getElementById('cdH'), mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
+  const interval = setInterval(() => {
+    const rem = Math.max(0, end - Date.now());
+    if (rem === 0) { clearInterval(interval); return; }
+    const h = Math.floor(rem / 3600000);
+    const m = Math.floor((rem % 3600000) / 60000);
+    const s = Math.floor((rem % 60000) / 1000);
+    if (hEl) hEl.textContent = h;
+    if (mEl) mEl.textContent = String(m).padStart(2, '0');
+    if (sEl) sEl.textContent = String(s).padStart(2, '0');
+  }, 1000);
+}
+document.getElementById('ann-close')?.addEventListener('click', () => {
+  document.getElementById('ann').style.display = 'none';
+});
 
 /* =============================================
    BOOT
 ============================================= */
+async function init() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('gender')) currentGender = params.get('gender');
+  if (params.get('family')) currentFamily = params.get('family');
+  
+  setActiveTab(currentGender);
+  await loadPricing();
+  await loadProducts();
+  refreshCartUI();
+  loadScentFamilies();
+  startAnnouncementTimer();
+  
+  // Nav event listeners
+  document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+  document.getElementById('nav-search-btn').addEventListener('click', () => {
+    document.getElementById('nav-search-bar').classList.toggle('visible');
+  });
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mega-overlay').classList.toggle('visible');
+  });
+  document.querySelector('.nav-logo').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'index.html';
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); closeMegaMenu(); closeNavSearch(); }
+  });
+}
+
 init();
 </script>
 </body>
