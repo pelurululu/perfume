@@ -943,80 +943,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('Header elements disabled: hamburger, search, nav links');
 })();
-    async function handleOrderSubmit() {
-  const name = document.getElementById('field-name').value.trim();
-  const phone = document.getElementById('field-phone').value.trim();
-  const email = document.getElementById('field-email').value.trim();
-  const address = document.getElementById('field-address').value.trim();
-  const state = document.getElementById('field-state').value;
-  const postcode = document.getElementById('field-postcode').value.trim();
-  const note = document.getElementById('field-note').value.trim();
-  
-  let ok = true;
-  if (name.length < 3) { setInvalid('field-name','err-name'); ok = false; } else clearInvalid('field-name','err-name');
-  if (!isValidPhone(phone)) { setInvalid('field-phone','err-phone'); ok = false; } else clearInvalid('field-phone','err-phone');
-  if (email && !isValidEmail(email)) { setInvalid('field-email','err-email'); ok = false; } else clearInvalid('field-email','err-email');
-  if (address.length < 10) { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
-  if (!state) { setInvalid('field-state','err-state'); ok = false; } else clearInvalid('field-state','err-state');
-  if (!isValidPostcode(postcode)) { setInvalid('field-postcode','err-postcode'); ok = false; } else clearInvalid('field-postcode','err-postcode');
-  if (!ok) return;
-
-  document.getElementById('submit-btn').disabled = true;
-  document.getElementById('modal-form').style.display = 'none';
-  document.getElementById('modal-loading').style.display = 'block';
-
-  const totalAmount = getCartTotal();
-  // SAVE items BEFORE clearing cart
-  const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
-  const itemsSummary = cart.map(i => `${i.name} (${i.size}) ×${i.qty}`).join(', ');
-  const orderRef = 'AP-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-  
-  // Prepare data matching your Supabase table
-  const orderData = {
-    order_ref: orderRef,
-    name: name,
-    phone: phone,
-    email: email || null,
-    address: address,
-    state: state,
-    postcode: postcode,
-    note: note || null,
-    items: itemsSummary,
-    total: totalAmount,
-    pay_status: 'pending'
-  };
-  
-  try {
-    // Save order to Supabase
-    const result = await sbFetch('orders', {
-      method: 'POST',
-      body: JSON.stringify(orderData)
-    });
-    
-    console.log('Order saved:', result);
-    
-    // Clear cart AFTER saving items for WhatsApp
-    cart = [];
-    saveCart();
-    refreshCartUI();
-    
-    // Show success
-    document.getElementById('modal-loading').style.display = 'none';
-    document.getElementById('modal-success').style.display = 'block';
-    
-    // Send WhatsApp notification (using itemsFmt saved earlier)
-    const waMsg = `*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email ? '\n📧 *Emel:* ' + email : ''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${totalAmount}*\n\n📝 *Nota:* ${note || '-'}\n\n🔖 *Ref:* ${orderRef}`;
-    window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
-    
-  } catch(error) {
-    console.error('Payment error:', error);
-    document.getElementById('modal-loading').style.display = 'none';
-    document.getElementById('modal-form').style.display = 'block';
-    document.getElementById('submit-btn').disabled = false;
-    toast('Gagal memproses pesanan: ' + error.message, 'error');
-  }
-}
-    // Add this function before handleOrderSubmit
+      // Add this function before handleOrderSubmit
 function toast(message, type = 'success') {
   // Create toast element if it doesn't exist
   let toastEl = document.getElementById('custom-toast');
@@ -1051,7 +978,62 @@ function toast(message, type = 'success') {
     toastEl.style.opacity = '0';
   }, 3000);
 }
+
     
+   function handleOrderSubmit() {
+  const name = document.getElementById('field-name').value.trim();
+  const phone = document.getElementById('field-phone').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+  const address = document.getElementById('field-address').value.trim();
+  const state = document.getElementById('field-state').value;
+  const postcode = document.getElementById('field-postcode').value.trim();
+  const note = document.getElementById('field-note').value.trim();
+  
+  let ok = true;
+  if (name.length < 3) { setInvalid('field-name','err-name'); ok = false; } else clearInvalid('field-name','err-name');
+  if (!isValidPhone(phone)) { setInvalid('field-phone','err-phone'); ok = false; } else clearInvalid('field-phone','err-phone');
+  if (email && !isValidEmail(email)) { setInvalid('field-email','err-email'); ok = false; } else clearInvalid('field-email','err-email');
+  if (address.length < 10) { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
+  if (!state) { setInvalid('field-state','err-state'); ok = false; } else clearInvalid('field-state','err-state');
+  if (!isValidPostcode(postcode)) { setInvalid('field-postcode','err-postcode'); ok = false; } else clearInvalid('field-postcode','err-postcode');
+  if (!ok) return;
+
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('modal-form').style.display = 'none';
+  document.getElementById('modal-loading').style.display = 'block';
+
+  const itemsStr = cart.map(i => `${i.name} (${i.size}) x${i.qty}`).join(' | ');
+  const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
+  const fullAddress = `${address}, ${state} ${postcode}`;
+
+  // Send to your backend checkout.php (which handles ToyyibPay)
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = CONFIG.TOYYIBPAY_URL;
+  
+  const fields = {
+    name: name,
+    phone: phone,
+    email: email,
+    address: fullAddress,
+    note: note,
+    total: getCartTotal(),
+    items: itemsStr,
+    itemsFormatted: itemsFmt
+  };
+  
+  Object.entries(fields).forEach(([k, v]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = k;
+    input.value = v;
+    form.appendChild(input);
+  });
+  
+  document.body.appendChild(form);
+  form.submit();
+}
+  
 </script>
 </body>
 </html>
