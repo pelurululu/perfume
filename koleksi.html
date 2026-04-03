@@ -275,6 +275,99 @@
   .ap-gender-btn { padding: 9px 12px; flex: 1; justify-content: center }
   .ap-gender-btn .cnt { display: none }
 }
+  /* BANNER */
+.coll-banner { width: 100% }
+.coll-banner-img { position: relative; width: 100%; height: 52vh; min-height: 260px; overflow: hidden }
+.coll-banner-img img { width: 100%; height: 100%; object-fit: cover; display: block }
+.coll-banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,.12) 60%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px 52px;
+}
+.coll-banner-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 8px }
+.coll-banner-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4vw,52px); font-weight: 300; color: #fff; margin-bottom: 8px }
+.coll-banner-sub { font-size: 12px; color: rgba(255,255,255,.5) }
+
+/* TABS */
+.coll-tabs-wrap {
+  position: sticky; top: 68px; z-index: 100;
+  background: #fff; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px; gap: 16px;
+}
+.coll-tabs { display: flex; height: 52px }
+.coll-search-wrap {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); padding: 8px 14px;
+  min-width: 200px; color: var(--muted);
+}
+.coll-search-input { border: none; outline: none; background: none; font-size: 13px; color: var(--ink); width: 100% }
+.coll-search-input::placeholder { color: var(--muted2) }
+.coll-search-wrap button { background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center }
+
+/* CHIPS */
+.scent-list-wrap { padding: 32px 52px 80px; min-height: 40vh }
+.scent-no-results { font-size: 14px; color: var(--muted); padding: 48px 0; text-align: center }
+.scent-chips { display: flex; flex-wrap: wrap; gap: 10px }
+.scent-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line); padding: 10px 16px;
+  font-size: 13px; color: var(--ink2); cursor: pointer;
+  background: #fff; transition: border-color .15s, background .15s;
+  white-space: nowrap; font-family: 'DM Sans', sans-serif;
+}
+.scent-chip:hover { border-color: var(--ink); background: var(--off) }
+.scent-chip.sold-out { opacity: .4; cursor: default }
+.scent-chip-num { font-size: 10px; color: var(--muted2); min-width: 18px }
+.scent-chip-badge { font-size: 9px; text-transform: uppercase; background: var(--ink); color: #fff; padding: 2px 6px }
+.scent-chip-badge.hot { background: #c0392b }
+.scent-chip-badge.new { background: #27ae60 }
+
+/* SCENT MODAL */
+.scent-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 920;
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .25s; backdrop-filter: blur(3px);
+}
+.scent-modal-overlay.visible { opacity: 1; pointer-events: all }
+.scent-modal {
+  background: #fff; width: 100%; max-width: 560px;
+  padding: 32px; border-top: 1px solid var(--line);
+  position: relative; transform: translateY(20px);
+  transition: transform .28s cubic-bezier(.23,.92,.52,1);
+  max-height: 90vh; overflow-y: auto;
+}
+.scent-modal-overlay.visible .scent-modal { transform: translateY(0) }
+.scent-modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; font-size: 16px; cursor: pointer; color: var(--muted) }
+.scent-modal-header { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line) }
+.scent-modal-bottle { flex-shrink: 0 }
+.scent-modal-insp { font-size: 11px; color: var(--muted); margin-bottom: 4px }
+.scent-modal-name { font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 4px }
+.scent-modal-family { font-size: 11px; color: var(--muted) }
+.scent-modal-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px }
+.scent-modal-sizes { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px }
+.scent-size-btn { border: 1px solid var(--line); background: #fff; padding: 14px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: border-color .15s }
+.scent-size-btn:hover, .scent-size-btn.selected { border-color: var(--ink); background: var(--off) }
+.ssb-ml { font-size: 13px; font-weight: 500; color: var(--ink) }
+.ssb-price { font-size: 15px; color: var(--ink) }
+.ssb-normal { font-size: 10px; color: var(--muted2); text-decoration: line-through }
+.scent-modal-stock { font-size: 12px; color: var(--muted); margin-bottom: 16px }
+.scent-modal-add { width: 100%; padding: 14px; background: var(--ink); color: #fff; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s }
+.scent-modal-add:hover:not(:disabled) { background: #333 }
+.scent-modal-add:disabled { opacity: .35; cursor: not-allowed }
+
+@media (max-width: 880px) {
+  .coll-tabs-wrap { padding: 0 16px; top: 56px }
+  .scent-list-wrap { padding: 20px 16px 64px }
+  .coll-banner-overlay { padding: 24px 20px }
+  .coll-search-wrap { min-width: 120px }
+}
+@media (max-width: 520px) {
+  .scent-chip { font-size: 12px; padding: 9px 12px }
+  .scent-modal { padding: 24px 16px }
+}
+  
 </style>
 </head>
 <body>
@@ -353,74 +446,93 @@
   <a href="https://wa.me/601159003985" target="_blank">WhatsApp</a>
 </nav>
 
-<!-- ===== PAGE HEADER ===== -->
-<header class="ap-header">
-  <div class="ap-header-inner">
-    <a href="index.html" class="ap-back">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-      Kembali ke Utama
-    </a>
-    <h1 class="ap-title">Semua <em>Wangian</em></h1>
-    <p class="ap-subtitle">Koleksi lengkap 165+ wangian premium · Terinspirasi jenama mewah dunia</p>
+<!-- COLLECTION BANNER -->
+<section class="coll-banner">
+  <div class="coll-banner-img">
+    <img src="images/collection-banner.jpg" alt="The Artisan Parfum Collection">
+    <div class="coll-banner-overlay">
+      <p class="coll-banner-eyebrow">Koleksi Wangian</p>
+      <h1 class="coll-banner-title">165 Wangian Premium</h1>
+      <p class="coll-banner-sub">Terinspirasi jenama dunia · 10ml · 30ml · 60ml</p>
+    </div>
   </div>
-</header>
+</section>
 
-<!-- ===== STICKY TOOLBAR ===== -->
-<div class="ap-toolbar">
-  <div class="ap-toolbar-inner">
-
-    <!-- Gender tabs -->
-    <div class="ap-gender-btns">
-      <button class="ap-gender-btn active" id="ap-gbtn-all" onclick="apSwitchGender('all')">
-        Semua <span class="cnt" id="ap-count-all">—</span>
-      </button>
-      <button class="ap-gender-btn" id="ap-gbtn-m" onclick="apSwitchGender('m')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="6"/><path d="M20 4l-6 6M20 4h-5M20 4v5"/></svg>
-        Lelaki <span class="cnt" id="ap-count-m">—</span>
-      </button>
-      <button class="ap-gender-btn" id="ap-gbtn-w" onclick="apSwitchGender('w')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg>
-        Wanita <span class="cnt" id="ap-count-w">—</span>
-      </button>
-      <button class="ap-gender-btn" id="ap-gbtn-u" onclick="apSwitchGender('u')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-        Unisex <span class="cnt" id="ap-count-u">—</span>
-      </button>
-    </div>
-
-    <!-- Search -->
-    <div class="ap-search-wrap">
-      <svg class="ap-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="ap-search" placeholder="Cari nama atau wangian inspirasi..." aria-label="Cari wangian">
-      <button class="ap-search-clear" id="ap-search-clear" onclick="apClearSearch()" aria-label="Padam">✕</button>
-    </div>
-
-    <!-- Sort -->
-    <div class="ap-sort">
-      <label for="ap-sort-sel">Susun:</label>
-      <select id="ap-sort-sel" onchange="apRender()">
-        <option value="default">Lalai</option>
-        <option value="name-asc">Nama A–Z</option>
-        <option value="name-desc">Nama Z–A</option>
-        <option value="price-asc">Harga Rendah</option>
-        <option value="price-desc">Harga Tinggi</option>
-        <option value="stock-asc">Stok Rendah</option>
-      </select>
-    </div>
+<div class="coll-tabs-wrap">
+  <div class="coll-tabs">
+    <button class="ap-gender-btn active" id="ap-gbtn-all" onclick="apSwitchGender('all')">
+      Semua <span class="cnt" id="ap-count-all">—</span>
+    </button>
+    <button class="ap-gender-btn" id="ap-gbtn-m" onclick="apSwitchGender('m')">
+      Men <span class="cnt" id="ap-count-m">—</span>
+    </button>
+    <button class="ap-gender-btn" id="ap-gbtn-w" onclick="apSwitchGender('w')">
+      Women <span class="cnt" id="ap-count-w">—</span>
+    </button>
+    <button class="ap-gender-btn" id="ap-gbtn-u" onclick="apSwitchGender('u')">
+      Unisex <span class="cnt" id="ap-count-u">—</span>
+    </button>
+  </div>
+  <div class="coll-search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="ap-search" class="coll-search-input" placeholder="Cari wangian...">
+    <button id="ap-search-clear" style="display:none" onclick="apClearSearch()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
 
     <!-- Count bar -->
     <div class="ap-count-bar" id="ap-count-bar">Memuatkan...</div>
   </div>
 </div>
 
-<!-- ===== PRODUCT GRID ===== -->
-<main class="ap-grid-wrap">
+<main class="scent-list-wrap">
   <div id="ap-loading" class="ap-loading">
     <div class="spinner"></div>
     <p>Memuatkan koleksi...</p>
   </div>
-  <div class="ap-grid" id="ap-grid" style="display:none"></div>
+  <div id="ap-count-bar" style="font-size:12px;color:var(--muted);margin-bottom:16px"></div>
+  <div id="no-results" style="display:none" class="scent-no-results">Tiada wangian dijumpai.</div>
+  <div class="scent-chips" id="ap-grid"></div>
 </main>
+
+<!-- SIZE PICKER MODAL -->
+<div class="scent-modal-overlay" id="scent-modal-overlay" onclick="if(event.target===this)closeScentModal()">
+  <div class="scent-modal">
+    <button class="scent-modal-close" onclick="closeScentModal()">✕</button>
+    <div class="scent-modal-header">
+      <div class="scent-modal-bottle" id="sm-bottle"></div>
+      <div>
+        <p class="scent-modal-insp" id="sm-insp"></p>
+        <h3 class="scent-modal-name" id="sm-name"></h3>
+        <p class="scent-modal-family" id="sm-family"></p>
+      </div>
+    </div>
+    <p class="scent-modal-label">Pilih Saiz</p>
+    <div class="scent-modal-sizes">
+      <button class="scent-size-btn" data-size="10ml" onclick="selectScentSize(this)">
+        <span class="ssb-ml">10ml</span>
+        <span class="ssb-price" id="sm-p10"></span>
+        <small class="ssb-normal" id="sm-n10"></small>
+      </button>
+      <button class="scent-size-btn" data-size="30ml" onclick="selectScentSize(this)">
+        <span class="ssb-ml">30ml</span>
+        <span class="ssb-price" id="sm-p30"></span>
+        <small class="ssb-normal" id="sm-n30"></small>
+      </button>
+      <button class="scent-size-btn" data-size="60ml" onclick="selectScentSize(this)">
+        <span class="ssb-ml">60ml</span>
+        <span class="ssb-price" id="sm-p60"></span>
+        <small class="ssb-normal" id="sm-n60"></small>
+      </button>
+    </div>
+    <div class="scent-modal-stock" id="sm-stock"></div>
+    <button class="scent-modal-add" id="sm-add-btn" onclick="scentModalAddToCart()">
+      + Tambah ke Troli
+    </button>
+  </div>
+</div>
 
 <!-- ===== CART + MODAL (identical to index.html) ===== -->
 <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
@@ -701,65 +813,20 @@ function handleOrderSubmit() {
   }
 }
 
-/* ---------- BUILD CARD ---------- */
-function apBuildCard(product) {
+function apBuildCard(product, index) {
   const stk = getStock(product.id);
   const isOut = stk === 0;
-  const pct = stk / CONFIG.INITIAL_STOCK;
-  const fillClass = stk===0?'crit':stk<=8?'crit':stk<=18?'low':'';
-  let badgeHTML='';
-  if(product.badge){const bc=['Exclusive'].includes(product.badge)?'badge-exclusive':['Hot','Bestseller','Trending'].includes(product.badge)?'badge-hot':'badge-new';badgeHTML=`<span class="card-badge ${bc}">${product.badge}</span>`;}
-  const visual = product.image_url
-    ? `<img src="${product.image_url}" alt="${product.name}" loading="lazy" style="max-height:200px;max-width:90%;object-fit:contain">`
-    : createBottleSVG(product.id, product.cap_color, product.rgb);
-  const p = CONFIG.PRICES;
-  const card = document.createElement('article');
-  card.className = 'product-card';
-  card.dataset.productId = product.id;
-  card.innerHTML = `
-    <div class="card-visual">${badgeHTML}${visual}</div>
-    <div class="card-info">
-      <h3 class="card-name">${product.name}</h3>
-      <p style="font-size:10px;color:var(--muted);margin-bottom:4px;letter-spacing:.03em">${product.inspired_by||''}</p>
-      <div class="card-price-row">
-        <span class="card-price-current">RM ${p['30ml'].promo}</span>
-        <span class="card-price-original">RM ${p['30ml'].normal}</span>
-      </div>
-      <div class="stock-wrap">
-        <div class="stock-bar"><div class="stock-fill ${fillClass}" style="width:${pct*100}%"></div></div>
-        <span class="stock-text ${stk<=8?'urgent':''}">${isOut?'STOK HABIS':stk+' unit berbaki'}</span>
-      </div>
-      <div class="size-selector">
-        <button class="size-btn" data-size="10ml" ${isOut?'disabled':''}><span class="size-ml">10ml</span></button>
-        <button class="size-btn" data-size="30ml" ${isOut?'disabled':''}><span class="size-ml">30ml</span></button>
-        <button class="size-btn" data-size="60ml" ${isOut?'disabled':''}><span class="size-ml">60ml</span></button>
-      </div>
-      <button class="btn-add-to-cart ${isOut?'sold-out':''}" ${isOut?'disabled':''}>
-        ${isOut?'Stok Habis':'+ Tambah ke Troli'}
-      </button>
-    </div>`;
-  // Listeners
-  const sizeBtns = card.querySelectorAll('.size-btn');
-  const addBtn   = card.querySelector('.btn-add-to-cart');
-  let selectedSize = null;
-  sizeBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      sizeBtns.forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedSize = btn.dataset.size;
-      if (!isOut) addBtn.textContent = `+ Tambah ${selectedSize} ke Troli`;
-    });
-  });
-  addBtn.addEventListener('click', () => {
-    if (addBtn.disabled) return;
-    if (!selectedSize) {
-      sizeBtns.forEach(b=>{b.style.borderColor='var(--g)';setTimeout(()=>{b.style.borderColor='';},1200);});
-      const prev=addBtn.textContent; addBtn.textContent='← Pilih saiz dahulu';
-      setTimeout(()=>{addBtn.textContent=prev;},1500); return;
-    }
-    addToCart(product.id, selectedSize, card);
-  });
-  return card;
+  let badgeHTML = '';
+  if (isOut) badgeHTML = `<span class="scent-chip-badge">Habis</span>`;
+  else if (product.badge === 'Hot' || product.badge === 'Bestseller') badgeHTML = `<span class="scent-chip-badge hot">${product.badge}</span>`;
+  else if (product.badge === 'New') badgeHTML = `<span class="scent-chip-badge new">New</span>`;
+
+  const btn = document.createElement('button');
+  btn.className = 'scent-chip' + (isOut ? ' sold-out' : '');
+  btn.dataset.productId = product.id;
+  btn.innerHTML = `<span class="scent-chip-num">${index + 1}.</span> ${product.name} ${badgeHTML}`;
+  if (!isOut) btn.addEventListener('click', () => openScentModal(product.id));
+  return btn;
 }
 
 /* ---------- FILTER + RENDER ---------- */
@@ -830,19 +897,14 @@ function apRender() {
     const qOk = !apQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(apQuery);
     return gOk && qOk;
   });
-
   filtered = apSort(filtered);
 
-  // Count bar
   document.getElementById('ap-count-bar').innerHTML =
     `Menunjukkan <b>${filtered.length}</b> daripada <b>${AP_PRODUCTS.length}</b> wangian`;
+  document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
 
   grid.innerHTML = '';
-  if (filtered.length === 0) {
-    grid.innerHTML = '<div class="ap-empty"><p>Tiada wangian dijumpai</p><span>Cuba carian lain atau tukar penapis</span></div>';
-  } else {
-    filtered.forEach(p => grid.appendChild(apBuildCard(p)));
-  }
+  filtered.forEach((p, i) => grid.appendChild(apBuildCard(p, i)));
 }
 
 /* ---------- INIT ---------- */
@@ -868,9 +930,8 @@ async function apInit() {
       if (el) el.textContent = AP_PRODUCTS.filter(p=>p.gender===g).length;
     });
 
-    // Hide loader, show grid
-    document.getElementById('ap-loading').style.display = 'none';
-    document.getElementById('ap-grid').style.display = 'grid';
+   document.getElementById('ap-grid').style.display = 'flex';
+document.getElementById('ap-loading').style.display = 'none';
 
     // Read URL params for gender and search
 const params = new URLSearchParams(window.location.search);
@@ -888,6 +949,68 @@ if (params.get('q')) {
     document.getElementById('ap-loading').innerHTML = '<p style="color:var(--red);font-size:12px;padding:40px">Gagal memuatkan produk. Cuba muat semula.</p>';
     console.error(e);
   }
+}
+  let currentScentId = null;
+let currentScentSize = null;
+
+function openScentModal(productId) {
+  const p = AP_PRODUCTS.find(x => x.id === productId);
+  if (!p) return;
+  currentScentId = productId;
+  currentScentSize = null;
+
+  document.getElementById('sm-bottle').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
+  document.getElementById('sm-insp').textContent = 'Terinspirasi oleh ' + (p.inspired_by || '');
+  document.getElementById('sm-name').textContent = p.name;
+  document.getElementById('sm-family').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
+
+  const pr = CONFIG.PRICES;
+  document.getElementById('sm-p10').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('sm-n10').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sm-p30').textContent = 'RM ' + pr['30ml'].promo;
+  document.getElementById('sm-n30').textContent = 'RM ' + pr['30ml'].normal;
+  document.getElementById('sm-p60').textContent = 'RM ' + pr['60ml'].promo;
+  document.getElementById('sm-n60').textContent = 'RM ' + pr['60ml'].normal;
+
+  const stk = getStock(productId);
+  document.getElementById('sm-stock').textContent = stk === 0 ? '⚠️ Stok habis' : stk + ' unit berbaki';
+
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  const addBtn = document.getElementById('sm-add-btn');
+  addBtn.textContent = '+ Tambah ke Troli';
+  addBtn.disabled = stk === 0;
+
+  document.getElementById('scent-modal-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+}
+
+function closeScentModal() {
+  document.getElementById('scent-modal-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+  currentScentId = null;
+  currentScentSize = null;
+}
+
+function selectScentSize(btn) {
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentScentSize = btn.dataset.size;
+  document.getElementById('sm-add-btn').textContent = `+ Tambah ${currentScentSize} ke Troli`;
+}
+
+function scentModalAddToCart() {
+  if (!currentScentSize) {
+    document.querySelectorAll('.scent-size-btn').forEach(b => {
+      b.style.borderColor = 'var(--red)';
+      setTimeout(() => b.style.borderColor = '', 1200);
+    });
+    document.getElementById('sm-add-btn').textContent = '← Pilih saiz dahulu';
+    setTimeout(() => document.getElementById('sm-add-btn').textContent = '+ Tambah ke Troli', 1500);
+    return;
+  }
+  const fakeCard = document.createElement('div');
+  addToCart(currentScentId, currentScentSize, fakeCard);
+  closeScentModal();
 }
 apInit();
 </script>
