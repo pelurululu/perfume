@@ -84,21 +84,25 @@ a { text-decoration: none; color: inherit }
 ================================================ */
 #main-nav {
   position: fixed;
-  top: 0;
+  top: 32px;
   left: 0;
   right: 0;
   z-index: 800;
-  height: 56px;
+  height: 68px;
   background: transparent;
   border-bottom: none;
   display: flex;
   align-items: center;
-  transition: background .3s ease, box-shadow .3s ease;
+  transition: background .3s ease, box-shadow .3s ease, top .2s ease;
 }
 #main-nav.scrolled {
+  top: 0;
   background: #fff;
   border-bottom: 1px solid var(--line);
   box-shadow: 0 1px 6px rgba(0,0,0,.07);
+}
+#main-nav.no-ann {
+  top: 0;
 }
 /* White icons/text when transparent (over hero) */
 #main-nav:not(.scrolled) .nav-logo { color: #fff }
@@ -140,7 +144,7 @@ a { text-decoration: none; color: inherit }
 .nav-center-links li a {
   display: flex;
   align-items: center;
-  height: 56px;
+  height: 68px;
   padding: 0 22px;
   font-size: 13px;
   letter-spacing: .01em;
@@ -362,11 +366,11 @@ a { text-decoration: none; color: inherit }
 .hero-carousel {
   position: relative;
   width: 100%;
-  height: calc(100vh - 88px);
+  height: 100vh;
   min-height: 480px;
   overflow: hidden;
   cursor: grab;
-  
+  margin-top: 0;
 }
 .hc-track {
   display: flex;
