@@ -4,10 +4,10 @@ async function init() {
   await loadPricing();
   await loadProducts();
   initStock();
-  refreshCartUI();
-  openPromoPopup();
+ refreshCartUI();
   await loadCarouselFromDB();
-await loadPopupFromDB();
+  await loadPopupFromDB();
+  openPromoPopup();
 }
 
 async function loadCarouselFromDB() {
