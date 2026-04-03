@@ -46,9 +46,10 @@ async function loadPopupFromDB() {
     const p = rows?.[0];
     if (!p) return;
     if (!p.active) {
-      localStorage.setItem('artisan_promo_hide', '1');
       return;
     }
+    // Clear any previously stored hide flag since popup is now active
+    localStorage.removeItem('artisan_promo_hide');
     document.querySelector('.promo-popup-eyebrow').textContent = p.eyebrow || '';
     document.querySelector('.promo-popup-title').innerHTML =
       `${p.title || ''} <br><em>${p.title_em || ''}</em>`;
