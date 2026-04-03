@@ -10,23 +10,68 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+/* Mega item image+text style */
+.mega-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  background: #111;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: opacity .15s;
+  cursor: pointer;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.mega-item:hover { opacity:.85; background:#111; }
+.mega-item-bg {
+  position:absolute; inset:0;
+  background-size:cover; background-position:center; background-color:#222;
+  transition:transform .35s ease;
+}
+.mega-item:hover .mega-item-bg { transform:scale(1.04); }
+.mega-item-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 60%,transparent 100%);
+}
+.mega-item-label {
+  position:absolute; bottom:14px; left:16px; right:16px;
+  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700;
+  color:#fff; letter-spacing:.02em; line-height:1.3;
+  text-shadow:0 1px 4px rgba(0,0,0,.5);
+}
+.mega-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:2px; background:#e0e0e0; border:1px solid #e0e0e0; margin-bottom:32px;
+}
+.mega-grid.hidden { display:none; }
+@media(max-width:880px){ .mega-grid { grid-template-columns:repeat(2,1fr); } }
+</style>
 </head>
 <body>
 
 <!-- ANNOUNCEMENT BAR -->
 <div id="ann">
-  <span class="ann-txt">⚡ Promosi Terhad — Berakhir Dalam</span>
+  <span class="ann-txt">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+    Promosi Terhad — Berakhir Dalam
+  </span>
   <div class="ann-cd">
     <b id="cdH">23</b><span class="ann-sep">:</span><b id="cdM">59</b><span class="ann-sep">:</span><b id="cdS">47</b>
   </div>
   <span class="ann-txt">· Harga Promo Aktif</span>
-  <button id="ann-close" aria-label="Tutup">✕</button>
+  <button id="ann-close" aria-label="Tutup">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
 </div>
 
 <!-- NAV -->
 <nav id="main-nav">
   <a href="index.html" class="nav-logo">the artisan</a>
-
   <div class="nav-center">
     <ul class="nav-center-links">
       <li><a href="koleksi.html?gender=m" id="nav-men">Men</a></li>
@@ -34,22 +79,14 @@
       <li><a href="koleksi.html?gender=u" id="nav-unisex">Unisex</a></li>
     </ul>
   </div>
-
   <div class="nav-right">
-    <!-- Search -->
     <button class="nav-icon" id="nav-search-btn" aria-label="Cari">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
-    <!-- WhatsApp 
-    <a href="https://wa.me/601159003985" target="_blank" rel="noopener" class="nav-icon" aria-label="WhatsApp">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>-->
-    <!-- Cart -->
     <button class="nav-icon" id="nav-cart-btn" aria-label="Troli" style="position:relative">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <i class="nav-cart-badge" id="nav-badge">0</i>
     </button>
-    <!-- Hamburger -->
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -70,137 +107,32 @@
 <!-- MEGA MENU -->
 <div class="mega-overlay" id="mega-overlay">
   <div class="mega-inner">
-
-    <!-- Gender tabs -->
     <div class="mega-tabs">
       <button class="mega-tab active" id="mtab-m" onclick="switchMegaTab('m')">Men</button>
       <button class="mega-tab" id="mtab-w" onclick="switchMegaTab('w')">Women</button>
       <button class="mega-tab" id="mtab-u" onclick="switchMegaTab('u')">Unisex</button>
     </div>
-
-    <!-- Search -->
     <div class="mega-search-wrap">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="mega-search-input" placeholder="What are you looking for?" id="mega-search-input"
+      <input class="mega-search-input" placeholder="Cari wangian..." id="mega-search-input"
         onkeydown="if(event.key==='Enter'){ const q=this.value.trim(); if(q) window.location.href='koleksi.html?q='+encodeURIComponent(q); }">
     </div>
-
-    <!-- Men grid -->
-    <div class="mega-grid" id="mgrid-m">
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">🌲</div>
-        <span>Woody & Smoky</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">🌊</div>
-        <span>Fresh & Aquatic</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">🍊</div>
-        <span>Citrus & Aromatic</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">🌶️</div>
-        <span>Oriental & Spicy</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">🌿</div>
-        <span>Fougère</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">⭐</div>
-        <span>Bestsellers</span>
-      </a>
-      <a href="koleksi.html?gender=m" class="mega-item">
-        <div class="mega-item-icon">✨</div>
-        <span>New Arrivals</span>
-      </a>
-      <a href="#bundle" class="mega-item" onclick="closeMegaMenu()">
-        <div class="mega-item-icon">🎁</div>
-        <span>Bundle 3+1</span>
-      </a>
-    </div>
-
-    <!-- Women grid -->
-    <div class="mega-grid hidden" id="mgrid-w">
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">🌸</div>
-        <span>Floral</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">🌹</div>
-        <span>Rose & Oud</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">🍬</div>
-        <span>Sweet & Gourmand</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">🌙</div>
-        <span>Oriental & Warm</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">🍃</div>
-        <span>Fresh & Light</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">⭐</div>
-        <span>Bestsellers</span>
-      </a>
-      <a href="koleksi.html?gender=w" class="mega-item">
-        <div class="mega-item-icon">✨</div>
-        <span>New Arrivals</span>
-      </a>
-      <a href="#bundle" class="mega-item" onclick="closeMegaMenu()">
-        <div class="mega-item-icon">🎁</div>
-        <span>Bundle 3+1</span>
-      </a>
-    </div>
-
-    <!-- Unisex grid -->
-    <div class="mega-grid hidden" id="mgrid-u">
-      <a href="koleksi.html?gender=u" class="mega-item">
-        <div class="mega-item-icon">🪵</div>
-        <span>Woody</span>
-      </a>
-      <a href="koleksi.html?gender=u" class="mega-item">
-        <div class="mega-item-icon">🌿</div>
-        <span>Green & Earthy</span>
-      </a>
-      <a href="koleksi.html?gender=u" class="mega-item">
-        <div class="mega-item-icon">🌊</div>
-        <span>Aquatic</span>
-      </a>
-      <a href="koleksi.html?gender=u" class="mega-item">
-        <div class="mega-item-icon">🫧</div>
-        <span>Clean & Musky</span>
-      </a>
-      <a href="koleksi.html?gender=u" class="mega-item">
-        <div class="mega-item-icon">⭐</div>
-        <span>Bestsellers</span>
-      </a>
-      <a href="#bundle" class="mega-item" onclick="closeMegaMenu()">
-        <div class="mega-item-icon">🎁</div>
-        <span>Bundle 3+1</span>
-      </a>
-    </div>
-
-    <!-- Bottom links -->
+    <!-- Dynamically populated from scent_families Supabase table -->
+    <div class="mega-grid" id="mgrid-m"></div>
+    <div class="mega-grid hidden" id="mgrid-w"></div>
+    <div class="mega-grid hidden" id="mgrid-u"></div>
     <div class="mega-footer-links">
       <a href="tentang.html" onclick="closeMegaMenu()">Tentang Kami</a>
       <a href="faq.html" onclick="closeMegaMenu()">FAQ</a>
       <a href="#shipping" onclick="closeMegaMenu()">Penghantaran</a>
       <a href="https://wa.me/601159003985" target="_blank">WhatsApp</a>
     </div>
-
   </div>
 </div>
 
 <!-- HERO CAROUSEL -->
 <section class="hero-carousel" id="top">
   <div class="hc-track" id="hc-track">
-
-    <!-- SLIDE 1 -->
     <div class="hc-slide">
       <div class="hc-bg" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)"></div>
       <div class="hc-content">
@@ -210,8 +142,6 @@
         <a href="koleksi.html" class="hc-btn">Terokai Koleksi</a>
       </div>
     </div>
-
-    <!-- SLIDE 2 -->
     <div class="hc-slide">
       <div class="hc-bg" style="background:linear-gradient(135deg,#111 0%,#222 50%,#111 100%)"></div>
       <div class="hc-content">
@@ -221,8 +151,6 @@
         <a href="koleksi.html?gender=m" class="hc-btn">Lihat Koleksi Men</a>
       </div>
     </div>
-
-    <!-- SLIDE 3 -->
     <div class="hc-slide">
       <div class="hc-bg" style="background:linear-gradient(135deg,#1c1c1e 0%,#2c2c2e 50%,#1c1c1e 100%)"></div>
       <div class="hc-content">
@@ -232,9 +160,7 @@
         <a href="koleksi.html?gender=w" class="hc-btn hc-btn--ghost">Lihat Koleksi Women</a>
       </div>
     </div>
-
   </div>
-
   <div class="hc-dots" id="hc-dots">
     <button class="hc-dot active" onclick="hcGoTo(0)"></button>
     <button class="hc-dot" onclick="hcGoTo(1)"></button>
@@ -243,55 +169,36 @@
   <div class="hc-counter"><span id="hc-current">1</span> / <span id="hc-total">3</span></div>
 </section>
 
-<!-- ENTRY GRID — men / women / unisex -->
+<!-- ENTRY GRID — populated dynamically from gender_categories table -->
 <section class="entry-grid" id="collection">
-  <a href="koleksi.html?gender=m" class="entry-card">
+  <a href="koleksi.html?gender=m" class="entry-card" id="entry-m">
     <div class="entry-card-bg" style="background:#1a1a2e"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Men</div>
-      <div class="entry-card-count">55 wangian</div>
+      <div class="entry-card-count" id="entry-m-count">55 wangian</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
   </a>
-  <a href="koleksi.html?gender=w" class="entry-card">
+  <a href="koleksi.html?gender=w" class="entry-card" id="entry-w">
     <div class="entry-card-bg" style="background:#111"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Women</div>
-      <div class="entry-card-count">98 wangian</div>
+      <div class="entry-card-count" id="entry-w-count">98 wangian</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
-  </a>
-  <a href="koleksi.html?gender=u" class="entry-card">
+  </g>
+  <a href="koleksi.html?gender=u" class="entry-card" id="entry-u">
     <div class="entry-card-bg" style="background:#1c1c1e"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Unisex</div>
-      <div class="entry-card-count">Untuk semua</div>
+      <div class="entry-card-count" id="entry-u-count">Untuk semua</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
   </a>
 </section>
-
-<!-- PRICE STRIP 
-<div class="strip">
-  <div class="strip-item">
-    <div class="strip-size">10ml</div>
-    <div class="strip-price" id="p10-promo">RM 25</div>
-    <div class="strip-desc">Cuba dahulu</div>
-  </div>
-  <div class="strip-item">
-    <div class="strip-size">30ml</div>
-    <div class="strip-price" id="p30-promo">RM 49</div>
-    <div class="strip-desc">Harian</div>
-  </div>
-  <div class="strip-item">
-    <div class="strip-size">60ml</div>
-    <div class="strip-price" id="p60-promo">RM 79</div>
-    <div class="strip-desc">Koleksi lengkap</div>
-  </div>
-</div>-->
 
 <!-- BUNDLE BANNER -->
 <section class="bundle-banner reveal" id="bundle">
@@ -316,70 +223,6 @@
   </div>
 </section>
 
-<!-- FEATURES 
-<section class="features">
-  <div class="feature reveal">
-    <div class="feature-num">01</div>
-    <div class="feature-title">Pati Premium Diimport</div>
-    <p class="feature-body">Setiap formula menggunakan pati berkualiti tinggi yang diimport — setara dengan jenama asal dunia.</p>
-  </div>
-  <div class="feature reveal delay-1">
-    <div class="feature-num">02</div>
-    <div class="feature-title">Ketahanan Sehingga 12 Jam</div>
-    <p class="feature-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam tanpa perlu semprot berulang kali.</p>
-  </div>
-  <div class="feature reveal delay-2">
-    <div class="feature-num">03</div>
-    <div class="feature-title">Tiga Saiz Tersedia</div>
-    <p class="feature-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Nilai terbaik untuk setiap saiz.</p>
-  </div>
-</section>-->
-
-<!-- TESTIMONIALS 
-<section class="testi-section">
-  <div class="testi-label">Pelanggan Setia</div>
-  <div class="testi-grid">
-    <div class="testi-card reveal">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-body">"Dah cuba banyak inspired perfume, tapi The Artisan memang lain. Tahan dari pagi sampai malam."</p>
-      <div class="testi-name">Nur Aisyah R.</div>
-      <div class="testi-location">Kuala Lumpur</div>
-    </div>
-    <div class="testi-card reveal delay-1">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-body">"Harga berpatutan tapi kualiti tak main-main. Dah order 3 kali. Good Girl jadi signature scent saya."</p>
-      <div class="testi-name">Farah D.</div>
-      <div class="testi-location">Shah Alam</div>
-    </div>
-    <div class="testi-card reveal delay-2">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-body">"Hadiah untuk isteri — dia tanya beli kat mana. Pembungkusan kemas, wangian tahan lama."</p>
-      <div class="testi-name">Ahmad Zaki B.</div>
-      <div class="testi-location">Johor Bahru</div>
-    </div>
-  </div>
-</section>-->
-
-<!-- SHIPPING 
-<div class="shipping-row" id="shipping">
-  <div class="shipping-item">
-    <div class="shipping-title">Penghantaran Pantas</div>
-    <p class="shipping-body">Semenanjung 2–4 hari. Sabah & Sarawak 4–7 hari bekerja.</p>
-  </div>
-  <div class="shipping-item">
-    <div class="shipping-title">Pembungkusan Selamat</div>
-    <p class="shipping-body">Setiap botol dibungkus bubble wrap — tiba dalam keadaan sempurna.</p>
-  </div>
-  <div class="shipping-item">
-    <div class="shipping-title">Percuma RM150+</div>
-    <p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj RM8 sahaja.</p>
-  </div>
-  <div class="shipping-item">
-    <div class="shipping-title">Polisi Pemulangan</div>
-    <p class="shipping-body">Produk rosak atau salah hantar diganti dalam 7 hari. Hubungi via WhatsApp.</p>
-  </div>
-</div>-->
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -387,10 +230,18 @@
       <a href="#top" class="footer-brand">the artisan</a>
       <p class="footer-about">165 wangian premium. Pati diimport. Terinspirasi jenama mewah dunia.</p>
       <div class="footer-socials">
-        <a href="#" class="footer-social" aria-label="Instagram">📷</a>
-        <a href="#" class="footer-social" aria-label="TikTok">🎵</a>
-        <a href="#" class="footer-social" aria-label="Facebook">📘</a>
-        <a href="https://wa.me/601159003985" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="#" class="footer-social" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://wa.me/601159003985" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
       </div>
     </div>
     <div class="footer-col">
@@ -438,7 +289,9 @@
       <div class="cart-header-title">Troli</div>
       <span class="cart-header-count" id="cart-count-label"></span>
     </div>
-    <button class="cart-close" onclick="closeCart()" aria-label="Tutup">✕</button>
+    <button class="cart-close" onclick="closeCart()" aria-label="Tutup">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
   <div class="cart-body" id="cart-body">
     <div class="cart-empty" id="cart-empty">
@@ -448,7 +301,7 @@
     <div id="cart-items-list"></div>
     <div class="cart-bundle-hint" id="bundle-hint" style="display:none"></div>
     <div class="cart-countdown" id="cart-countdown" style="display:none">
-      <span>⏳</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/></svg>
       <div>
         <div class="cart-cd-label">Troli disimpan selama</div>
         <span class="cart-cd-time" id="cart-cd-display">15:00</span>
@@ -472,7 +325,9 @@
 <!-- ORDER MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeOrderModal()" aria-label="Tutup">✕</button>
+    <button class="modal-close" onclick="closeOrderModal()" aria-label="Tutup">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div id="modal-form">
       <div class="modal-eyebrow">Maklumat Penghantaran</div>
       <h2 class="modal-title" id="modal-title">Sahkan Pesanan</h2>
@@ -494,11 +349,16 @@
         <span class="form-total-value" id="modal-total-display">RM 0</span>
       </div>
       <button class="btn-submit" id="submit-btn" onclick="handleOrderSubmit()">Sahkan & Bayar via ToyyibPay →</button>
-      <p class="form-security-note">🔒 FPX · Kad Kredit · eWallet</p>
+      <p class="form-security-note">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        FPX · Kad Kredit · eWallet
+      </p>
     </div>
     <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--muted);letter-spacing:.06em">Memproses pesanan...</p></div>
     <div class="modal-success" id="modal-success">
-      <div class="success-icon">✓</div>
+      <div class="success-icon">
+        <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+      </div>
       <h3>Pesanan Dihantar!</h3>
       <p>Pasukan kami akan menghubungi anda melalui <strong>WhatsApp</strong> dalam masa 1–2 jam.<br><br>Sila semak mesej WhatsApp anda.</p>
       <div class="success-tag">selamat datang ke the artisan parfum.</div>
@@ -553,13 +413,7 @@
   <span class="float-cart-label">Troli</span>
 </div>
 
-<!-- hidden theme-toggle so JS doesn't crash -->
 <button id="theme-toggle" style="display:none" aria-hidden="true"></button>
-
-<!-- SCRIPTS -->
-<script>
-
-</script>
 
 <script src="js/config.js"></script>
 <script src="js/products.js"></script>
@@ -567,5 +421,78 @@
 <script src="js/ui.js"></script>
 <script src="js/main.js"></script>
 
+<script>
+/* ── Load scent families into mega menu grids from Supabase ── */
+async function loadScentFamilies() {
+  try {
+    const rows = await sbFetch('scent_families?active=eq.true&order=sort_order.asc');
+    if (!rows || !rows.length) return renderFallbackFamilies();
+    const grids = { m: document.getElementById('mgrid-m'), w: document.getElementById('mgrid-w'), u: document.getElementById('mgrid-u') };
+    // clear grids
+    Object.values(grids).forEach(g => { if(g) g.innerHTML = ''; });
+    rows.forEach(fam => {
+      const genders = (fam.genders || 'mwu').split('');
+      genders.forEach(g => {
+        if (!grids[g]) return;
+        const href = fam.href || ('koleksi.html?gender=' + g + (fam.slug ? '&family=' + encodeURIComponent(fam.slug) : ''));
+        const a = document.createElement('a');
+        a.href = href;
+        a.className = 'mega-item';
+        a.innerHTML = '<div class="mega-item-bg" style="background-color:#1a1a2a;' +
+          (fam.image_url ? 'background-image:url(\'' + fam.image_url + '\');background-size:cover;background-position:center;' : '') +
+          '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + fam.name + '</div>';
+        grids[g].appendChild(a);
+      });
+    });
+  } catch(e) { renderFallbackFamilies(); }
+}
+
+function renderFallbackFamilies() {
+  const fallback = {
+    m: [['Woody & Smoky','#1a1a2e'],['Fresh & Aquatic','#0d1a2e'],['Citrus & Aromatic','#1a1400'],['Oriental & Spicy','#2e0d0d'],['Fougere','#0d2e0d'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
+    w: [['Floral','#2e0d1a'],['Rose & Oud','#1a0a0a'],['Sweet & Gourmand','#1a0d00'],['Oriental & Warm','#1a1000'],['Fresh & Light','#0d1a1a'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
+    u: [['Woody','#1a1a0d'],['Green & Earthy','#0d1a0d'],['Aquatic','#0d1a2e'],['Clean & Musky','#1a1a2e'],['Bestsellers','#1a1a1a'],['Bundle 3+1','#0a0a0a']]
+  };
+  const hrefs = { m:'koleksi.html?gender=m', w:'koleksi.html?gender=w', u:'koleksi.html?gender=u' };
+  Object.entries(fallback).forEach(([g, items]) => {
+    const grid = document.getElementById('mgrid-' + g);
+    if (!grid) return;
+    items.forEach(([name, bg]) => {
+      const a = document.createElement('a');
+      a.href = hrefs[g];
+      a.className = 'mega-item';
+      a.innerHTML = '<div class="mega-item-bg" style="background:' + bg + '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + name + '</div>';
+      grid.appendChild(a);
+    });
+  });
+}
+
+/* ── Load gender category images/text from Supabase ── */
+async function loadGenderCategories() {
+  try {
+    const rows = await sbFetch('gender_categories?order=sort_order.asc');
+    if (!rows || !rows.length) return;
+    rows.forEach(cat => {
+      const card = document.getElementById('entry-' + cat.gender);
+      if (!card) return;
+      const bg = card.querySelector('.entry-card-bg');
+      if (cat.image_url && bg) {
+        bg.style.backgroundImage = 'url(\'' + cat.image_url + '\')';
+        bg.style.backgroundSize = 'cover';
+        bg.style.backgroundPosition = 'center';
+      } else if (cat.bg_color && bg) {
+        bg.style.background = cat.bg_color;
+      }
+      if (cat.title) { const el = card.querySelector('.entry-card-title'); if(el) el.textContent = cat.title; }
+      if (cat.subtitle) { const el = document.getElementById('entry-' + cat.gender + '-count'); if(el) el.textContent = cat.subtitle; }
+    });
+  } catch(e) { /* keep defaults */ }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadScentFamilies();
+  loadGenderCategories();
+});
+</script>
 </body>
 </html>
