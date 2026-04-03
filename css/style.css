@@ -1565,3 +1565,318 @@ footer { background: var(--ink); color: rgba(255, 255, 255, .4); padding: 48px 6
     font-size: 9px;
   }
 }
+
+/* ================================================
+   COLLECTION BANNER
+================================================ */
+.coll-banner {
+  margin-top: 0;
+  width: 100%;
+  position: relative;
+}
+.coll-banner-img {
+  position: relative;
+  width: 100%;
+  height: 52vh;
+  min-height: 280px;
+  overflow: hidden;
+}
+.coll-banner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.coll-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,.15) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 36px 48px;
+}
+.coll-banner-eyebrow {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 8px;
+}
+.coll-banner-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.coll-banner-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .05em;
+}
+
+/* ================================================
+   COLLECTION TABS + SEARCH
+================================================ */
+.coll-tabs-wrap {
+  position: sticky;
+  top: 68px;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  gap: 16px;
+}
+.coll-tabs {
+  display: flex;
+  height: 52px;
+  gap: 0;
+}
+.coll-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  height: 100%;
+  padding: 0 24px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.coll-tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500 }
+.coll-tab:hover { color: var(--ink) }
+.coll-tab-count {
+  font-size: 10px;
+  color: var(--muted2);
+  font-weight: 400;
+}
+.coll-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  min-width: 200px;
+  color: var(--muted);
+}
+.coll-search-input {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 13px;
+  color: var(--ink);
+  width: 100%;
+}
+.coll-search-input::placeholder { color: var(--muted2) }
+.coll-search-wrap button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+
+/* ================================================
+   SCENT CHIPS
+================================================ */
+.scent-list-wrap {
+  padding: 32px 48px 64px;
+  min-height: 40vh;
+}
+.scent-no-results {
+  font-size: 14px;
+  color: var(--muted);
+  padding: 48px 0;
+  text-align: center;
+}
+.scent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.scent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--ink2);
+  cursor: pointer;
+  background: #fff;
+  transition: border-color .15s, background .15s;
+  user-select: none;
+  white-space: nowrap;
+}
+.scent-chip:hover {
+  border-color: var(--ink);
+  background: var(--off);
+}
+.scent-chip-num {
+  font-size: 10px;
+  color: var(--muted2);
+  min-width: 18px;
+}
+.scent-chip-badge {
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: #fff;
+  padding: 2px 6px;
+}
+.scent-chip-badge.hot { background: #c0392b }
+.scent-chip-badge.new { background: #27ae60 }
+
+/* ================================================
+   SCENT MODAL
+================================================ */
+.scent-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 900;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+  backdrop-filter: blur(3px);
+}
+.scent-modal-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.scent-modal {
+  background: #fff;
+  width: 100%;
+  max-width: 560px;
+  padding: 32px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  transform: translateY(20px);
+  transition: transform .28s cubic-bezier(.23,.92,.52,1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.scent-modal-overlay.visible .scent-modal {
+  transform: translateY(0);
+}
+.scent-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  transition: color .2s;
+}
+.scent-modal-close:hover { color: var(--ink) }
+.scent-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.scent-modal-bottle { flex-shrink: 0 }
+.scent-modal-insp {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.scent-modal-name {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.scent-modal-family {
+  font-size: 11px;
+  color: var(--muted);
+}
+.scent-modal-label {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.scent-modal-sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.scent-size-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 14px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color .15s, background .15s;
+}
+.scent-size-btn:hover,
+.scent-size-btn.selected {
+  border-color: var(--ink);
+  background: var(--off);
+}
+.ssb-ml { font-size: 13px; font-weight: 500; color: var(--ink) }
+.ssb-price { font-size: 15px; color: var(--ink) }
+.ssb-normal { font-size: 10px; color: var(--muted2); text-decoration: line-through }
+.scent-modal-stock {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.scent-modal-add {
+  width: 100%;
+  padding: 14px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+}
+.scent-modal-add:hover:not(:disabled) { background: #333 }
+.scent-modal-add:disabled { opacity: .35; cursor: not-allowed }
+
+/* ================================================
+   RESPONSIVE
+================================================ */
+@media (max-width: 880px) {
+  .coll-tabs-wrap { padding: 0 16px; top: 56px }
+  .coll-tab { padding: 0 14px; font-size: 12px }
+  .scent-list-wrap { padding: 20px 16px 48px }
+  .coll-banner-overlay { padding: 24px 20px }
+  .coll-search-wrap { min-width: 140px }
+}
+@media (max-width: 520px) {
+  .scent-chips { gap: 8px }
+  .scent-chip { font-size: 12px; padding: 9px 13px }
+  .scent-modal { padding: 24px 18px }
+  .scent-modal-sizes { grid-template-columns: repeat(3,1fr) }
+}
