@@ -573,10 +573,29 @@ async function handleEntryCardClick(gender) {
 document.getElementById('entry-m').addEventListener('click', () => handleEntryCardClick('m'));
 document.getElementById('entry-w').addEventListener('click', () => handleEntryCardClick('w'));
 document.getElementById('entry-u').addEventListener('click', () => handleEntryCardClick('u'));
+
+  document.addEventListener('DOMContentLoaded', () => {
+  loadScentFamilies();
+  loadGenderCategories();
+  loadProductsForModal();  // ← this preloads products so modal is ready
+});
+  
 </script>
 
 <!-- Include the modal functions from koleksi.html (reused) -->
 <script>
+  function getStock(id) {
+  const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
+  const p = (window.PRODUCTS_FOR_MODAL || []).find(x => x.id === id);
+  return s[id] !== undefined ? s[id] : (p?.stock ?? CONFIG.INITIAL_STOCK);
+}
+
+function decrementStock(id, qty = 1) {
+  const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
+  s[id] = Math.max(0, (s[id] ?? CONFIG.INITIAL_STOCK) - qty);
+  localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(s));
+  sbFetch('products?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ stock: s[id] }) }).catch(() => {});
+}
 'use strict';
 
 // Modal state
@@ -762,11 +781,13 @@ function modalAddToCart() {
 }
 
 // Expose functions globally
+// Expose functions globally
 window.selectSize = selectSize;
 window.changeQty = changeQty;
 window.closeProductModal = closeProductModal;
 window.modalAddToCart = modalAddToCart;
 window.selectScentIndex = selectScentIndex;
+window.handleEntryCardClick = handleEntryCardClick;
 </script>
 </body>
 </html>
