@@ -558,19 +558,9 @@ async function loadProductsForModal() {
   }
 }
 
-// Add click handlers to entry cards
-document.getElementById('entry-m').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('m');
-});
-document.getElementById('entry-w').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('w');
-});
-document.getElementById('entry-u').addEventListener('click', (e) => {
-  e.preventDefault();
-  openProductModalByGender('u');
-});
+document.getElementById('entry-m').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=m'; });
+document.getElementById('entry-w').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=w'; });
+document.getElementById('entry-u').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=u'; });
 
 document.addEventListener('DOMContentLoaded', () => {
   loadScentFamilies();
@@ -772,5 +762,22 @@ window.closeProductModal = closeProductModal;
 window.modalAddToCart = modalAddToCart;
 window.selectScentIndex = selectScentIndex;
 </script>
+
+  <script>
+function closePromoPopup() {
+  document.getElementById('promo-overlay').style.display = 'none';
+}
+function handleDontShow(cb) {
+  if (cb.checked) localStorage.setItem('promo_hide', '1');
+  else localStorage.removeItem('promo_hide');
+}
+// Show popup after 3 seconds (unless user dismissed it)
+setTimeout(() => {
+  if (!localStorage.getItem('promo_hide')) {
+    document.getElementById('promo-overlay').style.display = 'flex';
+  }
+}, 3000);
+</script>
+  
 </body>
 </html>
