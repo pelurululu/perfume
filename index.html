@@ -883,6 +883,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   }
 });
+
+    // Add this script to your page - put it after your existing scripts
+
+(function disableHeaderElements() {
+  // 1. Disable Hamburger Menu
+  const hamburger = document.getElementById('hamburger');
+  if (hamburger) {
+    hamburger.disabled = true;
+    hamburger.style.opacity = '0.5';
+    hamburger.style.cursor = 'not-allowed';
+    hamburger.style.pointerEvents = 'none';
+  }
+
+  // 2. Disable Search Button
+  const searchBtn = document.getElementById('nav-search-btn');
+  if (searchBtn) {
+    searchBtn.disabled = true;
+    searchBtn.style.opacity = '0.5';
+    searchBtn.style.cursor = 'not-allowed';
+    searchBtn.style.pointerEvents = 'none';
+  }
+
+  // 3. Disable Men, Women, Unisex Nav Links
+  const navLinks = ['nav-men', 'nav-women', 'nav-unisex'];
+  navLinks.forEach(id => {
+    const link = document.getElementById(id);
+    if (link) {
+      // Disable the link
+      link.style.pointerEvents = 'none';
+      link.style.opacity = '0.5';
+      link.style.cursor = 'not-allowed';
+      
+      // Remove href to prevent navigation
+      link.removeAttribute('href');
+      
+      // Prevent any click events
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+    }
+  });
+
+  // 4. Also disable the nav center links container if needed
+  const navCenterLinks = document.querySelectorAll('.nav-center-links li a');
+  navCenterLinks.forEach(link => {
+    link.style.pointerEvents = 'none';
+    link.style.opacity = '0.5';
+    link.style.cursor = 'not-allowed';
+    link.removeAttribute('href');
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    });
+  });
+
+  console.log('Header elements disabled: hamburger, search, nav links');
+})();
 </script>
 </body>
 </html>
