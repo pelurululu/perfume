@@ -395,11 +395,11 @@
 </div>
 
 <!-- DRAWER (mobile menu) -->
-<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeMegaMenu()")"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-header">
     <span class="drawer-title">Menu</span>
-    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+    <button class="drawer-close" onclick="closeMegaMenu()"" aria-label="Close">✕</button>
   </div>
   <div class="drawer-body">
     <div class="drawer-section-label">Collection</div>
@@ -482,34 +482,7 @@ window.handleDontShow = function(cb) {
            opens drawer on mobile (≤880px)
            opens mega menu on desktop (>880px)
    ════════════════════════════════════════════════ */
-(function() {
-  const hamburger = document.getElementById('hamburger');
-  const searchBtn = document.getElementById('nav-search-btn');
-  const mega      = document.getElementById('mega-overlay');
-  const drawer    = document.getElementById('drawer');
-  const drawerOvl = document.getElementById('drawer-overlay');
 
-  if (!hamburger) return;
-
-  hamburger.addEventListener('click', function() {
-    const isMobile = window.innerWidth <= 880;
-    const isOpen   = hamburger.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', isOpen);
-
-    // FIX 4: hide search icon while menu is open
-    if (searchBtn) searchBtn.style.display = isOpen ? 'none' : '';
-
-    if (isMobile) {
-      // Mobile: use the drawer
-      if (drawer)    drawer.classList.toggle('visible', isOpen);
-      if (drawerOvl) drawerOvl.classList.toggle('visible', isOpen);
-      document.body.classList.toggle('lock', isOpen);
-    } else {
-      // Desktop: use mega menu (.visible matches your CSS)
-      if (mega) mega.classList.toggle('visible', isOpen);
-    }
-  });
-})();
 
 window.closeDrawer = function() {
   const hamburger = document.getElementById('hamburger');
