@@ -8,562 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<style>
-/* =============================================
-   TOKENS
-============================================= */
-:root {
-  --ink:    #111;
-  --ink2:   #333;
-  --muted:  #777;
-  --muted2: #aaa;
-  --bg:     #fff;
-  --off:    #f7f7f7;
-  --line:   #e8e8e8;
-  --red:    #c0392b;
-  --grn:    #27ae60;
-  --t:      .2s ease;
-}
-
-/* =============================================
-   RESET
-============================================= */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-body.lock { overflow: hidden; }
-img, svg { display: block; }
-button, input, select, textarea { font-family: inherit; }
-a { text-decoration: none; color: inherit; }
-
-/* =============================================
-   HEADER / NAV (SAME AS INDEX)
-============================================= */
-#main-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 800;
-  height: 64px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  gap: 16px;
-}
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
-  font-style: italic;
-  letter-spacing: .04em;
-  color: var(--ink);
-  flex-shrink: 0;
-}
-.nav-logo:hover { opacity: .55; }
-.nav-center {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-center-links {
-  display: flex;
-  list-style: none;
-  gap: 0;
-  height: 64px;
-}
-.nav-center-links li a {
-  display: flex;
-  align-items: center;
-  height: 64px;
-  padding: 0 28px;
-  font-size: 13px;
-  color: var(--muted);
-  border-bottom: 2px solid transparent;
-  transition: color .18s, border-color .18s;
-  white-space: nowrap;
-}
-.nav-center-links li a:hover,
-.nav-center-links li a.active { color: var(--ink); border-bottom-color: var(--ink); }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  flex-shrink: 0;
-}
-.nav-icon {
-  width: 38px; height: 38px;
-  display: flex; align-items: center; justify-content: center;
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); transition: color .2s;
-  position: relative;
-}
-.nav-icon:hover { color: var(--ink); }
-.nav-cart-badge {
-  background: var(--ink); color: #fff;
-  border-radius: 50%; width: 14px; height: 14px;
-  font-size: 8px; font-weight: 600;
-  display: none; align-items: center; justify-content: center;
-  position: absolute; top: 4px; right: 4px;
-  font-style: normal;
-}
-.nav-cart-badge.visible { display: flex; }
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none; border: none; cursor: pointer;
-  padding: 6px; width: 38px; height: 38px;
-  align-items: center; justify-content: center;
-}
-.hamburger span {
-  width: 18px; height: 1px;
-  background: var(--ink); display: block;
-  transition: transform .25s, opacity .25s;
-}
-@media (max-width: 800px) {
-  .nav-center { display: none; }
-  .hamburger { display: flex; }
-}
-
-/* SEARCH BAR (hidden in koleksi) */
-.nav-search-bar {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  right: 0;
-  background: #fff;
-  padding: 12px 24px;
-  border-bottom: 1px solid var(--line);
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .25s, opacity .2s;
-  z-index: 795;
-}
-.nav-search-bar.visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: all;
-}
-.nav-search-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-.nav-search-inner input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  padding: 10px 0;
-  background: transparent;
-  color: var(--ink);
-}
-.nav-search-inner button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-}
-
-/* MEGA MENU */
-.mega-overlay {
-  position: fixed;
-  top: 64px;
-  left: 0;
-  right: 0;
-  background: #fff;
-  z-index: 790;
-  max-height: calc(100vh - 64px);
-  overflow-y: auto;
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .3s, opacity .2s;
-  border-bottom: 1px solid var(--line);
-}
-.mega-overlay.visible {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: all;
-}
-.mega-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 32px 24px;
-}
-.mega-tabs {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--line);
-}
-.mega-tab {
-  background: none;
-  border: none;
-  padding: 12px 24px;
-  font-size: 13px;
-  color: var(--muted);
-  cursor: pointer;
-  transition: color .15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.mega-tab.active {
-  color: var(--ink);
-  border-bottom: 2px solid var(--ink);
-  margin-bottom: -1px;
-}
-.mega-search-wrap {
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  padding: 10px 16px;
-  background: #fff;
-}
-.mega-search-input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 13px;
-  background: transparent;
-}
-.mega-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  background: #e0e0e0;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 32px;
-}
-.mega-grid.hidden { display: none; }
-.mega-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  background: #111;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  transition: opacity .15s;
-  cursor: pointer;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-}
-.mega-item:hover { opacity: .85; background: #111; }
-.mega-item-bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center; background-color: #222;
-  transition: transform .35s ease;
-}
-.mega-item:hover .mega-item-bg { transform: scale(1.04); }
-.mega-item-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.18) 60%, transparent 100%);
-}
-.mega-item-label {
-  position: absolute; bottom: 14px; left: 16px; right: 16px;
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700;
-  color: #fff; letter-spacing: .02em; line-height: 1.3;
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
-}
-.mega-footer-links {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-}
-.mega-footer-links a {
-  font-size: 11px;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: .08em;
-}
-@media (max-width: 880px) { .mega-grid { grid-template-columns: repeat(2, 1fr); } }
-
-/* =============================================
-   PAGE LAYOUT
-============================================= */
-.page-wrap {
-  padding-top: 64px;
-  min-height: 100vh;
-}
-
-/* =============================================
-   GENDER TABS + FAMILY FILTER
-============================================= */
-.filter-bar {
-  position: sticky;
-  top: 64px;
-  z-index: 100;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.gender-tabs {
-  display: flex;
-  height: 44px;
-  gap: 4px;
-}
-.gender-tab {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  height: 100%;
-  padding: 0 24px;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  transition: color .15s, border-color .15s;
-  white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
-}
-.gender-tab.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
-.gender-tab-count {
-  font-size: 10px;
-  color: var(--muted2);
-  font-weight: 400;
-}
-.family-filter {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.family-filter label {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.family-select {
-  padding: 8px 32px 8px 12px;
-  border: 1px solid var(--line);
-  background: #fff;
-  font-size: 13px;
-  color: var(--ink);
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23777' stroke-width='2'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  appearance: none;
-}
-.family-select:focus { outline: none; border-color: var(--ink); }
-
-/* =============================================
-   PRODUCT GRID
-============================================= */
-.products-section {
-  padding: 32px 40px 80px;
-}
-.products-count {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 24px;
-  letter-spacing: .04em;
-}
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-}
-.product-card {
-  background: #fff;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  transition: background .15s;
-  position: relative;
-  overflow: hidden;
-}
-.product-card:hover { background: var(--off); }
-.product-card-visual {
-  aspect-ratio: 3/4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.product-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .5s ease;
-}
-.product-card:hover .product-card-img { transform: scale(1.04); }
-.product-card-bottle {
-  padding: 40px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform .4s ease;
-}
-.product-card:hover .product-card-bottle { transform: translateY(-6px); }
-.card-badge {
-  position: absolute;
-  top: 14px; left: 14px;
-  font-size: 8px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  font-weight: 500;
-}
-.badge-hot { background: #c0392b; color: #fff; }
-.badge-new { background: #27ae60; color: #fff; }
-.badge-exclusive { background: var(--ink); color: #fff; }
-.product-card-info {
-  padding: 16px 18px 20px;
-  border-top: 1px solid var(--line);
-  flex: 1;
-}
-.card-inspired {
-  font-size: 10px;
-  color: var(--muted2);
-  letter-spacing: .06em;
-  margin-bottom: 3px;
-  text-transform: uppercase;
-}
-.card-name {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--ink);
-  margin-bottom: 3px;
-  line-height: 1.25;
-}
-.card-family {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 12px;
-}
-.card-prices {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.card-price-from {
-  font-size: 9px;
-  color: var(--muted2);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-}
-.card-price-main {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 300;
-  color: var(--ink);
-}
-.card-price-normal {
-  font-size: 11px;
-  color: var(--muted2);
-  text-decoration: line-through;
-}
-.card-stock-bar {
-  height: 2px;
-  background: var(--line);
-  margin-bottom: 5px;
-  overflow: hidden;
-}
-.card-stock-fill {
-  height: 100%;
-  background: var(--ink);
-  transition: width .3s;
-}
-.card-stock-fill.low { background: #e67e22; }
-.card-stock-fill.crit { background: var(--red); }
-.card-stock-text {
-  font-size: 10px;
-  color: var(--muted2);
-}
-.card-stock-text.urgent { color: var(--red); font-weight: 500; }
-.card-tap-hint {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  background: var(--ink);
-  color: #fff;
-  font-size: 9px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  text-align: center;
-  padding: 10px;
-  transform: translateY(100%);
-  transition: transform .2s ease;
-}
-.product-card:hover .card-tap-hint { transform: translateY(0); }
-.no-results {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 80px 20px;
-  font-size: 14px;
-  color: var(--muted);
-}
-.grid-loading {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 80px 20px;
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: .1em;
-}
-.spinner {
-  width: 20px; height: 20px;
-  border: 1.5px solid var(--line);
-  border-top-color: var(--ink);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-  flex-shrink: 0;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* =============================================
-   RESPONSIVE
-============================================= */
-@media (max-width: 1100px) {
-  .products-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 760px) {
-  .filter-bar { padding: 12px 16px; flex-direction: column; align-items: stretch; }
-  .gender-tabs { justify-content: center; }
-  .gender-tab { padding: 0 16px; font-size: 12px; }
-  .products-section { padding: 20px 16px 64px; }
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 480px) {
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-}
-</style>
+<link rel="stylesheet" href="css/style_koleksi.css">
 </head>
 <body>
 
@@ -606,7 +51,7 @@ a { text-decoration: none; color: inherit; }
   </div>
 </nav>
 
-<!-- SEARCH BAR (hidden but kept for consistency) -->
+<!-- SEARCH BAR -->
 <div class="nav-search-bar" id="nav-search-bar">
   <div class="nav-search-inner">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -644,10 +89,10 @@ a { text-decoration: none; color: inherit; }
 
 <div class="page-wrap">
 
-  <!-- FILTER BAR: Gender Tabs + Family Dropdown (NO SEARCH) -->
-  <div class="filter-bar">
+  <!-- GENDER TABS -->
+  <div class="gender-tabs-bar">
     <div class="gender-tabs">
-      <button class="gender-tab" id="gtab-all" onclick="switchGender('all')">
+      <button class="gender-tab active" id="gtab-all" onclick="switchGender('all')">
         Semua <span class="gender-tab-count" id="cnt-all">—</span>
       </button>
       <button class="gender-tab" id="gtab-m" onclick="switchGender('m')">
@@ -660,11 +105,12 @@ a { text-decoration: none; color: inherit; }
         Unisex <span class="gender-tab-count" id="cnt-u">—</span>
       </button>
     </div>
-    <div class="family-filter">
-      <label>🏷️ FILTER KELUARGA</label>
-      <select class="family-select" id="family-select" onchange="filterByFamily()">
-        <option value="all">Semua Keluarga</option>
-      </select>
+    <div class="search-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Cari wangian..." autocomplete="off">
+      <button id="search-clear" style="display:none" onclick="clearSearch()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
 
@@ -687,8 +133,11 @@ a { text-decoration: none; color: inherit; }
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
 
+    <!-- HEADER -->
     <div class="pm-header">
-      <div class="pm-header-bottle" id="pm-bottle-wrap"></div>
+      <div class="pm-header-bottle" id="pm-bottle-wrap">
+        <!-- SVG bottle injected here -->
+      </div>
       <div class="pm-header-info">
         <p class="pm-insp" id="pm-insp-text"></p>
         <h2 class="pm-name" id="pm-name-text"></h2>
@@ -705,11 +154,15 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
 
+    <!-- SCENT VARIATIONS -->
     <div class="pm-section" id="pm-scents-section">
       <div class="pm-section-label">Pilih Wangian</div>
-      <div class="scent-variations" id="pm-scents-wrap"></div>
+      <div class="scent-variations" id="pm-scents-wrap">
+        <!-- chips injected -->
+      </div>
     </div>
 
+    <!-- SIZE -->
     <div class="pm-section">
       <div class="pm-section-label">Saiz & Harga</div>
       <div class="size-options">
@@ -731,6 +184,7 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
 
+    <!-- QUANTITY -->
     <div class="pm-section">
       <div class="pm-section-label">Kuantiti</div>
       <div class="qty-row">
@@ -745,6 +199,7 @@ a { text-decoration: none; color: inherit; }
   </div>
 </div>
 
+<!-- STICKY FOOTER (outside sheet, stuck to viewport bottom) -->
 <div class="pm-footer" id="pm-footer" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:905;">
   <div class="pm-total-display">
     <div class="pm-total-label">Jumlah</div>
@@ -846,7 +301,9 @@ a { text-decoration: none; color: inherit; }
 /* ─── STATE ─── */
 let PRODUCTS      = [];
 let currentGender = 'all';
-let currentFamily = 'all';
+let searchQuery   = '';
+let searchDebounce;
+let searchClear;
 
 /* ─── MODAL STATE ─── */
 let modalProductId  = null;
@@ -860,7 +317,7 @@ let cartCountdownEnd   = 0;
 let cartCountdownTimer = null;
 
 /* =============================================
-   SVG BOTTLE HELPERS
+   SVG BOTTLE
 ============================================= */
 function createMiniBottleSVG(cap, rgbStr) {
   const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
@@ -902,21 +359,6 @@ function createCardBottleSVG(productId, cap, rgbStr) {
   </svg>`;
 }
 
-function miniSVG(cap, rgbStr) {
-  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
-  const uid = Math.random().toString(36).slice(2);
-  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
-    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
-      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-    </linearGradient></defs>
-    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
-    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
-    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
-  </svg>`;
-}
-
 /* =============================================
    STOCK HELPERS
 ============================================= */
@@ -925,14 +367,12 @@ function getStock(id) {
   const p = PRODUCTS.find(x => x.id === id);
   return s[id] !== undefined ? s[id] : (p?.stock ?? CONFIG.INITIAL_STOCK);
 }
-
 function decrementStock(id, qty = 1) {
   const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   s[id] = Math.max(0, (s[id] ?? CONFIG.INITIAL_STOCK) - qty);
   localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(s));
   sbFetch('products?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ stock: s[id] }) }).catch(() => {});
 }
-
 function initStock() {
   const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   let updated = false;
@@ -958,7 +398,6 @@ async function loadProducts() {
     PRODUCTS = rows || [];
     initStock();
     updateCounts();
-    loadFamilyOptions();
     renderGrid();
   } catch(e) {
     document.getElementById('products-grid').innerHTML =
@@ -966,13 +405,21 @@ async function loadProducts() {
   }
 }
 
-function loadFamilyOptions() {
-  const families = [...new Set(PRODUCTS.map(p => p.family).filter(f => f))];
-  const select = document.getElementById('family-select');
-  select.innerHTML = '<option value="all">Semua Keluarga</option>' +
-    families.sort().map(f => `<option value="${f.replace(/"/g, '&quot;')}">${f}</option>`).join('');
+async function init() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('gender')) currentGender = params.get('gender');
+  if (params.get('q')) { searchQuery = params.get('q').toLowerCase(); document.getElementById('search-input').value = params.get('q'); document.getElementById('search-clear').style.display = 'block'; }
+  setActiveTab(currentGender);
+  await loadPricing();
+  await loadProducts();
+  refreshCartUI();
+  loadScentFamilies();
+  startAnnouncementTimer();
 }
 
+/* =============================================
+   GRID RENDER
+============================================= */
 function updateCounts() {
   document.getElementById('cnt-all').textContent = PRODUCTS.length;
   document.getElementById('cnt-m').textContent   = PRODUCTS.filter(p => p.gender === 'm').length;
@@ -983,8 +430,8 @@ function updateCounts() {
 function getFiltered() {
   return PRODUCTS.filter(p => {
     const gOk = currentGender === 'all' || p.gender === currentGender;
-    const fOk = currentFamily === 'all' || p.family === currentFamily;
-    return gOk && fOk;
+    const qOk = !searchQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(searchQuery);
+    return gOk && qOk;
   });
 }
 
@@ -998,7 +445,7 @@ function renderGrid() {
       : '';
 
   if (filtered.length === 0) {
-    grid.innerHTML = '<div class="no-results">Tiada wangian dijumpai untuk filter ini.</div>';
+    grid.innerHTML = '<div class="no-results">Tiada wangian dijumpai untuk carian ini.</div>';
     return;
   }
 
@@ -1044,16 +491,11 @@ function renderGrid() {
 }
 
 /* =============================================
-   FILTER FUNCTIONS
+   TAB SWITCHING
 ============================================= */
 function switchGender(g) {
   currentGender = g;
   setActiveTab(g);
-  renderGrid();
-}
-
-function filterByFamily() {
-  currentFamily = document.getElementById('family-select').value;
   renderGrid();
 }
 
@@ -1066,6 +508,25 @@ function setActiveTab(g) {
     const navEl = document.getElementById('nav-' + (g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex'));
     if (navEl) navEl.classList.add('active');
   }
+}
+
+/* =============================================
+   SEARCH
+============================================= */
+document.getElementById('search-input').addEventListener('input', function() {
+  searchQuery = this.value.toLowerCase().trim();
+  document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(renderGrid, 240);
+});
+document.getElementById('search-input').addEventListener('keydown', e => {
+  if (e.key === 'Escape') clearSearch();
+});
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  searchQuery = '';
+  document.getElementById('search-clear').style.display = 'none';
+  renderGrid();
 }
 
 /* =============================================
@@ -1101,7 +562,6 @@ function openProductModal(productId) {
   document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
   document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
 
-  // Build scent variations (products in same gender)
   buildScentVariations(p);
 
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -1361,6 +821,21 @@ function startCartCountdown() {
   }, 1000);
 }
 
+function miniSVG(cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const uid = Math.random().toString(36).slice(2);
+  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
+    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+    </linearGradient></defs>
+    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
+    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
+    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
+  </svg>`;
+}
+
 function openCart(e) {
   if (e) e.preventDefault();
   document.getElementById('cart-overlay').classList.add('visible');
@@ -1458,10 +933,10 @@ function handleOrderSubmit() {
 }
 
 /* =============================================
-   MEGA MENU & HEADER FUNCTIONS (same as index)
+   MEGA MENU FUNCTIONS
 ============================================= */
 function closeNavSearch() {
-  document.getElementById('nav-search-bar').classList.remove('visible');
+  document.getElementById('nav-search-bar').classList.remove('open');
 }
 
 function closeMegaMenu() {
@@ -1519,7 +994,7 @@ function renderFallbackFamilies() {
 }
 
 /* =============================================
-   ANNOUNCEMENT BAR
+   ANNOUNCEMENT TIMER
 ============================================= */
 function startAnnouncementTimer() {
   let end = Date.now() + 23 * 3600000 + 59 * 60000 + 47 * 1000;
@@ -1535,41 +1010,24 @@ function startAnnouncementTimer() {
     if (sEl) sEl.textContent = String(s).padStart(2, '0');
   }, 1000);
 }
+
 document.getElementById('ann-close')?.addEventListener('click', () => {
   document.getElementById('ann').style.display = 'none';
 });
 
 /* =============================================
-   BOOT
+   EVENT LISTENERS
 ============================================= */
-async function init() {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('gender')) currentGender = params.get('gender');
-  if (params.get('family')) currentFamily = params.get('family');
-  
-  setActiveTab(currentGender);
-  await loadPricing();
-  await loadProducts();
-  refreshCartUI();
-  loadScentFamilies();
-  startAnnouncementTimer();
-  
-  // Nav event listeners
-  document.getElementById('nav-cart-btn').addEventListener('click', openCart);
-  document.getElementById('nav-search-btn').addEventListener('click', () => {
-    document.getElementById('nav-search-bar').classList.toggle('visible');
-  });
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mega-overlay').classList.toggle('visible');
-  });
-  document.querySelector('.nav-logo').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = 'index.html';
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); closeMegaMenu(); closeNavSearch(); }
-  });
-}
+document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+document.getElementById('nav-search-btn').addEventListener('click', () => {
+  document.getElementById('nav-search-bar').classList.toggle('open');
+});
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mega-overlay').classList.toggle('visible');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); closeMegaMenu(); closeNavSearch(); }
+});
 
 init();
 </script>
