@@ -3,385 +3,364 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Artisan Parfum — Wangian Premium Malaysia</title>
-<meta name="description" content="165 wangian premium terinspirasi jenama dunia. 10ml RM25 · 30ml RM49 · 60ml RM79. Beli 3×60ml PERCUMA 1×30ml. Penghantaran seluruh Malaysia.">
-<meta property="og:title" content="The Artisan Parfum — Wangian Premium Malaysia">
-<meta property="og:description" content="165 wangian premium. 10ml RM25 · 30ml RM49 · 60ml RM79.">
-<meta property="og:url" content="https://theartisanparfum.my">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='8' fill='%230A0908'/><text x='32' y='46' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23BF9B5F'>a</text></svg>">
+<title>The Artisan Parfum</title>
+<meta name="description" content="165 wangian premium terinspirasi jenama dunia. 10ml RM25 · 30ml RM49 · 60ml RM79.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23111'/><text x='32' y='46' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23fff'>a</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-  
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-<div class="cur" id="cur"></div>
-<div class="cur2" id="cur2"></div>
-
+<!-- ANNOUNCEMENT BAR -->
 <div id="ann">
   <span class="ann-txt">⚡ Promosi Terhad — Berakhir Dalam</span>
   <div class="ann-cd">
     <b id="cdH">23</b><span class="ann-sep">:</span><b id="cdM">59</b><span class="ann-sep">:</span><b id="cdS">47</b>
   </div>
-  <span class="ann-txt">· Harga Promo Aktif Sekarang</span>
+  <span class="ann-txt">· Harga Promo Aktif</span>
   <button id="ann-close" aria-label="Tutup">✕</button>
 </div>
 
+<!-- NAV -->
 <nav id="main-nav">
-  <a href="index.html" class="logo">the artisan<span>.</span></a>
+  <a href="index.html" class="nav-logo">the artisan</a>
 
-  <ul class="nav-links">
-    <li class="nav-dropdown">
-      <a href="koleksi.html">Koleksi
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </a>
-      <div class="nav-dropdown-panel">
-        <a href="koleksi.html" class="nav-dd-item">
-          <span class="nav-dd-label">Semua Wangian</span>
-          <span class="nav-dd-sub">165 koleksi lengkap</span>
-        </a>
-        <a href="koleksi.html?gender=m" class="nav-dd-item">
-          <span class="nav-dd-label">Untuk Lelaki</span>
-          <span class="nav-dd-sub">55 wangian maskulin</span>
-        </a>
-        <a href="koleksi.html?gender=w" class="nav-dd-item">
-          <span class="nav-dd-label">Untuk Wanita</span>
-          <span class="nav-dd-sub">98 wangian feminin</span>
-        </a>
-        <a href="koleksi.html?gender=u" class="nav-dd-item">
-          <span class="nav-dd-label">Unisex</span>
-          <span class="nav-dd-sub">Untuk semua</span>
-        </a>
-      </div>
-    </li>
-    <li><a href="index.html#bundle">Bundle</a></li>
-    <li><a href="tentang.html">Tentang Kami</a></li>
-    <li><a href="faq.html">FAQ</a></li>
-  </ul>
+  <div class="nav-center">
+    <ul class="nav-center-links">
+      <li><a href="koleksi.html?gender=m" id="nav-men">Men</a></li>
+      <li><a href="koleksi.html?gender=w" id="nav-women">Women</a></li>
+      <li><a href="koleksi.html?gender=u" id="nav-unisex">Unisex</a></li>
+    </ul>
+  </div>
 
-  <div class="nav-utils">
+  <div class="nav-right">
     <!-- Search -->
-    <button class="nav-icon-btn" id="nav-search-btn" aria-label="Cari">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <button class="nav-icon" id="nav-search-btn" aria-label="Cari">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
     <!-- WhatsApp -->
-    <a href="https://wa.me/601159003985" target="_blank" rel="noopener" class="nav-icon-btn" aria-label="WhatsApp">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <a href="https://wa.me/601159003985" target="_blank" rel="noopener" class="nav-icon" aria-label="WhatsApp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
-
-     <button class="theme-toggle nav-icon-btn" id="theme-toggle" aria-label="Tukar tema">
-    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>
-  </button>
-    
     <!-- Cart -->
-    <button class="nav-icon-btn nav-cart" id="nav-cart-btn" aria-label="Troli">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <button class="nav-icon" id="nav-cart-btn" aria-label="Troli" style="position:relative">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       <i class="nav-cart-badge" id="nav-badge">0</i>
     </button>
-    <!-- Mobile hamburger -->
-    <button class="hamburger" id="hamburger" aria-label="Buka Menu" aria-expanded="false">
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<!-- SEARCH BAR (slides down) -->
+<!-- SEARCH BAR -->
 <div class="nav-search-bar" id="nav-search-bar">
   <div class="nav-search-inner">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     <input type="text" id="nav-search-input" placeholder="Cari wangian..." autocomplete="off">
     <button onclick="closeNavSearch()" aria-label="Tutup">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
 </div>
-<nav class="mobile-nav" id="mobile-nav">
-  <a href="koleksi.html">Koleksi</a>
-  <a href="index.html#bundle">Bundle</a>
-  <a href="tentang.html">Tentang Kami</a>
-  <a href="faq.html">FAQ</a>
-  <a href="#" onclick="closeMobileNav(); openCart(event);" style="color:var(--g)">Troli</a>
-  <a href="https://wa.me/601159003985" target="_blank">WhatsApp</a>
-</nav>
 
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Tutup">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section-label">Koleksi</div>
+    <a href="koleksi.html?gender=m" class="drawer-link">Men — 55 Wangian</a>
+    <a href="koleksi.html?gender=w" class="drawer-link">Women — 98 Wangian</a>
+    <a href="koleksi.html?gender=u" class="drawer-link">Unisex</a>
+    <div class="drawer-section-label">Tawaran</div>
+    <a href="#bundle" class="drawer-link" onclick="closeDrawer()">Bundle 3×60ml + Percuma 1×30ml</a>
+    <div class="drawer-section-label">Maklumat</div>
+    <a href="tentang.html" class="drawer-link">Tentang Kami</a>
+    <a href="faq.html" class="drawer-link">FAQ</a>
+    <a href="#shipping" class="drawer-link" onclick="closeDrawer()">Penghantaran</a>
+    <div class="drawer-section-label">Hubungi</div>
+    <a href="https://wa.me/601159003985" target="_blank" class="drawer-wa">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- HERO CAROUSEL -->
 <section class="hero-carousel" id="top">
   <div class="hc-track" id="hc-track">
 
     <!-- SLIDE 1 -->
     <div class="hc-slide">
-      <div class="hc-bg" style="background:linear-gradient(135deg,#1a0f0a 0%,#2d1f14 40%,#1a0f0a 100%)">
-        <!-- decorative blurred circles to mimic soft studio lighting -->
-        <div class="hc-light" style="top:-10%;left:30%;width:600px;height:600px;background:radial-gradient(circle,rgba(196,152,80,.18) 0%,transparent 65%)"></div>
-        <div class="hc-light" style="top:20%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(138,90,120,.12) 0%,transparent 65%)"></div>
-      </div>
+      <div class="hc-bg" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)"></div>
       <div class="hc-content">
         <div class="hc-eyebrow">Koleksi Tandatangan</div>
         <h1 class="hc-title">Wangian yang<br><em>Bercerita</em></h1>
-        <p class="hc-desc">165 wangian premium terinspirasi jenama dunia. Formulasi pati diimport untuk setiap momen.</p>
-        <a href="#collection" class="hc-btn">Terokai Koleksi</a>
-      </div>
-      <div class="hc-visual">
-        <!--<div class="hc-bottles-wrap">
-          <svg width="70" height="196" viewBox="0 0 70 196" fill="none" aria-hidden="true"><defs><linearGradient id="cs1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".95"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient></defs><rect x="25" y="0" width="20" height="14" rx="4" fill="#0E2E42"/><rect x="27" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="24" y="14" width="22" height="9" rx="1.5" fill="#0E2E42" opacity=".6"/><rect x="12" y="23" width="46" height="164" rx="3.5" fill="url(#cs1)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="14" y="25" width="8" height="160" rx="2" fill="rgba(255,255,255,.06)"/><rect x="14" y="72" width="42" height="62" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.07)" stroke-width=".4"/><text x="35" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="3.8" fill="rgba(255,255,255,.5)" letter-spacing="1">THE ARTISAN</text><text x="35" y="107" text-anchor="middle" font-family="Georgia,serif" font-size="3.8" fill="rgba(255,255,255,.5)" letter-spacing="1">PARFUM</text><ellipse cx="35" cy="190" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-          <svg width="88" height="230" viewBox="0 0 88 230" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".18"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".96"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".18"/></linearGradient></defs><rect x="30" y="0" width="28" height="17" rx="6" fill="#5A3A10"/><rect x="33" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.18)"/><rect x="29" y="17" width="30" height="10" rx="1.5" fill="#5A3A10" opacity=".6"/><rect x="14" y="27" width="60" height="192" rx="4" fill="url(#cs2)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="16" y="29" width="10" height="188" rx="2" fill="rgba(255,255,255,.07)"/><rect x="16" y="84" width="56" height="72" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.08)" stroke-width=".5"/><text x="44" y="112" text-anchor="middle" font-family="Georgia,serif" font-size="4.4" fill="rgba(255,255,255,.55)" letter-spacing="1.1">THE ARTISAN</text><text x="44" y="125" text-anchor="middle" font-family="Georgia,serif" font-size="4.4" fill="rgba(255,255,255,.55)" letter-spacing="1.1">PARFUM</text><ellipse cx="44" cy="222" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
-          <svg width="70" height="196" viewBox="0 0 70 196" fill="none" aria-hidden="true"><defs><linearGradient id="cs3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".95"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="25" y="0" width="20" height="14" rx="4" fill="#3A1828"/><rect x="27" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="24" y="14" width="22" height="9" rx="1.5" fill="#3A1828" opacity=".6"/><rect x="12" y="23" width="46" height="164" rx="3.5" fill="url(#cs3)" stroke="rgba(255,255,255,.08)" stroke-width=".6"/><rect x="14" y="25" width="8" height="160" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="35" cy="190" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-        </div>-->
+        <p class="hc-desc">165 wangian premium terinspirasi jenama dunia.</p>
+        <a href="koleksi.html" class="hc-btn">Terokai Koleksi</a>
       </div>
     </div>
 
     <!-- SLIDE 2 -->
     <div class="hc-slide">
-      <div class="hc-bg" style="background:linear-gradient(135deg,#0d1a12 0%,#142a1c 40%,#0d1a12 100%)">
-        <div class="hc-light" style="top:0%;left:20%;width:700px;height:500px;background:radial-gradient(circle,rgba(74,120,88,.2) 0%,transparent 65%)"></div>
-        <div class="hc-light" style="bottom:-10%;right:10%;width:400px;height:400px;background:radial-gradient(circle,rgba(196,160,80,.1) 0%,transparent 65%)"></div>
-      </div>
+      <div class="hc-bg" style="background:linear-gradient(135deg,#111 0%,#222 50%,#111 100%)"></div>
       <div class="hc-content">
         <div class="hc-eyebrow">Untuk Lelaki</div>
         <h1 class="hc-title">55 Wangian<br><em>Maskulin</em></h1>
-        <p class="hc-desc">Dari woody smoky hingga fresh aquatic — pilihan lengkap untuk setiap gaya hidup lelaki moden.</p>
-        <a href="#collection" class="hc-btn" onclick="switchGender('m')">Lihat Koleksi Lelaki</a>
-      </div>
-      <div class="hc-visual">
-        <!--<div class="hc-bottles-wrap">
-          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#2A5A3A" stop-opacity=".2"/><stop offset="50%" stop-color="#2A5A3A" stop-opacity=".95"/><stop offset="100%" stop-color="#2A5A3A" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#0A2410"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.16)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#0A2410" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs4)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-          <svg width="90" height="234" viewBox="0 0 90 234" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".18"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".96"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".18"/></linearGradient></defs><rect x="31" y="0" width="28" height="17" rx="6" fill="#0E2E42"/><rect x="34" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.16)"/><rect x="30" y="17" width="30" height="10" rx="1.5" fill="#0E2E42" opacity=".6"/><rect x="15" y="27" width="60" height="196" rx="4" fill="url(#cs5)"/><rect x="17" y="29" width="10" height="192" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="45" cy="226" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
-          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs6" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A3A2A" stop-opacity=".2"/><stop offset="50%" stop-color="#4A3A2A" stop-opacity=".95"/><stop offset="100%" stop-color="#4A3A2A" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#2A1A0A"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.14)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#2A1A0A" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs6)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.05)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-        </div>-->
+        <p class="hc-desc">Dari woody smoky hingga fresh aquatic.</p>
+        <a href="koleksi.html?gender=m" class="hc-btn">Lihat Koleksi Men</a>
       </div>
     </div>
 
     <!-- SLIDE 3 -->
     <div class="hc-slide">
-      <div class="hc-bg" style="background:linear-gradient(135deg,#1a0d18 0%,#2d1428 40%,#1a0d18 100%)">
-        <div class="hc-light" style="top:-5%;right:25%;width:650px;height:550px;background:radial-gradient(circle,rgba(138,90,120,.22) 0%,transparent 65%)"></div>
-        <div class="hc-light" style="bottom:0%;left:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(196,152,80,.1) 0%,transparent 65%)"></div>
-      </div>
+      <div class="hc-bg" style="background:linear-gradient(135deg,#1c1c1e 0%,#2c2c2e 50%,#1c1c1e 100%)"></div>
       <div class="hc-content">
         <div class="hc-eyebrow">Untuk Wanita</div>
         <h1 class="hc-title">98 Wangian<br><em>Feminin</em></h1>
-        <p class="hc-desc">Floral intim, oriental hangat, fresh ringan — koleksi terlengkap untuk wanita yang tahu apa yang dia mahu.</p>
-        <a href="#collection" class="hc-btn hc-btn--light" onclick="switchGender('w')">Lihat Koleksi Wanita</a>
-      </div>
-      <div class="hc-visual">
-        <!--<div class="hc-bottles-wrap">
-          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs7" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".95"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#3A1828"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.18)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#3A1828" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs7)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-          <svg width="90" height="234" viewBox="0 0 90 234" fill="none" aria-hidden="true" style="margin-bottom:-10px"><defs><linearGradient id="cs8" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".18"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".96"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".18"/></linearGradient></defs><rect x="31" y="0" width="28" height="17" rx="6" fill="#5A3A10"/><rect x="34" y="2" width="7" height="12" rx="2" fill="rgba(255,255,255,.18)"/><rect x="30" y="17" width="30" height="10" rx="1.5" fill="#5A3A10" opacity=".6"/><rect x="15" y="27" width="60" height="196" rx="4" fill="url(#cs8)"/><rect x="17" y="29" width="10" height="192" rx="2" fill="rgba(255,255,255,.07)"/><ellipse cx="45" cy="226" rx="22" ry="3" fill="rgba(0,0,0,.22)"/></svg>
-          <svg width="72" height="200" viewBox="0 0 72 200" fill="none" aria-hidden="true"><defs><linearGradient id="cs9" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C47890" stop-opacity=".2"/><stop offset="50%" stop-color="#C47890" stop-opacity=".95"/><stop offset="100%" stop-color="#C47890" stop-opacity=".2"/></linearGradient></defs><rect x="26" y="0" width="20" height="14" rx="4" fill="#5A1828"/><rect x="28" y="1.5" width="5" height="10" rx="1.5" fill="rgba(255,255,255,.16)"/><rect x="25" y="14" width="22" height="9" rx="1.5" fill="#5A1828" opacity=".6"/><rect x="13" y="23" width="46" height="166" rx="3.5" fill="url(#cs9)"/><rect x="15" y="25" width="7" height="162" rx="2" fill="rgba(255,255,255,.06)"/><ellipse cx="36" cy="193" rx="18" ry="2.5" fill="rgba(0,0,0,.2)"/></svg>
-        </div>-->
+        <p class="hc-desc">Floral intim, oriental hangat, fresh ringan.</p>
+        <a href="koleksi.html?gender=w" class="hc-btn hc-btn--ghost">Lihat Koleksi Women</a>
       </div>
     </div>
 
   </div>
 
-  <!-- DOTS -->
   <div class="hc-dots" id="hc-dots">
     <button class="hc-dot active" onclick="hcGoTo(0)"></button>
     <button class="hc-dot" onclick="hcGoTo(1)"></button>
     <button class="hc-dot" onclick="hcGoTo(2)"></button>
   </div>
-
-
-  <!-- SCROLL HINT -->
-  <div class="hc-scroll-hint">
-    <div class="hc-scroll-line"></div>
-    <span>Scroll</span>
-  </div>
-
+  <div class="hc-counter"><span id="hc-current">1</span> / <span id="hc-total">3</span></div>
 </section>
 
-<div class="ticker-wrap" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Pati Diimport</span><span class="ticker-item">55 Wangian Lelaki</span><span class="ticker-item">98 Wangian Wanita</span><span class="ticker-item">10ml · 30ml · 60ml</span><span class="ticker-item">Terinspirasi Jenama Dunia</span><span class="ticker-item">Ketahanan Sehingga 12 Jam</span><span class="ticker-item">Penghantaran Seluruh Malaysia</span><span class="ticker-item">Bayar FPX · eWallet · Kad</span>
-    <span class="ticker-item">Pati Diimport</span><span class="ticker-item">55 Wangian Lelaki</span><span class="ticker-item">98 Wangian Wanita</span><span class="ticker-item">10ml · 30ml · 60ml</span><span class="ticker-item">Terinspirasi Jenama Dunia</span><span class="ticker-item">Ketahanan Sehingga 12 Jam</span><span class="ticker-item">Penghantaran Seluruh Malaysia</span><span class="ticker-item">Bayar FPX · eWallet · Kad</span>
+<!-- ENTRY GRID — men / women / unisex -->
+<section class="entry-grid" id="collection">
+  <a href="koleksi.html?gender=m" class="entry-card">
+    <div class="entry-card-bg" style="background:#1a1a2e"></div>
+    <div class="entry-card-info">
+      <div class="entry-card-label">Koleksi</div>
+      <div class="entry-card-title">Men</div>
+      <div class="entry-card-count">55 wangian</div>
+      <div class="entry-card-arrow">Shop Now →</div>
+    </div>
+  </a>
+  <a href="koleksi.html?gender=w" class="entry-card">
+    <div class="entry-card-bg" style="background:#111"></div>
+    <div class="entry-card-info">
+      <div class="entry-card-label">Koleksi</div>
+      <div class="entry-card-title">Women</div>
+      <div class="entry-card-count">98 wangian</div>
+      <div class="entry-card-arrow">Shop Now →</div>
+    </div>
+  </a>
+  <a href="koleksi.html?gender=u" class="entry-card">
+    <div class="entry-card-bg" style="background:#1c1c1e"></div>
+    <div class="entry-card-info">
+      <div class="entry-card-label">Koleksi</div>
+      <div class="entry-card-title">Unisex</div>
+      <div class="entry-card-count">Untuk semua</div>
+      <div class="entry-card-arrow">Shop Now →</div>
+    </div>
+  </a>
+</section>
+
+<!-- PRICE STRIP -->
+<div class="strip">
+  <div class="strip-item">
+    <div class="strip-size">10ml</div>
+    <div class="strip-price" id="p10-promo">RM 25</div>
+    <div class="strip-desc">Cuba dahulu</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-size">30ml</div>
+    <div class="strip-price" id="p30-promo">RM 49</div>
+    <div class="strip-desc">Harian</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-size">60ml</div>
+    <div class="strip-price" id="p60-promo">RM 79</div>
+    <div class="strip-desc">Koleksi lengkap</div>
   </div>
 </div>
 
-<section class="collection" id="collection">
-  <div class="section-wrap">
-    <div class="section-label">Koleksi Eksklusif</div>
-    <h2 class="section-title">Pilih <em>Wangian</em> Anda</h2>
-    <p class="section-subtitle">Terinspirasi profil jenama premium dunia — diformulasikan semula dengan pati premium diimport.</p>
-
-    <!-- Gender + Search row -->
-    <div class="coll-toolbar">
-      <div class="coll-gender-btns">
-        <button class="coll-gender-btn active" id="gbtn-m" onclick="switchGender('m')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="14" r="6"/><path d="M20 4l-6 6M20 4h-5M20 4v5"/></svg>
-          Lelaki <span id="count-m">—</span>
-        </button>
-        <button class="coll-gender-btn" id="gbtn-w" onclick="switchGender('w')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="6"/><line x1="12" y1="16" x2="12" y2="22"/><line x1="9" y1="19" x2="15" y2="19"/></svg>
-          Wanita <span id="count-w">—</span>
-        </button>
-        <button class="coll-gender-btn" id="gbtn-u" onclick="switchGender('u')">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
-          Unisex <span id="count-u">—</span>
-        </button>
-      </div>
-      <div class="search-wrap" style="margin:0;max-width:260px">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="search-input" placeholder="Cari wangian..." aria-label="Cari wangian">
-        <button id="search-clear" onclick="clearSearch()" aria-label="Padam">✕</button>
-      </div>
-    </div>
-
-    <!-- Slider -->
-    <!-- Hidden container for all products -->
-    <div id="product-grid" style="display:none;">
-      <!-- products appended here by JS -->
-    </div>
-    
-    <!-- Loading state -->
-    <div id="grid-loading" class="grid-loading">
-      <div class="spinner"></div>
-      <p>Memuatkan produk...</p>
-    </div>
-    
-    <!-- Multi-row slider -->
-    <div id="pslider-rows">
-      <!-- rows built by JS -->
-    </div>
-
-<!-- No results -->
-<div class="no-results" id="no-results" style="display:none">
-  <p>Tiada wangian dijumpai</p>
-  <span>Cuba carian berbeza</span>
-</div>
+<!-- BUNDLE BANNER -->
+<section class="bundle-banner reveal" id="bundle">
+  <div>
+    <div class="bundle-label">Tawaran Eksklusif</div>
+    <h2>Beli 3×60ml<br><em>Percuma 1×30ml</em></h2>
+    <p class="bundle-body">Gabungkan tiga wangian kegemaran anda dan dapatkan satu botol 30ml percuma pilihan anda sendiri.</p>
+    <ul class="bundle-perks">
+      <li>Pilih mana-mana 3 wangian 60ml</li>
+      <li>Dapat 1 botol 30ml percuma — pilihan anda</li>
+      <li>Jimat sehingga RM 49</li>
+      <li>Pembungkusan premium — sempurna untuk hadiah</li>
+    </ul>
+    <a href="koleksi.html" class="btn-primary">Terokai Koleksi 60ml →</a>
   </div>
-</section>
-
-<section class="bundle-section reveal" id="bundle">
-  <div class="bundle-inner">
-    <div>
-      <div class="bundle-tag">🎁 Tawaran Eksklusif</div>
-      <h2>Beli 3×60ml<br><em>Percuma 1×30ml</em></h2>
-      <p class="bundle-body">Gabungkan tiga wangian kegemaran anda dalam satu pesanan dan kami hadirkan satu botol 30ml percuma pilihan anda. Simpan untuk diri atau jadikan hadiah istimewa.</p>
-      <ul class="bundle-perks">
-        <li>Pilih mana-mana 3 wangian 60ml dari koleksi</li>
-        <li>Dapat 1 botol 30ml percuma — pilihan anda</li>
-        <li>Jimat sehingga RM 49 berbanding harga biasa</li>
-        <li>Sesuai untuk lelaki, wanita, atau campuran</li>
-        <li>Pembungkusan premium — sempurna untuk hadiah</li>
-      </ul>
-      <button class="btn-gold" onclick="scrollToSection('collection')">Terokai Koleksi 60ml →</button>
-    </div>
-    <div class="bundle-visual">
-      <div class="bundle-visual-bg">trio</div>
-      <div class="bundle-bottles">
-        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="bv1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A7858" stop-opacity=".3"/><stop offset="48%" stop-color="#4A7858" stop-opacity=".9"/><stop offset="100%" stop-color="#4A7858" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#1A3820"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#1A3820" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#bv1)"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
-        <svg width="62" height="172" viewBox="0 0 62 172" fill="none" aria-hidden="true"><defs><linearGradient id="bv2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".28"/><stop offset="48%" stop-color="#C49A62" stop-opacity=".9"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".28"/></linearGradient></defs><rect x="21" y="0" width="20" height="11" rx="5" fill="#5A3A10"/><rect x="23" y="1.5" width="5" height="7.5" rx="1" fill="rgba(255,255,255,.16)"/><rect x="20" y="11" width="22" height="7" rx="1" fill="#5A3A10" opacity=".6"/><rect x="10" y="18" width="42" height="146" rx="3" fill="url(#bv2)"/><rect x="12" y="20" width="7" height="142" rx="1.5" fill="rgba(255,255,255,.06)"/><ellipse cx="31" cy="166" rx="14" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
-        <svg width="50" height="152" viewBox="0 0 50 152" fill="none" aria-hidden="true"><defs><linearGradient id="bv3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".3"/><stop offset="48%" stop-color="#8A5A78" stop-opacity=".9"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".3"/></linearGradient></defs><rect x="17" y="0" width="16" height="11" rx="3" fill="#3A1828"/><rect x="19" y="1.5" width="4" height="7.5" rx="1" fill="rgba(255,255,255,.15)"/><rect x="16" y="11" width="18" height="7" rx="1" fill="#3A1828" opacity=".6"/><rect x="8" y="18" width="34" height="126" rx="2.5" fill="url(#bv3)"/><rect x="10" y="20" width="5" height="122" rx="1" fill="rgba(255,255,255,.06)"/><ellipse cx="25" cy="146" rx="11.5" ry="1.8" fill="rgba(0,0,0,.07)"/></svg>
-      </div>
+  <div class="bundle-visual-side">
+    <div class="bundle-bottles">
+      <svg width="48" height="148" viewBox="0 0 48 148" fill="none"><defs><linearGradient id="bv1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#333" stop-opacity=".3"/><stop offset="50%" stop-color="#333" stop-opacity=".9"/><stop offset="100%" stop-color="#333" stop-opacity=".3"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#111"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#111" opacity=".6"/><rect x="7" y="16" width="34" height="124" rx="2.5" fill="url(#bv1)"/><rect x="9" y="18" width="5" height="120" rx="1" fill="rgba(255,255,255,.06)"/></svg>
+      <svg width="60" height="168" viewBox="0 0 60 168" fill="none"><defs><linearGradient id="bv2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#444" stop-opacity=".3"/><stop offset="50%" stop-color="#444" stop-opacity=".9"/><stop offset="100%" stop-color="#444" stop-opacity=".3"/></linearGradient></defs><rect x="20" y="0" width="20" height="12" rx="4" fill="#111"/><rect x="19" y="12" width="22" height="7" rx="1" fill="#111" opacity=".6"/><rect x="9" y="19" width="42" height="142" rx="3" fill="url(#bv2)"/><rect x="11" y="21" width="7" height="138" rx="1.5" fill="rgba(255,255,255,.06)"/></svg>
+      <svg width="48" height="148" viewBox="0 0 48 148" fill="none"><defs><linearGradient id="bv3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#555" stop-opacity=".3"/><stop offset="50%" stop-color="#555" stop-opacity=".9"/><stop offset="100%" stop-color="#555" stop-opacity=".3"/></linearGradient></defs><rect x="16" y="0" width="16" height="10" rx="3" fill="#111"/><rect x="15" y="10" width="18" height="6" rx="1" fill="#111" opacity=".6"/><rect x="7" y="16" width="34" height="124" rx="2.5" fill="url(#bv3)"/><rect x="9" y="18" width="5" height="120" rx="1" fill="rgba(255,255,255,.06)"/></svg>
     </div>
   </div>
 </section>
 
-<section class="why-section">
-  <div class="section-wrap">
-    <div class="section-label">Kenapa The Artisan</div>
-    <h2 class="section-title">Kualiti yang <em>Tidak Berkompromi</em></h2>
-    <div class="why-grid">
-      <div class="why-card reveal"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M12 22V12M12 12C12 7 7 4 2 5c0 5 3 9 10 7M12 12c0-5 5-8 10-7-1 5-4 9-10 7"/></svg></div><div class="why-title">Pati Premium Diimport</div><p class="why-body">Setiap formula menggunakan pati wangian berkualiti tinggi yang diimport — profil wangian setara dengan inspirasi jenama asal dunia.</p></div>
-      <div class="why-card reveal delay-1"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 3h6M12 3v2"/></svg></div><div class="why-title">Ketahanan Sehingga 12 Jam</div><p class="why-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam. Tidak perlu semprot berulang kali sepanjang hari.</p></div>
-      <div class="why-card reveal delay-2"><div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div class="why-title">Tiga Saiz Untuk Semua</div><p class="why-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Setiap saiz menawarkan nilai terbaik untuk harganya.</p></div>
-    </div>
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature reveal">
+    <div class="feature-num">01</div>
+    <div class="feature-title">Pati Premium Diimport</div>
+    <p class="feature-body">Setiap formula menggunakan pati berkualiti tinggi yang diimport — setara dengan jenama asal dunia.</p>
+  </div>
+  <div class="feature reveal delay-1">
+    <div class="feature-num">02</div>
+    <div class="feature-title">Ketahanan Sehingga 12 Jam</div>
+    <p class="feature-body">Formulasi kami memastikan wangian bertahan dari pagi ke malam tanpa perlu semprot berulang kali.</p>
+  </div>
+  <div class="feature reveal delay-2">
+    <div class="feature-num">03</div>
+    <div class="feature-title">Tiga Saiz Tersedia</div>
+    <p class="feature-body">10ml untuk mencuba, 30ml untuk harian, 60ml untuk koleksi. Nilai terbaik untuk setiap saiz.</p>
   </div>
 </section>
 
-<section class="how-section">
-  <div class="section-wrap">
-    <div class="section-label">Proses Mudah</div>
-    <h2 class="section-title">Cara <em>Membuat Pesanan</em></h2>
-    <div class="how-grid">
-      <div class="how-card reveal"><div class="how-num">01</div><div class="how-title">Pilih Saiz</div><p class="how-body">Klik butang saiz yang anda mahu pada kad produk — 10ml, 30ml, atau 60ml. Saiz yang dipilih akan disorot.</p></div>
-      <div class="how-card reveal delay-1"><div class="how-num">02</div><div class="how-title">Tambah ke Troli</div><p class="how-body">Klik butang "Tambah ke Troli" pada kad produk. Wangian anda akan masuk ke dalam troli beli-belah.</p></div>
-      <div class="how-card reveal delay-2"><div class="how-num">03</div><div class="how-title">Sahkan & Bayar</div><p class="how-body">Buka troli, isi maklumat penghantaran, dan bayar melalui ToyyibPay (FPX · Kad · eWallet) atau WhatsApp.</p></div>
-    </div>
-  </div>
-</section>
-
+<!-- TESTIMONIALS -->
 <section class="testi-section">
-  <div class="section-wrap">
-    <div class="section-label">Pelanggan Setia</div>
-    <h2 class="section-title">Apa Kata <em>Mereka</em></h2>
-    <div class="testi-grid">
-      <div class="testi-card reveal"><div class="testi-stars">★★★★★</div><p class="testi-body">"Dah cuba banyak inspired perfume, tapi The Artisan memang lain. Aventus tahan dari pagi sampai malam — husband pun puji!"</p><div class="testi-name">Nur Aisyah R.</div><div class="testi-location">Kuala Lumpur</div></div>
-      <div class="testi-card reveal delay-1"><div class="testi-stars">★★★★★</div><p class="testi-body">"Harga berpatutan tapi kualiti tak main-main. Dah order 3 kali. Good Girl jadi signature scent saya sekarang."</p><div class="testi-name">Farah D.</div><div class="testi-location">Shah Alam</div></div>
-      <div class="testi-card reveal delay-2"><div class="testi-stars">★★★★★</div><p class="testi-body">"Hadiah untuk isteri — dia tanya beli kat mana. Pembungkusan kemas, wangian tahan lama. Memang recommend kepada semua!"</p><div class="testi-name">Ahmad Zaki B.</div><div class="testi-location">Johor Bahru</div></div>
+  <div class="testi-label">Pelanggan Setia</div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-body">"Dah cuba banyak inspired perfume, tapi The Artisan memang lain. Tahan dari pagi sampai malam."</p>
+      <div class="testi-name">Nur Aisyah R.</div>
+      <div class="testi-location">Kuala Lumpur</div>
+    </div>
+    <div class="testi-card reveal delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-body">"Harga berpatutan tapi kualiti tak main-main. Dah order 3 kali. Good Girl jadi signature scent saya."</p>
+      <div class="testi-name">Farah D.</div>
+      <div class="testi-location">Shah Alam</div>
+    </div>
+    <div class="testi-card reveal delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-body">"Hadiah untuk isteri — dia tanya beli kat mana. Pembungkusan kemas, wangian tahan lama."</p>
+      <div class="testi-name">Ahmad Zaki B.</div>
+      <div class="testi-location">Johor Bahru</div>
     </div>
   </div>
 </section>
 
-<section class="shipping-section" id="shipping">
-  <div class="section-wrap">
-    <div class="section-label">Penghantaran</div>
-    <h2 class="section-title">Cepat & <em>Selamat</em></h2>
-    <div class="shipping-grid">
-      <div class="shipping-card reveal"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><div class="shipping-title">Penghantaran Pantas</div><p class="shipping-body">Semenanjung 2–4 hari bekerja. Sabah & Sarawak 4–7 hari bekerja.</p></div>
-      <div class="shipping-card reveal delay-1"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div class="shipping-title">Pembungkusan Selamat</div><p class="shipping-body">Setiap botol dibungkus bubble wrap dan kotak khas — tiba dalam keadaan sempurna.</p></div>
-      <div class="shipping-card reveal delay-2"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 5v3h-7V8zM5.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.5 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg></div><div class="shipping-title">Percuma RM150+</div><p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj penghantaran RM8 sahaja.</p></div>
-      <div class="shipping-card reveal delay-3"><div class="shipping-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div><div class="shipping-title">Polisi Pemulangan</div><p class="shipping-body">Produk rosak atau salah hantar akan diganti dalam masa 7 hari bekerja. Hubungi kami via WhatsApp.</p></div>
-    </div>
+<!-- SHIPPING -->
+<div class="shipping-row" id="shipping">
+  <div class="shipping-item">
+    <div class="shipping-title">Penghantaran Pantas</div>
+    <p class="shipping-body">Semenanjung 2–4 hari. Sabah & Sarawak 4–7 hari bekerja.</p>
   </div>
-</section>
+  <div class="shipping-item">
+    <div class="shipping-title">Pembungkusan Selamat</div>
+    <p class="shipping-body">Setiap botol dibungkus bubble wrap — tiba dalam keadaan sempurna.</p>
+  </div>
+  <div class="shipping-item">
+    <div class="shipping-title">Percuma RM150+</div>
+    <p class="shipping-body">Penghantaran percuma untuk order RM150 ke atas. Di bawah RM150 caj RM8 sahaja.</p>
+  </div>
+  <div class="shipping-item">
+    <div class="shipping-title">Polisi Pemulangan</div>
+    <p class="shipping-body">Produk rosak atau salah hantar diganti dalam 7 hari. Hubungi via WhatsApp.</p>
+  </div>
+</div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
-      <a href="#top" class="footer-logo">the artisan<span>.</span></a>
-      <p class="footer-about">165 wangian premium untuk mereka yang menghargai kualiti. Pati diimport. Formula terinspirasi jenama mewah dunia.</p>
+      <a href="#top" class="footer-brand">the artisan</a>
+      <p class="footer-about">165 wangian premium. Pati diimport. Terinspirasi jenama mewah dunia.</p>
       <div class="footer-socials">
-        <a href="#" class="social-link" aria-label="Instagram">📷</a>
-        <a href="#" class="social-link" aria-label="TikTok">🎵</a>
-        <a href="#" class="social-link" aria-label="Facebook">📘</a>
-        <a href="https://wa.me/601159003985" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+        <a href="#" class="footer-social" aria-label="Instagram">📷</a>
+        <a href="#" class="footer-social" aria-label="TikTok">🎵</a>
+        <a href="#" class="footer-social" aria-label="Facebook">📘</a>
+        <a href="https://wa.me/601159003985" class="footer-social" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
       </div>
     </div>
-    <div class="footer-col"><h5>Koleksi</h5><ul><li><a href="#collection">Untuk Lelaki</a></li><li><a href="#collection">Untuk Wanita</a></li><li><a href="#bundle">Bundle 3+1</a></li></ul></div>
-    <div class="footer-col"><h5>Maklumat</h5><ul><li><a href="#shipping">Penghantaran</a></li><li><a href="#">FAQ</a></li><li><a href="#">Tentang Kami</a></li></ul></div>
-    <div class="footer-col"><h5>Hubungi Kami</h5><ul><li><a href="https://wa.me/601159003985" target="_blank">WhatsApp</a></li><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li></ul></div>
+    <div class="footer-col">
+      <h5>Koleksi</h5>
+      <ul>
+        <li><a href="koleksi.html?gender=m">Men</a></li>
+        <li><a href="koleksi.html?gender=w">Women</a></li>
+        <li><a href="koleksi.html?gender=u">Unisex</a></li>
+        <li><a href="#bundle">Bundle 3+1</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Maklumat</h5>
+      <ul>
+        <li><a href="#shipping">Penghantaran</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="tentang.html">Tentang Kami</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Hubungi</h5>
+      <ul>
+        <li><a href="https://wa.me/601159003985" target="_blank">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
     <p class="footer-copy">© 2026 The Artisan Parfum. Semua hak terpelihara.</p>
-    <div class="footer-legal"><a href="#">Privasi</a><a href="#">Terma & Syarat</a><a href="#">Polisi Pemulangan</a></div>
+    <div class="footer-legal">
+      <a href="#">Privasi</a>
+      <a href="#">Terma & Syarat</a>
+      <a href="#">Polisi Pemulangan</a>
+    </div>
   </div>
-  <p class="footer-disclaimer">Nota: Semua wangian The Artisan Parfum adalah produk asal yang terinspirasi oleh profil wangian jenama premium dunia. The Artisan Parfum tidak berafiliasi, disahkan, atau berkaitan dengan mana-mana jenama yang disebutkan. Nama jenama digunakan semata-mata untuk tujuan perbandingan profil wangian sahaja.</p>
+  <p class="footer-disclaimer">Nota: Semua wangian The Artisan Parfum adalah produk asal yang terinspirasi oleh profil wangian jenama premium dunia. Tidak berafiliasi dengan mana-mana jenama yang disebutkan.</p>
 </footer>
 
-<!-- CART SIDE PANEL -->
+<!-- CART PANEL -->
 <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
-<aside class="cart-panel" id="cart-panel" aria-label="Troli Beli-belah" aria-modal="true">
+<aside class="cart-panel" id="cart-panel" aria-label="Troli" aria-modal="true">
   <div class="cart-header">
-    <div><div class="cart-header-title">Troli Anda</div><span class="cart-header-count" id="cart-count-label"></span></div>
-    <button class="cart-close" onclick="closeCart()" aria-label="Tutup troli">✕</button>
+    <div>
+      <div class="cart-header-title">Troli</div>
+      <span class="cart-header-count" id="cart-count-label"></span>
+    </div>
+    <button class="cart-close" onclick="closeCart()" aria-label="Tutup">✕</button>
   </div>
   <div class="cart-body" id="cart-body">
-    <div class="cart-empty" id="cart-empty"><p>Troli kosong</p><span>Tambah wangian untuk mula membeli</span></div>
+    <div class="cart-empty" id="cart-empty">
+      <p>Troli kosong</p>
+      <span>Tambah wangian untuk mula membeli</span>
+    </div>
     <div id="cart-items-list"></div>
     <div class="cart-bundle-hint" id="bundle-hint" style="display:none"></div>
     <div class="cart-countdown" id="cart-countdown" style="display:none">
-      <span class="cart-cd-icon">⏳</span>
-      <div><div class="cart-cd-label">Troli anda disimpan selama</div><span class="cart-cd-time" id="cart-cd-display">15:00</span></div>
+      <span>⏳</span>
+      <div>
+        <div class="cart-cd-label">Troli disimpan selama</div>
+        <span class="cart-cd-time" id="cart-cd-display">15:00</span>
+      </div>
     </div>
   </div>
   <div class="cart-footer" id="cart-footer" style="display:none">
-    <div class="cart-total-row"><span class="cart-total-label">Jumlah</span><span class="cart-total-value" id="cart-total-display">RM 0</span></div>
+    <div class="cart-total-row">
+      <span class="cart-total-label">Jumlah</span>
+      <span class="cart-total-value" id="cart-total-display">RM 0</span>
+    </div>
     <div class="cart-savings" id="cart-savings-display"></div>
     <button class="btn-proceed-checkout" onclick="openOrderModal()">Teruskan ke Bayaran →</button>
     <button class="btn-whatsapp-order" onclick="sendCartViaWhatsApp()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Pesan via WhatsApp
     </button>
   </div>
@@ -394,132 +373,65 @@
     <div id="modal-form">
       <div class="modal-eyebrow">Maklumat Penghantaran</div>
       <h2 class="modal-title" id="modal-title">Sahkan Pesanan</h2>
-      <p class="modal-subtitle">Isi maklumat di bawah. Anda akan diarahkan ke halaman pembayaran selamat.</p>
-      <div class="order-summary" id="modal-order-summary" aria-label="Ringkasan pesanan"></div>
+      <p class="modal-subtitle">Isi maklumat di bawah untuk meneruskan pembayaran.</p>
+      <div class="order-summary" id="modal-order-summary"></div>
       <div class="form-group"><label for="field-name">Nama Penuh *</label><input type="text" id="field-name" placeholder="Nama anda" autocomplete="name"><div class="form-error" id="err-name">Nama tidak sah (minimum 3 huruf)</div></div>
-      <div class="form-group"><label for="field-phone">No. Telefon *</label><input type="tel" id="field-phone" placeholder="01X-XXXXXXX" autocomplete="tel"><div class="form-error" id="err-phone">No. telefon tidak sah (format: 01X-XXXXXXX)</div></div>
-      <div class="form-group"><label for="field-email">Emel <span style="color:var(--m)">(Opsyen)</span></label><input type="email" id="field-email" placeholder="email@contoh.com" autocomplete="email"><div class="form-error" id="err-email">Emel tidak sah</div></div>
-      <div class="form-group"><label for="field-address">Alamat Penghantaran *</label><textarea id="field-address" placeholder="No. rumah, jalan, taman..." autocomplete="street-address"></textarea><div class="form-error" id="err-address">Sila masukkan alamat lengkap (minimum 10 huruf)</div></div>
+      <div class="form-group"><label for="field-phone">No. Telefon *</label><input type="tel" id="field-phone" placeholder="01X-XXXXXXX" autocomplete="tel"><div class="form-error" id="err-phone">No. telefon tidak sah</div></div>
+      <div class="form-group"><label for="field-email">Emel <span style="color:var(--muted)">(Opsyen)</span></label><input type="email" id="field-email" placeholder="email@contoh.com" autocomplete="email"><div class="form-error" id="err-email">Emel tidak sah</div></div>
+      <div class="form-group"><label for="field-address">Alamat Penghantaran *</label><textarea id="field-address" placeholder="No. rumah, jalan, taman..." autocomplete="street-address"></textarea><div class="form-error" id="err-address">Sila masukkan alamat lengkap</div></div>
       <div class="form-row">
         <div class="form-group"><label for="field-state">Negeri *</label>
-          <select id="field-state" autocomplete="address-level1"><option value="">Pilih Negeri</option><option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option><option>Perlis</option><option>Pulau Pinang</option><option>Sabah</option><option>Sarawak</option><option>Selangor</option><option>Terengganu</option><option>W.P. Kuala Lumpur</option><option>W.P. Labuan</option><option>W.P. Putrajaya</option></select>
+          <select id="field-state"><option value="">Pilih Negeri</option><option>Johor</option><option>Kedah</option><option>Kelantan</option><option>Melaka</option><option>Negeri Sembilan</option><option>Pahang</option><option>Perak</option><option>Perlis</option><option>Pulau Pinang</option><option>Sabah</option><option>Sarawak</option><option>Selangor</option><option>Terengganu</option><option>W.P. Kuala Lumpur</option><option>W.P. Labuan</option><option>W.P. Putrajaya</option></select>
           <div class="form-error" id="err-state">Sila pilih negeri</div></div>
-        <div class="form-group"><label for="field-postcode">Poskod *</label><input type="text" id="field-postcode" placeholder="XXXXX" maxlength="5" autocomplete="postal-code"><div class="form-error" id="err-postcode">Poskod tidak sah (5 digit)</div></div>
+        <div class="form-group"><label for="field-postcode">Poskod *</label><input type="text" id="field-postcode" placeholder="XXXXX" maxlength="5"><div class="form-error" id="err-postcode">Poskod tidak sah (5 digit)</div></div>
       </div>
-      <div class="form-group"><label for="field-note">Nota <span style="color:var(--m)">(Opsyen)</span></label><input type="text" id="field-note" placeholder="Pilihan 30ml percuma untuk bundle, arahan khas..."></div>
-      <div class="form-total-row"><span class="form-total-label">Jumlah Bayaran</span><span class="form-total-value" id="modal-total-display">RM 0</span></div>
-      <button class="btn-submit" id="submit-btn" onclick="handleOrderSubmit()">Sahkan &amp; Bayar via ToyyibPay →</button>
-      <p class="form-security-note">🔒 Pembayaran selamat · FPX · Kad Kredit · eWallet</p>
+      <div class="form-group"><label for="field-note">Nota (Opsyen)</label><input type="text" id="field-note" placeholder="Pilihan 30ml percuma, arahan khas..."></div>
+      <div class="form-total-row">
+        <span class="form-total-label">Jumlah Bayaran</span>
+        <span class="form-total-value" id="modal-total-display">RM 0</span>
+      </div>
+      <button class="btn-submit" id="submit-btn" onclick="handleOrderSubmit()">Sahkan & Bayar via ToyyibPay →</button>
+      <p class="form-security-note">🔒 FPX · Kad Kredit · eWallet</p>
     </div>
-    <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--m2);letter-spacing:.06em">Memproses pesanan anda...</p></div>
+    <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--muted);letter-spacing:.06em">Memproses pesanan...</p></div>
     <div class="modal-success" id="modal-success">
-      <div class="success-icon"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg></div>
+      <div class="success-icon">✓</div>
       <h3>Pesanan Dihantar!</h3>
-      <p>Pasukan kami akan menghubungi anda melalui <strong style="color:var(--g)">WhatsApp</strong> dalam masa 1–2 jam untuk pengesahan bayaran dan penghantaran.<br><br>Sila semak mesej WhatsApp anda.</p>
+      <p>Pasukan kami akan menghubungi anda melalui <strong>WhatsApp</strong> dalam masa 1–2 jam.<br><br>Sila semak mesej WhatsApp anda.</p>
       <div class="success-tag">selamat datang ke the artisan parfum.</div>
     </div>
   </div>
 </div>
 
-<a href="https://wa.me/601159003985?text=Salam%2C+saya+ingin+bertanya+tentang+The+Artisan+Parfum." class="float-wa" target="_blank" rel="noopener" aria-label="Hubungi kami via WhatsApp">
-  <span class="float-wa-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span><span class="float-wa-text">Tanya Kami</span>
-</a>
-<div class="float-cart" id="float-cart" onclick="openCart(event)" role="button" tabindex="0" aria-label="Buka troli" onkeypress="if(event.key==='Enter')openCart(event)">
-  <div class="float-cart-badge" id="float-cart-badge">0</div>
-  <span class="float-cart-label">Troli</span>
-</div>
-
-<script src="js/config.js"></script>
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/main.js"></script>
-
 <!-- PROMO POPUP -->
 <div class="promo-popup-overlay" id="promo-overlay" onclick="if(event.target===this)closePromoPopup()">
   <div class="promo-popup">
     <button class="promo-close" onclick="closePromoPopup()" aria-label="Tutup">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-
-    <!-- LEFT: IMAGE -->
     <div class="promo-popup-img" id="promo-popup-img-wrap">
       <svg viewBox="0 0 420 480" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-        <rect width="420" height="480" fill="#EDE8DF"/>
-        <!-- ambient glow -->
-        <radialGradient id="ambglow" cx="50%" cy="60%" r="55%"><stop offset="0%" stop-color="rgba(196,160,96,.18)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
-        <rect width="420" height="480" fill="url(#ambglow)"/>
-        <!-- surface -->
-        <rect x="40" y="300" width="340" height="14" rx="4" fill="rgba(154,114,64,.12)"/>
-        <rect x="60" y="310" width="300" height="6" rx="3" fill="rgba(154,114,64,.07)"/>
+        <rect width="420" height="480" fill="#f0ede8"/>
         <defs>
-          <linearGradient id="pb1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4A7858" stop-opacity=".2"/><stop offset="50%" stop-color="#4A7858" stop-opacity=".9"/><stop offset="100%" stop-color="#4A7858" stop-opacity=".2"/></linearGradient>
-          <linearGradient id="pb2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#C49A62" stop-opacity=".2"/><stop offset="50%" stop-color="#C49A62" stop-opacity=".94"/><stop offset="100%" stop-color="#C49A62" stop-opacity=".2"/></linearGradient>
-          <linearGradient id="pb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8A5A78" stop-opacity=".2"/><stop offset="50%" stop-color="#8A5A78" stop-opacity=".9"/><stop offset="100%" stop-color="#8A5A78" stop-opacity=".2"/></linearGradient>
-          <linearGradient id="pb4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3A6A88" stop-opacity=".2"/><stop offset="50%" stop-color="#3A6A88" stop-opacity=".9"/><stop offset="100%" stop-color="#3A6A88" stop-opacity=".2"/></linearGradient>
-          <!-- box patterns -->
-          <pattern id="pat1" patternUnits="userSpaceOnUse" width="8" height="8"><rect width="8" height="8" fill="#C49A62" opacity=".08"/><path d="M0 0l8 8M8 0l-8 8" stroke="#C49A62" stroke-width=".5" opacity=".15"/></pattern>
-          <pattern id="pat2" patternUnits="userSpaceOnUse" width="10" height="10"><circle cx="5" cy="5" r="2" fill="#8A5A78" opacity=".12"/></pattern>
-          <pattern id="pat3" patternUnits="userSpaceOnUse" width="8" height="8"><rect width="8" height="8" fill="#4A7858" opacity=".07"/><rect x="1" y="1" width="6" height="6" fill="none" stroke="#4A7858" stroke-width=".4" opacity=".2"/></pattern>
+          <linearGradient id="pb1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#333" stop-opacity=".2"/><stop offset="50%" stop-color="#333" stop-opacity=".85"/><stop offset="100%" stop-color="#333" stop-opacity=".2"/></linearGradient>
+          <linearGradient id="pb2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#111" stop-opacity=".25"/><stop offset="50%" stop-color="#111" stop-opacity=".9"/><stop offset="100%" stop-color="#111" stop-opacity=".25"/></linearGradient>
+          <linearGradient id="pb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#555" stop-opacity=".2"/><stop offset="50%" stop-color="#555" stop-opacity=".85"/><stop offset="100%" stop-color="#555" stop-opacity=".2"/></linearGradient>
         </defs>
-        <!-- BOX 1 — left back -->
-        <rect x="54" y="148" width="72" height="152" rx="3" fill="url(#pat1)" stroke="rgba(196,154,98,.3)" stroke-width="1"/>
-        <rect x="56" y="150" width="68" height="148" rx="2" fill="rgba(196,154,98,.06)"/>
-        <text x="90" y="228" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(154,114,64,.6)" letter-spacing="1.2">THE ARTISAN</text>
-        <text x="90" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="rgba(154,114,64,.45)" letter-spacing=".8">PARFUM</text>
-        <!-- BOX 2 — right back -->
-        <rect x="294" y="158" width="68" height="142" rx="3" fill="url(#pat2)" stroke="rgba(138,90,120,.28)" stroke-width="1"/>
-        <rect x="296" y="160" width="64" height="138" rx="2" fill="rgba(138,90,120,.05)"/>
-        <text x="328" y="232" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(138,90,120,.55)" letter-spacing="1">THE ARTISAN</text>
-        <!-- BOX 3 — center back -->
-        <rect x="172" y="128" width="76" height="172" rx="3" fill="url(#pat3)" stroke="rgba(74,120,88,.28)" stroke-width="1"/>
-        <rect x="174" y="130" width="72" height="168" rx="2" fill="rgba(74,120,88,.05)"/>
-        <text x="210" y="216" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="rgba(74,120,88,.55)" letter-spacing="1">THE ARTISAN</text>
-        <!-- BOTTLE 1 — left -->
-        <rect x="78" y="174" width="13" height="10" rx="2.5" fill="#1A3820"/>
-        <rect x="77" y="184" width="15" height="5" rx="1" fill="#1A3820" opacity=".55"/>
-        <rect x="69" y="189" width="30" height="112" rx="2.5" fill="url(#pb1)"/>
-        <rect x="71" y="191" width="4.5" height="108" rx="1" fill="rgba(255,255,255,.07)"/>
-        <ellipse cx="84" cy="303" rx="16" ry="2.2" fill="rgba(0,0,0,.09)"/>
-        <!-- BOTTLE 2 — center (tallest) -->
-        <rect x="200" y="148" width="20" height="13" rx="4" fill="#5A3A10"/>
-        <rect x="199" y="161" width="22" height="7" rx="1" fill="#5A3A10" opacity=".55"/>
-        <rect x="190" y="168" width="40" height="136" rx="3" fill="url(#pb2)"/>
-        <rect x="192" y="170" width="6" height="132" rx="1.5" fill="rgba(255,255,255,.07)"/>
-        <rect x="192" y="210" width="32" height="50" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)" stroke-width=".5"/>
-        <text x="210" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">THE ARTISAN</text>
-        <text x="210" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="3.4" fill="rgba(255,255,255,.5)" letter-spacing=".9">PARFUM</text>
-        <ellipse cx="210" cy="306" rx="22" ry="2.8" fill="rgba(0,0,0,.09)"/>
-        <!-- BOTTLE 3 — right -->
-        <rect x="314" y="182" width="13" height="10" rx="2.5" fill="#3A1828"/>
-        <rect x="313" y="192" width="15" height="5" rx="1" fill="#3A1828" opacity=".55"/>
-        <rect x="305" y="197" width="30" height="106" rx="2.5" fill="url(#pb3)"/>
-        <rect x="307" y="199" width="4.5" height="102" rx="1" fill="rgba(255,255,255,.07)"/>
-        <ellipse cx="320" cy="305" rx="16" ry="2.2" fill="rgba(0,0,0,.09)"/>
-        <!-- FREE bottle — small, right foreground -->
-        <rect x="348" y="222" width="11" height="8" rx="2" fill="#0E2E42"/>
-        <rect x="347" y="230" width="13" height="4" rx="1" fill="#0E2E42" opacity=".55"/>
-        <rect x="341" y="234" width="26" height="68" rx="2" fill="url(#pb4)"/>
-        <rect x="343" y="236" width="3.5" height="64" rx="1" fill="rgba(255,255,255,.07)"/>
-        <ellipse cx="354" cy="304" rx="14" ry="1.8" fill="rgba(0,0,0,.08)"/>
-        <!-- FREE badge -->
-        <rect x="336" y="206" width="50" height="18" rx="2" fill="#9A7240"/>
-        <text x="361" y="218" text-anchor="middle" font-family="Georgia,serif" font-size="8.5" fill="#fff" letter-spacing="1.5">PERCUMA</text>
-        <!-- decorative label on surface -->
-        <text x="210" y="338" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-style="italic" fill="rgba(154,114,64,.28)" letter-spacing="2">the artisan parfum</text>
+        <rect x="40" y="300" width="340" height="10" rx="3" fill="rgba(0,0,0,.08)"/>
+        <rect x="78" y="174" width="13" height="10" rx="2.5" fill="#111"/><rect x="77" y="184" width="15" height="5" rx="1" fill="#111" opacity=".55"/><rect x="69" y="189" width="30" height="112" rx="2.5" fill="url(#pb1)"/><rect x="71" y="191" width="4.5" height="108" rx="1" fill="rgba(255,255,255,.07)"/>
+        <rect x="200" y="148" width="20" height="13" rx="4" fill="#111"/><rect x="199" y="161" width="22" height="7" rx="1" fill="#111" opacity=".55"/><rect x="190" y="168" width="40" height="136" rx="3" fill="url(#pb2)"/><rect x="192" y="170" width="6" height="132" rx="1.5" fill="rgba(255,255,255,.07)"/>
+        <rect x="314" y="182" width="13" height="10" rx="2.5" fill="#111"/><rect x="313" y="192" width="15" height="5" rx="1" fill="#111" opacity=".55"/><rect x="305" y="197" width="30" height="106" rx="2.5" fill="url(#pb3)"/><rect x="307" y="199" width="4.5" height="102" rx="1" fill="rgba(255,255,255,.07)"/>
+        <rect x="336" y="206" width="50" height="18" rx="2" fill="#111"/>
+        <text x="361" y="219" text-anchor="middle" font-family="Georgia,serif" font-size="8" fill="#fff" letter-spacing="1.5">PERCUMA</text>
+        <text x="210" y="338" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-style="italic" fill="rgba(0,0,0,.2)" letter-spacing="2">the artisan parfum</text>
       </svg>
     </div>
-
-    <!-- RIGHT: CONTENT -->
     <div class="promo-popup-body">
       <div class="promo-popup-eyebrow">Tawaran Eksklusif</div>
       <h2 class="promo-popup-title">Beli <em>3×60ml</em><br>Percuma <em>1×30ml</em></h2>
-      <p class="promo-popup-desc">Pilih mana-mana 3 wangian 60ml dari koleksi kami dan dapatkan 1 botol 30ml percuma pilihan anda sendiri.</p>
+      <p class="promo-popup-desc">Pilih mana-mana 3 wangian 60ml dan dapatkan 1 botol 30ml percuma pilihan anda.</p>
       <p class="promo-popup-saving">Jimat sehingga <strong>RM 49</strong></p>
-      <a href="#bundle" class="promo-popup-cta" onclick="closePromoPopup()">
-        Beli Sekarang
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-      </a>
+      <a href="#bundle" class="promo-popup-cta" onclick="closePromoPopup()">Beli Sekarang →</a>
       <label class="promo-popup-check">
         <input type="checkbox" id="promo-dont-show" onchange="handleDontShow(this)">
         <span>Jangan tunjuk lagi</span>
@@ -527,6 +439,187 @@
     </div>
   </div>
 </div>
+
+<!-- FLOAT BUTTONS -->
+<a href="https://wa.me/601159003985?text=Salam%2C+saya+ingin+bertanya+tentang+The+Artisan+Parfum." class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span class="float-wa-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span>
+  <span class="float-wa-text">Tanya Kami</span>
+</a>
+<div class="float-cart" id="float-cart" onclick="openCart(event)" role="button" tabindex="0" aria-label="Buka troli">
+  <div class="float-cart-badge" id="float-cart-badge">0</div>
+  <span class="float-cart-label">Troli</span>
+</div>
+
+<!-- hidden theme-toggle so JS doesn't crash -->
+<button id="theme-toggle" style="display:none" aria-hidden="true"></button>
+
+<!-- SCRIPTS -->
+<script>
+/* ── NAV scroll ── */
+const mainNav = document.getElementById('main-nav');
+const ann     = document.getElementById('ann');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 50;
+  mainNav.classList.toggle('scrolled', scrolled);
+  if (scrolled) mainNav.classList.add('no-ann');
+  else if (ann?.style.display !== 'none') mainNav.classList.remove('no-ann');
+}, { passive: true });
+
+document.getElementById('ann-close').addEventListener('click', () => {
+  ann.style.display = 'none';
+  mainNav.classList.add('no-ann');
+});
+
+/* ── Drawer ── */
+function openDrawer() {
+  document.getElementById('drawer').classList.add('visible');
+  document.getElementById('drawer-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+  document.getElementById('hamburger').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('visible');
+  document.getElementById('drawer-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+  document.getElementById('hamburger').classList.remove('open');
+}
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('drawer').classList.contains('visible') ? closeDrawer() : openDrawer();
+});
+
+/* ── Search ── */
+function closeNavSearch() {
+  document.getElementById('nav-search-bar').classList.remove('open');
+  document.getElementById('nav-search-input').value = '';
+}
+document.getElementById('nav-search-btn').addEventListener('click', () => {
+  const bar = document.getElementById('nav-search-bar');
+  bar.classList.toggle('open');
+  if (bar.classList.contains('open')) setTimeout(() => document.getElementById('nav-search-input').focus(), 150);
+});
+document.getElementById('nav-search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const q = e.target.value.trim();
+    if (q) window.location.href = `koleksi.html?q=${encodeURIComponent(q)}`;
+  }
+  if (e.key === 'Escape') closeNavSearch();
+});
+
+/* ── Cart button ── */
+document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+
+/* ── Keyboard ── */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeCart(); closeOrderModal(); closeDrawer(); closeNavSearch(); }
+});
+
+/* ── Announcement countdown ── */
+function initAnnouncementCountdown() {
+  let end = parseInt(localStorage.getItem('artisan_timer') || '0');
+  if (!end || end <= Date.now()) { end = Date.now() + 24 * 60 * 60 * 1000; localStorage.setItem('artisan_timer', end); }
+  (function tick() {
+    const rem = Math.max(0, end - Date.now());
+    const pad = n => String(n).padStart(2,'0');
+    const hEl = document.getElementById('cdH'), mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
+    if (hEl) hEl.textContent = pad(Math.floor(rem / 3600000));
+    if (mEl) mEl.textContent = pad(Math.floor((rem % 3600000) / 60000));
+    if (sEl) sEl.textContent = pad(Math.floor((rem % 60000) / 1000));
+    if (rem > 0) setTimeout(tick, 1000);
+    else { end = Date.now() + 24 * 60 * 60 * 1000; localStorage.setItem('artisan_timer', end); tick(); }
+  })();
+}
+
+/* ── Scroll reveal ── */
+function initScrollReveal() {
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+/* ── Hero Carousel ── */
+let hcCurrent = 0;
+const hcTotal = document.querySelectorAll('.hc-slide').length;
+let hcTimer, hcDragging = false, hcDragStartX = 0, hcDragDelta = 0;
+
+function hcGoTo(index) {
+  hcCurrent = (index + hcTotal) % hcTotal;
+  const track = document.getElementById('hc-track');
+  if (track) track.style.transform = `translateX(-${hcCurrent * 100}%)`;
+  document.querySelectorAll('.hc-dot').forEach((d,i) => d.classList.toggle('active', i === hcCurrent));
+  const cur = document.getElementById('hc-current');
+  if (cur) cur.textContent = hcCurrent + 1;
+  resetHcTimer();
+}
+function hcNext() { hcGoTo(hcCurrent + 1); }
+function hcPrev() { hcGoTo(hcCurrent - 1); }
+function resetHcTimer() { clearInterval(hcTimer); hcTimer = setInterval(hcNext, 5000); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.querySelector('.hero-carousel');
+  const track    = document.getElementById('hc-track');
+  if (!carousel || !track) return;
+  hcTimer = setInterval(hcNext, 5000);
+  hcGoTo(0);
+
+  carousel.addEventListener('mouseenter', () => clearInterval(hcTimer));
+  carousel.addEventListener('mouseleave', resetHcTimer);
+
+  let touchStartX = 0;
+  carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; clearInterval(hcTimer); }, { passive: true });
+  carousel.addEventListener('touchmove',  e => {
+    const delta = touchStartX - e.touches[0].clientX;
+    track.style.transform = `translateX(calc(-${hcCurrent * 100}% - ${delta}px))`;
+  }, { passive: true });
+  carousel.addEventListener('touchend', e => {
+    track.style.transition = '';
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    Math.abs(diff) > 50 ? (diff > 0 ? hcNext() : hcPrev()) : hcGoTo(hcCurrent);
+    resetHcTimer();
+  }, { passive: true });
+
+  carousel.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    hcDragging = true; hcDragStartX = e.clientX; hcDragDelta = 0;
+    track.style.transition = 'none'; carousel.style.cursor = 'grabbing'; clearInterval(hcTimer);
+  });
+  window.addEventListener('mousemove', e => {
+    if (!hcDragging) return;
+    hcDragDelta = hcDragStartX - e.clientX;
+    track.style.transform = `translateX(calc(-${hcCurrent * 100}% - ${hcDragDelta}px))`;
+  });
+  window.addEventListener('mouseup', () => {
+    if (!hcDragging) return;
+    hcDragging = false; track.style.transition = ''; carousel.style.cursor = 'grab';
+    Math.abs(hcDragDelta) > 60 ? (hcDragDelta > 0 ? hcNext() : hcPrev()) : hcGoTo(hcCurrent);
+    resetHcTimer();
+  });
+  carousel.addEventListener('dragstart', e => e.preventDefault());
+
+  initScrollReveal();
+  initAnnouncementCountdown();
+});
+
+/* ── Promo popup ── */
+function openPromoPopup() {
+  if (localStorage.getItem('artisan_promo_hide') === '1') return;
+  setTimeout(() => { document.getElementById('promo-overlay').classList.add('visible'); document.body.classList.add('lock'); }, 2000);
+}
+function closePromoPopup() {
+  document.getElementById('promo-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+}
+function handleDontShow(cb) { localStorage.setItem('artisan_promo_hide', cb.checked ? '1' : '0'); }
+
+/* ── theme-toggle stub (prevents crash from ui.js) ── */
+document.getElementById('theme-toggle')?.addEventListener('click', () => {});
+</script>
+
+<script src="js/config.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
