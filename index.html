@@ -943,6 +943,103 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('Header elements disabled: hamburger, search, nav links');
 })();
+    async function handleOrderSubmit() {
+  const name = document.getElementById('field-name').value.trim();
+  const phone = document.getElementById('field-phone').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+  const address = document.getElementById('field-address').value.trim();
+  const state = document.getElementById('field-state').value;
+  const postcode = document.getElementById('field-postcode').value.trim();
+  const note = document.getElementById('field-note').value.trim();
+  
+  let ok = true;
+  if (name.length < 3) { setInvalid('field-name','err-name'); ok = false; } else clearInvalid('field-name','err-name');
+  if (!isValidPhone(phone)) { setInvalid('field-phone','err-phone'); ok = false; } else clearInvalid('field-phone','err-phone');
+  if (email && !isValidEmail(email)) { setInvalid('field-email','err-email'); ok = false; } else clearInvalid('field-email','err-email');
+  if (address.length < 10) { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
+  if (!state) { setInvalid('field-state','err-state'); ok = false; } else clearInvalid('field-state','err-state');
+  if (!isValidPostcode(postcode)) { setInvalid('field-postcode','err-postcode'); ok = false; } else clearInvalid('field-postcode','err-postcode');
+  if (!ok) return;
+
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('modal-form').style.display = 'none';
+  document.getElementById('modal-loading').style.display = 'block';
+
+  // Prepare order data
+  const totalAmount = getCartTotal();
+  const itemsSummary = cart.map(i => `${i.name} (${i.size}) ×${i.qty}`).join(', ');
+  
+  // Generate unique order reference
+  const orderRef = 'AP-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+  
+  // Save order to Supabase first
+  const orderData = {
+    order_ref: orderRef,
+    name: name,
+    phone: phone,
+    email: email || null,
+    address: address,
+    state: state,
+    postcode: postcode,
+    note: note || null,
+    items: itemsSummary,
+    total: totalAmount,
+    pay_status: 'pending',
+    created_at: new Date().toISOString()
+  };
+  
+  try {
+    // Save order to database
+    const savedOrder = await sbFetch('orders', {
+      method: 'POST',
+      body: JSON.stringify(orderData)
+    });
+    
+    // Create ToyyibPay bill
+    const toyyibpayData = {
+      userSecretKey: CONFIG.TOYYIBPAY_SECRET_KEY, // You need to add this to config.js
+      categoryCode: CONFIG.TOYYIBPAY_CATEGORY,    // Your ToyyibPay category code
+      billName: `The Artisan Parfum - ${orderRef}`,
+      billDescription: itemsSummary.substring(0, 200),
+      billPriceSetting: 1,
+      billPayorInfo: 1,
+      billAmount: totalAmount * 100, // ToyyibPay uses cents
+      billReturnUrl: `${window.location.origin}/payment-success.html?order=${orderRef}`,
+      billCallbackUrl: `${window.location.origin}/payment-callback.php`,
+      billExternalReferenceNo: orderRef,
+      billTo: name,
+      billEmail: email || name + '@customer.com',
+      billPhone: phone,
+      billSplitPayment: 0,
+      billSplitPaymentArgs: '',
+      billPaymentChannel: 0,
+      billContentType: "application/json"
+    };
+    
+    // Call ToyyibPay API
+    const response = await fetch('https://dev.toyyibpay.com/index.php/api/createBill', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(toyyibpayData)
+    });
+    
+    const result = await response.json();
+    
+    if (result && result[0] && result[0].BillCode) {
+      // Redirect to ToyyibPay payment page
+      window.location.href = `https://dev.toyyibpay.com/${result[0].BillCode}`;
+    } else {
+      throw new Error('Failed to create bill');
+    }
+    
+  } catch(error) {
+    console.error('Payment error:', error);
+    document.getElementById('modal-loading').style.display = 'none';
+    document.getElementById('modal-form').style.display = 'block';
+    document.getElementById('submit-btn').disabled = false;
+    toast('Gagal memproses pembayaran. Sila cuba lagi.', 'error');
+  }
+}
 </script>
 </body>
 </html>
