@@ -791,11 +791,10 @@ window.handleEntryCardClick = handleEntryCardClick;
 </script>
 
   <script>
-/* ── Promo Popup ── */
 const PROMO_KEY = 'artisan_promo_hidden';
 
 function closePromoPopup() {
-  document.getElementById('promo-overlay').style.display = 'none';
+  document.getElementById('promo-overlay').classList.remove('visible');
 }
 
 function handleDontShow(checkbox) {
@@ -809,7 +808,7 @@ function handleDontShow(checkbox) {
 document.addEventListener('DOMContentLoaded', () => {
   if (!localStorage.getItem(PROMO_KEY)) {
     setTimeout(() => {
-      document.getElementById('promo-overlay').style.display = 'flex';
+      document.getElementById('promo-overlay').classList.add('visible');
     }, 2500);
   }
 });
