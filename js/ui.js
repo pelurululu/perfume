@@ -270,7 +270,7 @@ window.addEventListener('scroll', () => {
   if (scrolled) mainNav.classList.add('no-ann');
   else if (document.getElementById('ann')?.style.display !== 'none') mainNav.classList.remove('no-ann');
 }, { passive: true });
-const hamburgerBtn = document.getElementById('hamburger'), mobileNavEl = document.getElementById('mobile-nav');
+const hamburgerBtn = document.getElementById('hamburger');
 hamburgerBtn.addEventListener('click', () => {
   const isOpen = mobileNavEl.classList.toggle('open');
   hamburgerBtn.classList.toggle('open', isOpen);
