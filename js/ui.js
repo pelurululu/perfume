@@ -438,6 +438,16 @@ document.addEventListener('DOMContentLoaded', () => {
     resetHcTimer();
   });
 
+   window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY > 60;
+  mainNav.classList.toggle('scrolled', scrolled);
+  if (scrolled) {
+    mainNav.classList.add('no-ann');
+  } else if (document.getElementById('ann')?.style.display !== 'none') {
+    mainNav.classList.remove('no-ann');
+  }
+}, { passive: true });
+
   // Prevent drag from triggering link clicks
   carousel.addEventListener('dragstart', e => e.preventDefault());
 });
