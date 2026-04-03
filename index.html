@@ -1,60 +1,41 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Artisan Parfum</title>
-<meta name="description" content="165 wangian premium terinspirasi jenama dunia. 10ml RM25 · 30ml RM49 · 60ml RM79.">
+<meta name="description" content="165 premium fragrances inspired by world-renowned brands. 10ml RM25 · 30ml RM49 · 60ml RM79.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23111'/><text x='32' y='46' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23fff'>a</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-/* Mega item image+text style */
-.mega-item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0;
-  background: #111;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  transition: opacity .15s;
-  cursor: pointer;
-  overflow: hidden;
-  aspect-ratio: 4/3;
+/*
+  FIXES ONLY — these add/override specific things your style.css doesn't cover.
+  Everything else continues to be handled by style.css as normal.
+*/
+
+/* FIX 4: Hide search icon when hamburger menu is open
+   Your hamburger adds .open to itself — we match that to hide the search btn */
+.hamburger.open ~ * #nav-search-btn,
+#main-nav:has(.hamburger.open) #nav-search-btn {
+  display: none;
 }
-.mega-item:hover { opacity:.85; background:#111; }
-.mega-item-bg {
-  position:absolute; inset:0;
-  background-size:cover; background-position:center; background-color:#222;
-  transition:transform .35s ease;
-}
-.mega-item:hover .mega-item-bg { transform:scale(1.04); }
-.mega-item-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 60%,transparent 100%);
-}
-.mega-item-label {
-  position:absolute; bottom:14px; left:16px; right:16px;
-  font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700;
-  color:#fff; letter-spacing:.02em; line-height:1.3;
-  text-shadow:0 1px 4px rgba(0,0,0,.5);
-}
-.mega-grid {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:2px; background:#e0e0e0; border:1px solid #e0e0e0; margin-bottom:32px;
-}
-.mega-grid.hidden { display:none; }
-@media(max-width:880px){ .mega-grid { grid-template-columns:repeat(2,1fr); } }
+
+/* FIX 5: Announcement bar sits above the mega overlay (z-index 790) and nav (800)
+   Your existing CSS has #ann at z-index:810 which is correct already.
+   This just ensures it's position:relative so z-index applies */
+#ann { position: relative; }
+
+/* FIX 3: Carousel dot active state — pill shape (already in your CSS, just ensuring
+   the JS-driven counter el is visible with correct color) */
+#hc-current, #hc-total { color: inherit; }
 </style>
 </head>
 <body>
- 
-<!-- ANNOUNCEMENT BAR (FIX 5: compact, high z-index) -->
+
+<!-- ANNOUNCEMENT BAR -->
 <div id="ann">
   <span class="ann-txt">
     <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:4px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -68,7 +49,7 @@
     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
 </div>
- 
+
 <!-- NAV -->
 <nav id="main-nav">
   <a href="index.html" class="nav-logo">the artisan</a>
@@ -80,7 +61,6 @@
     </ul>
   </div>
   <div class="nav-right">
-    <!-- FIX 4: search icon hidden via CSS when menu-open class is on nav -->
     <button class="nav-icon" id="nav-search-btn" aria-label="Search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
@@ -93,7 +73,7 @@
     </button>
   </div>
 </nav>
- 
+
 <!-- SEARCH BAR -->
 <div class="nav-search-bar" id="nav-search-bar">
   <div class="nav-search-inner">
@@ -104,7 +84,7 @@
     </button>
   </div>
 </div>
- 
+
 <!-- MEGA MENU -->
 <div class="mega-overlay" id="mega-overlay">
   <div class="mega-inner">
@@ -129,7 +109,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- HERO CAROUSEL -->
 <section class="hero-carousel" id="top">
   <div class="hc-track" id="hc-track">
@@ -161,7 +141,6 @@
       </div>
     </div>
   </div>
-  <!-- FIX 3: dots wired correctly — counter updated via JS -->
   <div class="hc-dots" id="hc-dots">
     <button class="hc-dot active" onclick="hcGoTo(0)" aria-label="Slide 1"></button>
     <button class="hc-dot" onclick="hcGoTo(1)" aria-label="Slide 2"></button>
@@ -169,7 +148,7 @@
   </div>
   <div class="hc-counter"><span id="hc-current">1</span> / <span id="hc-total">3</span></div>
 </section>
- 
+
 <!-- ENTRY GRID -->
 <section class="entry-grid" id="collection">
   <a href="koleksi.html?gender=m" class="entry-card" id="entry-m">
@@ -200,7 +179,7 @@
     </div>
   </a>
 </section>
- 
+
 <!-- BUNDLE BANNER -->
 <section class="bundle-banner reveal" id="bundle">
   <div>
@@ -223,7 +202,7 @@
     </div>
   </div>
 </section>
- 
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-grid">
@@ -281,9 +260,9 @@
   </div>
   <p class="footer-disclaimer">Note: All The Artisan Parfum fragrances are original products inspired by the scent profiles of premium world brands. Not affiliated with any mentioned brands.</p>
 </footer>
- 
+
 <!-- CART PANEL -->
-<div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
+<div class="cart-overlay" id="cart-overlay"></div>
 <aside class="cart-panel" id="cart-panel" aria-label="Cart" aria-modal="true">
   <div class="cart-header">
     <div>
@@ -322,9 +301,9 @@
     </button>
   </div>
 </aside>
- 
+
 <!-- ORDER MODAL -->
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
     <button class="modal-close" onclick="closeOrderModal()" aria-label="Close">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -336,7 +315,7 @@
       <div class="order-summary" id="modal-order-summary"></div>
       <div class="form-group"><label for="field-name">Full Name *</label><input type="text" id="field-name" placeholder="Your name" autocomplete="name"><div class="form-error" id="err-name">Invalid name (minimum 3 characters)</div></div>
       <div class="form-group"><label for="field-phone">Phone Number *</label><input type="tel" id="field-phone" placeholder="01X-XXXXXXX" autocomplete="tel"><div class="form-error" id="err-phone">Invalid phone number</div></div>
-      <div class="form-group"><label for="field-email">Email <span style="color:#aaa">(Optional)</span></label><input type="email" id="field-email" placeholder="email@example.com" autocomplete="email"><div class="form-error" id="err-email">Invalid email</div></div>
+      <div class="form-group"><label for="field-email">Email <span style="color:var(--muted)">(Optional)</span></label><input type="email" id="field-email" placeholder="email@example.com" autocomplete="email"><div class="form-error" id="err-email">Invalid email</div></div>
       <div class="form-group"><label for="field-address">Shipping Address *</label><textarea id="field-address" placeholder="House number, street, area..." autocomplete="street-address"></textarea><div class="form-error" id="err-address">Please enter a complete address</div></div>
       <div class="form-row">
         <div class="form-group"><label for="field-state">State *</label>
@@ -355,7 +334,7 @@
         FPX · Credit Card · eWallet
       </p>
     </div>
-    <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:#888;letter-spacing:.06em">Processing order...</p></div>
+    <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--muted);letter-spacing:.06em">Processing order...</p></div>
     <div class="modal-success" id="modal-success">
       <div class="success-icon">
         <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
@@ -366,8 +345,9 @@
     </div>
   </div>
 </div>
- 
-<!-- FIX 2: Promo Popup — overlay uses display:flex when open -->
+
+<!-- PROMO POPUP -->
+<!-- FIX 2: Uses .visible class to match your existing CSS (.promo-popup-overlay.visible) -->
 <div class="promo-popup-overlay" id="promo-overlay" onclick="if(event.target===this)closePromoPopup()">
   <div class="promo-popup">
     <button class="promo-close" onclick="closePromoPopup()" aria-label="Close">
@@ -403,7 +383,7 @@
     </div>
   </div>
 </div>
- 
+
 <!-- FLOAT BUTTONS -->
 <a href="https://wa.me/601159003985?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20The%20Artisan%20Parfum." class="float-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
   <span class="float-wa-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></span>
@@ -413,73 +393,160 @@
   <div class="float-cart-badge" id="float-cart-badge">0</div>
   <span class="float-cart-label">Cart</span>
 </div>
- 
+
+<!-- DRAWER (mobile menu) -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span class="drawer-title">Menu</span>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-section-label">Collection</div>
+    <a class="drawer-link" href="koleksi.html?gender=m">Men</a>
+    <a class="drawer-link" href="koleksi.html?gender=w">Women</a>
+    <a class="drawer-link" href="koleksi.html?gender=u">Unisex</a>
+    <div class="drawer-section-label">Info</div>
+    <a class="drawer-link" href="tentang.html">About Us</a>
+    <a class="drawer-link" href="faq.html">FAQ</a>
+    <a class="drawer-link" href="#shipping">Shipping</a>
+    <a class="drawer-wa" href="https://wa.me/601159003985" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp Us
+    </a>
+  </div>
+</div>
+
 <button id="theme-toggle" style="display:none" aria-hidden="true"></button>
- 
+
 <script src="js/config.js"></script>
 <script src="js/products.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/main.js"></script>
- 
+
 <script>
 /* ════════════════════════════════════════════════
-   FIX 3: Hero Carousel — self-contained with
-   working counter (1/3) and dot sync
+   FIX 1: All text already translated in HTML above.
+
+   FIX 2: Promo popup — uses .visible to match style.css
    ════════════════════════════════════════════════ */
 (function() {
-  const TOTAL = 3;
-  let current = 0;
-  let timer = null;
- 
-  const track    = document.getElementById('hc-track');
-  const dots     = document.querySelectorAll('.hc-dot');
-  const elCur    = document.getElementById('hc-current');
-  const elTotal  = document.getElementById('hc-total');
- 
+  const overlay = document.getElementById('promo-overlay');
+  if (!overlay) return;
+  if (localStorage.getItem('artisan_no_promo') === '1') return;
+  setTimeout(function() { overlay.classList.add('visible'); }, 2000);
+})();
+window.closePromoPopup = function() {
+  const o = document.getElementById('promo-overlay');
+  if (o) o.classList.remove('visible');
+};
+window.handleDontShow = function(cb) {
+  if (cb && cb.checked) localStorage.setItem('artisan_no_promo', '1');
+  else localStorage.removeItem('artisan_no_promo');
+};
+
+
+/* ════════════════════════════════════════════════
+   FIX 3: Hero carousel — working counter + dots
+   ════════════════════════════════════════════════ */
+(function() {
+  const TOTAL   = document.querySelectorAll('.hc-slide').length;
+  let current   = 0, timer = null;
+  const track   = document.getElementById('hc-track');
+  const dots    = document.querySelectorAll('.hc-dot');
+  const elCur   = document.getElementById('hc-current');
+  const elTotal = document.getElementById('hc-total');
+
   if (elTotal) elTotal.textContent = TOTAL;
- 
+
   function goTo(idx) {
     current = ((idx % TOTAL) + TOTAL) % TOTAL;
     if (track) track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
     if (elCur) elCur.textContent = current + 1;
   }
- 
-  function next() { goTo(current + 1); }
- 
-  function startAuto() { timer = setInterval(next, 5000); }
+
+  function startAuto() { timer = setInterval(function() { goTo(current + 1); }, 5000); }
   function stopAuto()  { clearInterval(timer); }
- 
-  // Expose globally for onclick attributes in HTML
+
   window.hcGoTo = function(idx) { stopAuto(); goTo(idx); startAuto(); };
- 
+
   goTo(0);
   startAuto();
 })();
- 
- 
+
+
 /* ════════════════════════════════════════════════
-   FIX 4: Hamburger — hides search icon when open
+   FIX 4: Hamburger — hides search icon when open,
+           opens drawer on mobile (≤880px)
+           opens mega menu on desktop (>880px)
    ════════════════════════════════════════════════ */
 (function() {
-  const hamburger  = document.getElementById('hamburger');
-  const nav        = document.getElementById('main-nav');
-  const megaMenu   = document.getElementById('mega-overlay');
- 
+  const hamburger = document.getElementById('hamburger');
+  const searchBtn = document.getElementById('nav-search-btn');
+  const mega      = document.getElementById('mega-overlay');
+  const drawer    = document.getElementById('drawer');
+  const drawerOvl = document.getElementById('drawer-overlay');
+
   if (!hamburger) return;
- 
+
   hamburger.addEventListener('click', function() {
-    const isOpen = nav.classList.toggle('menu-open');
+    const isMobile = window.innerWidth <= 880;
+    const isOpen   = hamburger.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', isOpen);
-    if (megaMenu) megaMenu.classList.toggle('open', isOpen);
-    // FIX 4: search icon visibility is handled purely by CSS (.menu-open #nav-search-btn { display:none })
+
+    // FIX 4: hide search icon while menu is open
+    if (searchBtn) searchBtn.style.display = isOpen ? 'none' : '';
+
+    if (isMobile) {
+      // Mobile: use the drawer
+      if (drawer)    drawer.classList.toggle('visible', isOpen);
+      if (drawerOvl) drawerOvl.classList.toggle('visible', isOpen);
+      document.body.classList.toggle('lock', isOpen);
+    } else {
+      // Desktop: use mega menu (.visible matches your CSS)
+      if (mega) mega.classList.toggle('visible', isOpen);
+    }
   });
 })();
- 
- 
+
+window.closeDrawer = function() {
+  const hamburger = document.getElementById('hamburger');
+  const drawer    = document.getElementById('drawer');
+  const drawerOvl = document.getElementById('drawer-overlay');
+  if (hamburger) { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+  if (drawer)    drawer.classList.remove('visible');
+  if (drawerOvl) drawerOvl.classList.remove('visible');
+  document.body.classList.remove('lock');
+  // Restore search icon
+  const searchBtn = document.getElementById('nav-search-btn');
+  if (searchBtn) searchBtn.style.display = '';
+};
+
+window.closeMegaMenu = function() {
+  const hamburger = document.getElementById('hamburger');
+  const mega      = document.getElementById('mega-overlay');
+  if (hamburger) { hamburger.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); }
+  if (mega)      mega.classList.remove('visible');
+  const searchBtn = document.getElementById('nav-search-btn');
+  if (searchBtn) searchBtn.style.display = '';
+};
+
+window.switchMegaTab = function(g) {
+  ['m','w','u'].forEach(function(x) {
+    const tab  = document.getElementById('mtab-' + x);
+    const grid = document.getElementById('mgrid-' + x);
+    if (tab)  tab.classList.toggle('active', x === g);
+    if (grid) grid.classList.toggle('hidden', x !== g);
+  });
+};
+
+
 /* ════════════════════════════════════════════════
-   FIX 5: Announcement countdown (compact bar)
+   FIX 5: Announcement bar countdown
+   (your CSS already handles sizing; this just
+   keeps the timer running and wires the close btn)
    ════════════════════════════════════════════════ */
 (function() {
   const KEY = 'artisan_promo_end';
@@ -491,116 +558,64 @@
   function pad(n) { return String(n).padStart(2, '0'); }
   function tick() {
     const diff = Math.max(0, Math.floor((end - Date.now()) / 1000));
-    const h = Math.floor(diff / 3600);
-    const m = Math.floor((diff % 3600) / 60);
-    const s = diff % 60;
-    const H = document.getElementById('cdH');
-    const M = document.getElementById('cdM');
-    const S = document.getElementById('cdS');
-    if (H) H.textContent = pad(h);
-    if (M) M.textContent = pad(m);
-    if (S) S.textContent = pad(s);
+    const elH = document.getElementById('cdH');
+    const elM = document.getElementById('cdM');
+    const elS = document.getElementById('cdS');
+    if (elH) elH.textContent = pad(Math.floor(diff / 3600));
+    if (elM) elM.textContent = pad(Math.floor((diff % 3600) / 60));
+    if (elS) elS.textContent = pad(diff % 60);
   }
   tick();
   setInterval(tick, 1000);
- 
-  // Close button
+
   const btn = document.getElementById('ann-close');
   const bar = document.getElementById('ann');
-  if (btn && bar) btn.addEventListener('click', function() { bar.style.display = 'none'; });
+  if (btn && bar) {
+    btn.addEventListener('click', function() {
+      bar.style.display = 'none';
+      // Tell nav it's gone so it can sit at top:0
+      document.getElementById('main-nav').classList.add('no-ann');
+    });
+  }
 })();
- 
- 
-/* ════════════════════════════════════════════════
-   Nav search toggle
-   ════════════════════════════════════════════════ */
+
+
+/* Nav search toggle */
 (function() {
   const btn = document.getElementById('nav-search-btn');
   const bar = document.getElementById('nav-search-bar');
   const inp = document.getElementById('nav-search-input');
-  if (btn && bar) {
-    btn.addEventListener('click', function() {
-      bar.classList.toggle('open');
-      if (bar.classList.contains('open') && inp) inp.focus();
-    });
-  }
+  if (!btn || !bar) return;
+  btn.addEventListener('click', function() {
+    bar.classList.toggle('open');
+    if (bar.classList.contains('open') && inp) inp.focus();
+  });
 })();
 window.closeNavSearch = function() {
   const bar = document.getElementById('nav-search-bar');
   if (bar) bar.classList.remove('open');
 };
- 
- 
-/* ════════════════════════════════════════════════
-   FIX 2: Promo popup — open with display:flex,
-   respects localStorage "don't show" flag
-   ════════════════════════════════════════════════ */
+
+
+/* Nav scroll behaviour */
 (function() {
-  const overlay = document.getElementById('promo-overlay');
-  if (!overlay) return;
- 
-  // Don't show if user opted out
-  if (localStorage.getItem('artisan_no_promo') === '1') return;
- 
-  // Show after 2s delay
-  setTimeout(function() {
-    overlay.classList.add('open'); // CSS: .open => display:flex
-  }, 2000);
-})();
- 
-window.closePromoPopup = function() {
-  const overlay = document.getElementById('promo-overlay');
-  if (overlay) overlay.classList.remove('open');
-};
- 
-window.handleDontShow = function(cb) {
-  if (cb && cb.checked) {
-    localStorage.setItem('artisan_no_promo', '1');
-  } else {
-    localStorage.removeItem('artisan_no_promo');
+  const nav = document.getElementById('main-nav');
+  const ann = document.getElementById('ann');
+  if (!nav) return;
+  function onScroll() {
+    const annH = (ann && ann.offsetParent !== null) ? ann.offsetHeight : 0;
+    if (window.scrollY > annH + 10) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   }
-};
- 
- 
-/* ════════════════════════════════════════════════
-   Mega menu tab switcher
-   ════════════════════════════════════════════════ */
-window.switchMegaTab = function(g) {
-  ['m','w','u'].forEach(function(x) {
-    const tab  = document.getElementById('mtab-' + x);
-    const grid = document.getElementById('mgrid-' + x);
-    const active = (x === g);
-    if (tab)  tab.classList.toggle('active', active);
-    if (grid) grid.classList.toggle('hidden', !active);
-  });
-};
- 
-window.closeMegaMenu = function() {
-  const nav   = document.getElementById('main-nav');
-  const mega  = document.getElementById('mega-overlay');
-  if (nav)  nav.classList.remove('menu-open');
-  if (mega) mega.classList.remove('open');
-  const ham = document.getElementById('hamburger');
-  if (ham)  ham.setAttribute('aria-expanded', 'false');
-};
- 
- 
-/* ════════════════════════════════════════════════
-   Reveal on scroll
-   ════════════════════════════════════════════════ */
-(function() {
-  const els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
-  const io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  els.forEach(function(el) { io.observe(el); });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
- 
- 
-/* ════════════════════════════════════════════════
-   Scent families & gender categories (Supabase)
-   ════════════════════════════════════════════════ */
+
+
+/* Scent families (Supabase) */
 async function loadScentFamilies() {
   try {
     const rows = await sbFetch('scent_families?active=eq.true&order=sort_order.asc');
@@ -608,42 +623,38 @@ async function loadScentFamilies() {
     const grids = { m: document.getElementById('mgrid-m'), w: document.getElementById('mgrid-w'), u: document.getElementById('mgrid-u') };
     Object.values(grids).forEach(function(g) { if(g) g.innerHTML = ''; });
     rows.forEach(function(fam) {
-      const genders = (fam.genders || 'mwu').split('');
-      genders.forEach(function(g) {
+      (fam.genders || 'mwu').split('').forEach(function(g) {
         if (!grids[g]) return;
-        const href = fam.href || ('koleksi.html?gender=' + g + (fam.slug ? '&family=' + encodeURIComponent(fam.slug) : ''));
         const a = document.createElement('a');
-        a.href = href;
+        a.href = fam.href || ('koleksi.html?gender=' + g + (fam.slug ? '&family=' + encodeURIComponent(fam.slug) : ''));
         a.className = 'mega-item';
-        a.innerHTML = '<div class="mega-item-bg" style="background-color:#1a1a2a;' +
-          (fam.image_url ? 'background-image:url(\'' + fam.image_url + '\');background-size:cover;background-position:center;' : '') +
-          '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + fam.name + '</div>';
+        a.innerHTML = '<span class="mega-item-icon">' + (fam.icon || '✦') + '</span>' + fam.name;
         grids[g].appendChild(a);
       });
     });
   } catch(e) { renderFallbackFamilies(); }
 }
- 
+
 function renderFallbackFamilies() {
   const fallback = {
-    m: [['Woody & Smoky','#1a1a2e'],['Fresh & Aquatic','#0d1a2e'],['Citrus & Aromatic','#1a1400'],['Oriental & Spicy','#2e0d0d'],['Fougere','#0d2e0d'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
-    w: [['Floral','#2e0d1a'],['Rose & Oud','#1a0a0a'],['Sweet & Gourmand','#1a0d00'],['Oriental & Warm','#1a1000'],['Fresh & Light','#0d1a1a'],['Bestsellers','#1a1a1a'],['New Arrivals','#111'],['Bundle 3+1','#0a0a0a']],
-    u: [['Woody','#1a1a0d'],['Green & Earthy','#0d1a0d'],['Aquatic','#0d1a2e'],['Clean & Musky','#1a1a2e'],['Bestsellers','#1a1a1a'],['Bundle 3+1','#0a0a0a']]
+    m:[['🌲','Woody & Smoky'],['💧','Fresh & Aquatic'],['🍋','Citrus & Aromatic'],['🌶','Oriental & Spicy'],['🌿','Fougere'],['⭐','Bestsellers'],['✨','New Arrivals'],['🎁','Bundle 3+1']],
+    w:[['🌸','Floral'],['🌹','Rose & Oud'],['🍯','Sweet & Gourmand'],['🌙','Oriental & Warm'],['🌬','Fresh & Light'],['⭐','Bestsellers'],['✨','New Arrivals'],['🎁','Bundle 3+1']],
+    u:[['🪵','Woody'],['🌱','Green & Earthy'],['🌊','Aquatic'],['☁️','Clean & Musky'],['⭐','Bestsellers'],['🎁','Bundle 3+1']]
   };
   const hrefs = { m:'koleksi.html?gender=m', w:'koleksi.html?gender=w', u:'koleksi.html?gender=u' };
   Object.entries(fallback).forEach(function([g, items]) {
     const grid = document.getElementById('mgrid-' + g);
     if (!grid) return;
-    items.forEach(function([name, bg]) {
+    items.forEach(function([icon, name]) {
       const a = document.createElement('a');
       a.href = hrefs[g];
       a.className = 'mega-item';
-      a.innerHTML = '<div class="mega-item-bg" style="background:' + bg + '"></div><div class="mega-item-overlay"></div><div class="mega-item-label">' + name + '</div>';
+      a.innerHTML = '<span class="mega-item-icon">' + icon + '</span>' + name;
       grid.appendChild(a);
     });
   });
 }
- 
+
 async function loadGenderCategories() {
   try {
     const rows = await sbFetch('gender_categories?order=sort_order.asc');
@@ -652,19 +663,24 @@ async function loadGenderCategories() {
       const card = document.getElementById('entry-' + cat.gender);
       if (!card) return;
       const bg = card.querySelector('.entry-card-bg');
-      if (cat.image_url && bg) {
-        bg.style.backgroundImage = 'url(\'' + cat.image_url + '\')';
-        bg.style.backgroundSize = 'cover';
-        bg.style.backgroundPosition = 'center';
-      } else if (cat.bg_color && bg) {
-        bg.style.background = cat.bg_color;
-      }
+      if (cat.image_url && bg) { bg.style.backgroundImage = 'url(\'' + cat.image_url + '\')'; bg.style.backgroundSize = 'cover'; bg.style.backgroundPosition = 'center'; }
+      else if (cat.bg_color && bg) { bg.style.background = cat.bg_color; }
       if (cat.title) { const el = card.querySelector('.entry-card-title'); if(el) el.textContent = cat.title; }
       if (cat.subtitle) { const el = document.getElementById('entry-' + cat.gender + '-count'); if(el) el.textContent = cat.subtitle; }
     });
   } catch(e) { /* keep defaults */ }
 }
- 
+
+/* Reveal on scroll */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  const io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(function(el) { io.observe(el); });
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof sbFetch === 'function') {
     loadScentFamilies();
