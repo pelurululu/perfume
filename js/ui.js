@@ -272,12 +272,12 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 const hamburgerBtn = document.getElementById('hamburger');
 hamburgerBtn.addEventListener('click', () => {
-  const isOpen = mobileNavEl.classList.toggle('open');
+  
   hamburgerBtn.classList.toggle('open', isOpen);
   hamburgerBtn.setAttribute('aria-expanded', isOpen);
   document.body.classList.toggle('lock', isOpen);
 });
-function closeMobileNav() { mobileNavEl.classList.remove('open'); hamburgerBtn.classList.remove('open'); hamburgerBtn.setAttribute('aria-expanded','false'); document.body.classList.remove('lock'); }
+
 document.getElementById('nav-cart-btn').addEventListener('click', openCart);
 document.getElementById('nav-search-btn').addEventListener('click', () => {
   const bar = document.getElementById('nav-search-bar');
