@@ -1,6 +1,5 @@
 async function init() {
   initAnnouncementCountdown();
-  document.getElementById('main-nav').style.top = document.getElementById('ann').offsetHeight + 'px';
   initScrollReveal();
   await loadPricing();
   await loadProducts();
