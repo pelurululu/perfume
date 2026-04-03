@@ -84,19 +84,31 @@ a { text-decoration: none; color: inherit }
 ================================================ */
 #main-nav {
   position: fixed;
-  top: 32px;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 800;
   height: 56px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
+  background: transparent;
+  border-bottom: none;
   display: flex;
   align-items: center;
-  transition: top var(--t), box-shadow var(--t);
+  transition: background .3s ease, box-shadow .3s ease;
 }
-#main-nav.scrolled { top: 0; box-shadow: 0 1px 6px rgba(0, 0, 0, .07) }
-#main-nav.no-ann { top: 0 }
+#main-nav.scrolled {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 6px rgba(0,0,0,.07);
+}
+/* White icons/text when transparent (over hero) */
+#main-nav:not(.scrolled) .nav-logo { color: #fff }
+#main-nav:not(.scrolled) .nav-center-links li a { color: rgba(255,255,255,.85); border-bottom-color: transparent }
+#main-nav:not(.scrolled) .nav-center-links li a:hover { color: #fff; border-bottom-color: #fff }
+#main-nav:not(.scrolled) .nav-icon { color: rgba(255,255,255,.85) }
+#main-nav:not(.scrolled) .nav-icon:hover { color: #fff }
+#main-nav:not(.scrolled) .hamburger span { background: #fff }
+
+
 
 .nav-logo {
   width: 200px;
@@ -354,7 +366,7 @@ a { text-decoration: none; color: inherit }
   min-height: 480px;
   overflow: hidden;
   cursor: grab;
-  margin-top: 92px;
+  
 }
 .hc-track {
   display: flex;
