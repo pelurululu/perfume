@@ -966,6 +966,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('modal-loading').style.display = 'block';
 
   const totalAmount = getCartTotal();
+  // SAVE items BEFORE clearing cart
+  const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
   const itemsSummary = cart.map(i => `${i.name} (${i.size}) ×${i.qty}`).join(', ');
   const orderRef = 'AP-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
   
@@ -993,7 +995,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('Order saved:', result);
     
-    // Clear cart after successful order
+    // Clear cart AFTER saving items for WhatsApp
     cart = [];
     saveCart();
     refreshCartUI();
@@ -1002,8 +1004,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modal-loading').style.display = 'none';
     document.getElementById('modal-success').style.display = 'block';
     
-    // Send WhatsApp notification
-    const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
+    // Send WhatsApp notification (using itemsFmt saved earlier)
     const waMsg = `*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email ? '\n📧 *Emel:* ' + email : ''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${totalAmount}*\n\n📝 *Nota:* ${note || '-'}\n\n🔖 *Ref:* ${orderRef}`;
     window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
     
