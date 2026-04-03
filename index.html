@@ -131,7 +131,7 @@
 
 <!-- ENTRY GRID — populated dynamically from gender_categories table -->
 <section class="entry-grid" id="collection">
-  <a href="koleksi.html?gender=m" class="entry-card" id="entry-m">
+  <div class="entry-card" id="entry-m" data-gender="m" style="cursor:pointer">
     <div class="entry-card-bg" style="background:#1a1a2e"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
@@ -139,8 +139,8 @@
       <div class="entry-card-count" id="entry-m-count">55 wangian</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
-  </a>
-  <a href="koleksi.html?gender=w" class="entry-card" id="entry-w">
+  </div>
+  <div class="entry-card" id="entry-w" data-gender="w" style="cursor:pointer">
     <div class="entry-card-bg" style="background:#111"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
@@ -148,8 +148,8 @@
       <div class="entry-card-count" id="entry-w-count">98 wangian</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
-  </g>
-  <a href="koleksi.html?gender=u" class="entry-card" id="entry-u">
+  </div>
+  <div class="entry-card" id="entry-u" data-gender="u" style="cursor:pointer">
     <div class="entry-card-bg" style="background:#1c1c1e"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
@@ -157,7 +157,7 @@
       <div class="entry-card-count" id="entry-u-count">Untuk semua</div>
       <div class="entry-card-arrow">Shop Now →</div>
     </div>
-  </a>
+  </div>
 </section>
 
 <!-- BUNDLE BANNER -->
@@ -240,6 +240,86 @@
   </div>
   <p class="footer-disclaimer">Nota: Semua wangian The Artisan Parfum adalah produk asal yang terinspirasi oleh profil wangian jenama premium dunia. Tidak berafiliasi dengan mana-mana jenama yang disebutkan.</p>
 </footer>
+
+<!-- ===== PRODUCT MODAL (BOTTOM SHEET) - same as koleksi.html ===== -->
+<div class="pm-overlay" id="pm-overlay" onclick="if(event.target===this) closeProductModal()">
+  <div class="pm-sheet" id="pm-sheet">
+    <button class="pm-close" onclick="closeProductModal()" aria-label="Tutup">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- HEADER -->
+    <div class="pm-header">
+      <div class="pm-header-bottle" id="pm-bottle-wrap"></div>
+      <div class="pm-header-info">
+        <p class="pm-insp" id="pm-insp-text"></p>
+        <h2 class="pm-name" id="pm-name-text"></h2>
+        <p class="pm-family" id="pm-family-text"></p>
+        <div class="pm-prices">
+          <span class="pm-price-from">Dari</span>
+          <span class="pm-price-main" id="pm-price-main">RM —</span>
+          <span class="pm-price-old" id="pm-price-old"></span>
+        </div>
+        <div class="pm-stock-info" id="pm-stock-info">
+          <span class="pm-stock-dot" id="pm-stock-dot"></span>
+          <span id="pm-stock-text"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENT VARIATIONS -->
+    <div class="pm-section" id="pm-scents-section">
+      <div class="pm-section-label">Pilih Wangian</div>
+      <div class="scent-variations" id="pm-scents-wrap"></div>
+    </div>
+
+    <!-- SIZE -->
+    <div class="pm-section">
+      <div class="pm-section-label">Saiz & Harga</div>
+      <div class="size-options">
+        <button class="size-btn" id="size-10" onclick="selectSize('10ml')">
+          <span class="ml">10ml</span>
+          <span class="price-now" id="sz-price-10">RM —</span>
+          <span class="price-was" id="sz-was-10"></span>
+        </button>
+        <button class="size-btn" id="size-30" onclick="selectSize('30ml')">
+          <span class="ml">30ml</span>
+          <span class="price-now" id="sz-price-30">RM —</span>
+          <span class="price-was" id="sz-was-30"></span>
+        </button>
+        <button class="size-btn" id="size-60" onclick="selectSize('60ml')">
+          <span class="ml">60ml</span>
+          <span class="price-now" id="sz-price-60">RM —</span>
+          <span class="price-was" id="sz-was-60"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- QUANTITY -->
+    <div class="pm-section">
+      <div class="pm-section-label">Kuantiti</div>
+      <div class="qty-row">
+        <div class="qty-stepper">
+          <button class="qty-step-btn" onclick="changeQty(-1)">−</button>
+          <div class="qty-display" id="qty-display">1</div>
+          <button class="qty-step-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <span class="qty-hint" id="qty-stock-hint"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY FOOTER -->
+<div class="pm-footer" id="pm-footer" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:905;">
+  <div class="pm-total-display">
+    <div class="pm-total-label">Jumlah</div>
+    <div class="pm-total-value" id="pm-total-display">RM —</div>
+  </div>
+  <button class="btn-add-to-cart-main" id="pm-add-btn" onclick="modalAddToCart()">
+    + Tambah ke Troli
+  </button>
+</div>
 
 <!-- CART PANEL -->
 <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
@@ -388,7 +468,6 @@ async function loadScentFamilies() {
     const rows = await sbFetch('scent_families?active=eq.true&order=sort_order.asc');
     if (!rows || !rows.length) return renderFallbackFamilies();
     const grids = { m: document.getElementById('mgrid-m'), w: document.getElementById('mgrid-w'), u: document.getElementById('mgrid-u') };
-    // clear grids
     Object.values(grids).forEach(g => { if(g) g.innerHTML = ''; });
     rows.forEach(fam => {
       const genders = (fam.genders || 'mwu').split('');
@@ -449,10 +528,249 @@ async function loadGenderCategories() {
   } catch(e) { /* keep defaults */ }
 }
 
+// Open product modal for a specific product by ID (function to be used from koleksi.html modal code)
+let PRODUCTS_GLOBAL = [];
+
+async function openProductModalByGender(gender) {
+  // Wait for products to load if needed
+  if (!PRODUCTS_GLOBAL || PRODUCTS_GLOBAL.length === 0) {
+    await loadProductsForModal();
+  }
+  const product = PRODUCTS_GLOBAL.find(p => p.gender === gender);
+  if (product && typeof window.openProductModal === 'function') {
+    window.openProductModal(product.id);
+  } else if (product && window.openProductModalFromIndex) {
+    window.openProductModalFromIndex(product.id);
+  } else {
+    // Fallback - navigate to koleksi.html with gender filter
+    window.location.href = 'koleksi.html?gender=' + gender;
+  }
+}
+
+async function loadProductsForModal() {
+  try {
+    const rows = await sbFetch('products?active=eq.true&order=id.asc&select=*');
+    PRODUCTS_GLOBAL = rows || [];
+    // Also store globally for the modal functions
+    window.PRODUCTS_FOR_MODAL = PRODUCTS_GLOBAL;
+  } catch(e) {
+    console.error('Failed to load products', e);
+  }
+}
+
+// Add click handlers to entry cards
+document.getElementById('entry-m').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('m');
+});
+document.getElementById('entry-w').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('w');
+});
+document.getElementById('entry-u').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('u');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   loadScentFamilies();
   loadGenderCategories();
+  loadProductsForModal();
 });
+</script>
+
+<!-- Include the modal functions from koleksi.html (reused) -->
+<script>
+'use strict';
+
+// Modal state
+let modalProductId  = null;
+let modalScent      = null;
+let modalSize       = null;
+let modalQty        = 1;
+
+// Helper functions needed for modal
+function createMiniBottleSVG(cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const uid = Math.random().toString(36).slice(2);
+  return `<svg width="44" height="86" viewBox="0 0 44 86" fill="none" aria-hidden="true">
+    <defs><linearGradient id="mb_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+    </linearGradient></defs>
+    <rect x="15" y="0" width="14" height="10" rx="3" fill="${cap || '#3A1828'}"/>
+    <rect x="14" y="9" width="16" height="6" rx="1" fill="${cap || '#3A1828'}" opacity=".65"/>
+    <rect x="5" y="15" width="34" height="66" rx="3" fill="url(#mb_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".5"/>
+    <rect x="7" y="17" width="6" height="62" rx="1.5" fill="rgba(255,255,255,.06)"/>
+    <rect x="8" y="32" width="28" height="28" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.07)" stroke-width=".4"/>
+    <text x="22" y="43" text-anchor="middle" font-family="Georgia,serif" font-size="2.6" fill="rgba(255,255,255,.45)" letter-spacing=".8">THE ARTISAN</text>
+    <text x="22" y="50" text-anchor="middle" font-family="Georgia,serif" font-size="2.6" fill="rgba(255,255,255,.45)" letter-spacing=".8">PARFUM</text>
+    <ellipse cx="22" cy="82" rx="10" ry="1.5" fill="rgba(0,0,0,.06)"/>
+  </svg>`;
+}
+
+// Expose openProductModal globally
+window.openProductModalFromIndex = function(productId) {
+  const p = window.PRODUCTS_FOR_MODAL?.find(x => x.id === productId);
+  if (!p) return;
+
+  modalProductId = productId;
+  modalScent = null;
+  modalSize = null;
+  modalQty = 1;
+
+  document.getElementById('pm-bottle-wrap').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
+  document.getElementById('pm-insp-text').textContent = 'Terinspirasi oleh ' + (p.inspired_by || '');
+  document.getElementById('pm-name-text').textContent = p.name;
+  document.getElementById('pm-family-text').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
+
+  const pr = CONFIG.PRICES;
+  document.getElementById('pm-price-main').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('pm-price-old').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sz-price-10').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('sz-was-10').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sz-price-30').textContent = 'RM ' + pr['30ml'].promo;
+  document.getElementById('sz-was-30').textContent = 'RM ' + pr['30ml'].normal;
+  document.getElementById('sz-price-60').textContent = 'RM ' + pr['60ml'].promo;
+  document.getElementById('sz-was-60').textContent = 'RM ' + pr['60ml'].normal;
+
+  const stk = getStock(productId);
+  const dot = document.getElementById('pm-stock-dot');
+  dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
+  document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
+  document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
+
+  buildScentVariationsIndex(p);
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('qty-display').textContent = '1';
+  updateModalTotalIndex();
+
+  const footer = document.getElementById('pm-footer');
+  footer.style.display = 'flex';
+  document.getElementById('pm-add-btn').textContent = '+ Tambah ke Troli';
+  document.getElementById('pm-add-btn').classList.remove('added');
+  document.getElementById('pm-add-btn').disabled = stk === 0;
+
+  document.getElementById('pm-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+  document.getElementById('pm-sheet').scrollTop = 0;
+};
+
+function buildScentVariationsIndex(currentProduct) {
+  const sameGender = window.PRODUCTS_FOR_MODAL?.filter(p => p.gender === currentProduct.gender) || [];
+  const wrap = document.getElementById('pm-scents-wrap');
+
+  if (sameGender.length <= 1) {
+    document.getElementById('pm-scents-section').style.display = 'none';
+    modalScent = currentProduct.id;
+    return;
+  }
+
+  document.getElementById('pm-scents-section').style.display = 'block';
+  wrap.innerHTML = sameGender.map((p, i) => {
+    const stk = getStock(p.id);
+    const isOut = stk === 0;
+    let badgeHtml = '';
+    if (p.badge === 'Hot' || p.badge === 'Bestseller') badgeHtml = `<span class="scent-chip-hot chip-badge-hot">${p.badge}</span>`;
+    else if (p.badge === 'New') badgeHtml = `<span class="scent-chip-hot chip-badge-new">New</span>`;
+    const isCurrent = p.id === currentProduct.id;
+    return `<button class="scent-chip-btn${isOut ? ' out-chip' : ''}${isCurrent ? ' selected' : ''}" data-scent-id="${p.id}" onclick="selectScentIndex('${p.id}')">
+      <span class="scent-chip-num">${i + 1}.</span> ${p.name} ${badgeHtml}
+    </button>`;
+  }).join('');
+  modalScent = currentProduct.id;
+}
+
+function selectScentIndex(scentId) {
+  modalScent = scentId;
+  document.querySelectorAll('.scent-chip-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.scentId === scentId);
+  });
+  const stk = getStock(scentId);
+  const dot = document.getElementById('pm-stock-dot');
+  dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
+  document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
+  document.getElementById('pm-add-btn').disabled = stk === 0;
+  document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
+  modalQty = 1;
+  document.getElementById('qty-display').textContent = '1';
+  updateModalTotalIndex();
+}
+
+function selectSize(size) {
+  modalSize = size;
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('size-' + size.replace('ml', '')).classList.add('selected');
+  const pr = CONFIG.PRICES[size];
+  document.getElementById('pm-price-main').textContent = 'RM ' + pr.promo;
+  document.getElementById('pm-price-old').textContent = 'RM ' + pr.normal;
+  updateModalTotalIndex();
+}
+
+function changeQty(delta) {
+  const targetId = modalScent || modalProductId;
+  const stk = getStock(targetId);
+  const max = Math.min(stk, 10);
+  modalQty = Math.max(1, Math.min(max, modalQty + delta));
+  document.getElementById('qty-display').textContent = modalQty;
+  updateModalTotalIndex();
+}
+
+function updateModalTotalIndex() {
+  if (!modalSize) {
+    document.getElementById('pm-total-display').textContent = 'RM —';
+    return;
+  }
+  const total = CONFIG.PRICES[modalSize].promo * modalQty;
+  document.getElementById('pm-total-display').textContent = 'RM ' + total;
+}
+
+function closeProductModal() {
+  document.getElementById('pm-overlay').classList.remove('visible');
+  document.getElementById('pm-footer').style.display = 'none';
+  document.body.classList.remove('lock');
+  modalProductId = null;
+  modalScent = null;
+  modalSize = null;
+  modalQty = 1;
+}
+
+function modalAddToCart() {
+  const targetId = modalScent || modalProductId;
+  if (!targetId) return;
+  if (!modalSize) {
+    document.querySelectorAll('.size-btn').forEach(b => {
+      b.style.outline = '2px solid var(--red)';
+      setTimeout(() => b.style.outline = '', 1400);
+    });
+    document.querySelector('.size-options').classList.add('shake');
+    setTimeout(() => document.querySelector('.size-options').classList.remove('shake'), 400);
+    return;
+  }
+  const product = window.PRODUCTS_FOR_MODAL?.find(p => p.id === targetId);
+  if (!product) return;
+  const stk = getStock(targetId);
+  if (stk === 0) return;
+  const pricePerUnit = CONFIG.PRICES[modalSize].promo;
+  const existing = cart.find(i => i.productId === targetId && i.size === modalSize);
+  if (existing) existing.qty += modalQty;
+  else cart.push({ productId: targetId, size: modalSize, pricePerUnit, qty: modalQty, name: product.name, inspiredBy: product.inspired_by, cap: product.cap_color, rgb: product.rgb });
+  saveCart();
+  decrementStock(targetId, modalQty);
+  refreshCartUI();
+  const btn = document.getElementById('pm-add-btn');
+  btn.textContent = '✓ Ditambah!';
+  btn.classList.add('added');
+  setTimeout(() => { closeProductModal(); openCart(); }, 600);
+}
+
+// Expose functions globally
+window.selectSize = selectSize;
+window.changeQty = changeQty;
+window.closeProductModal = closeProductModal;
+window.modalAddToCart = modalAddToCart;
+window.selectScentIndex = selectScentIndex;
 </script>
 </body>
 </html>
