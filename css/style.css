@@ -129,17 +129,17 @@ a { text-decoration: none; color: inherit }
   display: flex;
   align-items: center;
   height: 56px;
-  padding: 0 28px;
-  font-size: 12px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--muted);
+  padding: 0 22px;
+  font-size: 13px;
+  letter-spacing: .01em;
+  text-transform: none;
+  font-weight: 400;
+  color: var(--ink);
   border-bottom: 2px solid transparent;
   transition: color .18s, border-color .18s;
   white-space: nowrap;
 }
-.nav-center-links li a:hover { color: var(--ink); border-bottom-color: var(--ink) }
+.nav-center-links li a:hover { color: var(--ink); border-bottom-color: var(--ink2) }
 .nav-center-links li a.active { color: var(--ink); border-bottom-color: var(--ink) }
 
 .nav-right {
