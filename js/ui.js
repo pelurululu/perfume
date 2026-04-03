@@ -277,6 +277,7 @@ function openMegaMenu() {
   document.getElementById('mega-overlay').classList.add('visible');
   document.getElementById('hamburger').classList.add('open');
   document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
+  document.getElementById('main-nav').classList.add('scrolled');
   document.body.classList.add('lock');
 }
 
@@ -286,6 +287,10 @@ function closeMegaMenu() {
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
   document.body.classList.remove('lock');
+  // Only remove solid if not actually scrolled
+  if (window.scrollY <= 60) {
+    document.getElementById('main-nav').classList.remove('scrolled');
+  }
 }
 
 function switchMegaTab(gender) {
@@ -307,8 +312,17 @@ document.addEventListener('keydown', e => {
 document.getElementById('nav-cart-btn').addEventListener('click', openCart);
 document.getElementById('nav-search-btn').addEventListener('click', () => {
   const bar = document.getElementById('nav-search-bar');
-  bar.classList.toggle('open');
-  if (bar.classList.contains('open')) {
+  const isOpen = bar.classList.contains('open');
+  if (isOpen) {
+    bar.classList.remove('open');
+    document.getElementById('main-nav').classList.remove('search-open');
+    if (window.scrollY <= 60 && !megaOpen) {
+      document.getElementById('main-nav').classList.remove('scrolled');
+    }
+  } else {
+    bar.classList.add('open');
+    document.getElementById('main-nav').classList.add('scrolled');
+    document.getElementById('main-nav').classList.add('search-open');
     setTimeout(() => document.getElementById('nav-search-input').focus(), 150);
   }
 });
@@ -318,7 +332,14 @@ document.getElementById('nav-search-input').addEventListener('keydown', e => {
     const q = e.target.value.trim();
     if (q) window.location.href = `koleksi.html?q=${encodeURIComponent(q)}`;
   }
-  if (e.key === 'Escape') closeNavSearch();
+  if (e.key === 'Escape') {
+    document.getElementById('nav-search-bar').classList.remove('open');
+    document.getElementById('main-nav').classList.remove('search-open');
+    if (window.scrollY <= 60 && !megaOpen) {
+      document.getElementById('main-nav').classList.remove('scrolled');
+    }
+    e.target.value = '';
+  }
 });
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
