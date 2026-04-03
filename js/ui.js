@@ -278,11 +278,13 @@ function openMegaMenu() {
   document.getElementById('hamburger').classList.add('open');
   document.getElementById('hamburger').setAttribute('aria-expanded', 'true');
   document.getElementById('main-nav').classList.add('scrolled');
+  document.getElementById('nav-search-btn').style.display = 'none'; // ADD THIS
   document.body.classList.add('lock');
 }
 
 function closeMegaMenu() {
   megaOpen = false;
+   document.getElementById('nav-search-btn').style.display = ''; // ADD THIS
   document.getElementById('mega-overlay').classList.remove('visible');
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
