@@ -132,7 +132,7 @@
 <!-- ENTRY GRID — populated dynamically from gender_categories table -->
 <section class="entry-grid" id="collection">
   <div class="entry-card" id="entry-m" data-gender="m" style="cursor:pointer">
-    <div class="entry-card-bg" style="background:#1a1a2e"></div>
+    <div class="entry-card-bg"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Men</div>
@@ -141,7 +141,7 @@
     </div>
   </div>
   <div class="entry-card" id="entry-w" data-gender="w" style="cursor:pointer">
-    <div class="entry-card-bg" style="background:#111"></div>
+    <div class="entry-card-bg"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Women</div>
@@ -150,7 +150,7 @@
     </div>
   </div>
   <div class="entry-card" id="entry-u" data-gender="u" style="cursor:pointer">
-    <div class="entry-card-bg" style="background:#1c1c1e"></div>
+    <div class="entry-card-bg"></div>
     <div class="entry-card-info">
       <div class="entry-card-label">Koleksi</div>
       <div class="entry-card-title">Unisex</div>
@@ -516,16 +516,27 @@ async function loadGenderCategories() {
       if (!card) return;
       const bg = card.querySelector('.entry-card-bg');
       if (cat.image_url && bg) {
-        bg.style.backgroundImage = 'url(\'' + cat.image_url + '\')';
+        // IMPORTANT: Clear any existing background and set the image
+        bg.style.background = '';
+        bg.style.backgroundImage = `url('${cat.image_url}')`;
         bg.style.backgroundSize = 'cover';
         bg.style.backgroundPosition = 'center';
       } else if (cat.bg_color && bg) {
         bg.style.background = cat.bg_color;
+        bg.style.backgroundImage = 'none';
       }
-      if (cat.title) { const el = card.querySelector('.entry-card-title'); if(el) el.textContent = cat.title; }
-      if (cat.subtitle) { const el = document.getElementById('entry-' + cat.gender + '-count'); if(el) el.textContent = cat.subtitle; }
+      if (cat.title) { 
+        const el = card.querySelector('.entry-card-title'); 
+        if(el) el.textContent = cat.title; 
+      }
+      if (cat.subtitle) { 
+        const el = document.getElementById('entry-' + cat.gender + '-count'); 
+        if(el) el.textContent = cat.subtitle; 
+      }
     });
-  } catch(e) { /* keep defaults */ }
+  } catch(e) { 
+    console.error('Error loading gender categories:', e);
+  }
 }
 
 // Open product modal for a specific product by ID (function to be used from koleksi.html modal code)
