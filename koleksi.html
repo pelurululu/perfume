@@ -8,63 +8,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style_koleksi.css">
-  <style>
-  /* Solid header for koleksi page only - with higher specificity */
-  nav#main-nav,
+<link rel="stylesheet" href="css/style.css">
+<style>
+  /* Solid header for koleksi page only */
   #main-nav {
     top: 0 !important;
     background: #fff !important;
-    border-bottom: 1px solid #e8e8e8 !important;
+    border-bottom: 1px solid var(--line) !important;
     box-shadow: 0 1px 6px rgba(0,0,0,.07) !important;
   }
-  
-  nav#main-nav .nav-logo,
-  #main-nav .nav-logo {
-    color: #111 !important;
-  }
-  
-  nav#main-nav .nav-center-links li a,
-  #main-nav .nav-center-links li a {
-    color: #333 !important;
-    border-bottom-color: transparent !important;
-  }
-  
-  nav#main-nav .nav-center-links li a:hover,
-  #main-nav .nav-center-links li a:hover {
-    color: #111 !important;
-    border-bottom-color: #333 !important;
-  }
-  
-  nav#main-nav .nav-icon,
-  #main-nav .nav-icon {
-    color: #777 !important;
-  }
-  
-  nav#main-nav .nav-icon:hover,
-  #main-nav .nav-icon:hover {
-    color: #111 !important;
-  }
-  
-  nav#main-nav .hamburger span,
+  #main-nav .nav-logo,
+  #main-nav .nav-center-links li a,
+  #main-nav .nav-icon,
   #main-nav .hamburger span {
-    background: #111 !important;
+    color: var(--ink) !important;
   }
-  
-  /* Remove any transparent background variations */
-  #main-nav:not(.scrolled) .nav-logo,
-  #main-nav:not(.scrolled) .nav-center-links li a,
-  #main-nav:not(.scrolled) .nav-icon,
-  #main-nav:not(.scrolled) .hamburger span {
-    color: #111 !important;
+  #main-nav .hamburger span {
+    background: var(--ink) !important;
   }
-  
-  #main-nav:not(.scrolled) .hamburger span {
-    background: #111 !important;
+  /* Remove gender tabs completely */
+  .gender-tabs-bar {
+    display: none !important;
+  }
+  /* Adjust products section padding */
+  .products-section {
+    padding-top: 80px;
   }
 </style>
 </head>
- 
 <body>
 
 <!-- NAV -->
@@ -93,23 +64,9 @@
 
 <div class="page-wrap">
 
-  <!-- GENDER TABS -->
-  <div class="gender-tabs-bar">
-    <div class="gender-tabs">
-      <button class="gender-tab active" id="gtab-all" onclick="switchGender('all')">
-        Semua <span class="gender-tab-count" id="cnt-all">—</span>
-      </button>
-      <button class="gender-tab" id="gtab-m" onclick="switchGender('m')">
-        Men <span class="gender-tab-count" id="cnt-m">—</span>
-      </button>
-      <button class="gender-tab" id="gtab-w" onclick="switchGender('w')">
-        Women <span class="gender-tab-count" id="cnt-w">—</span>
-      </button>
-      <button class="gender-tab" id="gtab-u" onclick="switchGender('u')">
-        Unisex <span class="gender-tab-count" id="cnt-u">—</span>
-      </button>
-    </div>
-    <div class="search-bar">
+  <!-- Search Bar (only) -->
+  <div class="search-bar-wrapper" style="padding: 20px 40px 0; display: flex; justify-content: flex-end;">
+    <div class="search-bar" style="max-width: 300px;">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="search-input" placeholder="Cari wangian..." autocomplete="off">
       <button id="search-clear" style="display:none" onclick="clearSearch()">
@@ -139,9 +96,7 @@
 
     <!-- HEADER -->
     <div class="pm-header">
-      <div class="pm-header-bottle" id="pm-bottle-wrap">
-        <!-- SVG bottle injected here -->
-      </div>
+      <div class="pm-header-bottle" id="pm-bottle-wrap"></div>
       <div class="pm-header-info">
         <p class="pm-insp" id="pm-insp-text"></p>
         <h2 class="pm-name" id="pm-name-text"></h2>
@@ -161,9 +116,7 @@
     <!-- SCENT VARIATIONS -->
     <div class="pm-section" id="pm-scents-section">
       <div class="pm-section-label">Pilih Wangian</div>
-      <div class="scent-variations" id="pm-scents-wrap">
-        <!-- chips injected -->
-      </div>
+      <div class="scent-variations" id="pm-scents-wrap"></div>
     </div>
 
     <!-- SIZE -->
@@ -203,7 +156,7 @@
   </div>
 </div>
 
-<!-- STICKY FOOTER (outside sheet, stuck to viewport bottom) -->
+<!-- STICKY FOOTER -->
 <div class="pm-footer" id="pm-footer" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:905;">
   <div class="pm-total-display">
     <div class="pm-total-label">Jumlah</div>
@@ -298,9 +251,6 @@
   <span class="float-cart-label">Troli</span>
 </div>
 
-<!-- =============================================
-   SCRIPTS
-============================================= -->
 <script src="js/config.js"></script>
 <script>
 'use strict';
@@ -310,12 +260,11 @@ let PRODUCTS      = [];
 let currentGender = 'all';
 let searchQuery   = '';
 let searchDebounce;
-let searchClear;
 
 /* ─── MODAL STATE ─── */
-let modalProductId  = null;  // selected product (from PRODUCTS)
-let modalScent      = null;  // selected scent variation id
-let modalSize       = null;  // '10ml' | '30ml' | '60ml'
+let modalProductId  = null;
+let modalScent      = null;
+let modalSize       = null;
 let modalQty        = 1;
 
 /* ─── CART STATE ─── */
@@ -324,7 +273,7 @@ let cartCountdownEnd   = 0;
 let cartCountdownTimer = null;
 
 /* =============================================
-   SVG BOTTLE
+   SVG FUNCTIONS (same as before)
 ============================================= */
 function createMiniBottleSVG(cap, rgbStr) {
   const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
@@ -366,6 +315,21 @@ function createCardBottleSVG(productId, cap, rgbStr) {
   </svg>`;
 }
 
+function miniSVG(cap, rgbStr) {
+  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
+  const uid = Math.random().toString(36).slice(2);
+  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
+    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
+      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
+    </linearGradient></defs>
+    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
+    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
+    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
+  </svg>`;
+}
+
 /* =============================================
    STOCK HELPERS
 ============================================= */
@@ -374,12 +338,14 @@ function getStock(id) {
   const p = PRODUCTS.find(x => x.id === id);
   return s[id] !== undefined ? s[id] : (p?.stock ?? CONFIG.INITIAL_STOCK);
 }
+
 function decrementStock(id, qty = 1) {
   const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   s[id] = Math.max(0, (s[id] ?? CONFIG.INITIAL_STOCK) - qty);
   localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(s));
   sbFetch('products?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ stock: s[id] }) }).catch(() => {});
 }
+
 function initStock() {
   const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   let updated = false;
@@ -404,20 +370,27 @@ async function loadProducts() {
     const rows = await sbFetch('products?active=eq.true&order=id.asc&select=*');
     PRODUCTS = rows || [];
     initStock();
-    updateCounts();
+    updateNavActiveState();
     renderGrid();
   } catch(e) {
-    document.getElementById('products-grid').innerHTML =
-      '<div class="no-results" style="color:var(--red)">Gagal memuatkan produk. Cuba muat semula.</div>';
+    document.getElementById('products-grid').innerHTML = '<div class="no-results" style="color:var(--red)">Gagal memuatkan produk. Cuba muat semula.</div>';
+  }
+}
+
+function updateNavActiveState() {
+  // Highlight active nav link based on currentGender
+  document.querySelectorAll('.nav-center-links a').forEach(a => a.classList.remove('active'));
+  if (currentGender !== 'all') {
+    const navEl = document.getElementById('nav-' + (currentGender === 'm' ? 'men' : currentGender === 'w' ? 'women' : 'unisex'));
+    if (navEl) navEl.classList.add('active');
   }
 }
 
 async function init() {
-  // URL params
   const params = new URLSearchParams(window.location.search);
   if (params.get('gender')) currentGender = params.get('gender');
   if (params.get('q')) { searchQuery = params.get('q').toLowerCase(); document.getElementById('search-input').value = params.get('q'); document.getElementById('search-clear').style.display = 'block'; }
-  setActiveTab(currentGender);
+  
   await loadPricing();
   await loadProducts();
   refreshCartUI();
@@ -426,13 +399,6 @@ async function init() {
 /* =============================================
    GRID RENDER
 ============================================= */
-function updateCounts() {
-  document.getElementById('cnt-all').textContent = PRODUCTS.length;
-  document.getElementById('cnt-m').textContent   = PRODUCTS.filter(p => p.gender === 'm').length;
-  document.getElementById('cnt-w').textContent   = PRODUCTS.filter(p => p.gender === 'w').length;
-  document.getElementById('cnt-u').textContent   = PRODUCTS.filter(p => p.gender === 'u').length;
-}
-
 function getFiltered() {
   return PRODUCTS.filter(p => {
     const gOk = currentGender === 'all' || p.gender === currentGender;
@@ -445,10 +411,7 @@ function renderGrid() {
   const grid = document.getElementById('products-grid');
   const filtered = getFiltered();
 
-  document.getElementById('products-count').textContent =
-    filtered.length > 0
-      ? `Menunjukkan ${filtered.length} wangian`
-      : '';
+  document.getElementById('products-count').textContent = filtered.length > 0 ? `Menunjukkan ${filtered.length} wangian` : '';
 
   if (filtered.length === 0) {
     grid.innerHTML = '<div class="no-results">Tiada wangian dijumpai untuk carian ini.</div>';
@@ -456,11 +419,11 @@ function renderGrid() {
   }
 
   grid.innerHTML = filtered.map(p => {
-    const stk  = getStock(p.id);
-    const pct  = Math.max(0, Math.min(100, (stk / CONFIG.INITIAL_STOCK) * 100));
+    const stk = getStock(p.id);
+    const pct = Math.max(0, Math.min(100, (stk / CONFIG.INITIAL_STOCK) * 100));
     const isOut = stk === 0;
     const fillCls = stk === 0 ? 'crit' : stk <= 8 ? 'crit' : stk <= 18 ? 'low' : '';
-    const pr   = CONFIG.PRICES;
+    const pr = CONFIG.PRICES;
 
     let badgeHtml = '';
     if (p.badge) {
@@ -497,25 +460,51 @@ function renderGrid() {
 }
 
 /* =============================================
-   TAB SWITCHING
+   NAVIGATION - Use header links for filtering
 ============================================= */
-function switchGender(g) {
-  currentGender = g;
-  setActiveTab(g);
+// Override nav link clicks to filter instead of navigating away
+document.getElementById('nav-men').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentGender = 'm';
+  updateNavActiveState();
   renderGrid();
-}
+  // Update URL without reload
+  const url = new URL(window.location);
+  url.searchParams.set('gender', 'm');
+  window.history.pushState({}, '', url);
+});
 
-function setActiveTab(g) {
-  document.querySelectorAll('.gender-tab').forEach(b => b.classList.remove('active'));
-  const el = document.getElementById('gtab-' + g);
-  if (el) el.classList.add('active');
-  // Also highlight nav link
-  document.querySelectorAll('.nav-center-links a').forEach(a => a.classList.remove('active'));
-  if (g !== 'all') {
-    const navEl = document.getElementById('nav-' + (g === 'm' ? 'men' : g === 'w' ? 'women' : 'unisex'));
-    if (navEl) navEl.classList.add('active');
-  }
-}
+document.getElementById('nav-women').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentGender = 'w';
+  updateNavActiveState();
+  renderGrid();
+  const url = new URL(window.location);
+  url.searchParams.set('gender', 'w');
+  window.history.pushState({}, '', url);
+});
+
+document.getElementById('nav-unisex').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentGender = 'u';
+  updateNavActiveState();
+  renderGrid();
+  const url = new URL(window.location);
+  url.searchParams.set('gender', 'u');
+  window.history.pushState({}, '', url);
+});
+
+// Also handle logo click to show all
+document.querySelector('.nav-logo').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentGender = 'all';
+  updateNavActiveState();
+  renderGrid();
+  const url = new URL(window.location);
+  url.searchParams.delete('gender');
+  window.history.pushState({}, '', url);
+  window.location.href = 'index.html'; // Actually go to homepage
+});
 
 /* =============================================
    SEARCH
@@ -526,9 +515,7 @@ document.getElementById('search-input').addEventListener('input', function() {
   clearTimeout(searchDebounce);
   searchDebounce = setTimeout(renderGrid, 240);
 });
-document.getElementById('search-input').addEventListener('keydown', e => {
-  if (e.key === 'Escape') clearSearch();
-});
+
 function clearSearch() {
   document.getElementById('search-input').value = '';
   searchQuery = '';
@@ -537,102 +524,76 @@ function clearSearch() {
 }
 
 /* =============================================
-   PRODUCT MODAL
+   PRODUCT MODAL (same as before)
 ============================================= */
 function openProductModal(productId) {
   const p = PRODUCTS.find(x => x.id === productId);
   if (!p) return;
 
   modalProductId = productId;
-  modalScent     = null;
-  modalSize      = null;
-  modalQty       = 1;
+  modalScent = null;
+  modalSize = null;
+  modalQty = 1;
 
-  // Header
   document.getElementById('pm-bottle-wrap').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
-  document.getElementById('pm-insp-text').textContent   = 'Terinspirasi oleh ' + (p.inspired_by || '');
-  document.getElementById('pm-name-text').textContent   = p.name;
+  document.getElementById('pm-insp-text').textContent = 'Terinspirasi oleh ' + (p.inspired_by || '');
+  document.getElementById('pm-name-text').textContent = p.name;
   document.getElementById('pm-family-text').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
 
-  // Prices
   const pr = CONFIG.PRICES;
   document.getElementById('pm-price-main').textContent = 'RM ' + pr['10ml'].promo;
-  document.getElementById('pm-price-old').textContent  = 'RM ' + pr['10ml'].normal;
-  document.getElementById('sz-price-10').textContent   = 'RM ' + pr['10ml'].promo;
-  document.getElementById('sz-was-10').textContent     = 'RM ' + pr['10ml'].normal;
-  document.getElementById('sz-price-30').textContent   = 'RM ' + pr['30ml'].promo;
-  document.getElementById('sz-was-30').textContent     = 'RM ' + pr['30ml'].normal;
-  document.getElementById('sz-price-60').textContent   = 'RM ' + pr['60ml'].promo;
-  document.getElementById('sz-was-60').textContent     = 'RM ' + pr['60ml'].normal;
+  document.getElementById('pm-price-old').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sz-price-10').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('sz-was-10').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sz-price-30').textContent = 'RM ' + pr['30ml'].promo;
+  document.getElementById('sz-was-30').textContent = 'RM ' + pr['30ml'].normal;
+  document.getElementById('sz-price-60').textContent = 'RM ' + pr['60ml'].promo;
+  document.getElementById('sz-was-60').textContent = 'RM ' + pr['60ml'].normal;
 
-  // Stock
   const stk = getStock(productId);
-  const dot  = document.getElementById('pm-stock-dot');
+  const dot = document.getElementById('pm-stock-dot');
   dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
   document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
   document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
 
-  // Scent variations — build from product data
-  // Each product represents one "scent name". We'll show a list of similar
-  // scents (same gender) as the "variation" selector — typical for these sites
-  // where you pick the specific scent then size. We also show the product itself.
   buildScentVariations(p);
-
-  // Size buttons reset
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-
-  // Qty
   document.getElementById('qty-display').textContent = '1';
   updateModalTotal();
 
-  // Footer
   const footer = document.getElementById('pm-footer');
   footer.style.display = 'flex';
   document.getElementById('pm-add-btn').textContent = '+ Tambah ke Troli';
   document.getElementById('pm-add-btn').classList.remove('added');
   document.getElementById('pm-add-btn').disabled = stk === 0;
 
-  // Open
   document.getElementById('pm-overlay').classList.add('visible');
   document.body.classList.add('lock');
-
-  // Scroll sheet to top
   document.getElementById('pm-sheet').scrollTop = 0;
 }
 
 function buildScentVariations(currentProduct) {
-  // Show all products of same gender as scent chips
   const sameGender = PRODUCTS.filter(p => p.gender === currentProduct.gender);
   const wrap = document.getElementById('pm-scents-wrap');
 
   if (sameGender.length <= 1) {
-    // Just this product — no variation section needed
     document.getElementById('pm-scents-section').style.display = 'none';
     modalScent = currentProduct.id;
     return;
   }
 
   document.getElementById('pm-scents-section').style.display = 'block';
-
   wrap.innerHTML = sameGender.map((p, i) => {
-    const stk   = getStock(p.id);
-    const isOut  = stk === 0;
+    const stk = getStock(p.id);
+    const isOut = stk === 0;
     let badgeHtml = '';
     if (p.badge === 'Hot' || p.badge === 'Bestseller') badgeHtml = `<span class="scent-chip-hot chip-badge-hot">${p.badge}</span>`;
     else if (p.badge === 'New') badgeHtml = `<span class="scent-chip-hot chip-badge-new">New</span>`;
-
     const isCurrent = p.id === currentProduct.id;
-
-    return `<button class="scent-chip-btn${isOut ? ' out-chip' : ''}${isCurrent ? ' selected' : ''}"
-      data-scent-id="${p.id}"
-      onclick="selectScent('${p.id}')">
-      <span class="scent-chip-num">${i + 1}.</span>
-      ${p.name}
-      ${badgeHtml}
+    return `<button class="scent-chip-btn${isOut ? ' out-chip' : ''}${isCurrent ? ' selected' : ''}" data-scent-id="${p.id}" onclick="selectScent('${p.id}')">
+      <span class="scent-chip-num">${i + 1}.</span> ${p.name} ${badgeHtml}
     </button>`;
   }).join('');
-
-  // Pre-select current product
   modalScent = currentProduct.id;
 }
 
@@ -641,16 +602,12 @@ function selectScent(scentId) {
   document.querySelectorAll('.scent-chip-btn').forEach(b => {
     b.classList.toggle('selected', b.dataset.scentId === scentId);
   });
-
-  // Update stock display for selected scent
   const stk = getStock(scentId);
-  const dot  = document.getElementById('pm-stock-dot');
+  const dot = document.getElementById('pm-stock-dot');
   dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
   document.getElementById('pm-stock-text').textContent = stk === 0 ? 'Stok habis' : stk <= 8 ? `Hanya ${stk} unit berbaki!` : `${stk} unit tersedia`;
   document.getElementById('pm-add-btn').disabled = stk === 0;
   document.getElementById('qty-stock-hint').textContent = stk > 0 ? `Maks ${Math.min(stk, 10)} unit` : '';
-
-  // Reset qty
   modalQty = 1;
   document.getElementById('qty-display').textContent = '1';
   updateModalTotal();
@@ -660,11 +617,9 @@ function selectSize(size) {
   modalSize = size;
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
   document.getElementById('size-' + size.replace('ml', '')).classList.add('selected');
-
-  // Update header price
   const pr = CONFIG.PRICES[size];
   document.getElementById('pm-price-main').textContent = 'RM ' + pr.promo;
-  document.getElementById('pm-price-old').textContent  = 'RM ' + pr.normal;
+  document.getElementById('pm-price-old').textContent = 'RM ' + pr.normal;
   updateModalTotal();
 }
 
@@ -682,8 +637,7 @@ function updateModalTotal() {
     document.getElementById('pm-total-display').textContent = 'RM —';
     return;
   }
-  const pr    = CONFIG.PRICES[modalSize];
-  const total = pr.promo * modalQty;
+  const total = CONFIG.PRICES[modalSize].promo * modalQty;
   document.getElementById('pm-total-display').textContent = 'RM ' + total;
 }
 
@@ -692,78 +646,54 @@ function closeProductModal() {
   document.getElementById('pm-footer').style.display = 'none';
   document.body.classList.remove('lock');
   modalProductId = null;
-  modalScent     = null;
-  modalSize      = null;
-  modalQty       = 1;
+  modalScent = null;
+  modalSize = null;
+  modalQty = 1;
 }
 
 function modalAddToCart() {
-  // Validate scent
   const targetId = modalScent || modalProductId;
   if (!targetId) return;
-
-  // Validate size
   if (!modalSize) {
     document.querySelectorAll('.size-btn').forEach(b => {
       b.style.outline = '2px solid var(--red)';
       setTimeout(() => b.style.outline = '', 1400);
     });
-    const section = document.querySelector('.size-options');
-    section.classList.add('shake');
-    setTimeout(() => section.classList.remove('shake'), 400);
+    document.querySelector('.size-options').classList.add('shake');
+    setTimeout(() => document.querySelector('.size-options').classList.remove('shake'), 400);
     return;
   }
-
   const product = PRODUCTS.find(p => p.id === targetId);
   if (!product) return;
-
   const stk = getStock(targetId);
   if (stk === 0) return;
-
   const pricePerUnit = CONFIG.PRICES[modalSize].promo;
   const existing = cart.find(i => i.productId === targetId && i.size === modalSize);
-  if (existing) {
-    existing.qty += modalQty;
-  } else {
-    cart.push({
-      productId:    targetId,
-      size:         modalSize,
-      pricePerUnit,
-      qty:          modalQty,
-      name:         product.name,
-      inspiredBy:   product.inspired_by,
-      cap:          product.cap_color,
-      rgb:          product.rgb
-    });
-  }
-
+  if (existing) existing.qty += modalQty;
+  else cart.push({ productId: targetId, size: modalSize, pricePerUnit, qty: modalQty, name: product.name, inspiredBy: product.inspired_by, cap: product.cap_color, rgb: product.rgb });
   saveCart();
   decrementStock(targetId, modalQty);
   refreshCartUI();
-
-  // Feedback
   const btn = document.getElementById('pm-add-btn');
   btn.textContent = '✓ Ditambah!';
   btn.classList.add('added');
-  setTimeout(() => {
-    closeProductModal();
-    openCart();
-  }, 600);
+  setTimeout(() => { closeProductModal(); openCart(); }, 600);
 }
 
 /* =============================================
-   CART
+   CART FUNCTIONS
 ============================================= */
-const saveCart      = () => localStorage.setItem(CONFIG.KEYS.CART, JSON.stringify(cart));
-const getCartTotal  = () => cart.reduce((s, i) => s + i.pricePerUnit * i.qty, 0);
-const getCartCount  = () => cart.reduce((s, i) => s + i.qty, 0);
+const saveCart = () => localStorage.setItem(CONFIG.KEYS.CART, JSON.stringify(cart));
+const getCartTotal = () => cart.reduce((s, i) => s + i.pricePerUnit * i.qty, 0);
+const getCartCount = () => cart.reduce((s, i) => s + i.qty, 0);
 const getCartSaving = () => cart.reduce((s, i) => s + (CONFIG.PRICES[i.size].normal - i.pricePerUnit) * i.qty, 0);
-const count60ml     = () => cart.filter(i => i.size === '60ml').reduce((s, i) => s + i.qty, 0);
+const count60ml = () => cart.filter(i => i.size === '60ml').reduce((s, i) => s + i.qty, 0);
 
 function removeFromCart(productId, size) {
   cart = cart.filter(i => !(i.productId === productId && i.size === size));
   saveCart(); refreshCartUI();
 }
+
 function changeCartQty(productId, size, delta) {
   const item = cart.find(i => i.productId === productId && i.size === size);
   if (!item) return;
@@ -772,19 +702,19 @@ function changeCartQty(productId, size, delta) {
 }
 
 function refreshCartUI() {
-  const count   = getCartCount();
-  const total   = getCartTotal();
-  const saving  = getCartSaving();
-  const qty60   = count60ml();
+  const count = getCartCount();
+  const total = getCartTotal();
+  const saving = getCartSaving();
+  const qty60 = count60ml();
 
-  document.getElementById('nav-badge').textContent         = count;
-  document.getElementById('float-cart-badge').textContent  = count;
+  document.getElementById('nav-badge').textContent = count;
+  document.getElementById('float-cart-badge').textContent = count;
   document.getElementById('nav-badge').classList.toggle('visible', count > 0);
-  document.getElementById('float-cart').style.display      = count > 0 ? 'flex' : 'none';
-  document.getElementById('cart-count-label').textContent  = count > 0 ? `${count} item` : '';
+  document.getElementById('float-cart').style.display = count > 0 ? 'flex' : 'none';
+  document.getElementById('cart-count-label').textContent = count > 0 ? `${count} item` : '';
 
-  const emptyEl  = document.getElementById('cart-empty');
-  const itemsEl  = document.getElementById('cart-items-list');
+  const emptyEl = document.getElementById('cart-empty');
+  const itemsEl = document.getElementById('cart-items-list');
   const footerEl = document.getElementById('cart-footer');
 
   if (count === 0) {
@@ -797,7 +727,7 @@ function refreshCartUI() {
     return;
   }
 
-  emptyEl.style.display  = 'none';
+  emptyEl.style.display = 'none';
   footerEl.style.display = 'block';
 
   itemsEl.innerHTML = cart.map(item => `
@@ -816,22 +746,19 @@ function refreshCartUI() {
           <span class="cart-item-price">RM ${item.pricePerUnit * item.qty}</span>
         </div>
         <button class="cart-item-remove-btn" onclick="removeFromCart('${item.productId}','${item.size}')">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-          Buang
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg> Buang
         </button>
       </div>
     </div>`).join('');
 
   const hintEl = document.getElementById('bundle-hint');
-  const need   = 3 - qty60;
-  if (qty60 >= 3)      { hintEl.innerHTML = '<b>🎁 Bundle aktif!</b> Anda layak mendapat <b>1 botol 30ml PERCUMA</b>. Nyatakan pilihan dalam nota.'; hintEl.style.display = 'block'; }
-  else if (qty60 > 0)  { hintEl.innerHTML = `<b>🎁 Hampir!</b> Tambah <b>${need}</b> lagi 60ml untuk 30ml <b>PERCUMA</b>.`; hintEl.style.display = 'block'; }
-  else                  { hintEl.style.display = 'none'; }
+  const need = 3 - qty60;
+  if (qty60 >= 3) hintEl.innerHTML = '<b>🎁 Bundle aktif!</b> Anda layak mendapat <b>1 botol 30ml PERCUMA</b>. Nyatakan pilihan dalam nota.';
+  else if (qty60 > 0) hintEl.innerHTML = `<b>🎁 Hampir!</b> Tambah <b>${need}</b> lagi 60ml untuk 30ml <b>PERCUMA</b>.`;
+  hintEl.style.display = qty60 > 0 ? 'block' : 'none';
 
   document.getElementById('cart-total-display').textContent = 'RM ' + total;
-  const savEl = document.getElementById('cart-savings-display');
-  savEl.textContent = saving > 0 ? `Jimat RM ${saving} daripada harga asal` : '';
-
+  document.getElementById('cart-savings-display').textContent = saving > 0 ? `Jimat RM ${saving} daripada harga asal` : '';
   document.getElementById('cart-countdown').style.display = 'flex';
   if (!cartCountdownEnd || cartCountdownEnd <= Date.now()) cartCountdownEnd = Date.now() + 15 * 60 * 1000;
   startCartCountdown();
@@ -842,26 +769,11 @@ function startCartCountdown() {
   const display = document.getElementById('cart-cd-display');
   cartCountdownTimer = setInterval(() => {
     const rem = Math.max(0, cartCountdownEnd - Date.now());
-    const m   = Math.floor(rem / 60000);
-    const s   = Math.floor((rem % 60000) / 1000);
+    const m = Math.floor(rem / 60000);
+    const s = Math.floor((rem % 60000) / 1000);
     if (display) display.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    if (rem === 0) { cartCountdownEnd = Date.now() + 15 * 60 * 1000; }
+    if (rem === 0) cartCountdownEnd = Date.now() + 15 * 60 * 1000;
   }, 1000);
-}
-
-function miniSVG(cap, rgbStr) {
-  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
-  const uid = Math.random().toString(36).slice(2);
-  return `<svg width="32" height="56" viewBox="0 0 32 56" fill="none">
-    <defs><linearGradient id="cs_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
-      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-    </linearGradient></defs>
-    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap || '#3A1828'}"/>
-    <rect x="10" y="6" width="12" height="4" rx="1" fill="${cap || '#3A1828'}" opacity=".6"/>
-    <rect x="4" y="10" width="24" height="42" rx="2.5" fill="url(#cs_${uid})" stroke="rgba(0,0,0,.08)" stroke-width=".4"/>
-  </svg>`;
 }
 
 function openCart(e) {
@@ -870,6 +782,7 @@ function openCart(e) {
   document.getElementById('cart-panel').classList.add('visible');
   document.body.classList.add('lock');
 }
+
 function closeCart() {
   document.getElementById('cart-overlay').classList.remove('visible');
   document.getElementById('cart-panel').classList.remove('visible');
@@ -879,7 +792,7 @@ function closeCart() {
 function sendCartViaWhatsApp() {
   if (!cart.length) return;
   const items = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} — RM ${i.pricePerUnit * i.qty}`).join('\n');
-  const msg   = `Salam, saya ingin pesan The Artisan Parfum:\n\n${items}\n\n*Jumlah: RM ${getCartTotal()}*\n\nTerima kasih!`;
+  const msg = `Salam, saya ingin pesan The Artisan Parfum:\n\n${items}\n\n*Jumlah: RM ${getCartTotal()}*\n\nTerima kasih!`;
   window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
@@ -890,94 +803,70 @@ function openOrderModal() {
   if (!cart.length) return;
   closeCart();
   const sumEl = document.getElementById('modal-order-summary');
-  sumEl.innerHTML = cart.map(i => `<div class="order-summary-item"><span>${i.name} ${i.size} ×${i.qty}</span><span>RM ${i.pricePerUnit * i.qty}</span></div>`).join('')
-    + `<div class="order-summary-total"><span>Jumlah</span><span>RM ${getCartTotal()}</span></div>`;
+  sumEl.innerHTML = cart.map(i => `<div class="order-summary-item"><span>${i.name} ${i.size} ×${i.qty}</span><span>RM ${i.pricePerUnit * i.qty}</span></div>`).join('') + `<div class="order-summary-total"><span>Jumlah</span><span>RM ${getCartTotal()}</span></div>`;
   document.getElementById('modal-total-display').textContent = 'RM ' + getCartTotal();
-  ['field-name','field-phone','field-email','field-address','field-state','field-postcode','field-note'].forEach(id => {
-    const el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('invalid'); }
-  });
+  ['field-name','field-phone','field-email','field-address','field-state','field-postcode','field-note'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('invalid'); } });
   document.querySelectorAll('.form-error').forEach(e => e.classList.remove('visible'));
-  document.getElementById('modal-form').style.display    = 'block';
+  document.getElementById('modal-form').style.display = 'block';
   document.getElementById('modal-loading').style.display = 'none';
   document.getElementById('modal-success').style.display = 'none';
-  document.getElementById('submit-btn').disabled         = false;
+  document.getElementById('submit-btn').disabled = false;
   document.getElementById('modal-overlay').classList.add('visible');
   document.body.classList.add('lock');
 }
+
 function closeOrderModal() {
   document.getElementById('modal-overlay').classList.remove('visible');
   document.body.classList.remove('lock');
 }
 
-const isValidEmail    = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-const isValidPhone    = v => /^(\+?60|0)[0-9]{8,10}$/.test(v.replace(/[\s\-]/g, ''));
+const isValidEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const isValidPhone = v => /^(\+?60|0)[0-9]{8,10}$/.test(v.replace(/[\s\-]/g, ''));
 const isValidPostcode = v => /^\d{5}$/.test(v.trim());
+
 function setInvalid(fId, eId) { document.getElementById(fId)?.classList.add('invalid'); document.getElementById(eId)?.classList.add('visible'); }
 function clearInvalid(fId, eId) { document.getElementById(fId)?.classList.remove('invalid'); document.getElementById(eId)?.classList.remove('visible'); }
 
 function handleOrderSubmit() {
-  const name     = document.getElementById('field-name').value.trim();
-  const phone    = document.getElementById('field-phone').value.trim();
-  const email    = document.getElementById('field-email').value.trim();
-  const address  = document.getElementById('field-address').value.trim();
-  const state    = document.getElementById('field-state').value;
+  const name = document.getElementById('field-name').value.trim();
+  const phone = document.getElementById('field-phone').value.trim();
+  const email = document.getElementById('field-email').value.trim();
+  const address = document.getElementById('field-address').value.trim();
+  const state = document.getElementById('field-state').value;
   const postcode = document.getElementById('field-postcode').value.trim();
-  const note     = document.getElementById('field-note').value.trim();
+  const note = document.getElementById('field-note').value.trim();
   let ok = true;
-  if (name.length < 3)        { setInvalid('field-name','err-name'); ok = false; }     else clearInvalid('field-name','err-name');
-  if (!isValidPhone(phone))   { setInvalid('field-phone','err-phone'); ok = false; }   else clearInvalid('field-phone','err-phone');
+  if (name.length < 3) { setInvalid('field-name','err-name'); ok = false; } else clearInvalid('field-name','err-name');
+  if (!isValidPhone(phone)) { setInvalid('field-phone','err-phone'); ok = false; } else clearInvalid('field-phone','err-phone');
   if (email && !isValidEmail(email)) { setInvalid('field-email','err-email'); ok = false; } else clearInvalid('field-email','err-email');
-  if (address.length < 10)    { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
-  if (!state)                 { setInvalid('field-state','err-state'); ok = false; }   else clearInvalid('field-state','err-state');
+  if (address.length < 10) { setInvalid('field-address','err-address'); ok = false; } else clearInvalid('field-address','err-address');
+  if (!state) { setInvalid('field-state','err-state'); ok = false; } else clearInvalid('field-state','err-state');
   if (!isValidPostcode(postcode)) { setInvalid('field-postcode','err-postcode'); ok = false; } else clearInvalid('field-postcode','err-postcode');
   if (!ok) return;
 
-  document.getElementById('submit-btn').disabled         = true;
-  document.getElementById('modal-form').style.display    = 'none';
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('modal-form').style.display = 'none';
   document.getElementById('modal-loading').style.display = 'block';
 
   const itemsFmt = cart.map(i => `• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit * i.qty}`).join('\n');
-  const itemsStr = cart.map(i => `${i.name} (${i.size}) x${i.qty}`).join(' | ');
 
-  if (CONFIG.USE_TOYYIBPAY && CONFIG.TOYYIBPAY_URL) {
-    const form = document.createElement('form');
-    form.method = 'POST'; form.action = CONFIG.TOYYIBPAY_URL;
-    Object.entries({ name, phone, email, address: `${address}, ${state} ${postcode}`, note, total: getCartTotal(), items: itemsStr, itemsFormatted: itemsFmt }).forEach(([k, v]) => {
-      const i = document.createElement('input'); i.type = 'hidden'; i.name = k; i.value = v; form.appendChild(i);
-    });
-    document.body.appendChild(form); form.submit();
-  } else {
-    setTimeout(() => {
-      const waMsg = `*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email ? '\n📧 *Emel:* ' + email : ''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${getCartTotal()}*\n\n📝 *Nota:* ${note || '-'}`;
-      window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
-      document.getElementById('modal-loading').style.display = 'none';
-      document.getElementById('modal-success').style.display = 'block';
-      cart = []; saveCart(); refreshCartUI();
-    }, 1800);
-  }
+  setTimeout(() => {
+    const waMsg = `*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email ? '\n📧 *Emel:* ' + email : ''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${getCartTotal()}*\n\n📝 *Nota:* ${note || '-'}`;
+    window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`, '_blank');
+    document.getElementById('modal-loading').style.display = 'none';
+    document.getElementById('modal-success').style.display = 'block';
+    cart = []; saveCart(); refreshCartUI();
+  }, 1800);
 }
 
 /* =============================================
-   NAV & MISC
+   EVENT LISTENERS
 ============================================= */
 document.getElementById('nav-cart-btn').addEventListener('click', openCart);
-document.getElementById('hamburger').addEventListener('click', () => {
-  // Mobile: link to index for now
-  window.location.href = 'index.html';
-});
-document.getElementById('nav-search-btn').addEventListener('click', () => {
-  document.getElementById('search-input').focus();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); }
-});
+document.getElementById('hamburger').addEventListener('click', () => { window.location.href = 'index.html'; });
+document.getElementById('nav-search-btn').addEventListener('click', () => { document.getElementById('search-input').focus(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeProductModal(); closeCart(); closeOrderModal(); } });
 
-// Scroll — nav stays fixed, no announcement bar on this page
-window.addEventListener('scroll', () => {}, { passive: true });
-
-/* =============================================
-   BOOT
-============================================= */
 init();
 </script>
 </body>
