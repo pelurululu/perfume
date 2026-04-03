@@ -558,9 +558,19 @@ async function loadProductsForModal() {
   }
 }
 
-document.getElementById('entry-m').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=m'; });
-document.getElementById('entry-w').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=w'; });
-document.getElementById('entry-u').addEventListener('click', () => { window.location.href = 'koleksi.html?gender=u'; });
+// Add click handlers to entry cards
+document.getElementById('entry-m').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('m');
+});
+document.getElementById('entry-w').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('w');
+});
+document.getElementById('entry-u').addEventListener('click', (e) => {
+  e.preventDefault();
+  openProductModalByGender('u');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   loadScentFamilies();
@@ -762,16 +772,5 @@ window.closeProductModal = closeProductModal;
 window.modalAddToCart = modalAddToCart;
 window.selectScentIndex = selectScentIndex;
 </script>
-
-  <script>
-function closePromoPopup() {
-  document.getElementById('promo-overlay').classList.remove('visible');
-  document.body.classList.remove('lock');
-}
-function handleDontShow(cb) {
-  localStorage.setItem('artisan_promo_hide', cb.checked ? '1' : '0');
-}
-</script>
-  
 </body>
 </html>
