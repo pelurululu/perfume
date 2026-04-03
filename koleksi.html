@@ -204,6 +204,49 @@
   .scent-chip { font-size: 12px; padding: 9px 12px }
   .scent-modal { padding: 24px 16px }
 }
+  .family-pills-wrap {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  padding: 0 52px;
+  position: sticky;
+  top: 120px; /* 68px nav + 52px tabs */
+  z-index: 99;
+}
+.family-pills {
+  display: flex;
+  gap: 8px;
+  padding: 10px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.family-pills::-webkit-scrollbar { display: none }
+.family-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-radius: 999px;
+  transition: all .15s;
+  font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+.family-pill:hover { border-color: var(--ink); color: var(--ink) }
+.family-pill.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+@media (max-width: 880px) {
+  .family-pills-wrap { padding: 0 16px; top: 108px }
+}
   
 </style>
 </head>
@@ -309,6 +352,22 @@
     <button class="ap-gender-btn" id="ap-gbtn-u" onclick="apSwitchGender('u')">
       Unisex <span class="cnt" id="ap-count-u">—</span>
     </button>
+    <!-- FAMILY FILTER PILLS -->
+<div class="family-pills-wrap" id="family-pills-wrap">
+  <div class="family-pills" id="family-pills">
+    <button class="family-pill active" data-family="all" onclick="setFamilyFilter(this, 'all')">Semua</button>
+    <button class="family-pill" data-family="woody" onclick="setFamilyFilter(this, 'woody')">🪵 Woody</button>
+    <button class="family-pill" data-family="fresh" onclick="setFamilyFilter(this, 'fresh')">🌊 Fresh</button>
+    <button class="family-pill" data-family="floral" onclick="setFamilyFilter(this, 'floral')">🌸 Floral</button>
+    <button class="family-pill" data-family="oriental" onclick="setFamilyFilter(this, 'oriental')">🌙 Oriental</button>
+    <button class="family-pill" data-family="citrus" onclick="setFamilyFilter(this, 'citrus')">🍊 Citrus</button>
+    <button class="family-pill" data-family="sweet" onclick="setFamilyFilter(this, 'sweet')">🍬 Sweet</button>
+    <button class="family-pill" data-family="aquatic" onclick="setFamilyFilter(this, 'aquatic')">💧 Aquatic</button>
+    <button class="family-pill" data-family="musk" onclick="setFamilyFilter(this, 'musk')">🫧 Musky</button>
+    <button class="family-pill" data-family="spicy" onclick="setFamilyFilter(this, 'spicy')">🌶️ Spicy</button>
+    <button class="family-pill" data-family="oud" onclick="setFamilyFilter(this, 'oud')">🕌 Oud</button>
+  </div>
+</div>
   </div>
   <div class="coll-search-wrap">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -451,7 +510,15 @@
 let AP_PRODUCTS = [];
 let apGender  = 'all';
 let apQuery   = '';
+let apFamily  = 'all';
 let apDebounce;
+
+  function setFamilyFilter(btn, family) {
+  apFamily = family;
+  document.querySelectorAll('.family-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  apRender();
+}
 
 /* Shared cart/modal JS is inlined below (extracted from cart.js + products.js) */
 
@@ -671,6 +738,10 @@ function apSwitchGender(g) {
   apGender = g;
   document.querySelectorAll('.ap-gender-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('ap-gbtn-'+g)?.classList.add('active');
+  // Reset family filter on gender switch
+  apFamily = 'all';
+  document.querySelectorAll('.family-pill').forEach(b => b.classList.remove('active'));
+  document.querySelector('.family-pill[data-family="all"]')?.classList.add('active');
   apRender();
 }
 
@@ -729,11 +800,12 @@ function apRender() {
   const grid = document.getElementById('ap-grid');
   if (!grid || AP_PRODUCTS.length === 0) return;
 
-  let filtered = AP_PRODUCTS.filter(p => {
-    const gOk = apGender === 'all' || p.gender === apGender;
-    const qOk = !apQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(apQuery);
-    return gOk && qOk;
-  });
+let filtered = AP_PRODUCTS.filter(p => {
+  const gOk = apGender === 'all' || p.gender === apGender;
+  const qOk = !apQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(apQuery);
+  const fOk = apFamily === 'all' || [p.family, p.notes].join(' ').toLowerCase().includes(apFamily);
+  return gOk && qOk && fOk;
+});
   filtered = apSort(filtered);
 
   document.getElementById('ap-count-bar').innerHTML =
@@ -849,6 +921,7 @@ function scentModalAddToCart() {
   addToCart(currentScentId, currentScentSize, fakeCard);
   closeScentModal();
 }
+  
 apInit();
 </script>
 </body>
