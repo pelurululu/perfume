@@ -765,18 +765,12 @@ window.selectScentIndex = selectScentIndex;
 
   <script>
 function closePromoPopup() {
-  document.getElementById('promo-overlay').style.display = 'none';
+  document.getElementById('promo-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
 }
 function handleDontShow(cb) {
-  if (cb.checked) localStorage.setItem('promo_hide', '1');
-  else localStorage.removeItem('promo_hide');
+  localStorage.setItem('artisan_promo_hide', cb.checked ? '1' : '0');
 }
-// Show popup after 3 seconds (unless user dismissed it)
-setTimeout(() => {
-  if (!localStorage.getItem('promo_hide')) {
-    document.getElementById('promo-overlay').style.display = 'flex';
-  }
-}, 3000);
 </script>
   
 </body>
