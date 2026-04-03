@@ -11,243 +11,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-  /* Variable bridge — maps koleksi vars to style.css vars */
 :root {
-  --border: #e8e8e8;
-  --bg2: #f5f5f5;
-  --g: #111;
-  --line: #e8e8e8;
-  --off: #f5f5f5;
-  --ink: #111;
-  --ink2: #333;
-  --muted: #777;
-  --muted2: #aaa;
-  --red: #c0392b;
-}
-/* ---- FONT ---- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
-
-/* ---- PAGE HEADER ---- */
-.ap-header {
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-  padding: 100px 52px 40px;
-}
-.ap-header-inner {
-  max-width: 1360px;
-  margin: 0 auto;
-}
-.ap-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 24px;
-  transition: color .2s;
-  font-weight: 400;
-}
-.ap-back:hover { color: var(--ink) }
-.ap-back svg { opacity: .5 }
-.ap-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 300;
-  color: var(--ink);
-  line-height: 1.05;
-  margin-bottom: 10px;
-  letter-spacing: -.01em;
-}
-.ap-title em { font-style: italic; color: var(--g) }
-.ap-subtitle {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.7;
-  font-weight: 400;
+  --border:#e8e8e8; --bg2:#f5f5f5; --g:#111; --line:#e8e8e8;
+  --off:#f5f5f5; --ink:#111; --ink2:#333; --muted:#777; --muted2:#aaa; --red:#c0392b;
 }
 
+/* ── BANNER ── */
+.coll-banner { width:100% }
+.coll-banner-img { position:relative; width:100%; height:52vh; min-height:260px; overflow:hidden; transition:background .4s }
+.coll-banner-img img.coll-banner-photo { width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0; transition:opacity .4s }
+.coll-banner-img .coll-banner-fallback {
+  position:absolute; inset:0; transition:background .4s;
+}
+.coll-banner-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.12) 60%,transparent 100%);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:36px 52px;
+}
+.coll-banner-eyebrow { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.55); margin-bottom:8px }
+.coll-banner-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,52px); font-weight:300; color:#fff; margin-bottom:8px; transition:opacity .3s }
+.coll-banner-sub { font-size:12px; color:rgba(255,255,255,.5) }
 
-
+/* ── TABS (no search) ── */
+.coll-tabs-wrap {
+  position:sticky; top:0; z-index:100;
+  background:#fff; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; padding:0 52px; gap:16px;
+}
+.coll-tabs { display:flex; height:52px }
 .ap-gender-btn {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  height: 52px;
-  padding: 0 22px;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--muted);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: color .15s, border-color .15s;
-  white-space: nowrap;
-  font-family: 'DM Sans', sans-serif;
+  background:none; border:none; border-bottom:2px solid transparent;
+  height:52px; padding:0 22px; font-size:13px; font-weight:400; color:var(--muted);
+  cursor:pointer; display:flex; align-items:center; gap:6px; transition:color .15s,border-color .15s;
+  white-space:nowrap; font-family:'DM Sans',sans-serif;
 }
-.ap-gender-btn:hover { color: var(--ink) }
-.ap-gender-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500 }
-.ap-gender-btn .cnt { font-size: 10px; color: var(--muted2); font-weight: 400 }
+.ap-gender-btn:hover { color:var(--ink) }
+.ap-gender-btn.active { color:var(--ink); border-bottom-color:var(--ink); font-weight:500 }
+.ap-gender-btn .cnt { font-size:10px; color:var(--muted2); font-weight:400 }
 
-
-
-
-
-/* ---- RESPONSIVE ---- */
-@media(max-width:1280px) {
-  .ap-grid { grid-template-columns: repeat(3, 1fr) }
+/* ── SCENT CHIPS ── */
+.scent-list-wrap { padding:32px 52px 80px; min-height:40vh }
+.scent-no-results { font-size:14px; color:var(--muted); padding:48px 0; text-align:center }
+.scent-chips { display:flex; flex-wrap:wrap; gap:10px }
+.scent-chip {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--line); padding:10px 16px;
+  font-size:13px; color:var(--ink2); cursor:pointer;
+  background:#fff; transition:border-color .15s,background .15s;
+  white-space:nowrap; font-family:'DM Sans',sans-serif;
 }
-@media(max-width:900px) {
-  .ap-header { padding: 90px 22px 28px }
-  .ap-toolbar-inner { padding: 12px 22px }
-  .ap-grid-wrap { padding: 20px 22px 64px }
-  .ap-grid { grid-template-columns: repeat(2, 1fr) }
-  .ap-search-wrap { max-width: 100% }
-  .ap-sort { margin-left: 0 }
+.scent-chip:hover { border-color:var(--ink); background:var(--off) }
+.scent-chip.sold-out { opacity:.4; cursor:default }
+.scent-chip-num { font-size:10px; color:var(--muted2); min-width:18px }
+.scent-chip-badge { font-size:9px; text-transform:uppercase; background:var(--ink); color:#fff; padding:2px 6px }
+.scent-chip-badge.hot { background:#c0392b }
+.scent-chip-badge.new { background:#27ae60 }
+
+/* ── SCENT MODAL ── */
+.scent-modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:920;
+  display:flex; align-items:flex-end; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .25s; backdrop-filter:blur(3px);
+}
+.scent-modal-overlay.visible { opacity:1; pointer-events:all }
+.scent-modal {
+  background:#fff; width:100%; max-width:560px;
+  padding:32px; border-top:1px solid var(--line);
+  position:relative; transform:translateY(20px);
+  transition:transform .28s cubic-bezier(.23,.92,.52,1); max-height:90vh; overflow-y:auto;
+}
+.scent-modal-overlay.visible .scent-modal { transform:translateY(0) }
+.scent-modal-close { position:absolute; top:14px; right:14px; background:none; border:none; font-size:16px; cursor:pointer; color:var(--muted); display:flex; align-items:center }
+.scent-modal-header { display:flex; align-items:center; gap:18px; margin-bottom:24px; padding-bottom:20px; border-bottom:1px solid var(--line) }
+.scent-modal-bottle { flex-shrink:0 }
+.scent-modal-insp { font-size:11px; color:var(--muted); margin-bottom:4px }
+.scent-modal-name { font-size:18px; font-weight:400; color:var(--ink); margin-bottom:4px }
+.scent-modal-family { font-size:11px; color:var(--muted) }
+.scent-modal-label { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px }
+.scent-modal-sizes { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:16px }
+.scent-size-btn { border:1px solid var(--line); background:#fff; padding:14px 10px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; transition:border-color .15s }
+.scent-size-btn:hover,.scent-size-btn.selected { border-color:var(--ink); background:var(--off) }
+.ssb-ml { font-size:13px; font-weight:500; color:var(--ink) }
+.ssb-price { font-size:15px; color:var(--ink) }
+.ssb-normal { font-size:10px; color:var(--muted2); text-decoration:line-through }
+.scent-modal-stock { font-size:12px; color:var(--muted); margin-bottom:16px }
+.scent-modal-add { width:100%; padding:14px; background:var(--ink); color:#fff; font-size:12px; letter-spacing:.08em; text-transform:uppercase; border:none; cursor:pointer; transition:background .2s }
+.scent-modal-add:hover:not(:disabled) { background:#333 }
+.scent-modal-add:disabled { opacity:.35; cursor:not-allowed }
+
+/* ── MEGA ITEM ── */
+.mega-item {
+  position:relative; display:flex; flex-direction:column; align-items:flex-start;
+  padding:0; background:#111; color:#fff; font-size:13px; font-weight:700;
+  transition:opacity .15s; cursor:pointer; overflow:hidden; aspect-ratio:4/3;
+}
+.mega-item:hover { opacity:.85; background:#111; }
+.mega-item-bg { position:absolute; inset:0; background-size:cover; background-position:center; background-color:#222; transition:transform .35s ease; }
+.mega-item:hover .mega-item-bg { transform:scale(1.04); }
+.mega-item-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.18) 60%,transparent 100%); }
+.mega-item-label { position:absolute; bottom:14px; left:16px; right:16px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:700; color:#fff; letter-spacing:.02em; line-height:1.3; text-shadow:0 1px 4px rgba(0,0,0,.5); }
+.mega-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:#e0e0e0; border:1px solid #e0e0e0; margin-bottom:32px; }
+.mega-grid.hidden { display:none; }
+
+@media(max-width:880px) {
+  .coll-tabs-wrap { padding:0 16px; top:56px }
+  .scent-list-wrap { padding:20px 16px 64px }
+  .coll-banner-overlay { padding:24px 20px }
+  .mega-grid { grid-template-columns:repeat(2,1fr); }
 }
 @media(max-width:520px) {
-  .ap-grid { grid-template-columns: 1fr }
-  .ap-gender-btn { padding: 9px 12px; flex: 1; justify-content: center }
-  .ap-gender-btn .cnt { display: none }
+  .scent-chip { font-size:12px; padding:9px 12px }
+  .scent-modal { padding:24px 16px }
+  .ap-gender-btn { padding:9px 12px; flex:1; justify-content:center }
+  .ap-gender-btn .cnt { display:none }
 }
-  /* BANNER */
-.coll-banner { width: 100% }
-.coll-banner-img { position: relative; width: 100%; height: 52vh; min-height: 260px; overflow: hidden }
-.coll-banner-img img { width: 100%; height: 100%; object-fit: cover; display: block }
-.coll-banner-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,.12) 60%, transparent 100%);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 36px 52px;
-}
-.coll-banner-eyebrow { font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 8px }
-.coll-banner-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4vw,52px); font-weight: 300; color: #fff; margin-bottom: 8px }
-.coll-banner-sub { font-size: 12px; color: rgba(255,255,255,.5) }
-
-/* TABS */
-.coll-tabs-wrap {
-  position: sticky; top: 64px; z-index: 100;
-  background: #fff; border-bottom: 1px solid var(--line);
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 52px; gap: 16px;
-}
-.coll-tabs { display: flex; height: 52px }
-.coll-search-wrap {
-  display: flex; align-items: center; gap: 8px;
-  border: 1px solid var(--line); padding: 8px 14px;
-  min-width: 200px; color: var(--muted);
-}
-.coll-search-input { border: none; outline: none; background: none; font-size: 13px; color: var(--ink); width: 100% }
-.coll-search-input::placeholder { color: var(--muted2) }
-.coll-search-wrap button { background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center }
-
-/* CHIPS */
-.scent-list-wrap { padding: 32px 52px 80px; min-height: 40vh }
-.scent-no-results { font-size: 14px; color: var(--muted); padding: 48px 0; text-align: center }
-.scent-chips { display: flex; flex-wrap: wrap; gap: 10px }
-.scent-chip {
-  display: inline-flex; align-items: center; gap: 8px;
-  border: 1px solid var(--line); padding: 10px 16px;
-  font-size: 13px; color: var(--ink2); cursor: pointer;
-  background: #fff; transition: border-color .15s, background .15s;
-  white-space: nowrap; font-family: 'DM Sans', sans-serif;
-}
-.scent-chip:hover { border-color: var(--ink); background: var(--off) }
-.scent-chip.sold-out { opacity: .4; cursor: default }
-.scent-chip-num { font-size: 10px; color: var(--muted2); min-width: 18px }
-.scent-chip-badge { font-size: 9px; text-transform: uppercase; background: var(--ink); color: #fff; padding: 2px 6px }
-.scent-chip-badge.hot { background: #c0392b }
-.scent-chip-badge.new { background: #27ae60 }
-
-/* SCENT MODAL */
-.scent-modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 920;
-  display: flex; align-items: flex-end; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity .25s; backdrop-filter: blur(3px);
-}
-.scent-modal-overlay.visible { opacity: 1; pointer-events: all }
-.scent-modal {
-  background: #fff; width: 100%; max-width: 560px;
-  padding: 32px; border-top: 1px solid var(--line);
-  position: relative; transform: translateY(20px);
-  transition: transform .28s cubic-bezier(.23,.92,.52,1);
-  max-height: 90vh; overflow-y: auto;
-}
-.scent-modal-overlay.visible .scent-modal { transform: translateY(0) }
-.scent-modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; font-size: 16px; cursor: pointer; color: var(--muted) }
-.scent-modal-header { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line) }
-.scent-modal-bottle { flex-shrink: 0 }
-.scent-modal-insp { font-size: 11px; color: var(--muted); margin-bottom: 4px }
-.scent-modal-name { font-size: 18px; font-weight: 400; color: var(--ink); margin-bottom: 4px }
-.scent-modal-family { font-size: 11px; color: var(--muted) }
-.scent-modal-label { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px }
-.scent-modal-sizes { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 16px }
-.scent-size-btn { border: 1px solid var(--line); background: #fff; padding: 14px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: border-color .15s }
-.scent-size-btn:hover, .scent-size-btn.selected { border-color: var(--ink); background: var(--off) }
-.ssb-ml { font-size: 13px; font-weight: 500; color: var(--ink) }
-.ssb-price { font-size: 15px; color: var(--ink) }
-.ssb-normal { font-size: 10px; color: var(--muted2); text-decoration: line-through }
-.scent-modal-stock { font-size: 12px; color: var(--muted); margin-bottom: 16px }
-.scent-modal-add { width: 100%; padding: 14px; background: var(--ink); color: #fff; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; border: none; cursor: pointer; transition: background .2s }
-.scent-modal-add:hover:not(:disabled) { background: #333 }
-.scent-modal-add:disabled { opacity: .35; cursor: not-allowed }
-
-@media (max-width: 880px) {
-  .coll-tabs-wrap { padding: 0 16px; top: 56px }
-  .scent-list-wrap { padding: 20px 16px 64px }
-  .coll-banner-overlay { padding: 24px 20px }
-  .coll-search-wrap { min-width: 120px }
-}
-@media (max-width: 520px) {
-  .scent-chip { font-size: 12px; padding: 9px 12px }
-  .scent-modal { padding: 24px 16px }
-}
-  .family-pills-wrap {
-  background: #fff;
-  border-bottom: 1px solid var(--line);
-  padding: 0 52px;
-  position: sticky;
-  top: 120px; /* 68px nav + 52px tabs */
-  z-index: 99;
-}
-.family-pills {
-  display: flex;
-  gap: 8px;
-  padding: 10px 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.family-pills::-webkit-scrollbar { display: none }
-.family-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 14px;
-  border: 1px solid var(--line);
-  background: #fff;
-  font-size: 12px;
-  color: var(--muted);
-  cursor: pointer;
-  white-space: nowrap;
-  border-radius: 999px;
-  transition: all .15s;
-  font-family: 'DM Sans', sans-serif;
-  flex-shrink: 0;
-}
-.family-pill:hover { border-color: var(--ink); color: var(--ink) }
-.family-pill.active {
-  background: var(--ink);
-  color: #fff;
-  border-color: var(--ink);
-}
-
-@media (max-width: 880px) {
-  .family-pills-wrap { padding: 0 16px; top: 108px }
-}
-  
 </style>
 </head>
 <body>
@@ -288,7 +165,6 @@
   </div>
 </div>
 
-<!-- Mega menu overlay (same as index) -->
 <div class="mega-overlay" id="mega-overlay">
   <div class="mega-inner">
     <div class="mega-tabs">
@@ -301,28 +177,9 @@
       <input class="mega-search-input" placeholder="Cari wangian..." id="mega-search-input"
         onkeydown="if(event.key==='Enter'){ const q=this.value.trim(); if(q) window.location.href='koleksi.html?q='+encodeURIComponent(q); }">
     </div>
-    <div class="mega-grid" id="mgrid-m">
-      <a href="koleksi.html?gender=m" class="mega-item"><div class="mega-item-icon">🌲</div><span>Woody & Smoky</span></a>
-      <a href="koleksi.html?gender=m" class="mega-item"><div class="mega-item-icon">🌊</div><span>Fresh & Aquatic</span></a>
-      <a href="koleksi.html?gender=m" class="mega-item"><div class="mega-item-icon">🍊</div><span>Citrus & Aromatic</span></a>
-      <a href="koleksi.html?gender=m" class="mega-item"><div class="mega-item-icon">🌶️</div><span>Oriental & Spicy</span></a>
-      <a href="koleksi.html?gender=m" class="mega-item"><div class="mega-item-icon">⭐</div><span>Bestsellers</span></a>
-      <a href="#bundle" class="mega-item" onclick="closeMegaMenu()"><div class="mega-item-icon">🎁</div><span>Bundle 3+1</span></a>
-    </div>
-    <div class="mega-grid hidden" id="mgrid-w">
-      <a href="koleksi.html?gender=w" class="mega-item"><div class="mega-item-icon">🌸</div><span>Floral</span></a>
-      <a href="koleksi.html?gender=w" class="mega-item"><div class="mega-item-icon">🌹</div><span>Rose & Oud</span></a>
-      <a href="koleksi.html?gender=w" class="mega-item"><div class="mega-item-icon">🍬</div><span>Sweet & Gourmand</span></a>
-      <a href="koleksi.html?gender=w" class="mega-item"><div class="mega-item-icon">🌙</div><span>Oriental & Warm</span></a>
-      <a href="koleksi.html?gender=w" class="mega-item"><div class="mega-item-icon">⭐</div><span>Bestsellers</span></a>
-      <a href="#bundle" class="mega-item" onclick="closeMegaMenu()"><div class="mega-item-icon">🎁</div><span>Bundle 3+1</span></a>
-    </div>
-    <div class="mega-grid hidden" id="mgrid-u">
-      <a href="koleksi.html?gender=u" class="mega-item"><div class="mega-item-icon">🪵</div><span>Woody</span></a>
-      <a href="koleksi.html?gender=u" class="mega-item"><div class="mega-item-icon">🌊</div><span>Aquatic</span></a>
-      <a href="koleksi.html?gender=u" class="mega-item"><div class="mega-item-icon">🫧</div><span>Clean & Musky</span></a>
-      <a href="koleksi.html?gender=u" class="mega-item"><div class="mega-item-icon">⭐</div><span>Bestsellers</span></a>
-    </div>
+    <div class="mega-grid" id="mgrid-m"></div>
+    <div class="mega-grid hidden" id="mgrid-w"></div>
+    <div class="mega-grid hidden" id="mgrid-u"></div>
     <div class="mega-footer-links">
       <a href="tentang.html">Tentang Kami</a>
       <a href="faq.html">FAQ</a>
@@ -331,18 +188,20 @@
   </div>
 </div>
 
-<!-- COLLECTION BANNER -->
+<!-- COLLECTION BANNER — changes with gender filter -->
 <section class="coll-banner">
-  <div class="coll-banner-img">
-    <img src="images/collection-banner.jpg" alt="The Artisan Parfum Collection">
+  <div class="coll-banner-img" id="coll-banner-img">
+    <div class="coll-banner-fallback" id="coll-banner-fallback" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)"></div>
+    <img class="coll-banner-photo" id="coll-banner-photo" src="" alt="" style="opacity:0">
     <div class="coll-banner-overlay">
       <p class="coll-banner-eyebrow">Koleksi Wangian</p>
-      <h1 class="coll-banner-title">165 Wangian Premium</h1>
-      <p class="coll-banner-sub">Terinspirasi jenama dunia · 10ml · 30ml · 60ml</p>
+      <h1 class="coll-banner-title" id="coll-banner-title">165 Wangian Premium</h1>
+      <p class="coll-banner-sub" id="coll-banner-sub">Terinspirasi jenama dunia · 10ml · 30ml · 60ml</p>
     </div>
   </div>
 </section>
 
+<!-- TABS — no search bar -->
 <div class="coll-tabs-wrap">
   <div class="coll-tabs">
     <button class="ap-gender-btn active" id="ap-gbtn-all" onclick="apSwitchGender('all')">
@@ -358,30 +217,6 @@
       Unisex <span class="cnt" id="ap-count-u">—</span>
     </button>
   </div>
-  <div class="coll-search-wrap">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="ap-search" class="coll-search-input" placeholder="Cari wangian...">
-    <button id="ap-search-clear" style="display:none" onclick="apClearSearch()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- FAMILY FILTER PILLS -->
-<div class="family-pills-wrap" id="family-pills-wrap">
-  <div class="family-pills" id="family-pills">
-    <button class="family-pill active" data-family="all" onclick="setFamilyFilter(this, 'all')">Semua</button>
-    <button class="family-pill" data-family="woody" onclick="setFamilyFilter(this, 'woody')">🪵 Woody</button>
-    <button class="family-pill" data-family="fresh" onclick="setFamilyFilter(this, 'fresh')">🌊 Fresh</button>
-    <button class="family-pill" data-family="floral" onclick="setFamilyFilter(this, 'floral')">🌸 Floral</button>
-    <button class="family-pill" data-family="oriental" onclick="setFamilyFilter(this, 'oriental')">🌙 Oriental</button>
-    <button class="family-pill" data-family="citrus" onclick="setFamilyFilter(this, 'citrus')">🍊 Citrus</button>
-    <button class="family-pill" data-family="sweet" onclick="setFamilyFilter(this, 'sweet')">🍬 Sweet</button>
-    <button class="family-pill" data-family="aquatic" onclick="setFamilyFilter(this, 'aquatic')">💧 Aquatic</button>
-    <button class="family-pill" data-family="musk" onclick="setFamilyFilter(this, 'musk')">🫧 Musky</button>
-    <button class="family-pill" data-family="spicy" onclick="setFamilyFilter(this, 'spicy')">🌶️ Spicy</button>
-    <button class="family-pill" data-family="oud" onclick="setFamilyFilter(this, 'oud')">🕌 Oud</button>
-  </div>
 </div>
 
 <main class="scent-list-wrap">
@@ -389,7 +224,6 @@
     <div class="spinner"></div>
     <p>Memuatkan koleksi...</p>
   </div>
-  <div id="ap-count-bar" style="font-size:12px;color:var(--muted);margin-bottom:16px;display:none"></div>
   <div id="no-results" style="display:none" class="scent-no-results">Tiada wangian dijumpai.</div>
   <div class="scent-chips" id="ap-grid" style="display:none"></div>
 </main>
@@ -397,7 +231,9 @@
 <!-- SIZE PICKER MODAL -->
 <div class="scent-modal-overlay" id="scent-modal-overlay" onclick="if(event.target===this)closeScentModal()">
   <div class="scent-modal">
-    <button class="scent-modal-close" onclick="closeScentModal()">✕</button>
+    <button class="scent-modal-close" onclick="closeScentModal()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div class="scent-modal-header">
       <div class="scent-modal-bottle" id="sm-bottle"></div>
       <div>
@@ -425,25 +261,25 @@
       </button>
     </div>
     <div class="scent-modal-stock" id="sm-stock"></div>
-    <button class="scent-modal-add" id="sm-add-btn" onclick="scentModalAddToCart()">
-      + Tambah ke Troli
-    </button>
+    <button class="scent-modal-add" id="sm-add-btn" onclick="scentModalAddToCart()">+ Tambah ke Troli</button>
   </div>
 </div>
 
-<!-- ===== CART + MODAL (identical to index.html) ===== -->
+<!-- CART -->
 <div class="cart-overlay" id="cart-overlay" onclick="if(event.target===this) closeCart()"></div>
-<aside class="cart-panel" id="cart-panel" aria-label="Troli Beli-belah" aria-modal="true">
+<aside class="cart-panel" id="cart-panel" aria-label="Troli" aria-modal="true">
   <div class="cart-header">
     <div><div class="cart-header-title">Troli Anda</div><span class="cart-header-count" id="cart-count-label"></span></div>
-    <button class="cart-close" onclick="closeCart()" aria-label="Tutup troli">✕</button>
+    <button class="cart-close" onclick="closeCart()" aria-label="Tutup">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
   <div class="cart-body" id="cart-body">
     <div class="cart-empty" id="cart-empty"><p>Troli kosong</p><span>Tambah wangian untuk mula membeli</span></div>
     <div id="cart-items-list"></div>
     <div class="cart-bundle-hint" id="bundle-hint" style="display:none"></div>
     <div class="cart-countdown" id="cart-countdown" style="display:none">
-      <span class="cart-cd-icon">⏳</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 22h14M5 2h14M17 22v-4.17a2 2 0 00-.59-1.42L12 12l-4.41 4.41A2 2 0 007 17.83V22M7 2v4.17a2 2 0 00.59 1.42L12 12l4.41-4.41A2 2 0 0017 6.17V2"/></svg>
       <div><div class="cart-cd-label">Troli anda disimpan selama</div><span class="cart-cd-time" id="cart-cd-display">15:00</span></div>
     </div>
   </div>
@@ -458,9 +294,12 @@
   </div>
 </aside>
 
+<!-- ORDER MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this) closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
-    <button class="modal-close" onclick="closeOrderModal()" aria-label="Tutup">✕</button>
+    <button class="modal-close" onclick="closeOrderModal()" aria-label="Tutup">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
     <div id="modal-form">
       <div class="modal-eyebrow">Maklumat Penghantaran</div>
       <h2 class="modal-title" id="modal-title">Sahkan Pesanan</h2>
@@ -479,7 +318,10 @@
       <div class="form-group"><label for="field-note">Nota <span style="color:var(--muted)">(Opsyen)</span></label><input type="text" id="field-note" placeholder="Pilihan 30ml percuma untuk bundle..."></div>
       <div class="form-total-row"><span class="form-total-label">Jumlah Bayaran</span><span class="form-total-value" id="modal-total-display">RM 0</span></div>
       <button class="btn-submit" id="submit-btn" onclick="handleOrderSubmit()">Sahkan &amp; Bayar via ToyyibPay →</button>
-      <p class="form-security-note">🔒 Pembayaran selamat · FPX · Kad Kredit · eWallet</p>
+      <p class="form-security-note">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:3px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Pembayaran selamat · FPX · Kad Kredit · eWallet
+      </p>
     </div>
     <div class="modal-loading" id="modal-loading"><div class="spinner"></div><p style="font-size:11px;color:var(--muted2);letter-spacing:.06em">Memproses pesanan anda...</p></div>
     <div class="modal-success" id="modal-success">
@@ -500,66 +342,66 @@
   <span class="float-cart-label">Troli</span>
 </div>
 
-<!-- Scripts (same as index) -->
-<script src="js/config.js"></script>
+<button id="theme-toggle" style="display:none" aria-hidden="true"></button>
 
-<!-- All-products page logic -->
+<script src="js/config.js"></script>
 <script>
 'use strict';
 
-/* Re-use the shared helpers from config.js (sbFetch, CONFIG) */
 let AP_PRODUCTS = [];
-let apGender  = 'all';
-let apQuery   = '';
-let apFamily  = 'all';
-let apDebounce;
+let apGender = 'all';
+let apBannerData = {};  // gender -> { title, subtitle, image_url, bg_color }
 
-  function setFamilyFilter(btn, family) {
-  apFamily = family;
-  document.querySelectorAll('.family-pill').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  apRender();
+/* ── Banner update on gender switch ── */
+function updateBanner(gender) {
+  const data = apBannerData[gender] || apBannerData['all'] || {};
+  const titleEl = document.getElementById('coll-banner-title');
+  const subEl   = document.getElementById('coll-banner-sub');
+  const photo   = document.getElementById('coll-banner-photo');
+  const fallback = document.getElementById('coll-banner-fallback');
+
+  if (data.title && titleEl) titleEl.textContent = data.title;
+  if (data.subtitle && subEl) subEl.textContent = data.subtitle;
+
+  if (data.image_url) {
+    photo.src = data.image_url;
+    photo.style.opacity = '1';
+    if (fallback) fallback.style.opacity = '0';
+  } else {
+    photo.style.opacity = '0';
+    if (fallback) {
+      fallback.style.background = data.bg_color || 'linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)';
+      fallback.style.opacity = '1';
+    }
+  }
 }
 
-/* Shared cart/modal JS is inlined below (extracted from cart.js + products.js) */
-
-/* ---------- MINI BOTTLE SVG (same as products.js) ---------- */
-function createBottleSVG(productId, cap, rgbStr) {
-  const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
-  const gradId = 'grad_' + String(productId).replace(/[^a-zA-Z0-9]/g,'_') + '_ap';
-  return `<svg width="58" height="166" viewBox="0 0 58 166" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".26"/>
-      <stop offset="46%" stop-color="rgb(${r},${g},${b})" stop-opacity=".88"/>
-      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".26"/>
-    </linearGradient></defs>
-    <rect x="21" y="0" width="16" height="12" rx="3.5" fill="${cap||'#3A1828'}"/>
-    <rect x="23" y="1.5" width="4" height="8.5" rx="1" fill="rgba(255,255,255,.16)"/>
-    <rect x="20" y="12" width="18" height="8" rx="1" fill="${cap||'#3A1828'}" opacity=".6"/>
-    <rect x="11" y="20" width="36" height="138" rx="3" fill="url(#${gradId})" stroke="rgba(0,0,0,.1)" stroke-width=".5"/>
-    <rect x="13" y="22" width="5.5" height="134" rx="1.5" fill="rgba(255,255,255,.055)"/>
-    <text x="29" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="3.2" fill="rgba(255,255,255,.48)" letter-spacing=".9">THE ARTISAN</text>
-    <text x="29" y="89" text-anchor="middle" font-family="Georgia,serif" font-size="3.2" fill="rgba(255,255,255,.48)" letter-spacing=".9">PARFUM</text>
-    <ellipse cx="29" cy="160" rx="12.5" ry="1.8" fill="rgba(0,0,0,.07)"/>
-  </svg>`;
+async function loadCollectionBanners() {
+  try {
+    const rows = await sbFetch('gender_categories?order=sort_order.asc');
+    if (!rows || !rows.length) return;
+    const allCount = AP_PRODUCTS.length;
+    apBannerData['all'] = { title: allCount + ' Wangian Premium', subtitle: 'Terinspirasi jenama dunia · 10ml · 30ml · 60ml' };
+    rows.forEach(cat => {
+      apBannerData[cat.gender] = {
+        title: cat.title || cat.gender.toUpperCase() + ' Collection',
+        subtitle: cat.subtitle || '',
+        image_url: cat.image_url || '',
+        bg_color: cat.bg_color || ''
+      };
+    });
+    updateBanner(apGender);
+  } catch(e) { /* keep defaults */ }
 }
 
+/* ── Mini bottle SVGs ── */
 function createMiniBottleSVG(cap, rgbStr) {
   const [r, g, b] = (rgbStr || '155,85,110').split(',').map(Number);
   const uid = Math.random().toString(36).slice(2);
-  return `<svg width="32" height="62" viewBox="0 0 32 62" fill="none">
-    <defs><linearGradient id="mini_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-      <stop offset="50%" stop-color="rgb(${r},${g},${b})" stop-opacity=".86"/>
-      <stop offset="100%" stop-color="rgb(${r},${g},${b})" stop-opacity=".28"/>
-    </linearGradient></defs>
-    <rect x="11" y="0" width="10" height="7" rx="2" fill="${cap||'#3A1828'}"/>
-    <rect x="10" y="7" width="12" height="4" rx="1" fill="${cap||'#3A1828'}" opacity=".6"/>
-    <rect x="4" y="11" width="24" height="46" rx="2.5" fill="url(#mini_${uid})" stroke="rgba(0,0,0,.1)" stroke-width=".4"/>
-  </svg>`;
+  return '<svg width="32" height="62" viewBox="0 0 32 62" fill="none"><defs><linearGradient id="mini_' + uid + '" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgb(' + r + ',' + g + ',' + b + ')" stop-opacity=".28"/><stop offset="50%" stop-color="rgb(' + r + ',' + g + ',' + b + ')" stop-opacity=".86"/><stop offset="100%" stop-color="rgb(' + r + ',' + g + ',' + b + ')" stop-opacity=".28"/></linearGradient></defs><rect x="11" y="0" width="10" height="7" rx="2" fill="' + (cap||'#3A1828') + '"/><rect x="10" y="7" width="12" height="4" rx="1" fill="' + (cap||'#3A1828') + '" opacity=".6"/><rect x="4" y="11" width="24" height="46" rx="2.5" fill="url(#mini_' + uid + ')" stroke="rgba(0,0,0,.1)" stroke-width=".4"/></svg>';
 }
 
-/* ---------- STOCK ---------- */
+/* ── Stock ── */
 function getStock(id) {
   const s = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK) || '{}');
   const p = AP_PRODUCTS.find(x => x.id === id);
@@ -572,7 +414,7 @@ function decrementStock(id, qty = 1) {
   sbFetch('products?id=eq.' + id, { method:'PATCH', headers:{'Prefer':'return=minimal'}, body: JSON.stringify({stock:s[id]}) }).catch(()=>{});
 }
 
-/* ---------- CART (full) ---------- */
+/* ── Cart ── */
 let cart = JSON.parse(localStorage.getItem(CONFIG.KEYS.CART) || '[]');
 let cartCountdownEnd = 0, cartCountdownTimer = null;
 const saveCart      = () => localStorage.setItem(CONFIG.KEYS.CART, JSON.stringify(cart));
@@ -590,10 +432,10 @@ function addToCart(productId, size, cardEl) {
     cart.push({ productId, size, pricePerUnit, qty:1, name:product.name, inspiredBy:product.inspired_by, cap:product.cap_color, rgb:product.rgb });
   }
   saveCart(); decrementStock(productId, 1); refreshCartUI(); openCart();
-  const addBtn = cardEl.querySelector('.btn-add-to-cart');
+  const addBtn = cardEl ? cardEl.querySelector('.btn-add-to-cart') : null;
   if (addBtn) {
     const prev = addBtn.textContent;
-    addBtn.textContent = '✓ Ditambah!'; addBtn.className = 'btn-add-to-cart added';
+    addBtn.textContent = 'Ditambah!'; addBtn.className = 'btn-add-to-cart added';
     setTimeout(() => { addBtn.textContent = prev; addBtn.className = 'btn-add-to-cart'; }, 1400);
   }
 }
@@ -608,38 +450,31 @@ function refreshCartUI() {
   document.getElementById('float-cart-badge').textContent = count;
   document.getElementById('nav-badge').classList.toggle('visible', count>0);
   document.getElementById('float-cart').style.display = count>0 ? 'flex' : 'none';
-  document.getElementById('cart-count-label').textContent = count>0 ? `${count} item` : '';
+  document.getElementById('cart-count-label').textContent = count>0 ? count + ' item' : '';
   const emptyEl=document.getElementById('cart-empty'), itemsEl=document.getElementById('cart-items-list'), footerEl=document.getElementById('cart-footer');
   if (count===0) { emptyEl.style.display='block'; footerEl.style.display='none'; itemsEl.innerHTML=''; document.getElementById('bundle-hint').style.display='none'; document.getElementById('cart-countdown').style.display='none'; clearInterval(cartCountdownTimer); return; }
   emptyEl.style.display='none'; footerEl.style.display='block';
-  itemsEl.innerHTML = cart.map(item=>`
-    <div class="cart-item">
-      <div class="cart-item-visual">${createMiniBottleSVG(item.cap, item.rgb)}</div>
-      <div class="cart-item-info">
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-insp">Terinspirasi: ${item.inspiredBy}</div>
-        <div class="cart-item-size">${item.size} · RM ${item.pricePerUnit}</div>
-        <div class="cart-item-controls">
-          <div class="qty-control">
-            <button class="qty-btn" onclick="changeCartQty('${item.productId}','${item.size}',-1)">−</button>
-            <span class="qty-num">${item.qty}</span>
-            <button class="qty-btn" onclick="changeCartQty('${item.productId}','${item.size}',1)">+</button>
-          </div>
-          <span class="cart-item-price">RM ${item.pricePerUnit*item.qty}</span>
-        </div>
-        <button class="cart-item-remove-btn" onclick="removeFromCart('${item.productId}','${item.size}')">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-          Buang dari Troli
-        </button>
-      </div>
-    </div>`).join('');
+  itemsEl.innerHTML = cart.map(item =>
+    '<div class="cart-item"><div class="cart-item-visual">' + createMiniBottleSVG(item.cap, item.rgb) + '</div>' +
+    '<div class="cart-item-info"><div class="cart-item-name">' + item.name + '</div>' +
+    '<div class="cart-item-insp">Terinspirasi: ' + item.inspiredBy + '</div>' +
+    '<div class="cart-item-size">' + item.size + ' · RM ' + item.pricePerUnit + '</div>' +
+    '<div class="cart-item-controls"><div class="qty-control">' +
+    '<button class="qty-btn" onclick="changeCartQty(\'' + item.productId + '\',\'' + item.size + '\',-1)">−</button>' +
+    '<span class="qty-num">' + item.qty + '</span>' +
+    '<button class="qty-btn" onclick="changeCartQty(\'' + item.productId + '\',\'' + item.size + '\',1)">+</button>' +
+    '</div><span class="cart-item-price">RM ' + (item.pricePerUnit*item.qty) + '</span></div>' +
+    '<button class="cart-item-remove-btn" onclick="removeFromCart(\'' + item.productId + '\',\'' + item.size + '\')">' +
+    '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>' +
+    'Buang dari Troli</button></div></div>'
+  ).join('');
   const hintEl=document.getElementById('bundle-hint'), need=3-qty60;
-  if (qty60>=3) { hintEl.innerHTML='<b>🎁 Bundle aktif!</b> Anda layak mendapat <b>1 botol 30ml PERCUMA</b>. Nyatakan pilihan dalam nota.'; hintEl.style.display='block'; }
-  else if (qty60>0) { hintEl.innerHTML=`<b>🎁 Hampir!</b> Tambah <b>${need}</b> lagi 60ml untuk 30ml <b>PERCUMA</b>.`; hintEl.style.display='block'; }
+  if (qty60>=3) { hintEl.innerHTML='<b>Bundle aktif!</b> Anda layak mendapat <b>1 botol 30ml PERCUMA</b>. Nyatakan pilihan dalam nota.'; hintEl.style.display='block'; }
+  else if (qty60>0) { hintEl.innerHTML='<b>Hampir!</b> Tambah <b>' + need + '</b> lagi 60ml untuk 30ml <b>PERCUMA</b>.'; hintEl.style.display='block'; }
   else { hintEl.style.display='none'; }
   document.getElementById('cart-total-display').textContent = 'RM '+total;
   const savEl=document.getElementById('cart-savings-display');
-  savEl.textContent = saving>0 ? `Jimat RM ${saving} daripada harga asal` : '';
+  savEl.textContent = saving>0 ? 'Jimat RM ' + saving + ' daripada harga asal' : '';
   document.getElementById('cart-countdown').style.display='flex';
   if (!cartCountdownEnd||cartCountdownEnd<=Date.now()) cartCountdownEnd=Date.now()+15*60*1000;
   clearInterval(cartCountdownTimer);
@@ -647,7 +482,7 @@ function refreshCartUI() {
   cartCountdownTimer=setInterval(()=>{
     const rem=Math.max(0,cartCountdownEnd-Date.now());
     const m=Math.floor(rem/60000),s=Math.floor((rem%60000)/1000);
-    if(display) display.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(display) display.textContent=(String(m).padStart(2,'0'))+':'+(String(s).padStart(2,'0'));
     if(rem===0){cartCountdownEnd=Date.now()+15*60*1000;}
   },1000);
 }
@@ -655,17 +490,17 @@ function openCart(e) { if(e) e.preventDefault(); document.getElementById('cart-o
 function closeCart() { document.getElementById('cart-overlay').classList.remove('visible'); document.getElementById('cart-panel').classList.remove('visible'); document.body.classList.remove('lock'); }
 function sendCartViaWhatsApp() {
   if (!cart.length) return;
-  const items=cart.map(i=>`• ${i.name} (${i.size}) ×${i.qty} — RM ${i.pricePerUnit*i.qty}`).join('\n');
-  const msg=`Salam, saya ingin pesan The Artisan Parfum:\n\n${items}\n\n*Jumlah: RM ${getCartTotal()}*\n\nTerima kasih!`;
-  window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+  const items=cart.map(i=>'• '+i.name+' ('+i.size+') x'+i.qty+' — RM '+(i.pricePerUnit*i.qty)).join('\n');
+  const msg='Salam, saya ingin pesan The Artisan Parfum:\n\n'+items+'\n\n*Jumlah: RM '+getCartTotal()+'*\n\nTerima kasih!';
+  window.open('https://wa.me/'+CONFIG.WA_NUMBER+'?text='+encodeURIComponent(msg),'_blank');
 }
 
-/* ---------- ORDER MODAL ---------- */
+/* ── Order Modal ── */
 function openOrderModal() {
   if (!cart.length) return;
   closeCart();
   const sumEl=document.getElementById('modal-order-summary');
-  sumEl.innerHTML=cart.map(i=>`<div class="order-summary-item"><span>${i.name} ${i.size} ×${i.qty}</span><span>RM ${i.pricePerUnit*i.qty}</span></div>`).join('')+`<div class="order-summary-total"><span>Jumlah</span><span>RM ${getCartTotal()}</span></div>`;
+  sumEl.innerHTML=cart.map(i=>'<div class="order-summary-item"><span>'+i.name+' '+i.size+' x'+i.qty+'</span><span>RM '+(i.pricePerUnit*i.qty)+'</span></div>').join('')+'<div class="order-summary-total"><span>Jumlah</span><span>RM '+getCartTotal()+'</span></div>';
   document.getElementById('modal-total-display').textContent='RM '+getCartTotal();
   ['field-name','field-phone','field-email','field-address','field-state','field-postcode','field-note'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.classList.remove('invalid');}});
   document.querySelectorAll('.form-error').forEach(e=>e.classList.remove('visible'));
@@ -701,16 +536,16 @@ function handleOrderSubmit() {
   document.getElementById('submit-btn').disabled=true;
   document.getElementById('modal-form').style.display='none';
   document.getElementById('modal-loading').style.display='block';
-  const itemsFmt=cart.map(i=>`• ${i.name} (${i.size}) ×${i.qty} = RM${i.pricePerUnit*i.qty}`).join('\n');
-  const itemsStr=cart.map(i=>`${i.name} (${i.size}) x${i.qty}`).join(' | ');
+  const itemsFmt=cart.map(i=>'• '+i.name+' ('+i.size+') x'+i.qty+' = RM'+(i.pricePerUnit*i.qty)).join('\n');
+  const itemsStr=cart.map(i=>i.name+' ('+i.size+') x'+i.qty).join(' | ');
   if(CONFIG.USE_TOYYIBPAY&&CONFIG.TOYYIBPAY_URL){
     const form=document.createElement('form');form.method='POST';form.action=CONFIG.TOYYIBPAY_URL;
-    Object.entries({name,phone,email,address:`${address}, ${state} ${postcode}`,note,total:getCartTotal(),items:itemsStr,itemsFormatted:itemsFmt}).forEach(([k,v])=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;form.appendChild(i);});
+    Object.entries({name,phone,email,address:address+', '+state+' '+postcode,note,total:getCartTotal(),items:itemsStr,itemsFormatted:itemsFmt}).forEach(([k,v])=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;form.appendChild(i);});
     document.body.appendChild(form);form.submit();
   } else {
     setTimeout(()=>{
-      const waMsg=`*Pesanan Baru — The Artisan Parfum*\n\n👤 *Nama:* ${name}\n📞 *Tel:* ${phone}${email?'\n📧 *Emel:* '+email:''}\n📍 *Alamat:* ${address}, ${state} ${postcode}\n\n*Item:*\n${itemsFmt}\n\n💰 *JUMLAH: RM ${getCartTotal()}*\n\n📝 *Nota:* ${note||'-'}`;
-      window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${encodeURIComponent(waMsg)}`,'_blank');
+      const waMsg='*Pesanan Baru — The Artisan Parfum*\n\n*Nama:* '+name+'\n*Tel:* '+phone+(email?'\n*Emel:* '+email:'')+'\n*Alamat:* '+address+', '+state+' '+postcode+'\n\n*Item:*\n'+itemsFmt+'\n\n*JUMLAH: RM '+getCartTotal()+'*\n\n*Nota:* '+(note||'-');
+      window.open('https://wa.me/'+CONFIG.WA_NUMBER+'?text='+encodeURIComponent(waMsg),'_blank');
       document.getElementById('modal-loading').style.display='none';
       document.getElementById('modal-success').style.display='block';
       cart=[];saveCart();refreshCartUI();
@@ -718,162 +553,50 @@ function handleOrderSubmit() {
   }
 }
 
+/* ── Scent chip builder ── */
 function apBuildCard(product, index) {
   const stk = getStock(product.id);
   const isOut = stk === 0;
   let badgeHTML = '';
-  if (isOut) badgeHTML = `<span class="scent-chip-badge">Habis</span>`;
-  else if (product.badge === 'Hot' || product.badge === 'Bestseller') badgeHTML = `<span class="scent-chip-badge hot">${product.badge}</span>`;
-  else if (product.badge === 'New') badgeHTML = `<span class="scent-chip-badge new">New</span>`;
-
+  if (isOut) badgeHTML = '<span class="scent-chip-badge">Habis</span>';
+  else if (product.badge === 'Hot' || product.badge === 'Bestseller') badgeHTML = '<span class="scent-chip-badge hot">' + product.badge + '</span>';
+  else if (product.badge === 'New') badgeHTML = '<span class="scent-chip-badge new">New</span>';
   const btn = document.createElement('button');
   btn.className = 'scent-chip' + (isOut ? ' sold-out' : '');
   btn.dataset.productId = product.id;
-  btn.innerHTML = `<span class="scent-chip-num">${index + 1}.</span> ${product.name} ${badgeHTML}`;
+  btn.innerHTML = '<span class="scent-chip-num">' + (index+1) + '.</span> ' + product.name + ' ' + badgeHTML;
   if (!isOut) btn.addEventListener('click', () => openScentModal(product.id));
   return btn;
 }
 
-/* ---------- FILTER + RENDER ---------- */
+/* ── Filter + Render ── */
 function apSwitchGender(g) {
   apGender = g;
   document.querySelectorAll('.ap-gender-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('ap-gbtn-'+g)?.classList.add('active');
-  // Reset family filter on gender switch
-  apFamily = 'all';
-  document.querySelectorAll('.family-pill').forEach(b => b.classList.remove('active'));
-  document.querySelector('.family-pill[data-family="all"]')?.classList.add('active');
+  updateBanner(g);
   apRender();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const inp = document.getElementById('ap-search');
-  if (inp) {
-    inp.addEventListener('input', function() {
-      apQuery = this.value.toLowerCase().trim();
-      document.getElementById('ap-search-clear').style.display = apQuery ? 'block' : 'none';
-      clearTimeout(apDebounce);
-      apDebounce = setTimeout(apRender, 240);
-    });
-  }
-  // Nav scroll
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
-  // Hamburger
-  const ham = document.getElementById('hamburger'), mob = document.getElementById('mobile-nav');
-  ham.addEventListener('click', () => { const o=mob.classList.toggle('open'); ham.classList.toggle('open',o); document.body.classList.toggle('lock',o); });
-  // Cart btn
-  document.getElementById('nav-cart-btn').addEventListener('click', openCart);
-  // ESC
-  document.addEventListener('keydown', e => { if(e.key==='Escape'){closeCart();closeOrderModal();} });
-  // Theme
-  const saved=localStorage.getItem('artisan_theme');
-  if(saved==='dark') document.documentElement.setAttribute('data-theme','dark');
-  document.getElementById('theme-toggle').addEventListener('click',()=>{
-    const isDark=document.documentElement.getAttribute('data-theme')==='dark';
-    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
-    localStorage.setItem('artisan_theme',isDark?'light':'dark');
-  });
-});
-
-function closeMobileNav(){document.getElementById('mobile-nav').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.classList.remove('lock');}
-
-function apClearSearch() {
-  document.getElementById('ap-search').value = '';
-  apQuery = '';
-  document.getElementById('ap-search-clear').style.display = 'none';
-  apRender();
-}
-
-function apSort(products) {
-  const sel = document.getElementById('ap-sort-sel')?.value || 'default';
-  const arr = [...products];
-  switch(sel) {
-    case 'name-asc':   return arr.sort((a,b)=>a.name.localeCompare(b.name));
-    case 'name-desc':  return arr.sort((a,b)=>b.name.localeCompare(a.name));
-    case 'price-asc':  return arr.sort((a,b)=>CONFIG.PRICES['30ml'].promo - CONFIG.PRICES['30ml'].promo); // same price; kept for future
-    case 'stock-asc':  return arr.sort((a,b)=>getStock(a.id)-getStock(b.id));
-    default: return arr;
-  }
 }
 
 function apRender() {
   const grid = document.getElementById('ap-grid');
   if (!grid || AP_PRODUCTS.length === 0) return;
-
-let filtered = AP_PRODUCTS.filter(p => {
-  const gOk = apGender === 'all' || p.gender === apGender;
-  const qOk = !apQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(apQuery);
-  const fOk = apFamily === 'all' || [p.family, p.notes].join(' ').toLowerCase().includes(apFamily);
-  return gOk && qOk && fOk;
-});
-  filtered = apSort(filtered);
-
-  document.getElementById('ap-count-bar').innerHTML =
-    `Menunjukkan <b>${filtered.length}</b> daripada <b>${AP_PRODUCTS.length}</b> wangian`;
+  let filtered = AP_PRODUCTS.filter(p => apGender === 'all' || p.gender === apGender);
   document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
-
   grid.innerHTML = '';
   filtered.forEach((p, i) => grid.appendChild(apBuildCard(p, i)));
 }
 
-/* ---------- INIT ---------- */
-async function apInit() {
-  try {
-    // Load pricing
-    const pricingRows = await sbFetch('pricing?select=size,normal_price,promo_price').catch(()=>null);
-    if (pricingRows) pricingRows.forEach(r => { CONFIG.PRICES[r.size]={normal:r.normal_price,promo:r.promo_price}; });
-
-    // Load products
-    const rows = await sbFetch('products?active=eq.true&order=id.asc&select=*');
-    AP_PRODUCTS = rows || [];
-
-    // Init stock
-    const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK)||'{}');
-    AP_PRODUCTS.forEach(p => { if(stored[p.id]===undefined) stored[p.id]=p.stock??CONFIG.INITIAL_STOCK; });
-    localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(stored));
-
-    // Update gender counts
-    document.getElementById('ap-count-all').textContent = AP_PRODUCTS.length;
-    ['m','w','u'].forEach(g => {
-      const el = document.getElementById('ap-count-'+g);
-      if (el) el.textContent = AP_PRODUCTS.filter(p=>p.gender===g).length;
-    });
-
-   document.getElementById('ap-grid').style.display = 'flex';
-document.getElementById('ap-loading').style.display = 'none';
-
-    // Read URL params for gender and search
-const params = new URLSearchParams(window.location.search);
-if (params.get('gender')) apSwitchGender(params.get('gender'));
-if (params.get('q')) {
-  const q = params.get('q');
-  document.getElementById('ap-search').value = q;
-  apQuery = q.toLowerCase();
-  document.getElementById('ap-search-clear').style.display = 'block';
-}
-
-    refreshCartUI();
-    apRender();
-  } catch(e) {
-    document.getElementById('ap-loading').innerHTML = '<p style="color:var(--red);font-size:12px;padding:40px">Gagal memuatkan produk. Cuba muat semula.</p>';
-    console.error(e);
-  }
-}
-  let currentScentId = null;
-let currentScentSize = null;
-
+/* ── Scent modal ── */
+let currentScentId = null, currentScentSize = null;
 function openScentModal(productId) {
   const p = AP_PRODUCTS.find(x => x.id === productId);
   if (!p) return;
-  currentScentId = productId;
-  currentScentSize = null;
-
+  currentScentId = productId; currentScentSize = null;
   document.getElementById('sm-bottle').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
   document.getElementById('sm-insp').textContent = 'Terinspirasi oleh ' + (p.inspired_by || '');
   document.getElementById('sm-name').textContent = p.name;
   document.getElementById('sm-family').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
-
   const pr = CONFIG.PRICES;
   document.getElementById('sm-p10').textContent = 'RM ' + pr['10ml'].promo;
   document.getElementById('sm-n10').textContent = 'RM ' + pr['10ml'].normal;
@@ -881,75 +604,106 @@ function openScentModal(productId) {
   document.getElementById('sm-n30').textContent = 'RM ' + pr['30ml'].normal;
   document.getElementById('sm-p60').textContent = 'RM ' + pr['60ml'].promo;
   document.getElementById('sm-n60').textContent = 'RM ' + pr['60ml'].normal;
-
   const stk = getStock(productId);
-  document.getElementById('sm-stock').textContent = stk === 0 ? '⚠️ Stok habis' : stk + ' unit berbaki';
-
+  document.getElementById('sm-stock').textContent = stk === 0 ? 'Stok habis' : stk + ' unit berbaki';
   document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
   const addBtn = document.getElementById('sm-add-btn');
-  addBtn.textContent = '+ Tambah ke Troli';
-  addBtn.disabled = stk === 0;
-
+  addBtn.textContent = '+ Tambah ke Troli'; addBtn.disabled = stk === 0;
   document.getElementById('scent-modal-overlay').classList.add('visible');
   document.body.classList.add('lock');
 }
-
 function closeScentModal() {
   document.getElementById('scent-modal-overlay').classList.remove('visible');
   document.body.classList.remove('lock');
-  currentScentId = null;
-  currentScentSize = null;
+  currentScentId = null; currentScentSize = null;
 }
-
 function selectScentSize(btn) {
   document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  currentScentSize = btn.dataset.size;
-  document.getElementById('sm-add-btn').textContent = `+ Tambah ${currentScentSize} ke Troli`;
+  btn.classList.add('selected'); currentScentSize = btn.dataset.size;
+  document.getElementById('sm-add-btn').textContent = '+ Tambah ' + currentScentSize + ' ke Troli';
 }
-
 function scentModalAddToCart() {
   if (!currentScentSize) {
-    document.querySelectorAll('.scent-size-btn').forEach(b => {
-      b.style.borderColor = 'var(--red)';
-      setTimeout(() => b.style.borderColor = '', 1200);
-    });
-    document.getElementById('sm-add-btn').textContent = '← Pilih saiz dahulu';
-    setTimeout(() => document.getElementById('sm-add-btn').textContent = '+ Tambah ke Troli', 1500);
-    return;
+    document.querySelectorAll('.scent-size-btn').forEach(b => { b.style.borderColor='var(--red)'; setTimeout(()=>b.style.borderColor='',1200); });
+    document.getElementById('sm-add-btn').textContent = 'Pilih saiz dahulu';
+    setTimeout(()=>document.getElementById('sm-add-btn').textContent='+ Tambah ke Troli',1500); return;
   }
-  const fakeCard = document.createElement('div');
-  addToCart(currentScentId, currentScentSize, fakeCard);
+  addToCart(currentScentId, currentScentSize, null);
   closeScentModal();
 }
-  // Missing nav functions
+
+/* ── Mega menu (same as index) ── */
 let megaOpen = false;
-function openMegaMenu() {
-  megaOpen = true;
-  document.getElementById('mega-overlay').classList.add('visible');
-  document.getElementById('hamburger').classList.add('open');
-  document.getElementById('main-nav').classList.add('scrolled');
-  document.body.classList.add('lock');
+function openMegaMenu() { megaOpen=true; document.getElementById('mega-overlay').classList.add('visible'); document.getElementById('hamburger').classList.add('open'); document.getElementById('hamburger').setAttribute('aria-expanded','true'); document.getElementById('main-nav').classList.add('scrolled'); document.body.classList.add('lock'); }
+function closeMegaMenu() { megaOpen=false; document.getElementById('mega-overlay').classList.remove('visible'); document.getElementById('hamburger').classList.remove('open'); document.getElementById('hamburger').setAttribute('aria-expanded','false'); document.body.classList.remove('lock'); if(window.scrollY<=60) document.getElementById('main-nav').classList.remove('scrolled'); }
+function switchMegaTab(gender) { document.querySelectorAll('.mega-tab').forEach(t=>t.classList.remove('active')); document.getElementById('mtab-'+gender).classList.add('active'); document.querySelectorAll('.mega-grid').forEach(g=>g.classList.add('hidden')); document.getElementById('mgrid-'+gender).classList.remove('hidden'); }
+function closeNavSearch() { document.getElementById('nav-search-bar').classList.remove('open'); document.getElementById('nav-search-input').value=''; }
+
+async function loadScentFamiliesMenu() {
+  try {
+    const rows = await sbFetch('scent_families?active=eq.true&order=sort_order.asc');
+    if (!rows || !rows.length) return;
+    const grids = { m: document.getElementById('mgrid-m'), w: document.getElementById('mgrid-w'), u: document.getElementById('mgrid-u') };
+    Object.values(grids).forEach(g => { if(g) g.innerHTML=''; });
+    rows.forEach(fam => {
+      (fam.genders || 'mwu').split('').forEach(g => {
+        if (!grids[g]) return;
+        const href = fam.href || ('koleksi.html?gender='+g+(fam.slug?'&family='+encodeURIComponent(fam.slug):''));
+        const a = document.createElement('a'); a.href=href; a.className='mega-item';
+        a.innerHTML='<div class="mega-item-bg" style="background-color:#1a1a2a;'+(fam.image_url?'background-image:url(\''+fam.image_url+'\');background-size:cover;background-position:center;':'')+'"></div><div class="mega-item-overlay"></div><div class="mega-item-label">'+fam.name+'</div>';
+        grids[g].appendChild(a);
+      });
+    });
+  } catch(e) {}
 }
-function closeMegaMenu() {
-  megaOpen = false;
-  document.getElementById('mega-overlay').classList.remove('visible');
-  document.getElementById('hamburger').classList.remove('open');
-  document.body.classList.remove('lock');
-  if (window.scrollY <= 60) document.getElementById('main-nav').classList.remove('scrolled');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
+  document.getElementById('hamburger').addEventListener('click', () => megaOpen ? closeMegaMenu() : openMegaMenu());
+  document.getElementById('nav-cart-btn').addEventListener('click', openCart);
+  document.getElementById('nav-search-btn').addEventListener('click', () => {
+    const bar=document.getElementById('nav-search-bar');
+    if(bar.classList.contains('open')){ bar.classList.remove('open'); } else { bar.classList.add('open'); nav.classList.add('scrolled'); setTimeout(()=>document.getElementById('nav-search-input').focus(),150); }
+  });
+  document.getElementById('nav-search-input').addEventListener('keydown', e => {
+    if(e.key==='Enter'){const q=e.target.value.trim();if(q){apGender='all';document.querySelectorAll('.ap-gender-btn').forEach(b=>b.classList.remove('active'));document.getElementById('ap-gbtn-all')?.classList.add('active');updateBanner('all');apRender();}}
+    if(e.key==='Escape'){document.getElementById('nav-search-bar').classList.remove('open');e.target.value='';}
+  });
+  document.addEventListener('keydown', e => { if(e.key==='Escape'){closeCart();closeOrderModal();closeScentModal();closeMegaMenu();} });
+  const saved=localStorage.getItem('artisan_theme');
+  if(saved==='dark') document.documentElement.setAttribute('data-theme','dark');
+  document.getElementById('theme-toggle').addEventListener('click',()=>{const isDark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',isDark?'light':'dark');localStorage.setItem('artisan_theme',isDark?'light':'dark');});
+  loadScentFamiliesMenu();
+});
+
+/* ── INIT ── */
+async function apInit() {
+  try {
+    const pricingRows = await sbFetch('pricing?select=size,normal_price,promo_price').catch(()=>null);
+    if (pricingRows) pricingRows.forEach(r => { CONFIG.PRICES[r.size]={normal:r.normal_price,promo:r.promo_price}; });
+    const rows = await sbFetch('products?active=eq.true&order=id.asc&select=*');
+    AP_PRODUCTS = rows || [];
+    const stored = JSON.parse(localStorage.getItem(CONFIG.KEYS.STOCK)||'{}');
+    AP_PRODUCTS.forEach(p => { if(stored[p.id]===undefined) stored[p.id]=p.stock??CONFIG.INITIAL_STOCK; });
+    localStorage.setItem(CONFIG.KEYS.STOCK, JSON.stringify(stored));
+    document.getElementById('ap-count-all').textContent = AP_PRODUCTS.length;
+    ['m','w','u'].forEach(g => { const el=document.getElementById('ap-count-'+g); if(el) el.textContent=AP_PRODUCTS.filter(p=>p.gender===g).length; });
+    document.getElementById('ap-grid').style.display = 'flex';
+    document.getElementById('ap-loading').style.display = 'none';
+    // Read URL params
+    const params = new URLSearchParams(window.location.search);
+    const gParam = params.get('gender');
+    if (gParam && ['m','w','u'].includes(gParam)) apSwitchGender(gParam);
+    else apSwitchGender('all');
+    await loadCollectionBanners();
+    refreshCartUI();
+  } catch(e) {
+    document.getElementById('ap-loading').innerHTML = '<p style="color:var(--red);font-size:12px;padding:40px">Gagal memuatkan produk. Cuba muat semula.</p>';
+    console.error(e);
+  }
 }
-function switchMegaTab(gender) {
-  document.querySelectorAll('.mega-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('mtab-' + gender).classList.add('active');
-  document.querySelectorAll('.mega-grid').forEach(g => g.classList.add('hidden'));
-  document.getElementById('mgrid-' + gender).classList.remove('hidden');
-}
-function closeNavSearch() {
-  document.getElementById('nav-search-bar').classList.remove('open');
-  document.getElementById('nav-search-input').value = '';
-  if (window.scrollY <= 60 && !megaOpen) document.getElementById('main-nav').classList.remove('scrolled');
-}
-  
+
 apInit();
 </script>
 </body>
