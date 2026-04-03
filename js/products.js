@@ -135,14 +135,122 @@ function renderProducts() {
   const loading = document.getElementById('grid-loading');
   if (loading) loading.remove();
 
-  // Get or create hidden storage container
+  // Keep hidden grid for cart internals
   let grid = document.getElementById('product-grid');
-  if (!grid) {
-    grid = document.createElement('div');
-    grid.id = 'product-grid';
-    grid.style.display = 'none';
-    document.querySelector('.collection .section-wrap').appendChild(grid);
+  if (grid) {
+    grid.innerHTML = '';
+    PRODUCTS.forEach(p => {
+      const card = document.createElement('article');
+      card.className = 'product-card';
+      card.dataset.gender = p.gender;
+      card.dataset.productId = p.id;
+      card.dataset.searchIndex = [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase();
+      card._productId = p.id;
+      grid.appendChild(card);
+    });
   }
+
+  // Update counts
+  ['m','w','u'].forEach(g => {
+    const el = document.getElementById('count-' + g);
+    if (el) el.textContent = PRODUCTS.filter(p => p.gender === g).length;
+  });
+
+  initStock();
+  applyFilters();
+}
+
+function applyFilters() {
+  const chips = document.getElementById('scent-chips');
+  if (!chips) return;
+
+  const matching = PRODUCTS.filter(p =>
+    p.gender === currentGender &&
+    (!searchQuery || [p.name, p.inspired_by, p.family, p.notes].join(' ').toLowerCase().includes(searchQuery))
+  );
+
+  document.getElementById('no-results').style.display = matching.length === 0 ? 'block' : 'none';
+
+  chips.innerHTML = matching.map((p, i) => {
+    const stk = getStock(p.id);
+    let badgeHTML = '';
+    if (stk === 0) badgeHTML = `<span class="scent-chip-badge">Habis</span>`;
+    else if (p.badge === 'Hot' || p.badge === 'Bestseller') badgeHTML = `<span class="scent-chip-badge hot">${p.badge}</span>`;
+    else if (p.badge === 'New') badgeHTML = `<span class="scent-chip-badge new">New</span>`;
+
+    return `<button class="scent-chip ${stk===0?'sold-out':''}"
+      onclick="openScentModal('${p.id}')"
+      data-product-id="${p.id}">
+      <span class="scent-chip-num">${i + 1}.</span>
+      ${p.name}
+      ${badgeHTML}
+    </button>`;
+  }).join('');
+}
+
+// Scent modal
+let currentScentId = null;
+let currentScentSize = null;
+
+function openScentModal(productId) {
+  const p = PRODUCTS.find(x => x.id === productId);
+  if (!p) return;
+  currentScentId = productId;
+  currentScentSize = null;
+
+  document.getElementById('sm-bottle').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
+  document.getElementById('sm-insp').textContent = 'Terinspirasi oleh ' + p.inspired_by;
+  document.getElementById('sm-name').textContent = p.name;
+  document.getElementById('sm-family').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
+
+  const pr = CONFIG.PRICES;
+  document.getElementById('sm-p10').textContent = 'RM ' + pr['10ml'].promo;
+  document.getElementById('sm-n10').textContent = 'RM ' + pr['10ml'].normal;
+  document.getElementById('sm-p30').textContent = 'RM ' + pr['30ml'].promo;
+  document.getElementById('sm-n30').textContent = 'RM ' + pr['30ml'].normal;
+  document.getElementById('sm-p60').textContent = 'RM ' + pr['60ml'].promo;
+  document.getElementById('sm-n60').textContent = 'RM ' + pr['60ml'].normal;
+
+  const stk = getStock(productId);
+  document.getElementById('sm-stock').textContent = stk === 0 ? '⚠️ Stok habis' : stk + ' unit berbaki';
+
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  const addBtn = document.getElementById('sm-add-btn');
+  addBtn.textContent = '+ Tambah ke Troli';
+  addBtn.disabled = stk === 0;
+
+  document.getElementById('scent-modal-overlay').classList.add('visible');
+  document.body.classList.add('lock');
+}
+
+function closeScentModal() {
+  document.getElementById('scent-modal-overlay').classList.remove('visible');
+  document.body.classList.remove('lock');
+  currentScentId = null;
+  currentScentSize = null;
+}
+
+function selectScentSize(btn) {
+  document.querySelectorAll('.scent-size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  currentScentSize = btn.dataset.size;
+  document.getElementById('sm-add-btn').textContent = `+ Tambah ${currentScentSize} ke Troli`;
+}
+
+function scentModalAddToCart() {
+  if (!currentScentSize) {
+    document.querySelectorAll('.scent-size-btn').forEach(b => {
+      b.style.borderColor = 'var(--red)';
+      setTimeout(() => b.style.borderColor = '', 1200);
+    });
+    document.getElementById('sm-add-btn').textContent = '← Pilih saiz dahulu';
+    setTimeout(() => document.getElementById('sm-add-btn').textContent = '+ Tambah ke Troli', 1500);
+    return;
+  }
+  const fakeCard = document.querySelector(`[data-product-id="${currentScentId}"]`) || document.createElement('div');
+  addToCart(currentScentId, currentScentSize, fakeCard);
+  closeScentModal();
+}
   grid.innerHTML = '';
 
   PRODUCTS.forEach((product, index) => {
