@@ -9,25 +9,62 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style_koleksi.css">
-</head>
   <style>
-  /* Solid header for koleksi page only */
+  /* Solid header for koleksi page only - with higher specificity */
+  nav#main-nav,
   #main-nav {
     top: 0 !important;
     background: #fff !important;
-    border-bottom: 1px solid var(--line) !important;
+    border-bottom: 1px solid #e8e8e8 !important;
     box-shadow: 0 1px 6px rgba(0,0,0,.07) !important;
   }
-  #main-nav .nav-logo,
-  #main-nav .nav-center-links li a,
-  #main-nav .nav-icon,
-  #main-nav .hamburger span {
-    color: var(--ink) !important;
+  
+  nav#main-nav .nav-logo,
+  #main-nav .nav-logo {
+    color: #111 !important;
   }
+  
+  nav#main-nav .nav-center-links li a,
+  #main-nav .nav-center-links li a {
+    color: #333 !important;
+    border-bottom-color: transparent !important;
+  }
+  
+  nav#main-nav .nav-center-links li a:hover,
+  #main-nav .nav-center-links li a:hover {
+    color: #111 !important;
+    border-bottom-color: #333 !important;
+  }
+  
+  nav#main-nav .nav-icon,
+  #main-nav .nav-icon {
+    color: #777 !important;
+  }
+  
+  nav#main-nav .nav-icon:hover,
+  #main-nav .nav-icon:hover {
+    color: #111 !important;
+  }
+  
+  nav#main-nav .hamburger span,
   #main-nav .hamburger span {
-    background: var(--ink) !important;
+    background: #111 !important;
+  }
+  
+  /* Remove any transparent background variations */
+  #main-nav:not(.scrolled) .nav-logo,
+  #main-nav:not(.scrolled) .nav-center-links li a,
+  #main-nav:not(.scrolled) .nav-icon,
+  #main-nav:not(.scrolled) .hamburger span {
+    color: #111 !important;
+  }
+  
+  #main-nav:not(.scrolled) .hamburger span {
+    background: #111 !important;
   }
 </style>
+</head>
+ 
 <body>
 
 <!-- NAV -->
