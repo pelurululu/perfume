@@ -267,8 +267,7 @@ const mainNav = document.getElementById('main-nav');
 window.addEventListener('scroll', () => {
   const scrolled = window.scrollY > 60;
   mainNav.classList.toggle('scrolled', scrolled);
-  if (scrolled) mainNav.classList.add('no-ann');
-  else if (document.getElementById('ann')?.style.display !== 'none') mainNav.classList.remove('no-ann');
+  
 }, { passive: true });
 const hamburgerBtn = document.getElementById('hamburger');
 hamburgerBtn.addEventListener('click', () => {
