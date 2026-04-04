@@ -640,16 +640,28 @@ async function handleEntryCardClick(gender) {
   }
 }
 
+  async function loadPricing() {
+  try {
+    const rows = await sbFetch('pricing?select=size,normal_price,promo_price');
+    if (rows && rows.length) {
+      rows.forEach(r => {
+        CONFIG.PRICES[r.size] = { normal: r.normal_price, promo: r.promo_price };
+      });
+    }
+  } catch(e) { /* keep defaults */ }
+}
+
 document.getElementById('entry-m').addEventListener('click', () => handleEntryCardClick('m'));
 document.getElementById('entry-w').addEventListener('click', () => handleEntryCardClick('w'));
 document.getElementById('entry-u').addEventListener('click', () => handleEntryCardClick('u'));
 
   document.addEventListener('DOMContentLoaded', () => {
+    
   loadScentFamilies();
   loadGenderCategories();
   loadProductsForModal();  // ← this preloads products so modal is ready
     loadCarouselSlides();  // ← ADD THIS LINE
-    loadPricing(); // ← add this line
+     await loadPricing();
 });
   
 </script>
