@@ -655,13 +655,12 @@ document.getElementById('entry-m').addEventListener('click', () => handleEntryCa
 document.getElementById('entry-w').addEventListener('click', () => handleEntryCardClick('w'));
 document.getElementById('entry-u').addEventListener('click', () => handleEntryCardClick('u'));
 
-  document.addEventListener('DOMContentLoaded', () => {
-    
+ document.addEventListener('DOMContentLoaded', async () => {
+  await loadPricing(); // ← load prices FIRST before modal loads
   loadScentFamilies();
   loadGenderCategories();
-  loadProductsForModal();  // ← this preloads products so modal is ready
-    loadCarouselSlides();  // ← ADD THIS LINE
-     await loadPricing();
+  loadProductsForModal();
+  loadCarouselSlides();
 });
   
 </script>
