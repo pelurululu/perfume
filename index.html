@@ -661,6 +661,7 @@ document.getElementById('entry-u').addEventListener('click', () => handleEntryCa
   loadGenderCategories();
   loadProductsForModal();
   loadCarouselSlides();
+   await loadPromoPopup();
 });
   
 </script>
@@ -888,13 +889,7 @@ function handleDontShow(checkbox) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  if (!localStorage.getItem(PROMO_KEY)) {
-    setTimeout(() => {
-      document.getElementById('promo-overlay').classList.add('visible');
-    }, 2500);
-  }
-});
+
 
     // Add this script to your page - put it after your existing scripts
 
@@ -1045,7 +1040,59 @@ function toast(message, type = 'success') {
   document.body.appendChild(form);
   form.submit();
 }
-  
+  /* ── Load Promo Popup from Supabase ── */
+async function loadPromoPopup() {
+  try {
+    const rows = await sbFetch('promo_popup?active=eq.true&order=sort_order.asc&limit=1');
+    if (!rows || rows.length === 0) return;
+    
+    const promo = rows[0];
+    
+    // Update popup content
+    const eyebrow = document.querySelector('.promo-popup-eyebrow');
+    const title = document.querySelector('.promo-popup-title');
+    const desc = document.querySelector('.promo-popup-desc');
+    const saving = document.querySelector('.promo-popup-saving');
+    const cta = document.querySelector('.promo-popup-cta');
+    const imgWrap = document.getElementById('promo-popup-img-wrap');
+    
+    if (eyebrow) eyebrow.textContent = promo.eyebrow || 'Tawaran Eksklusif';
+    if (title) title.innerHTML = promo.title || 'Beli <em>3×60ml</em><br>Percuma <em>1×30ml</em>';
+    if (desc) desc.textContent = promo.description || 'Pilih mana-mana 3 wangian 60ml dan dapatkan 1 botol 30ml percuma pilihan anda.';
+    if (saving) saving.innerHTML = promo.saving_text || 'Jimat sehingga <strong>RM 49</strong>';
+    if (cta) {
+      cta.textContent = promo.cta_text || 'Beli Sekarang →';
+      cta.href = promo.cta_link || '#bundle';
+    }
+    
+    // Update SVG/image if provided
+    if (promo.image_svg && imgWrap) {
+      imgWrap.innerHTML = promo.image_svg;
+    } else if (promo.image_url && imgWrap) {
+      imgWrap.innerHTML = `<img src="${promo.image_url}" alt="Promo" style="width:100%;height:100%;object-fit:cover;">`;
+    }
+    
+    // Store popup enabled status
+    window.PROMO_ENABLED = promo.enabled !== false;
+    
+    // Show popup if enabled
+    if (window.PROMO_ENABLED && !localStorage.getItem(PROMO_KEY)) {
+      setTimeout(() => {
+        document.getElementById('promo-overlay').classList.add('visible');
+      }, (promo.delay_seconds || 2.5) * 1000);
+    }
+    
+  } catch(e) {
+    console.error('Error loading promo popup:', e);
+    // Fallback to default showing
+    if (!localStorage.getItem(PROMO_KEY)) {
+      setTimeout(() => {
+        document.getElementById('promo-overlay').classList.add('visible');
+      }, 2500);
+    }
+  }
+}
+    
 </script>
 </body>
 </html>
