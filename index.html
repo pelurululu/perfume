@@ -585,7 +585,7 @@ async function loadCarouselSlides() {
         <div class="hc-eyebrow">${slide.eyebrow || ''}</div>
         <h1 class="hc-title">${slide.title || ''}<br><em>${slide.title_em || ''}</em></h1>
         <p class="hc-desc">${slide.description || ''}</p>
-        <a href="${slide.btn_onclick || 'koleksi.html'}" class="hc-btn ${slide.btn_onclick?.includes('gender=w') ? 'hc-btn--ghost' : ''}">${slide.btn_text || 'Terokai Koleksi'}</a>
+        <a href="#collection" class="hc-btn ${slide.btn_onclick?.includes('gender=w') ? 'hc-btn--ghost' : ''}" onclick="event.preventDefault(); document.getElementById('collection').scrollIntoView({behavior:'smooth'})">${slide.btn_text || 'Terokai Koleksi'}</a>
       `;
       
       slideDiv.appendChild(bgDiv);
@@ -796,6 +796,16 @@ function selectScentIndex(scentId) {
   document.querySelectorAll('.scent-chip-btn').forEach(b => {
     b.classList.toggle('selected', b.dataset.scentId === scentId);
   });
+
+  // ✅ ADD THESE — update product details when scent changes
+  const product = window.PRODUCTS_FOR_MODAL?.find(p => p.id === scentId);
+  if (product) {
+    document.getElementById('pm-insp-text').innerHTML = `Terinspirasi oleh <strong>${product.inspired_by}</strong>`;
+    document.getElementById('pm-insp-detail').textContent = product.inspired_detail || '';
+    document.getElementById('pm-name-text').textContent = product.name;
+    document.getElementById('pm-family-text').textContent = product.family + (product.notes ? ' · ' + product.notes : '');
+  }
+
   const stk = getStock(scentId);
   const dot = document.getElementById('pm-stock-dot');
   dot.className = 'pm-stock-dot' + (stk === 0 ? ' out' : stk <= 8 ? ' low' : '');
