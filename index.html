@@ -12,6 +12,14 @@
 <link rel="stylesheet" href="css/style_koleksi.css">
 
 </head>
+  <style>
+    html {
+    scroll-behavior: smooth;
+}
+#collection {
+    scroll-margin-top: 80px;
+}
+  </style>
 <body>
 
 <!-- ANNOUNCEMENT BAR -->
@@ -99,7 +107,7 @@
         <div class="hc-eyebrow">Koleksi Tandatangan</div>
         <h1 class="hc-title">Wangian yang<br><em>Bercerita</em></h1>
         <p class="hc-desc">165 wangian premium terinspirasi jenama dunia.</p>
-        <a href="" class="hc-btn">Terokai Koleksi</a>
+        <a href="#collection" class="hc-btn" onclick="event.preventDefault(); document.getElementById('collection').scrollIntoView({behavior: 'smooth'});">Terokai Koleksi</a>
       </div>
     </div>
     <div class="hc-slide">
@@ -108,7 +116,7 @@
         <div class="hc-eyebrow">Untuk Lelaki</div>
         <h1 class="hc-title">55 Wangian<br><em>Maskulin</em></h1>
         <p class="hc-desc">Dari woody smoky hingga fresh aquatic.</p>
-        <a href="" class="hc-btn">Lihat Koleksi Men</a>
+        <a href="#collection" class="hc-btn" onclick="event.preventDefault(); document.getElementById('collection').scrollIntoView({behavior: 'smooth'});">Lihat Koleksi Men</a>
       </div>
     </div>
     <div class="hc-slide">
@@ -117,7 +125,7 @@
         <div class="hc-eyebrow">Untuk Wanita</div>
         <h1 class="hc-title">98 Wangian<br><em>Feminin</em></h1>
         <p class="hc-desc">Floral intim, oriental hangat, fresh ringan.</p>
-        <a href="" class="hc-btn hc-btn--ghost">Lihat Koleksi Women</a>
+        <a href="#collection" class="hc-btn hc-btn--ghost" onclick="event.preventDefault(); document.getElementById('collection').scrollIntoView({behavior: 'smooth'});">Lihat Koleksi Women</a>
       </div>
     </div>
   </div>
@@ -253,6 +261,7 @@
       <div class="pm-header-bottle" id="pm-bottle-wrap"></div>
       <div class="pm-header-info">
         <p class="pm-insp" id="pm-insp-text"></p>
+        <p class="pm-insp-detail" id="pm-insp-detail" style="font-size:11px;color:#aaa;margin:-8px 0 8px 0"></p>
         <h2 class="pm-name" id="pm-name-text"></h2>
         <p class="pm-family" id="pm-family-text"></p>
         <div class="pm-prices">
@@ -713,16 +722,17 @@ function createMiniBottleSVG(cap, rgbStr) {
 window.openProductModalFromIndex = function(productId) {
   const p = window.PRODUCTS_FOR_MODAL?.find(x => x.id === productId);
   if (!p) return;
-
+  
   modalProductId = productId;
-  modalScent = null;
+  modalScent = productId;
   modalSize = null;
   modalQty = 1;
-
-  document.getElementById('pm-bottle-wrap').innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
-  document.getElementById('pm-insp-text').textContent = 'Terinspirasi oleh ' + (p.inspired_by || '');
+  
+  // Update inspired by text
+  document.getElementById('pm-insp-text').innerHTML = `Terinspirasi oleh <strong>${p.inspired_by}</strong>`;
+  document.getElementById('pm-insp-detail').textContent = p.inspired_detail || '';
   document.getElementById('pm-name-text').textContent = p.name;
-  document.getElementById('pm-family-text').textContent = (p.family || '') + (p.notes ? ' · ' + p.notes : '');
+  document.getElementById('pm-family-text').textContent = p.family + (p.notes ? ' · ' + p.notes : '');
 
   const pr = CONFIG.PRICES;
   document.getElementById('pm-price-main').textContent = 'RM ' + pr['10ml'].promo;
