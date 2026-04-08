@@ -764,6 +764,11 @@ window.openProductModalFromIndex = function(productId) {
   document.getElementById('pm-overlay').classList.add('visible');
   document.body.classList.add('lock');
   document.getElementById('pm-sheet').scrollTop = 0;
+
+  const bottleWrap = document.getElementById('pm-bottle-wrap');
+if (bottleWrap) {
+  bottleWrap.innerHTML = createMiniBottleSVG(p.cap_color, p.rgb);
+}
 };
 
 function buildScentVariationsIndex(currentProduct) {
@@ -815,6 +820,11 @@ function selectScentIndex(scentId) {
   modalQty = 1;
   document.getElementById('qty-display').textContent = '1';
   updateModalTotalIndex();
+
+  const bottleWrap = document.getElementById('pm-bottle-wrap');
+    if (bottleWrap) {
+      bottleWrap.innerHTML = createMiniBottleSVG(product.cap_color, product.rgb);
+    }
 }
 
 function selectSize(size) {
