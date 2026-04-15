@@ -699,7 +699,8 @@ let modalQty        = 1;
 
 // Helper functions needed for modal
 function createMiniBottleSVG(cap, rgbStr) {
-  return `<img src="images/perfume-bottle.png" alt="bottle" style="height:100px;width:auto;object-fit:contain;">`;
+  // Kita abaikan cap dan rgbStr kerana imej .png adalah statik
+  return `<img src="images/perfume-bottle.png" alt="bottle" class="product-bottle-img">`;
 }
 
 // Expose openProductModal globally
