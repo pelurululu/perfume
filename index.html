@@ -265,15 +265,20 @@
     display: flex; 
     align-items: center; 
     justify-content: center; 
-     
     flex-shrink: 0;
+    /* Tambah overflow: visible supaya imej yang besar tidak terpotong */
+    position: relative;
+    overflow: visible; 
   ">
     <img src="images/perfume-bottle.png" alt="bottle" style="
-      height: 150px; 
+      /* Besarkan ketinggian (contoh: 180px atau 200px) */
+      height: 190px; 
       width: auto; 
-      object-fit: cover; 
-      
+      object-fit: contain; 
+      /* Gunakan transform untuk adjust kedudukan jika perlu */
+      transform: translateY(-5px); 
     ">
+</div>
   </div>
 
   <div class="pm-header-info">
