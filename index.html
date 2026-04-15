@@ -257,38 +257,43 @@
     </button>
 
     <!-- HEADER -->
-    <div class="pm-header" style="display: flex; align-items: center; gap: 24px; padding: 20px 0;">
+   <div class="pm-header" style="display: flex; align-items: flex-start; gap: 20px;">
   
   <div class="pm-header-bottle" id="pm-bottle-wrap" style="
-    flex-shrink: 0; 
     width: 100px; 
     height: 140px; 
+    background: var(--off); /* Menggunakan token warna asal */
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    background: #f9f9f9; 
-    border-radius: 12px;
+    border-radius: 4px; 
+    flex-shrink: 0;
   ">
-    </div>
-
-  <div class="pm-header-info" style="flex: 1;">
-    <p class="pm-insp" id="pm-insp-text"></p>
-    <p class="pm-insp-detail" id="pm-insp-detail" style="font-size:11px;color:#aaa;margin:-8px 0 8px 0"></p>
-    <h2 class="pm-name" id="pm-name-text" style="margin: 0; font-size: 20px; line-height: 1.2;"></h2>
-    <p class="pm-family" id="pm-family-text" style="margin: 4px 0; font-size: 13px; color: #666;"></p>
-    
-    <div class="pm-prices" style="margin-top: 12px;">
-      <span class="pm-price-from" style="font-size: 12px; color: #888;">Dari</span>
-      <span class="pm-price-main" id="pm-price-main" style="font-size: 22px; font-weight: 600; color: #111;">RM —</span>
-      <span class="pm-price-old" id="pm-price-old" style="text-decoration: line-through; color: #bbb; margin-left: 8px;"></span>
-    </div>
-    
-    <div class="pm-stock-info" id="pm-stock-info" style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
-      <span class="pm-stock-dot" id="pm-stock-dot" style="width: 8px; height: 8px; border-radius: 50%;"></span>
-      <span id="pm-stock-text" style="font-size: 12px; font-weight: 500;"></span>
-    </div>
+    <img src="images/perfume-bottle.png" alt="bottle" style="
+      height: 110px; 
+      width: auto; 
+      object-fit: contain; 
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    ">
   </div>
 
+  <div class="pm-header-info">
+    <p class="pm-insp" id="pm-insp-text"></p>
+    <p class="pm-insp-detail" id="pm-insp-detail" style="font-size:11px;color:#aaa;margin:-8px 0 8px 0"></p>
+    <h2 class="pm-name" id="pm-name-text"></h2>
+    <p class="pm-family" id="pm-family-text"></p>
+    
+    <div class="pm-prices">
+      <span class="pm-price-from">Dari</span>
+      <span class="pm-price-main" id="pm-price-main">RM —</span>
+      <span class="pm-price-old" id="pm-price-old"></span>
+    </div>
+    
+    <div class="pm-stock-info" id="pm-stock-info">
+      <span class="pm-stock-dot" id="pm-stock-dot"></span>
+      <span id="pm-stock-text"></span>
+    </div>
+  </div>
 </div>
 
     <!-- SCENT VARIATIONS -->
